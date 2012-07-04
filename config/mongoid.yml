@@ -1,5 +1,7 @@
 development:
   host: localhost
   database: gift_development
+staging:
+  uri: <%=ENV['MONGOLAB_URI']%>
 production:
   uri: <%=ENV['MONGOLAB_URI']%>
