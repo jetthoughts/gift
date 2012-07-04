@@ -35,9 +35,10 @@ class User
   field :confirmation_sent_at, :type => Time
   field :unconfirmed_email,    :type => String # Only if using reconfirmable
 
-  ## Omniauth Facebook
-  field :provider, :time => String
-  field :uid,      :time => String
+  ## Omniauth
+  field :provider,         :type => String
+  field :uid,              :type => String
+  field :password_changed, :type => Boolean, :default => false
 
   ## Lockable
   # field :failed_attempts, :type => Integer, :default => 0 # Only if lock strategy is :failed_attempts
@@ -46,6 +47,8 @@ class User
 
   ## Token authenticatable
   # field :authentication_token, :type => String
+  
+  field :name, :type => String
 
 
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
