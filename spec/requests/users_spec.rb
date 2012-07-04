@@ -23,7 +23,7 @@ feature "User sign in and sign up actions" do
       fill_in 'Password confirmation', with: 'qweqwe'
       click_button 'Sign up'
 
-      current_page? == root_path
+      page.current_path == root_path
       page.should have_content 'You need to sign in or sign up before continuing.'
 
   end
