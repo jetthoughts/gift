@@ -62,4 +62,13 @@ Gift::Application.configure do
   config.active_support.deprecation = :notify
 
   config.action_mailer.default_url_options = { host: 'gift-staging.herokuapp.com'}
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    :user_name => "giftstaging",
+    :password => "a447925824c59c1c",
+    :address => "mailtrap.io",
+    :port => 2525,
+    :authentication => :plain,
+  }
 end
