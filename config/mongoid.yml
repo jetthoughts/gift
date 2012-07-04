@@ -1,3 +1,5 @@
 development:
   host: localhost
   database: gift_development
+production:
+  uri: mongodb://root:root@ds035517.mongolab.com:35517/gift
