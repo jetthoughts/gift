@@ -24,6 +24,7 @@ gem 'bson_ext'
 
 gem "mongoid", "~> 2.4"
 gem "devise", ">= 1.3.3"
+gem "omniauth-facebook"
 gem "cancan"
 gem "kaminari"
 gem "show_for"
