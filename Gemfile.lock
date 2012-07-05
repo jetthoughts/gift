@@ -112,6 +112,7 @@ GEM
       haml
       sprockets
       tilt
+    has_scope (0.5.1)
     hashie (1.2.0)
     heroku (2.28.7)
       heroku-api (~> 0.2.6)
@@ -315,6 +316,7 @@ DEPENDENCIES
   guard-spork
   haml
   haml-rails
+  has_scope
   heroku
   jasmine
   jasminerice
