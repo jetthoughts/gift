@@ -1,5 +1,6 @@
 class Project
   PAID_TYPES = [:pay_pal, :money_transfer, :amazon_voucher]
+  END_TYPES = [:fixed_amount, :open_end]
   include Mongoid::Document
 
   field :name,                              type: String
@@ -7,8 +8,9 @@ class Project
   field :article_link,                      type: String
   field :participants_add_own_suggestions,  type: Boolean
   field :fixed_amount,                      type: Float
-  field :open_end,                         type: Time
+  field :open_end,                          type: Time
   field :paid_type,                         type: String
+  field :end_type,                          type: String
 
 
   ## Validators

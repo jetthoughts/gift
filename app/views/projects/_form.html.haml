@@ -6,8 +6,25 @@
     = f.input :description
     = f.input :article_link
     = f.input :participants_add_own_suggestions, as: :boolean
-    = f.input :fixed_amount
-    = f.input :open_end
+
+  #end-type.accordeon
+    .accordion-group.form-inputs
+      %div{ class: 'accordion-heading' }
+        = label_tag(nil, class: 'accordion-toggle', data: { target: '#fixed-amount-collapse', toggle: 'collapse', parent: '#end-type' }) do
+          = f.radio_button :end_type, :fixed_amount, checked: true
+          Earn up to fixed amount
+      #fixed-amount-collapse.collapse.in.accordion-body
+        = f.input :fixed_amount
+
+    .accordion-group.form-inputs
+      %div{ class: 'accordion-heading' }
+        =label_tag(nil, class: 'accordion-toggle', data: { target: '#open-end-collapse', toggle: 'collapse', parent: '#end-type' }) do
+          = f.radio_button :end_type, :open_end
+          Gather with OpenEnd
+      #open-end-collapse.collapse.accordion-body
+        = f.input :open_end
+
+  .form-inputs
     = f.input :paid_type, as: :radio_buttons do
       - f.collection_radio_buttons :paid_type, Project::PAID_TYPES, :to_s, lambda { |p| p.to_s.humanize } do |b|
         = b.label(class: 'radio inline') { b.radio_button + b.text }
