@@ -35,7 +35,7 @@ feature "User sign in and sign up actions" do
     page.should have_content I18n.t('devise.failure.unconfirmed')
   end
 
-  scenario "Signing in with correct credentials and confirmed" do
+  def sign_in
     @user.update_attribute :confirmed_at, Time.now
 
     fill_in 'Email', with: @user.email
@@ -45,5 +45,13 @@ feature "User sign in and sign up actions" do
     page.should have_content I18n.t('devise.sessions.signed_in')
   end
 
+  scenario "Signing in with correct credentials and confirmed" do
+    sign_in
+  end
 
+  scenario "Sign in and sign out" do
+    sign_in
+    within('.navbar-text') {click_link @user.email }
+    page.current_path == root_path
+  end
 end
