@@ -1,26 +1,29 @@
 %p#notice= notice
 
 %p
-  %b Name:
-  = @project.name
-%p
-  %b Description:
-  = @project.description
-%p
-  %b Article link:
-  = @project.article_link
-%p
-  %b Participants add own suggestions:
-  = @project.participants_add_own_suggestions
-%p
-  %b Fixed amount:
-  = @project.fixed_amount
-%p
-  %b Opend end:
-  = @project.opend_end
-%p
-  %b Paid type:
-  = @project.paid_type
+  .row
+    .span4
+      %span= @project.name
+      <br/>
+      %span= @project.description
+    .span8
+      .btn.pull-right
+        = link_to 'Profile'
+  %hr
+  .row
+    .span10
+      %div
+        gift image, name, price, web link here
+    .span2
+      .btn.pull-right.clear-right
+        = link_to 'Donate'
+      .btn.pull-right.clear-right
+        = link_to 'Add gift suggestion'
+
+  %hr
+  .btn
+    = link_to 'Add comment'
+
 
 = link_to 'Edit', edit_project_path(@project)
 \|
