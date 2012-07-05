@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  #respond_to :html, :json
+
   def index
     respond_with project, @comments = chain.all
   end
