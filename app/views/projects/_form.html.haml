@@ -8,7 +8,9 @@
     = f.input :participants_add_own_suggestions, as: :boolean
     = f.input :fixed_amount
     = f.input :open_end
-    = f.input :paid_type, as: :radio_buttons, collection: Project::PAID_TYPES, label_method: lambda { |p| p.to_s.humanize }
+    = f.input :paid_type, as: :radio_buttons do
+      - f.collection_radio_buttons :paid_type, Project::PAID_TYPES, :to_s, lambda { |p| p.to_s.humanize } do |b|
+        = b.label(class: 'radio inline') { b.radio_button + b.text }
 
   .form-actions
     = f.button :submit
