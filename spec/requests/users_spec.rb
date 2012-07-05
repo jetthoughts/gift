@@ -2,38 +2,48 @@ require 'spec_helper'
 
 feature "User sign in and sign up actions" do
   background do
+    @user = Fabricate(:user)
     visit root_path
   end
 
   scenario "Signing in with incorrect credentials" do
-    fill_in 'Email', with: 'test@test.com'
+    fill_in 'Email', with: @user.email
     fill_in 'Password', with: 'incorrect'
     click_button 'Sign in'
 
-    page.should have_content 'Invalid email or password'
+    page.should have_content I18n.t('devise.failure.invalid')
   end
 
   scenario "Signing up" do
-      click_link 'Sign up'
-      page.should have_content 'Sign up'
-
-      fill_in 'Email', with: 'test@test.com'
-      fill_in 'Password', with: 'qweqwe'
-      fill_in 'Password confirmation', with: 'qweqwe'
-      click_button 'Sign up'
-
-      page.current_path == root_path
-      page.should have_content 'You need to sign in or sign up before continuing.'
-  end
-
-
-  scenario "Signing in with correct credentials" do
-    User.create! email: 'test@test.com', password: 'qweqwe', confirmed_at: DateTime.now
+    click_link 'Sign up'
+    page.should have_content 'Sign up'
 
     fill_in 'Email', with: 'test@test.com'
-    fill_in 'Password', with: 'qweqwe'
+    fill_in 'Password', with: @user.password
+    fill_in 'Password confirmation', with: @user.password
+    click_button 'Sign up'
+
+    page.current_path == root_path
+    page.should have_content I18n.t('devise.failure.unauthenticated')
+  end
+
+  scenario "Signing in with correct credentials without confirmed" do
+    fill_in 'Email', with: @user.email
+    fill_in 'Password', with: @user.password
     click_button 'Sign in'
 
-    page.should have_content 'Signed in successfully.'
+    page.should have_content I18n.t('devise.failure.unconfirmed')
   end
+
+  scenario "Signing in with correct credentials and confirmed" do
+    @user.update_attribute :confirmed_at, Time.now
+
+    fill_in 'Email', with: @user.email
+    fill_in 'Password', with: @user.password
+    click_button 'Sign in'
+
+    page.should have_content I18n.t('devise.sessions.signed_in')
+  end
+
+
 end
