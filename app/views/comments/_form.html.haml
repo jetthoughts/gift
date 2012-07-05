@@ -1,4 +1,4 @@
-= simple_form_for(@comment, url: [@project, :comments]) do |f|
+= simple_form_for(@comment, url: [@project, :comments], remote: true) do |f|
   = f.error_notification
 
   .form-inputs
