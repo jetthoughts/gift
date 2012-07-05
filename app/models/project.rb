@@ -9,5 +9,6 @@ class Project
   field :opend_end,                         type: Time
   field :paid_type,                         type: String
 
+  ## Relations
   belongs_to :user
 end
