@@ -11,4 +11,9 @@ class Project
 
   ## Relations
   belongs_to :user
+
+  ## Scopes
+  scope :ordered_by_date, -> do
+    order_by [[:created_at, :desc]]
+  end
 end
