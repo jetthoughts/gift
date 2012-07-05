@@ -1,4 +1,5 @@
 class Project
+  PAID_TYPES = [:pay_pal, :transfer, :amazon_voucher]
   include Mongoid::Document
 
   field :name,                              type: String
