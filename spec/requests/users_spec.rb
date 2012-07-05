@@ -51,7 +51,10 @@ feature "User sign in and sign up actions" do
 
   scenario "Sign in and sign out" do
     sign_in
-    within('.navbar-text') {click_link @user.email }
+    within('ul.nav.pull-right') do
+      click_link @user.email
+      click_link 'Sign out'
+    end
     page.current_path == root_path
   end
 end
