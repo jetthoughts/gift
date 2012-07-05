@@ -18,8 +18,14 @@
   <%= link_to "Didn't receive unlock instructions?", new_unlock_path(resource_name) %><br />
 <% end -%>
 
+<div>
 <%- if devise_mapping.omniauthable? %>
   <%- resource_class.omniauth_providers.each do |provider| %>
     <%= link_to "Sign in with #{provider.to_s.titleize}", omniauth_authorize_path(resource_name, provider) %><br />
   <% end -%>
+  <span>
+    If you signed-up via an authentication service a random password has been set for the local password.<br/>
+    You can request a new password using the "Forgot your Password?" link on the sign-in page.
+  </span>
 <% end -%>
+</div>
