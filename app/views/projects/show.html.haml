@@ -9,6 +9,11 @@
     .span8
       .btn.pull-right
         = link_to 'Profile', @project.user
+      .btn.pull-right
+        = link_to 'Edit_project', edit_project_path(@project)
+      .btn.pull-right
+        = link_to 'Close project'
+
   %hr
   .row
     .span10
@@ -23,8 +28,3 @@
   %hr
   .btn
     = link_to 'Add comment'
-
-
-= link_to 'Edit', edit_project_path(@project)
-\|
-= link_to 'Back', projects_path
