@@ -7,7 +7,7 @@
     = f.input :article_link
     = f.input :participants_add_own_suggestions, as: :boolean
     = f.input :fixed_amount
-    = f.input :opend_end
+    = f.input :open_end
     = f.input :paid_type, as: :radio_buttons, collection: Project::PAID_TYPES, label_method: lambda { |p| p.to_s.humanize }
 
   .form-actions
