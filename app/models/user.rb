@@ -48,8 +48,9 @@ class User
   
   field :name,                    type: String
 
+
   ## Validators
-  validates_uniqueness_of :email, case_sensitive: false, if: :email_changed?
+  validates :email, uniqueness: { case_sensitive: false }, if: :email_changed?
 
 
   ## Relations
