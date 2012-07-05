@@ -1,4 +1,6 @@
 Gift::Application.routes.draw do
+  resources :projects
+
   root to: 'users#show'
 
   devise_for :users,

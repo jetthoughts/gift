@@ -1,0 +1,27 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @project.name
+%p
+  %b Description:
+  = @project.description
+%p
+  %b Article link:
+  = @project.article_link
+%p
+  %b Participants add own suggestions:
+  = @project.participants_add_own_suggestions
+%p
+  %b Fixed amount:
+  = @project.fixed_amount
+%p
+  %b Opend end:
+  = @project.opend_end
+%p
+  %b Paid type:
+  = @project.paid_type
+
+= link_to 'Edit', edit_project_path(@project)
+\|
+= link_to 'Back', projects_path

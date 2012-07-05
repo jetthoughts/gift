@@ -1,0 +1,14 @@
+= simple_form_for(@project) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.input :description
+    = f.input :article_link
+    = f.input :participants_add_own_suggestions
+    = f.input :fixed_amount
+    = f.input :opend_end
+    = f.input :paid_type
+
+  .form-actions
+    = f.button :submit
