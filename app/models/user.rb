@@ -55,6 +55,7 @@ class User
 
   ## Relations
   has_many :projects
+  has_many :comments
 
 
   ## Methods
