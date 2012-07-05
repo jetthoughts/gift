@@ -1,7 +1,8 @@
 class Comment
   include Mongoid::Document
-  field :text, :type => String
+  include Mongoid::Timestamps
 
+  field :text, :type => String
   validates :text, presence: true
 
   ## Relations
