@@ -26,7 +26,7 @@ class CommentsController < ApplicationController
   end
 
   def author
-    @author ||= params[:user_id] ? User.find(params[:user_id]) : nil 
+    @author ||= params[:user_id] ? User.find(params[:user_id]) : nil
   end
 
   def projects_chain
