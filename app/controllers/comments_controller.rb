@@ -1,5 +1,4 @@
 class CommentsController < ApplicationController
-
   def index
     respond_with project, @comments = chain.all, :layout => false
   end
@@ -23,7 +22,7 @@ class CommentsController < ApplicationController
   end
 
   def chain
-    project.comments
+    project.comments.ordered_by_date
   end
 
   def author

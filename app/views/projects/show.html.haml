@@ -28,4 +28,4 @@
   %hr
     = render 'comments/form'
     #comments
-      = render @project.comments
+      = render @project.comments.ordered_by_date
