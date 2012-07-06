@@ -1,6 +1,5 @@
-= simple_form_for(@comment, url: [@project, :comments]) do |f|
-  = f.error_notification
-
+= simple_form_for(@comment, url: [@project, :comments], remote: true) do |f|
+  .form-errors
   .form-inputs
     = f.input :text, :placeholder => t('simple_form.placeholders.defaults.comment')
 
