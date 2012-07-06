@@ -1,5 +1,7 @@
 Gift::Application.routes.draw do
-  resources :projects
+  resources :projects do
+    resources :comments
+  end
 
 
   devise_for :users,

@@ -25,3 +25,4 @@
 //= require_tree ./templates
 
 //= require projects
+//= require comments
