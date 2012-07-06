@@ -15,7 +15,7 @@ class Project
 
 
   ## Validators
-  validates :paid_type, inclusion: Project::PAID_TYPES.map(&:to_s)
+  validates :paid_type, inclusion: { in: Project::PAID_TYPES.map(&:to_s), message: '' }
   validates :end_type,  inclusion: Project::END_TYPES.map(&:to_s)
   validates :name, presence: true
   validates :fixed_amount, numericality: { if: :fixed_amount? }
