@@ -1,20 +1,19 @@
 class CommentsController < ApplicationController
-  #respond_to :html, :json
 
   def index
-    respond_with project, @comments = chain.all
+    respond_with project, @comments = chain.all, :layout => false
   end
 
   def create
-    respond_with project, @comment = chain.create(comment_params.merge({user: current_user}))
+    respond_with project, @comment = chain.create(comment_params.merge({user: current_user})), :layout => false
   end
 
   def update
-    respond_with project, @comment = chain.update(params[:id], comment_params)
+    respond_with project, @comment = chain.update(params[:id], comment_params), :layout => false
   end
 
   def destroy
-    respond_with project, @comment = chain.destroy(params[:id])
+    respond_with project, @comment = chain.destroy(params[:id]), :layout => false
   end
 
   private
