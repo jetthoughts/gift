@@ -55,7 +55,7 @@ class User
 
   ## Relations
   has_many :projects
-
+  has_many :comments
 
   ## Methods
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)

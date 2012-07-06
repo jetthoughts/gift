@@ -8,7 +8,9 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1
   def show
-    respond_with @project = chain.find(params[:id])
+    @project = chain.find(params[:id])
+    @comment = @project.comments.build
+    respond_with @project
   end
 
   # GET /projects/new
