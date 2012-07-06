@@ -7,11 +7,7 @@ feature "Project create and show" do
   end
 
   scenario "Create project with valid fixed amount" do
-    sign_in
-
-    click_link 'New Project'
-
-    page.should have_content 'New project'
+    go_to_new_project
 
     fill_in 'Name', with: 'Test Project'
     fill_in 'Description', with: 'Project Description'
@@ -29,11 +25,7 @@ feature "Project create and show" do
   end
 
   scenario "Create project with valid open end" do
-    sign_in
-
-    click_link 'New Project'
-
-    page.should have_content 'New project'
+    go_to_new_project
 
     fill_in 'Name', with: 'Test Project'
     fill_in 'Description', with: 'Project Description'
@@ -50,6 +42,20 @@ feature "Project create and show" do
     page.should have_link 'Edit project'
   end
 
+  scenario "Create project with invalid params" do
+    go_to_new_project
+
+    click_button 'Create Project'
+
+    page.should have_content "Some errors were found, please take a look:"
+    page.should have_content "can't be blank"
+  end
+
+  def go_to_new_project
+    sign_in
+    click_link 'New Project'
+    page.should have_content 'New project'
+  end
 
   def sign_in
     @user.update_attribute :confirmed_at, Time.now
