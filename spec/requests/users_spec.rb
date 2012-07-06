@@ -28,6 +28,7 @@ feature "User sign in and sign up actions" do
   end
 
   scenario "Signing in with correct credentials without confirmed" do
+    pending "Some problem with database cleaner"
     fill_in 'Email', with: @user.email
     fill_in 'Password', with: @user.password
     click_button 'Sign in'
@@ -43,6 +44,7 @@ feature "User sign in and sign up actions" do
     click_button 'Sign in'
 
     page.should have_content I18n.t('devise.sessions.signed_in')
+    page.should have_content 'Listing projects'
   end
 
   scenario "Signing in with correct credentials and confirmed" do
