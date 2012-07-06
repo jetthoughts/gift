@@ -3,10 +3,11 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $ ->
-  $('#new_comment').live("ajax:complete", (evt, data, status) ->
+  $('#new_comment').live("ajax:success", (evt, data, status, xhr) ->
     $this = $(this)
-    $("#comments").append data.responseText
+
+    $("#comments").prepend data
     $this.find("#comment_text").val ""
-    $this.find(".form-errors").empty()
-  ).live "ajax:error", (evt, data, status) ->
-    $(this).find(".form-errors").html data.responseText
+    $this.find(".form-errors").empty
+  ).live "ajax:error", (evt, xhr, status, error) ->
+    $(this).find(".form-errors").html xhr.responseText
