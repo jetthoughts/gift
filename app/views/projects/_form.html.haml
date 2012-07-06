@@ -11,9 +11,9 @@
     .accordion-group.form-inputs
       %div{ class: 'accordion-heading' }
         = label_tag(nil, class: 'accordion-toggle', data: { target: '#fixed-amount-collapse', toggle: 'collapse', parent: '#end-type' }) do
-          = f.radio_button :end_type, :fixed_amount, checked: true
+          = f.radio_button :end_type, :fixed_amount
           Earn up to fixed amount
-      #fixed-amount-collapse.collapse.in.accordion-body
+      #fixed-amount-collapse.collapse.accordion-body{ class: f.object.fixed_amount? && 'in' }
         = f.input :fixed_amount
 
     .accordion-group.form-inputs
@@ -21,8 +21,8 @@
         =label_tag(nil, class: 'accordion-toggle', data: { target: '#open-end-collapse', toggle: 'collapse', parent: '#end-type' }) do
           = f.radio_button :end_type, :open_end
           Gather with OpenEnd
-      #open-end-collapse.collapse.accordion-body
-        = f.input :open_end
+      #open-end-collapse.collapse.accordion-body{ class: f.object.open_end? && 'in' }
+        = f.input :open_end, input_html: { class: 'datetimepicker' }
 
   .form-inputs
     = f.input :paid_type, as: :radio_buttons do
