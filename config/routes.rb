@@ -1,11 +1,18 @@
 Gift::Application.routes.draw do
   resources :projects
 
-  root to: 'users#show'
 
   devise_for :users,
     :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
+
   resource :user, only: [:show]
+
+  authenticate :user do
+    root to: 'projects#index'
+  end
+
+
+  root to: 'users#show'
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
