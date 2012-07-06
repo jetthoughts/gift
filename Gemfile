@@ -33,6 +33,8 @@ gem "simple_form", ">= 2.0.0"
 gem "carrierwave"
 gem "bootstrap-sass", ">= 2.0.1"
 
+gem "date_validator"
+
 group :development do
   gem "unicorn-rails"
 
