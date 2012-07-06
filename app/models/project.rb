@@ -15,8 +15,8 @@ class Project
 
 
   ## Validators
-  validates :fixed_amount, numericality: true, allow_blank: true
-  validates :paid_type, presence: true
+  validates :paid_type, inclusion: Project::PAID_TYPES.map(&:to_s)
+  validates :end_type,  inclusion: Project::END_TYPES.map(&:to_s)
   validates :name, presence: true
   validates :fixed_amount, numericality: { if: :fixed_amount? }
   validates :open_end, date: { after: Time.now, if: :open_end? }
