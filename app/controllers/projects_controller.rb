@@ -38,7 +38,9 @@ class ProjectsController < ApplicationController
 
   # DELETE /projects/1
   def destroy
-    respond_with @project = chain.destroy(params[:id])
+    @project = chain.find(params[:id])
+    @project.destroy
+    respond_with @project
   end
 
 
