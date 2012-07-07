@@ -1,5 +1,37 @@
 require 'spec_helper'
 
+feature "Project edit" do
+  background do
+    @user = Fabricate(:user)
+    visit root_path
+  end
+
+  scenario "Edit project" do
+    @project = Fabricate(:project, name: 'Project Name', end_type: :fixed_amount, fixed_amount: 10, user: @user)
+    @project.save
+
+    sign_in
+
+    visit root_path
+
+    page.should have_content "Listing projects"
+    page.should have_content "Project Name"
+
+    within '#main tbody tr:nth-child(1)' do
+      click_link 'Edit'
+    end
+
+    page.should have_content 'Editing project'
+
+    fill_in 'Name', with: "New name"
+    click_button 'Update Project'
+
+    current_path.should eql project_path(@project)
+    page.should have_content 'New name'
+  end
+
+end
+
 feature "Project create and show" do
   background do
     @user = Fabricate(:user)
@@ -50,21 +82,21 @@ feature "Project create and show" do
     page.should have_content "Some errors were found, please take a look:"
     page.should have_content "can't be blank"
   end
+end
 
-  def go_to_new_project
-    sign_in
-    click_link 'New Project'
-    page.should have_content 'New project'
-  end
+def go_to_new_project
+  sign_in
+  click_link 'New Project'
+  page.should have_content 'New project'
+end
 
-  def sign_in
-    @user.update_attribute :confirmed_at, Time.now
+def sign_in
+  @user.update_attribute :confirmed_at, Time.now
 
-    fill_in 'Email', with: @user.email
-    fill_in 'Password', with: @user.password
-    click_button 'Sign in'
+  fill_in 'Email', with: @user.email
+  fill_in 'Password', with: @user.password
+  click_button 'Sign in'
 
-    page.should have_content I18n.t('devise.sessions.signed_in')
-    page.should have_content 'Listing projects'
-  end
+  page.should have_content I18n.t('devise.sessions.signed_in')
+  page.should have_content 'Listing projects'
 end
