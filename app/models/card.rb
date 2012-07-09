@@ -7,5 +7,7 @@ class Card
   field :price, :type => Float
   field :web_link, :type => String
 
+  belongs_to :project
+
   validates :name, presence: true
 end

@@ -17,7 +17,11 @@
   %hr
   .row
     .span10
-      = render @project.cards
+      - unless @project.cards.blank?
+        = render @project.cards
+      - else
+        No any gifts
+
     .span2
       .btn.pull-right.clear-right
         = link_to 'Donate'
