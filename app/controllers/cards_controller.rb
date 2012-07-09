@@ -4,7 +4,8 @@ class CardsController < ApplicationController
   end
 
   def new
-
+    @card = Card.new
+    @project = project
   end
 
   def create
