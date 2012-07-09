@@ -25,7 +25,7 @@ class Project
   ## Relations
   belongs_to :user
   has_many :comments
-
+  has_many :cards
 
   ## Filters
   before_validation :prepare_end_type
