@@ -50,6 +50,9 @@ GEM
     carrierwave (0.6.2)
       activemodel (>= 3.2.0)
       activesupport (>= 3.2.0)
+    carrierwave-mongoid (0.2.1)
+      carrierwave (~> 0.6.1)
+      mongoid (~> 2.1)
     childprocess (0.3.3)
       ffi (~> 1.0.6)
     coderay (1.0.7)
@@ -233,6 +236,7 @@ GEM
       json (~> 1.4)
     rest-client (1.6.7)
       mime-types (>= 1.16)
+    rmagick (2.13.1)
     rspec (2.10.0)
       rspec-core (~> 2.10.0)
       rspec-expectations (~> 2.10.0)
@@ -306,6 +310,7 @@ DEPENDENCIES
   capybara
   capybara-webkit
   carrierwave
+  carrierwave-mongoid
   coffee-rails (~> 3.2.1)
   database_cleaner (>= 0.7.1)
   date_validator
@@ -339,6 +344,7 @@ DEPENDENCIES
   rails (~> 3.2)
   rb-fsevent
   rb-inotify
+  rmagick
   rspec-rails (>= 2.8.1)
   sass-rails (~> 3.2.3)
   show_for

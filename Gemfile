@@ -32,6 +32,8 @@ gem "has_scope"
 gem "show_for"
 gem "simple_form", ">= 2.0.0"
 gem "carrierwave"
+gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
+gem 'rmagick'
 gem "bootstrap-sass", ">= 2.0.1"
 
 gem "date_validator"
