@@ -1,5 +1,5 @@
 module RequestHelpers
-  def login
+  def sign_in
     @user = Fabricate(:user)
     @user.update_attribute :confirmed_at, Time.now
     visit root_path
