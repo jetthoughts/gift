@@ -1,7 +1,3 @@
-#require "uploaders/image_uploader"
-#require "carrierwave/mongoid"
-
-
 class Card
   include Mongoid::Document
   include Mongoid::Timestamps
