@@ -6,4 +6,6 @@ class Card
   field :name, :type => String
   field :price, :type => Float
   field :web_link, :type => String
+
+  validates :name, presence: true
 end

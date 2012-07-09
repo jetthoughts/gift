@@ -17,8 +17,7 @@
   %hr
   .row
     .span10
-      %div
-        gift image, name, price, web link here
+      = render @project.cards
     .span2
       .btn.pull-right.clear-right
         = link_to 'Donate'
