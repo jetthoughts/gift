@@ -27,7 +27,6 @@ module RequestHelper
     fill_in 'Fixed amount', with: '10'
     choose('Pay pal')
 
-    click_button 'Create Project'
     should_create_valid_project
   end
 
