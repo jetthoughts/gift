@@ -9,7 +9,7 @@ class CardsController < ApplicationController
   end
 
   def show
-
+    redirect_to project
   end
 
   def create
