@@ -8,6 +8,17 @@
 
 .gift {
   width: 20%;
+  float: left;
+  margin-left: 20px;
+  padding-bottom: 10px;
+
+  .image {
+    margin: 10px;
+  }
+
+  div {
+    text-align: center;
+  }
 }
 
 .description {
