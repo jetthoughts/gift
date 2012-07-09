@@ -1,1 +1,14 @@
-test
+= simple_form_for(@card, url: [@project, :cards]) do |f|
+  .form-errors
+    = f.error_notification
+  .form-inputs
+    .description
+      %span= f.input :description#, :placeholder => t('placeholders.defaults.description')
+      %span= f.button :button, 'Amazon search'
+    .clearfix
+    = f.input :web_link
+    = f.file_field :image
+    = f.input :price
+
+  .form-actions
+    = f.button :submit, t('simple_form.add_gift')
