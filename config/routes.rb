@@ -4,6 +4,7 @@ Gift::Application.routes.draw do
     resources :cards
   end
 
+  #mount Rack::GridFS::Endpoint.new(:db => Mongoid.database, :lookup => :path), :at => "gridfs"
 
   devise_for :users,
     :controllers => { :omniauth_callbacks => "omniauth_callbacks" }

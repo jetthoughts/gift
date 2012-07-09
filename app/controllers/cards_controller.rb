@@ -8,6 +8,10 @@ class CardsController < ApplicationController
     @project = project
   end
 
+  def show
+
+  end
+
   def create
     respond_with project, @card = chain.create(card_params.merge({user: current_user}))#, :layout => false
   end
