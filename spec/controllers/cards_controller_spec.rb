@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe CardController do
+describe CardsController do
 
 end
