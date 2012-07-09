@@ -1,8 +1,4 @@
-// Place all the styles related to the Card controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
-
-.gift, .image {
+@mixin border {
   border: 1px solid #666;
 }
 
@@ -11,9 +7,11 @@
   float: left;
   margin-left: 20px;
   padding-bottom: 10px;
+  @include border;
 
   .image {
     margin: 10px;
+    @include border;
   }
 
   div {
@@ -23,10 +21,15 @@
 
 .description {
   span {
-    float:left;
+    float: left;
 
     button {
       margin-left: 10px;
     }
   }
+}
+
+form .image {
+  text-align: right;
+  width: 40%;
 }
