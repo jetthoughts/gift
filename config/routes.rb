@@ -1,6 +1,7 @@
 Gift::Application.routes.draw do
   resources :projects do
     resources :comments
+    resources :cards
   end
 
 
