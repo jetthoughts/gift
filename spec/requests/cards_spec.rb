@@ -22,10 +22,10 @@ feature "Cards" do
      page.should have_link 'Add gift suggestion'
      click_link 'Add gift suggestion'
 
-     fill_in 'Description', 'description'
-     page.attach_file('#card_image', '/images/test-image.jpg')
+     fill_in 'Description', with: 'description'
+     page.attach_file('card_image', Rails.root.join('spec', 'assets', 'test-image.jpg'))
      click_button 'Add gift'
 
-     page.should have_content "'description'"
+     within('.gift') {page.should have_content 'description'}
    end
 end
