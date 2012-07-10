@@ -3,13 +3,13 @@ require 'spec_helper'
 feature "Project edit" do
   background do
     @user = Fabricate(:user)
-    visit root_path
-  end
-
-  scenario "Edit project" do
     @project = Fabricate(:project, name: 'Project Name', end_type: :fixed_amount, fixed_amount: 10, user: @user)
     @project.save
 
+    visit root_path
+  end
+
+  scenario "with valid attributes" do
     sign_in
 
     visit root_path
@@ -30,6 +30,29 @@ feature "Project edit" do
     page.should have_content 'New name'
   end
 
+end
+
+feature "Project destroy" do
+  background do
+    @user = Fabricate(:user)
+    @project = Fabricate(:project, name: 'Project Name', end_type: :fixed_amount, fixed_amount: 10, user: @user).save
+
+    visit root_path
+  end
+
+  scenario "destroy" do
+    sign_in
+
+    page.should have_content "Listing projects"
+    page.should have_content "Project Name"
+
+    within '#main tbody tr:nth-child(1)' do
+      click_link 'Destroy'
+    end
+
+
+
+  end
 end
 
 feature "Project create and show" do
