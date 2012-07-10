@@ -86,6 +86,7 @@ feature "Project create and show" do
     fill_in 'Description', with: 'Project Description'
     fill_in 'Article link', with: 'http://google.com'
     choose('Gather with OpenEnd')
+
     find('#project_open_end').should be_visible
     fill_in 'Open end', with: (Time.now + 1.months).strftime('%d/%m/%Y %H:%M')
     choose('Pay pal')
