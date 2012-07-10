@@ -28,6 +28,10 @@ class CardsController < ApplicationController
 
   private
 
+  def card
+    chain.find(params[:id])
+  end
+
   def init_project
     @project = project
   end
