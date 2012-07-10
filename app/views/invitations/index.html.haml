@@ -1,0 +1,16 @@
+%h2
+  Invite your friends
+%h4
+  By email<br/><br/><br/>
+  = form_tag "/projects/#{@project.id}/invitations" do
+    %div
+      Participant:
+      = text_field_tag 'invite[name][]', nil, :placeholder => 'Name'
+      = text_field_tag 'invite[email][]', nil, :placeholder => 'Email'
+
+    %div
+      Participant:
+      = text_field_tag 'invite[name][]', nil, :placeholder => 'Name'
+      = text_field_tag 'invite[email][]', nil, :placeholder => 'Email'
+    <br/>
+    = submit_tag 'Ready'
