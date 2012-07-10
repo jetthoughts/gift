@@ -6,7 +6,6 @@
   width: 20%;
   float: left;
   margin-left: 20px;
-  padding-bottom: 10px;
   @include border;
 
   .image {
@@ -16,6 +15,11 @@
 
   div {
     text-align: center;
+  }
+
+  .vote {
+    text-align: right;
+    margin-right: 10px;
   }
 }
 
