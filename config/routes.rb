@@ -1,7 +1,8 @@
 Gift::Application.routes.draw do
   resources :projects do
     resources :comments
-    match 'invitations' => 'invitations#show'
+    match 'invitations' => 'invitations#index',  via: :get
+    match 'invitations' => 'invitations#create',  via: :post
     resources :cards do
       resource :votes
     end
