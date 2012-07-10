@@ -1,16 +1,13 @@
 source :rubygems
 
 gem 'rails', '~> 3.2'
-
 gem "unicorn"
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
-
   gem 'therubyracer', :require => 'v8'
   gem 'execjs'
-
   gem 'uglifier', '>= 1.0.3'
 end
 
@@ -19,8 +16,6 @@ gem 'jquery-ui-rails'
 gem "emberjs-rails"
 
 gem "haml"
-
-
 gem 'bson_ext'
 
 gem "mongoid", "~> 2.4"
@@ -37,10 +32,10 @@ gem 'rmagick'
 gem "bootstrap-sass", ">= 2.0.1"
 
 gem "date_validator"
+gem 'voteable_mongo'
 
 group :development do
   gem "unicorn-rails"
-
   gem "heroku", require: false
   gem "haml-rails", require: false
 
