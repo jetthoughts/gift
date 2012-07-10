@@ -1,15 +1,13 @@
 Gift::Application.routes.draw do
   resources :projects do
     resources :comments
-    match 'invitations' => 'invitations#index',  via: :get
-    match 'invitations' => 'invitations#create',  via: :post
     resources :cards do
       resource :votes
     end
   end
 
   devise_for :users,
-    :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
+    controllers: { omniauth_callbacks: "omniauth_callbacks", invitations: 'devise/invitations' }
 
   resource :user, only: [:show]
 
