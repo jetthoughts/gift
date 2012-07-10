@@ -1,8 +1,8 @@
 Gift::Application.routes.draw do
   resources :projects do
     resources :comments
+    resources :cards
   end
-
 
   devise_for :users,
     :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
