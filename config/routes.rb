@@ -2,7 +2,7 @@ Gift::Application.routes.draw do
   resources :projects do
     resources :comments
     resources :cards do
-      resources :votes
+      resource :votes
     end
   end
 

@@ -10,6 +10,7 @@ class ProjectsController < ApplicationController
   def show
     @project = chain.find(params[:id])
     @comment = @project.comments.build
+    @voted_card = @project.cards.up_voted_by(current_user).first
     respond_with @project
   end
 
@@ -42,7 +43,6 @@ class ProjectsController < ApplicationController
     @project.destroy
     respond_with @project
   end
-
 
   private
 
