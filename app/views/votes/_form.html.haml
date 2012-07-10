@@ -1,2 +1,2 @@
-= form_tag([@project, card, :votes]) do
-   = like_dislike_button card
+= form_tag([@project, card, :votes], method: (@voted_card ==  card ? :delete : :post) ) do
+  = like_dislike_button card
