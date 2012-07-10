@@ -1,6 +1,7 @@
 Gift::Application.routes.draw do
   resources :projects do
     resources :comments
+    match 'invitations' => 'invitations#show'
     resources :cards do
       resource :votes
     end
