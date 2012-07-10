@@ -16,7 +16,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/new
   def new
-    respond_with @project = chain.new
+    respond_with @project = chain.build(end_type: :fixed_amount)
   end
 
   # GET /projects/1/edit
@@ -39,7 +39,9 @@ class ProjectsController < ApplicationController
 
   # DELETE /projects/1
   def destroy
-    respond_with @project = chain.destroy(params[:id])
+    @project = chain.find(params[:id])
+    @project.destroy
+    respond_with @project
   end
 
   private
