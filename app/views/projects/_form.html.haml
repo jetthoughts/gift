@@ -26,7 +26,9 @@
         = f.input :open_end, input_html: { class: 'datetimepicker' }
 
   .form-inputs
-    .btn.pull-right= link_to 'More', [@project, :invitations]
+    - if action_name == 'edit'
+      .btn.pull-right= link_to 'Invites', new_user_invitation_path(@project)
+
     = f.input :paid_type, as: :radio_buttons do
       - f.collection_radio_buttons :paid_type, Project::PAID_TYPES, :to_s, lambda { |p| p.to_s.humanize } do |b|
         = b.label(class: 'radio inline') { b.radio_button + b.text }
