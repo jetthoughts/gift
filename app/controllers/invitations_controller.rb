@@ -13,18 +13,16 @@ class InvitationsController < Devise::InvitationsController
 
     invite_params.each do |param|
       name, email = param
-      if name.blank? || email.blank?
-        next
-      end
       @invite = User.invite!({name: name, email: email}, @user)
 
-      if @invite.errors
+      unless @invite.errors.blank?
         render :new
         return
       end
     end
 
-    redirect_to project_path @project
+    flash[:notice] =  'Success sended'
+    redirect_to project_path(@project)
   end
 
   def edit
