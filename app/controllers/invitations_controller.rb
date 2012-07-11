@@ -1,10 +1,20 @@
-class InvitationsController < ApplicationController
-  def index
-    @project = project
+class InvitationsController < Devise::InvitationsController
+  def new
+    #@project = project
+    p '################################'
+    super
   end
 
   def create
+    super
+  end
 
+  def edit
+    super
+  end
+
+  def update
+    super
   end
 
   private
