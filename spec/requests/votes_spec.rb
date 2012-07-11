@@ -9,15 +9,26 @@ feature "Votes" do
     visit project_path(@project)
   end
 
-  scenario "should likes and dislikes" do
+  scenario "should likes" do
     add_gift_with_description 'First'
     add_gift_with_description 'Second'
 
     page.first('.gift').click_button 'Like'
 
     page.should have_button 'Dislike'
-    page.find_button('Like')['disabled'].should == "disabled"
+    page.find_button('Like')['disabled'].should eql "disabled"
   end
+
+  scenario "should dislikes" do
+     add_gift_with_description 'First'
+     add_gift_with_description 'Second'
+
+     page.first('.gift').click_button 'Like'
+     click_button 'Dislike'
+
+     page.should_not have_button 'Dislike'
+     page.find_button('Like')['disabled'].should_not eql "disabled"
+   end
 
   def add_gift_with_description description
     click_link 'Add gift suggestion'
