@@ -7,7 +7,7 @@ Gift::Application.routes.draw do
   end
 
   devise_for :users,
-    controllers: { omniauth_callbacks: "omniauth_callbacks", invitations: 'devise/invitations' }
+    controllers: { omniauth_callbacks: "omniauth_callbacks", invitations: 'invitations' }
 
   resource :user, only: [:show]
 

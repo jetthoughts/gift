@@ -1,0 +1,17 @@
+%h2 Send invitation
+%h4  By email
+
+= form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :post} do |f|
+  = devise_error_messages!
+  %div
+    Participant:
+    = text_field_tag 'invite[name][]', nil, :placeholder => 'Name'
+    = text_field_tag 'invite[email][]', nil, :placeholder => 'Email'
+
+  %div
+    Participant:
+    = text_field_tag 'invite[name][]', nil, :placeholder => 'Name'
+    = text_field_tag 'invite[email][]', nil, :placeholder => 'Email'
+  %p= f.submit 'Ready'
+
+= link_to "Home", after_sign_in_path_for(resource_name)
