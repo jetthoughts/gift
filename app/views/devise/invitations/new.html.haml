@@ -10,8 +10,8 @@
 
   %div
     Participant:
-    = text_field_tag 'invite[name][]', nil, :placeholder => 'Name'
-    = text_field_tag 'invite[email][]', nil, :placeholder => 'Email'
+    = text_field_tag 'user[name][]', nil, :placeholder => 'Name'
+    = text_field_tag 'user[email][]', nil, :placeholder => 'Email'
   %p= f.submit 'Ready'
 
 = link_to "Home", after_sign_in_path_for(resource_name)
