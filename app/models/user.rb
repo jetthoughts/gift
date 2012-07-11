@@ -49,6 +49,16 @@ class User
   
   field :name,                    type: String
 
+  ##Invitations
+  field :invitation_token, type: String, limit: 60
+  field :invitation_sent_at, type: Time
+  field :invitation_accepted_at, type: Time
+  field :invitation_limit, type: Integer
+  field :invited_by_id, type: Integer
+  field :invited_by_type, type: String
+
+  index({invitation_token: 1}, {unique: true})
+
 
   ## Validators
   validates :email, uniqueness: { case_sensitive: false }, if: :email_changed?
