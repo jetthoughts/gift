@@ -6,8 +6,12 @@ Gift::Application.routes.draw do
     end
   end
 
+  scope '/projects/:project_id' do
+    devise_for :users, only: :invitations, controllers: {invitations: 'invitations'}
+  end
+
   devise_for :users,
-    controllers: { omniauth_callbacks: "omniauth_callbacks", invitations: 'invitations' }
+             controllers: {omniauth_callbacks: "omniauth_callbacks"}
 
   resource :user, only: [:show]
 
