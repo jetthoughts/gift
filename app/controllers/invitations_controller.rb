@@ -1,11 +1,12 @@
 class InvitationsController < Devise::InvitationsController
+  before_filter :authenticate_user!
+
   def new
-    #@project = project
-    p '################################'
     super
   end
 
   def create
+    #User.invite! email: "new_user@example.com", invited_by: current_user
     super
   end
 
@@ -19,15 +20,7 @@ class InvitationsController < Devise::InvitationsController
 
   private
 
-  def author
-    @author ||= params[:user_id] ? User.find(params[:user_id]) : nil
-  end
-
-  def projects_chain
-    @projects_chain ||= (author and author.projects) or Project
-  end
-
   def project
-    projects_chain.find(params[:project_id])
+    Project.find(params[:project_id])
   end
 end

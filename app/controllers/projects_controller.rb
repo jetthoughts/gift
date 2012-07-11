@@ -26,7 +26,8 @@ class ProjectsController < ApplicationController
 
   # POST /projects
   def create
-    respond_with @project = chain.create(project_params(user: current_user))
+    @project = chain.create(project_params(user: current_user))
+    redirect_to new_user_invitation_path(@project)
   end
 
   # PUT /projects/1
