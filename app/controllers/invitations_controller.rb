@@ -6,7 +6,6 @@ class InvitationsController < Devise::InvitationsController
   end
 
   def create
-    p '#' * 20
     @project = project
     @user = current_user
     invite_params = params[:user][:name].zip params[:user][:email]
