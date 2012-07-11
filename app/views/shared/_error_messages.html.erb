@@ -1,4 +1,4 @@
-<% if target.errors.any? %>
+<% if !target.blank? and target.errors.any? %>
 
 <div class="alert alert-error">
   Some errors were found, please take a look:
