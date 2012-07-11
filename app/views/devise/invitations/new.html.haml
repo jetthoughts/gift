@@ -2,15 +2,13 @@
 
 = form_for resource, :as => resource_name, :url => invitation_path(resource_name), :html => {:method => :post} do |f|
   = render "shared/error_messages", :target => @invite
-  %h4  By email
+  %h4
+    By email
   #by_email
     .email_participant
       Participant:
       = text_field_tag 'user[name][]', nil, :placeholder => 'Name'
       = text_field_tag 'user[email][]', nil, :placeholder => 'Email'
-
-
-  .center= link_to 'Other participants', '#',  id: 'add_email_participant', class: 'btn'
+  .center
+    = link_to 'Other participants', '#',  id: 'add_email_participant', class: 'btn'
   %p= f.submit 'Ready'
-
-= link_to "Home", after_sign_in_path_for(resource_name)
