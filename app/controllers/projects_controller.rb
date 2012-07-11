@@ -27,7 +27,12 @@ class ProjectsController < ApplicationController
   # POST /projects
   def create
     @project = chain.create(project_params(user: current_user))
-    redirect_to new_user_invitation_path(@project)
+
+    if @project.errors.empty?
+      redirect_to new_user_invitation_path(@project)
+    else
+      render 'new'
+    end
   end
 
   # PUT /projects/1

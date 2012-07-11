@@ -4,11 +4,12 @@ feature "Votes" do
   include RequestHelper
   background do
     sign_in
+    @project = Fabricate(:project_with_amount, user: @user)
+    @project.save
+    visit project_path(@project)
   end
 
   scenario "should likes and dislikes" do
-    create_project
-
     add_gift_with_description 'First'
     add_gift_with_description 'Second'
 
@@ -19,7 +20,6 @@ feature "Votes" do
   end
 
   def add_gift_with_description description
-    page.should have_link 'Add gift suggestion'
     click_link 'Add gift suggestion'
 
     fill_in 'Description', with: description
