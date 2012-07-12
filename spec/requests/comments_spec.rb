@@ -14,7 +14,6 @@ feature "Comments" do
     within('.new_comment') do
       fill_in 'Text', :with => 'My comment'
       click_button 'Add comment'
-      fill_in 'Text', :with => ''
     end
 
     page.should have_content 'My comment'

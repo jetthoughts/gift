@@ -14,3 +14,7 @@ en:
       defaults:
         comment: 'Write your comment'
     add_comment: "Add comment"
+    add_gift: "Add gift"
+  placeholders:
+    defaults:
+      description: "Description"
