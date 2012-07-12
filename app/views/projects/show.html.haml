@@ -17,13 +17,17 @@
   %hr
   .row
     .span10
-      %div
-        gift image, name, price, web link here
+      - unless @project.cards.blank?
+        = render @project.cards
+      - else
+        No any gifts
+
     .span2
       .btn.pull-right.clear-right
         = link_to 'Donate'
       .btn.pull-right.clear-right
-        = link_to 'Add gift suggestion'
+        = link_to 'Add gift suggestion', new_project_card_path(@project)
+  .clearfix
 
   %hr
     = render 'comments/form'
