@@ -3,6 +3,7 @@
 %p
   .row
     .span4
+      %span= image_tag @project.image if @project.image?
       %span= @project.name
       <br/>
       %span= @project.description

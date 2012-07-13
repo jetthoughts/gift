@@ -13,6 +13,8 @@ class Project
   field :paid_type,                         type: String
   field :end_type,                          type: String
 
+  mount_uploader :image, ImageUploader
+
 
   ## Validators
   validates :paid_type, inclusion: { in: Project::PAID_TYPES.map(&:to_s), message: '' }

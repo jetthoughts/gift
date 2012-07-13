@@ -49,6 +49,7 @@ class User
   
   field :name,                    type: String
 
+  mount_uploader :avatar, ImageUploader
 
   ## Validators
   validates :email, uniqueness: { case_sensitive: false }, if: :email_changed?
