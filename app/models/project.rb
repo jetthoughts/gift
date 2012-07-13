@@ -20,7 +20,7 @@ class Project
   validates :name, presence: true
   validates :fixed_amount, numericality: { if: :fixed_amount? }
   validates :open_end, date: { after: Time.now, if: :open_end? }
-
+  validates :article_link, :url => {:allow_blank => true}
 
   ## Relations
   belongs_to :user
