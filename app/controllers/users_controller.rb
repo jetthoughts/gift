@@ -5,6 +5,6 @@ class UsersController < ApplicationController
 
   def show
     @user = current_user
-    respond_with @user
+    render 'users/show'
   end
 end
