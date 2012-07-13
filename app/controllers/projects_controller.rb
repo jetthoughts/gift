@@ -29,7 +29,7 @@ class ProjectsController < ApplicationController
     @project = chain.create(project_params(user: current_user))
 
     if @project.errors.empty?
-      redirect_to new_user_invitation_path(@project)
+      redirect_to [:new, @project, :invite]
     else
       render 'new'
     end

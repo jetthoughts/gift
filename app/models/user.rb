@@ -66,9 +66,14 @@ class User
 
   ## Relations
   has_many :projects
+  has_many :invites
+
   has_many :comments
   has_many :cards
-  has_many :invites
+
+  attr_accessor :invite_token
+
+  after_create :check_invite_token
 
   ## Methods
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
@@ -83,6 +88,19 @@ class User
                         )
     end
     user
+  end
+
+  def check_invite_token
+    return unless invite_token
+    invite = Invite.where(:invite_token => invite_token).first
+    if invite
+      self.invites << invite
+      self.save
+    end
+  end
+
+  def rest_projects
+    self.invites.map(&:project)
   end
 
   def self.new_with_session(params, session)

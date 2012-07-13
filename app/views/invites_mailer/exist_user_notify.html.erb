@@ -1,8 +1,8 @@
-<p>Hello <%= @invite.name || @invite.email %>!</p>
+<p>Hello <%= @invite.user.name %>!</p>
 
 <p>Someone has invited you to <%= root_url %>, you can accept it through the link below.</p>
 
-<p><%= link_to 'Accept invitation', new_registration_url(:user, :invite_token => @invite.invite_token) %></p>
+<p><%= link_to 'Accept invitation', project_invite_path(@project, @invite, :invite_token => @invite.invite_token) %></p>
 
 <p>If you don't want to accept the invitation, please ignore this email.<br />
   Your account won't be created until you access the link above and set your password.</p>
