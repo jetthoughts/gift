@@ -12,7 +12,7 @@ Gift::Application.routes.draw do
   end
 
   devise_for :users,
-             controllers: {omniauth_callbacks: "omniauth_callbacks"}
+             controllers: {omniauth_callbacks: "omniauth_callbacks", registrations: "users/registrations"}
 
   resource :user, only: [:show]
 
