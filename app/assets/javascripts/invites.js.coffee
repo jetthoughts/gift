@@ -4,7 +4,7 @@
 
 $ ->
   $('#add_email_participant').click ->
-    elem = $('form.new_user .email_participant:first')
+    elem = $('#new_invite .email_participant:first')
     elem.clone().appendTo $('#by_email')
     return false
 

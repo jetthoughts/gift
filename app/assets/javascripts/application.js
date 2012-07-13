@@ -26,4 +26,4 @@
 
 //= require projects
 //= require comments
-//= require invitations
+//= require invites
