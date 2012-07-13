@@ -1,20 +1,18 @@
-class InvitationsController < Devise::InvitationsController
+class InvitesController < ApplicationController
   before_filter :authenticate_user!
+  before_filter :find_project
 
   def new
-    super
+    @invite = @project.invites.build
   end
 
   def create
-    @project = project
-    @user = current_user
     invite_params = params[:user][:name].zip params[:user][:email]
 
     invite_params.each do |param|
       name, email = param
-      @invite = User.invite!({name: name, email: email}, @user)
-
-      unless @invite.errors.blank?
+      @invite = @project.invites.create(email: email, name: name)
+      if @invite.errors.present?
         render :new
         return
       end
@@ -34,7 +32,7 @@ class InvitationsController < Devise::InvitationsController
 
   private
 
-  def project
-    Project.find(params[:project_id])
+  def find_project
+    @project  = Project.find(params[:project_id])
   end
 end

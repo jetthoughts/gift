@@ -1,5 +1,6 @@
 Gift::Application.routes.draw do
   resources :projects do
+    resources :invites
     resources :comments
     resources :cards do
       resource :votes
@@ -7,7 +8,7 @@ Gift::Application.routes.draw do
   end
 
   scope '/projects/:project_id' do
-    devise_for :users, only: :invitations, controllers: {invitations: 'invitations'}
+    #devise_for :users, only: :invites, controllers: {invites: 'invites'}
   end
 
   devise_for :users,

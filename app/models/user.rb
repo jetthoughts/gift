@@ -3,7 +3,7 @@ class User
   include Mongo::Voter
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :invitable, :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :confirmable,
          :omniauthable, omniauth_providers: [:facebook]
 
@@ -68,6 +68,7 @@ class User
   has_many :projects
   has_many :comments
   has_many :cards
+  has_many :invites
 
   ## Methods
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
