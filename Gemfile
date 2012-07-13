@@ -31,6 +31,7 @@ gem 'carrierwave-mongoid', :require => 'carrierwave/mongoid'
 gem 'rmagick'
 gem "bootstrap-sass", ">= 2.0.1"
 
+gem 'validate_url'
 gem "date_validator"
 gem 'voteable_mongo'
 

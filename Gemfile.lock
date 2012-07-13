@@ -295,6 +295,8 @@ GEM
     unicorn-rails (0.0.1)
       rack
       unicorn
+    validate_url (0.2.0)
+      activemodel (>= 3.0.0)
     voteable_mongo (0.9.3)
     warden (1.2.1)
       rack (>= 1.0)
@@ -356,4 +358,5 @@ DEPENDENCIES
   uglifier (>= 1.0.3)
   unicorn
   unicorn-rails
+  validate_url
   voteable_mongo

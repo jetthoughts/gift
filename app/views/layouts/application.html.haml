@@ -16,6 +16,8 @@
           %ul.nav
             %li.active
               = link_to "Home", root_path
+            %li.active
+              = link_to 'Projects', projects_path
           - if user_signed_in?
             %ul.nav.pull-right
               %li#user-menu.dropdown

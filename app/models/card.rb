@@ -13,6 +13,7 @@ class Card
   voteable self, :up => +1, :down => -1
 
   validates_presence_of :image
+  validates :web_link, :url => {:allow_blank => true}
 
   belongs_to :project
   belongs_to :user
