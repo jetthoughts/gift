@@ -25,7 +25,8 @@ class Project
   validates :article_link, :url => {:allow_blank => true}
 
   ## Relations
-  belongs_to :user
+  belongs_to :admin, :class_name => 'User', :inverse_of => :own_project, :foreign_key => "admin_id"
+  has_and_belongs_to_many :users
   has_many :comments
   has_many :cards
   has_many :invites
