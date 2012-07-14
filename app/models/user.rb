@@ -65,7 +65,7 @@ class User
 
 
   ## Relations
-  has_many :projects
+  has_and_belongs_to_many :projects
   has_many :invites
 
   has_many :comments
@@ -94,14 +94,13 @@ class User
     return unless invite_token
     invite = Invite.where(:invite_token => invite_token).first
     if invite
-      self.invites << invite
-      self.save
+      invite.user = self
+      invite.save
+      invite.reload
+      invite.accept!
     end
   end
 
-  def rest_projects
-    self.invites.map(&:project)
-  end
 
   def self.new_with_session(params, session)
     super.tap do |user|

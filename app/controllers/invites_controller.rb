@@ -1,6 +1,7 @@
 class InvitesController < ApplicationController
   before_filter :authenticate_user!
-  before_filter :find_project
+  before_filter :find_project, :except => [:destroy]
+  before_filter :find_invite, :only => [:show, :update, :destroy]
 
   def new
     @invite = @project.invites.build
@@ -22,12 +23,17 @@ class InvitesController < ApplicationController
     redirect_to project_path(@project)
   end
 
-  def edit
-    super
+  def show
   end
 
   def update
-    super
+    @invite.accept!
+    redirect_to @project
+  end
+
+  def destroy
+    @invite.destroy
+    redirect_to root_path
   end
 
   private
@@ -35,4 +41,9 @@ class InvitesController < ApplicationController
   def find_project
     @project  = Project.find(params[:project_id])
   end
+
+  def find_invite
+    @invite = current_user.invites.find(params[:id])
+  end
+
 end

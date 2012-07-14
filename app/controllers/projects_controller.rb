@@ -26,7 +26,7 @@ class ProjectsController < ApplicationController
 
   # POST /projects
   def create
-    @project = chain.create(project_params(user: current_user))
+    @project = current_user.projects.create(project_params(admin: current_user))
 
     if @project.errors.empty?
       redirect_to [:new, @project, :invite]

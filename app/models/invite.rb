@@ -22,6 +22,13 @@ class Invite
     SecureRandom.hex(8)
   end
 
+  def accept!
+    if user and !project.users.include? user
+      project.users << user
+      project.save
+    end
+  end
+
   private
 
   def set_user
@@ -34,7 +41,7 @@ class Invite
   end
 
   def send_notification
-    InvitesMailer.new_user_notify(self).deliver
+    self.user.present? ? InvitesMailer.exist_user_notify(self).deliver : InvitesMailer.new_user_notify(self).deliver
   end
 
 end
