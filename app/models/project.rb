@@ -48,6 +48,10 @@ class Project
     end_type == 'open_end'
   end
 
+  def can_suggest?(user)
+    participants_add_own_suggestions? || admin == user
+  end
+
 
   private
 

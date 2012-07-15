@@ -11,10 +11,11 @@ class Card
   field :web_link, :type => String
 
   voteable self, :up => +1, :down => -1
-
-  validates_presence_of :image
-  validates :web_link, :url => {:allow_blank => true}
-
   belongs_to :project
   belongs_to :user
+
+  validates :web_link, :url => {:allow_blank => true}
+
+  validates :project, :image, presence: true
+
 end
