@@ -24,8 +24,9 @@
     .span2
       .btn.pull-right.clear-right
         = link_to 'Donate'
-      .btn.pull-right.clear-right
-        = link_to 'Add gift suggestion', new_project_card_path(@project)
+      - if @project.can_suggest?(current_user)
+        .btn.pull-right.clear-right
+          = link_to 'Add gift suggestion', new_project_card_path(@project)
   .clearfix
 
   %hr
