@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
   has_scope :page, default: 1
-
+  before_filter :find_project, only: [:show, :edit, :update, :destroy]
+  before_filter :check_rights, only: [:edit, :update, :destroy]
   # GET /projects
   def index
     respond_with @projects = scoped_chain.all
@@ -8,7 +9,6 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1
   def show
-    @project = chain.find(params[:id])
     @comment = @project.comments.build
     @voted_card = @project.cards.up_voted_by(current_user).first
     respond_with @project
@@ -21,7 +21,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
-    respond_with @project = chain.find(params[:id])
+    respond_with @project
   end
 
   # POST /projects
@@ -37,7 +37,6 @@ class ProjectsController < ApplicationController
 
   # PUT /projects/1
   def update
-    @project = chain.find params[:id]
     @project.update_attributes project_params
 
     respond_with @project
@@ -45,7 +44,6 @@ class ProjectsController < ApplicationController
 
   # DELETE /projects/1
   def destroy
-    @project = chain.find(params[:id])
     @project.destroy
     respond_with @project
   end
@@ -71,4 +69,13 @@ class ProjectsController < ApplicationController
   def scoped_chain
     apply_scopes chain
   end
+
+  def find_project
+    @project = chain.find(params[:id])
+  end
+
+  def check_rights
+    access_denied unless @project.can_manage?(current_user)
+  end
+
 end
