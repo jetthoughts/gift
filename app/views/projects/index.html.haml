@@ -25,8 +25,9 @@
         %td= project.open_end
         %td= project.paid_type
         %td= link_to 'Show', project
-        %td= link_to 'Edit', edit_project_path(project)
-        %td= link_to 'Destroy', project, data: { confirm: 'Are you sure?', method: :delete }
+        - if project.can_manage?(current_user)
+          %td= link_to 'Edit', edit_project_path(project)
+          %td= link_to 'Destroy', project, data: { confirm: 'Are you sure?', method: :delete }
 
 %br
 
