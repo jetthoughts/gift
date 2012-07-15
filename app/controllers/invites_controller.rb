@@ -4,21 +4,23 @@ class InvitesController < ApplicationController
   before_filter :find_invite, :only => [:show, :update, :destroy]
 
   def new
-    @invite = @project.invites.build
+    @invites = [@project.invites.build]
   end
 
   def create
-    invite_params = params[:user][:name].zip params[:user][:email]
-
+    invite_params = params[:invites]
+    @invites = []
     invite_params.each do |param|
-      name, email = param
-      @invite = @project.invites.create(email: email, name: name)
-      if @invite.errors.present?
-        render :new
-        return
-      end
+      name = param[:name]
+      email = param[:email]
+      invite = @project.invites.create(email: email, name: name)
+      @invites.push(invite) if invite.errors.present?
     end
 
+    if @invites.any?
+      render :new
+      return
+    end
     flash[:notice] =  'Success sended'
     redirect_to project_path(@project)
   end

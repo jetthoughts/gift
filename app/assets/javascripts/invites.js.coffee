@@ -5,6 +5,6 @@
 $ ->
   $('#add_email_participant').click ->
     elem = $('#new_invite .email_participant:first')
-    elem.clone().appendTo $('#by_email')
+    elem.clone().find('input').val('').end().appendTo $('#by_email')
     return false
 

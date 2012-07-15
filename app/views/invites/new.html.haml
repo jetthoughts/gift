@@ -1,14 +1,10 @@
 %h2 Send invitation
 
-= form_for [@project, @invite], :html => {:method => :post} do |f|
-  = render "shared/error_messages", :target => @invite
+= form_for [@project, Invite.new], :html => {:method => :post} do |f|
   %h4
     By email
   #by_email
-    .email_participant
-      Participant:
-      = text_field_tag 'user[name][]', nil, :placeholder => 'Name'
-      = text_field_tag 'user[email][]', nil, :placeholder => 'Email'
+    = render :partial => 'invite_fields', :collection => @invites, :as => :invite
   .center
     = link_to 'Other participants', '#',  id: 'add_email_participant', class: 'btn'
   %p= f.submit 'Ready'
