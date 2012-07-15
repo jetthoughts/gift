@@ -9,8 +9,11 @@ class Invite
   field :name
   field :invite_token
 
-  validates :project, :email, presence: true
-
+  validates :project, :name, presence: true
+  validates :email,
+            :presence => true,
+            :uniqueness => true,
+            :format => { :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i }
 
   before_create :set_token
   before_validation :set_user, :on => :create
