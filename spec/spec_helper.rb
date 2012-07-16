@@ -34,7 +34,7 @@ Spork.prefork do
     config.include Mongoid::Matchers
 
     config.before(:suite) do
-      DatabaseCleaner.strategy = :truncation
+      DatabaseCleaner[:mongoid].strategy = :truncation
     end
 
     config.before(:each) do
