@@ -30,6 +30,7 @@ class Project
   has_many :comments
   has_many :cards
   has_many :invites
+  has_many :fees
   ## Filters
   before_validation :prepare_end_type
 
@@ -56,6 +57,9 @@ class Project
     admin == user
   end
 
+  def fee_in_cents
+    fixed_amount.to_i*100 #/3
+  end
 
   private
 
