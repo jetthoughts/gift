@@ -25,10 +25,11 @@ class Project
   validates :article_link, :url => {:allow_blank => true}
 
   ## Relations
-  belongs_to :user
+  belongs_to :admin, :class_name => 'User', :inverse_of => :own_project, :foreign_key => "admin_id"
+  has_and_belongs_to_many :users
   has_many :comments
   has_many :cards
-
+  has_many :invites
   ## Filters
   before_validation :prepare_end_type
 
@@ -45,6 +46,14 @@ class Project
 
   def open_end?
     end_type == 'open_end'
+  end
+
+  def can_suggest?(user)
+    participants_add_own_suggestions? || admin == user
+  end
+
+  def can_manage?(user)
+    admin == user
   end
 
 

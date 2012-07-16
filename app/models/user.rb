@@ -54,11 +54,16 @@ class User
   ## Validators
   validates :email, uniqueness: { case_sensitive: false }, if: :email_changed?
 
-
   ## Relations
-  has_many :projects
+  has_and_belongs_to_many :projects
+  has_many :invites
+
   has_many :comments
   has_many :cards
+
+  attr_accessor :invite_token
+
+  after_create :check_invite_token
 
   ## Methods
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
@@ -74,6 +79,18 @@ class User
     end
     user
   end
+
+  def check_invite_token
+    return unless invite_token
+    invite = Invite.where(:invite_token => invite_token).first
+    if invite
+      invite.user = self
+      invite.save
+      invite.reload
+      invite.accept!
+    end
+  end
+
 
   def self.new_with_session(params, session)
     super.tap do |user|

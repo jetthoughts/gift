@@ -3,7 +3,7 @@ require 'spec_helper'
 feature "Project edit" do
   background do
     @user = Fabricate(:user)
-    @project = Fabricate(:project, name: 'Project Name', end_type: :fixed_amount, fixed_amount: 10, user: @user)
+    @project = Fabricate(:project_with_amount, user: @user)
     @project.save
 
     visit root_path
@@ -35,7 +35,8 @@ end
 feature "Project destroy" do
   background do
     @user = Fabricate(:user)
-    @project = Fabricate(:project, name: 'Project Name', end_type: :fixed_amount, fixed_amount: 10, user: @user).save
+    @project = Fabricate(:project_with_amount, user: @user)
+    @project.save
 
     visit root_path
   end
@@ -49,9 +50,6 @@ feature "Project destroy" do
     within '#main tbody tr:nth-child(1)' do
       click_link 'Destroy'
     end
-
-
-
   end
 end
 
@@ -61,7 +59,7 @@ feature "Project create and show" do
     visit root_path
   end
 
-  scenario "Create project with valid fixed amount" do
+  scenario "with valid fixed amount" do
     go_to_new_project
 
     fill_in 'Name', with: 'Test Project'
@@ -73,13 +71,11 @@ feature "Project create and show" do
     choose('Pay pal')
     click_button 'Create Project'
 
-    page.should have_content 'Test Project'
-    page.should have_content 'Project Description'
-    page.should have_link 'Profile'
-    page.should have_link 'Edit project'
+    ##redirect to invites only in success
+    page.should have_content 'Send invitation'
   end
 
-  scenario "Create project with valid open end" do
+  scenario "with valid open end" do
     go_to_new_project
 
     fill_in 'Name', with: 'Test Project'
@@ -92,13 +88,11 @@ feature "Project create and show" do
     choose('Pay pal')
     click_button 'Create Project'
 
-    page.should have_content 'Test Project'
-    page.should have_content 'Project Description'
-    page.should have_link 'Profile'
-    page.should have_link 'Edit project'
+    ##redirect to invites only in success
+    page.should have_content 'Send invitation'
   end
 
-  scenario "Create project with invalid params" do
+  scenario "with invalid params" do
     go_to_new_project
 
     click_button 'Create Project'

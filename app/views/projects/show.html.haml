@@ -1,5 +1,3 @@
-%p#notice= notice
-
 %p
   .row
     .span4
@@ -9,7 +7,7 @@
       %span= @project.description
     .span8
       .btn.pull-right
-        = link_to 'Profile', @project.user
+        = link_to 'Profile', @project.admin
       .btn.pull-right
         = link_to 'Edit project', edit_project_path(@project)
       .btn.pull-right
@@ -26,8 +24,9 @@
     .span2
       .btn.pull-right.clear-right
         = link_to 'Donate'
-      .btn.pull-right.clear-right
-        = link_to 'Add gift suggestion', new_project_card_path(@project)
+      - if @project.can_suggest?(current_user)
+        .btn.pull-right.clear-right
+          = link_to 'Add gift suggestion', new_project_card_path(@project)
   .clearfix
 
   %hr

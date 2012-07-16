@@ -4,22 +4,33 @@ feature "Votes" do
   include RequestHelper
   background do
     sign_in
+    @project = Fabricate(:project_with_amount, user: @user)
+    @project.save
+    visit project_path(@project)
   end
 
-  scenario "should likes and dislikes" do
-    create_project
-
+  scenario "should likes" do
     add_gift_with_description 'First'
     add_gift_with_description 'Second'
 
     page.first('.gift').click_button 'Like'
 
     page.should have_button 'Dislike'
-    page.find_button('Like')['disabled'].should == "disabled"
+    page.find_button('Like')['disabled'].should eql "disabled"
   end
 
+  scenario "should dislikes" do
+     add_gift_with_description 'First'
+     add_gift_with_description 'Second'
+
+     page.first('.gift').click_button 'Like'
+     click_button 'Dislike'
+
+     page.should_not have_button 'Dislike'
+     page.find_button('Like')['disabled'].should_not eql "disabled"
+   end
+
   def add_gift_with_description description
-    page.should have_link 'Add gift suggestion'
     click_link 'Add gift suggestion'
 
     fill_in 'Description', with: description
