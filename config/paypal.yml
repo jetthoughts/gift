@@ -1,0 +1,8 @@
+development:
+  login: 'seller_1342456463_biz_api1.mailinator.com'
+  password: '1342456486'
+  signature: 'AYx.vXofSLRGg6cTYT4cQwRGiddkABt4njCMpaZnA5uW6DgEZ25YLCsY'
+staging:
+  login: 'seller_1342456463_biz_api1.mailinator.com'
+  password: '1342456486'
+  signature: 'AYx.vXofSLRGg6cTYT4cQwRGiddkABt4njCMpaZnA5uW6DgEZ25YLCsY'

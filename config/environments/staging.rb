@@ -71,4 +71,7 @@ Gift::Application.configure do
     :port => 2525,
     :authentication => :plain,
   }
+  config.after_initialize do
+    ActiveMerchant::Billing::Base.gateway_mode = :test
+  end
 end

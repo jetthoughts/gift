@@ -37,7 +37,7 @@ gem 'voteable_mongo'
 gem 'state_machine'
 gem 'activeadmin'
 gem 'activeadmin-mongoid'
-
+gem "activemerchant"
 group :development do
   gem "unicorn-rails"
   gem "heroku", require: false
