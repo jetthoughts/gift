@@ -1,0 +1,10 @@
+%h2 Send invitation
+
+= form_for [@project, Invite.new], :html => {:method => :post} do |f|
+  %h4
+    By email
+  #by_email
+    = render :partial => 'invite_fields', :collection => @invites, :as => :invite
+  .center
+    = link_to 'Other participants', '#',  id: 'add_email_participant', class: 'btn'
+  %p= f.submit 'Ready'
