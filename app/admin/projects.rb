@@ -11,7 +11,7 @@ ActiveAdmin.register Project do
     column :open_end
     column :paid_type
     column :end_type
-    column :user
+    column :admin
     default_actions
   end
 
@@ -25,7 +25,7 @@ ActiveAdmin.register Project do
       f.input :open_end
       f.input :paid_type, as: :radio, collection: Project::PAID_TYPES
       f.input :end_type, as: :radio, collection: Project::END_TYPES
-      f.input :user
+      f.input :admin
       f.input :image
     end
     f.buttons
