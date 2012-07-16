@@ -35,6 +35,8 @@ gem 'validate_url'
 gem "date_validator"
 gem 'voteable_mongo'
 gem 'state_machine'
+gem 'activeadmin'
+gem 'activeadmin-mongoid'
 
 group :development do
   gem "unicorn-rails"
