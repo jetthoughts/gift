@@ -1,5 +1,6 @@
 class CardsController < ApplicationController
   before_filter :init_project, only: [:new, :create, :update]
+  before_filter :check_rights, except: [:index, :show]
 
   def index
     respond_with project, @cards = chain.all #, :layout => false
@@ -55,4 +56,9 @@ class CardsController < ApplicationController
   def project
     projects_chain.find(params[:project_id])
   end
+
+  def check_rights
+    access_denied unless @project.can_suggest?(current_user)
+  end
+
 end

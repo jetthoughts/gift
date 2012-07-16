@@ -1,0 +1,5 @@
+= render "shared/error_messages", :target => invite
+.email_participant
+  Participant:
+  = text_field_tag 'invites[][name]', invite.name, :placeholder => 'Name'
+  = text_field_tag 'invites[][email]', invite.email, :placeholder => 'Email'

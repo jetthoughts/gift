@@ -34,6 +34,7 @@ gem "bootstrap-sass", ">= 2.0.1"
 gem 'validate_url'
 gem "date_validator"
 gem 'voteable_mongo'
+gem 'state_machine'
 
 group :development do
   gem "unicorn-rails"
