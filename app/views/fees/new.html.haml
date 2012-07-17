@@ -1,3 +1,30 @@
 = render "shared/error_messages", :target => @fee
+
 = form_for [@project, @fee] do |f|
+  - puts '*'*100
+  - p @fee
+  - p @fee.credit_card
+  = f.label :payment_method, 'Credit Card'
+  = f.radio_button :payment_method, 'cc', :checked => true
+  = f.fields_for :credit_card, @fee.credit_card do |card|
+    - p card.object
+    %p
+      = card.label :first_name
+      = card.text_field :first_name
+    %p
+      = card.label :last_name
+      = card.text_field :last_name
+    %p
+      = card.label :number
+      = card.text_field :number
+      = card.select :brand, ['visa']
+    %p
+      = card.text_field :month, :size => 2, :maxlength => 2, :class => :small
+      \/
+      = card.text_field :year, :size => 4, :maxlength => 4, :class => :small
+    %p
+      = card.text_field :verification_value, :size => 4, :maxlength => 4, :class => :small
+  = f.label :payment_method, 'PayPal'
+  = f.radio_button :payment_method, 'paypal'
+  %br
   = f.submit 'Pay'
