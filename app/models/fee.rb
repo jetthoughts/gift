@@ -24,7 +24,7 @@ class Fee
   attr_accessible :credit_card, :payment_method, :project, :amount
 
   validate :validate_card, if: -> { self.cc? }, on: :update
-  validates :amount, presence: true
+  validates :amount, presence: true, numericality: true
 
   scope :paid, where(:state => 'paid')
   scope :idle, where(:state => 'idle')
