@@ -7,4 +7,13 @@ class ApplicationController < ActionController::Base
   def access_denied
     raise 'Access denied'
   end
+
+  def model_name
+    controller_name.classify.parameterize
+  end
+
+  def model_params new_params = {}
+    params[model_name].merge new_params
+  end
+
 end
