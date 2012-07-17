@@ -57,17 +57,12 @@ class Project
     admin == user
   end
 
-  def fee_in_cents
-    fixed_amount.to_i*100 #/3
-  end
-
-
   def donated_amount
-    self.fees.sum(:amount)
+    self.fees.paid.sum(:amount)
   end
 
   def donated_amount_from(user)
-    self.fees.where(:user_id => user.id).sum(:amount)
+    self.fees.paid.where(:user_id => user.id).sum(:amount)
   end
 
   private

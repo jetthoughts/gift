@@ -6,7 +6,7 @@ Gift::Application.routes.draw do
   resources :projects do
     resources :invites
     resources :fees do
-      collection do
+      member do
         get :paypal
       end
     end
