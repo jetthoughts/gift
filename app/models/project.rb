@@ -61,6 +61,15 @@ class Project
     fixed_amount.to_i*100 #/3
   end
 
+
+  def donated_amount
+    self.fees.sum(:amount)
+  end
+
+  def donated_amount_from(user)
+    self.fees.where(:user_id => user.id).sum(:amount)
+  end
+
   private
 
   def prepare_end_type

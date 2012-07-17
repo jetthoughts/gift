@@ -6,11 +6,22 @@ class FeesController < ApplicationController
    end
 
    def create
-     @fee = current_user.fees.build(:project => @project)
-     if (redirect_url = @fee.start_paypal(paypal_project_fees_url(@project), new_project_fee_url(@project)))
-       redirect_to redirect_url
+     @fee = current_user.fees.build(model_params(:project => @project))
+
+     if @fee.valid?
+       if @fee.cc?
+         success =  @fee.cc_payment(request.remote_ip)
+         redirect_to (success ? url_for(@project) : new_project_fee_url(@project))
+       else
+         if (redirect_url = @fee.start_paypal(paypal_project_fees_url(@project), new_project_fee_url(@project)))
+           redirect_to redirect_url
+         else
+           render :new, :notice => "We have problem with gateway"
+         end
+       end
+
      else
-       render :new, :notice => "We have problem with gateway"
+       render :new
      end
    end
 
