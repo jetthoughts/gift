@@ -24,15 +24,13 @@
     .span2
       .btn.pull-right.clear-right
         = link_to 'Donate', new_project_fee_url(@project)
-      = number_to_currency(@project.donated_amount)
-      already donated
       = number_to_currency(@project.donated_amount_from(current_user))
-      comes from you
+      you already donated
       - if @project.can_suggest?(current_user)
         .btn.pull-right.clear-right
           = link_to 'Add gift suggestion', new_project_card_path(@project)
   .clearfix
-
+  = render 'donation_state'
   %hr
     = render 'comments/form'
     #comments

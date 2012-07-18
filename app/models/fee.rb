@@ -21,10 +21,10 @@ class Fee
   end
   validates :payment_method, :inclusion => {:in => %w(cc paypal)}
 
-  attr_accessible :credit_card, :payment_method, :project, :amount
+  attr_accessible :credit_card, :payment_method, :project, :amount, :visible
 
   validate :validate_card, if: -> { self.cc? }, on: :update
-  validates :amount, presence: true, numericality: true
+  validates :amount, presence: true, numericality: {greater_than: 1}
 
   scope :paid, where(:state => 'paid')
   scope :idle, where(:state => 'idle')
