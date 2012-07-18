@@ -28,7 +28,7 @@ var InviteFriend = {
       }
       data.push({friend_uid:fuid, friend_name:Facebook.getFriendName(fuid)})
     }
-    InviteFriend._createInvites(data);
+//    InviteFriend._createInvites(data);
     return true;
   },
 

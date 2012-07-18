@@ -24,7 +24,7 @@ var Facebook = window.Facebook = {};
   };
 
   Controller.login = function () {
-    FB.login(authorizedOnFacebook, {scope:'email, user_likes'});
+    FB.login(authorizedOnFacebook, {scope:'email'});
   };
 
   Controller.logout = function () {
