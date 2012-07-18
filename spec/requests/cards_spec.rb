@@ -4,8 +4,7 @@ feature "Cards" do
   include RequestHelper
   background do
     sign_in
-    @project = Fabricate(:project_with_amount, user: @user)
-    @project.save
+    create_project
     visit project_path(@project)
   end
 

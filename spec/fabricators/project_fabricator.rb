@@ -10,4 +10,5 @@ Fabricator(:project_with_amount, from: :project) do
   name 'Project Name'
   end_type :fixed_amount
   fixed_amount 10
+  paid_type :pay_pal
 end

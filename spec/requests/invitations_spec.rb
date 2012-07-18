@@ -4,9 +4,8 @@ feature "Invitations" do
   include RequestHelper
   background do
     sign_in
-    @project = Fabricate(:project_with_amount, user: @user)
-    @project.save
-    visit new_user_invitation_path(@project)
+    create_project
+    visit new_project_invite_path(@project)
   end
 
   scenario "should has email" do
@@ -19,8 +18,8 @@ feature "Invitations" do
   scenario "should sended" do
 
     within '#by_email .email_participant:first' do
-      fill_in 'user[name][]', with: 'Name'
-      fill_in 'user[email][]', with: 'some@email.com'
+      fill_in 'invites__name', with: 'Name'
+      fill_in 'invites__email', with: 'some@email.com'
     end
 
     click_button 'Ready'

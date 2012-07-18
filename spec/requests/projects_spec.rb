@@ -1,19 +1,15 @@
 require 'spec_helper'
 
 feature "Project edit" do
+  include RequestHelper
   background do
-    @user = Fabricate(:user)
-    @project = Fabricate(:project_with_amount, user: @user)
-    @project.save
+    sign_in
+    create_project
 
     visit root_path
   end
 
   scenario "with valid attributes" do
-    sign_in
-
-    visit root_path
-
     page.should have_content "Listing projects"
     page.should have_content "Project Name"
 
@@ -33,17 +29,15 @@ feature "Project edit" do
 end
 
 feature "Project destroy" do
+  include RequestHelper
   background do
-    @user = Fabricate(:user)
-    @project = Fabricate(:project_with_amount, user: @user)
-    @project.save
+    sign_in
+    create_project
 
     visit root_path
   end
 
   scenario "destroy" do
-    sign_in
-
     page.should have_content "Listing projects"
     page.should have_content "Project Name"
 
@@ -54,6 +48,7 @@ feature "Project destroy" do
 end
 
 feature "Project create and show" do
+  include RequestHelper
   background do
     @user = Fabricate(:user)
     visit root_path
@@ -106,15 +101,4 @@ def go_to_new_project
   sign_in
   click_link 'New Project'
   page.should have_content 'New project'
-end
-
-def sign_in
-  @user.update_attribute :confirmed_at, Time.now
-
-  fill_in 'Email', with: @user.email
-  fill_in 'Password', with: @user.password
-  click_button 'Sign in'
-
-  page.should have_content I18n.t('devise.sessions.signed_in')
-  page.should have_content 'Listing projects'
 end
