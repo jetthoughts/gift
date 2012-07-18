@@ -23,7 +23,7 @@
 
     .span2
       .btn.pull-right.clear-right
-        = link_to 'Donate', new_project_fee_url(@project)
+        = link_to 'Engage', new_project_fee_url(@project)
       = number_to_currency(@project.donated_amount_from(current_user))
       you already donated
       - if @project.can_suggest?(current_user)
