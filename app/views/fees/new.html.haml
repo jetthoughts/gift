@@ -15,10 +15,10 @@
   %h4
     Privacy
   %p
-    = f.radio_button :visible, '1', :checked => true
+    = f.radio_button :visible, true, :checked => true
     = f.label :visible, 'Visible'
   %p
-    = f.radio_button :visible, '0'
+    = f.radio_button :visible, false
     = f.label :visible, 'Not Visible'
   %br
   = f.submit 'Next'
