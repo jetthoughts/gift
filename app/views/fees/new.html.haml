@@ -2,23 +2,23 @@
 
 = form_for [@project, @fee] do |f|
   %h4
-    How much?
+    How do you want to contribute?
   %p
     = f.text_field :amount
   %h4
-    Payment method
+    How do you want to pay?
   %p
     = f.radio_button :payment_method, 'cc', :checked => true
     = f.label :payment_method, 'Credit Card'
     = f.radio_button :payment_method, 'paypal'
     = f.label :payment_method, 'PayPal'
   %h4
-    Privacy
+    Visability
   %p
     = f.radio_button :visible, true, :checked => true
-    = f.label :visible, 'Visible'
+    = f.label :visible, 'Everyone should be allowed to see the amount I contibuted'
   %p
     = f.radio_button :visible, false
-    = f.label :visible, 'Not Visible'
+    = f.label :visible, 'No one is allowed to see the amount'
   %br
   = f.submit 'Next'
