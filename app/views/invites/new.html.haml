@@ -1,13 +1,15 @@
+#fb-root
 %h2 Invite your Friends
 
 = form_for [@project, Invite.new], :html => {:method => :post} do |f|
   %h4
     Via Facebook:
-  =link_to "Facebook", '#', id: 'fb-invite-link'
+  #fb-invite-link Facebook
+  #invite-other
 
   - content_for :javascript_code
   :javascript
-    =  InviteFriend.initialize('#invite-other', {});
+    InviteFriend.initialize('#invite-other', {});
   = render 'shared/fb_js_sdk'
 
   %h4
