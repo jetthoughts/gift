@@ -53,6 +53,8 @@ class Fee
   def complete_paypal(token, payer_id)
     if (response = paypal.purchase(fee_in_cents, {:token => token, :payer_id => payer_id, :description => description})).success?
       self.pay
+      # self.real_amount = response.params['gross_amount'].to_f - response.params['fee_amount'].to_f - response.params['tax_amount'].to_f
+      # save
     else
       errors.add("PayPal Error: #{response.message}")
       false
