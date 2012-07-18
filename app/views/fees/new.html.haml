@@ -1,15 +1,24 @@
 = render "shared/error_messages", :target => @fee
 
 = form_for [@project, @fee] do |f|
+  %h4
+    How much?
   %p
-    = f.label :amount
     = f.text_field :amount
+  %h4
+    Payment method
   %p
-    = f.label :visible, 'Visible for other members?'
-    = f.check_box :visible
-  = f.label :payment_method, 'Credit Card'
-  = f.radio_button :payment_method, 'cc', :checked => true
-  = f.label :payment_method, 'PayPal'
-  = f.radio_button :payment_method, 'paypal'
+    = f.radio_button :payment_method, 'cc', :checked => true
+    = f.label :payment_method, 'Credit Card'
+    = f.radio_button :payment_method, 'paypal'
+    = f.label :payment_method, 'PayPal'
+  %h4
+    Privacy
+  %p
+    = f.radio_button :visible, '1', :checked => true
+    = f.label :visible, 'Visible'
+  %p
+    = f.radio_button :visible, '0'
+    = f.label :visible, 'Not Visible'
   %br
   = f.submit 'Next'

@@ -23,9 +23,11 @@
           = f.radio_button :end_type, :open_end
           Gather with OpenEnd
       #open-end-collapse.collapse.accordion-body{ class: f.object.open_end? && 'in' }
-        = f.input :open_end, input_html: { class: 'datetimepicker' }
+        %p
+          No fixed amount to achieve.
 
   .form-inputs
+    = f.input :deadline, input_html: { class: 'datetimepicker' }
     - if action_name == 'edit'
       .btn.pull-right= link_to 'Invites', [:new, @project, :invite]
 
