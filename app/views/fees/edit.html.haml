@@ -3,7 +3,7 @@
 = form_for [@project, @fee] do |f|
   = f.fields_for :credit_card, @fee.credit_card do |card|
     %p
-      = card.select :brand, [[ "Visa", "Visa" ], [ "MasterCard", "MasterCard" ], [ "Discover", "Discover" ] ]
+      = card.select :brand, ActiveMerchant::Billing::PaypalGateway.supported_cardtypes
     %p
       = card.label :first_name
       = card.text_field :first_name
