@@ -63,6 +63,8 @@ class User
 
   attr_accessor :invite_token
 
+  attr_accessor :fbook_access_token
+
   after_create :check_invite_token
 
   ## Methods

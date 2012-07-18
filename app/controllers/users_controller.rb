@@ -7,4 +7,12 @@ class UsersController < ApplicationController
     @user = current_user
     render 'users/show'
   end
+
+  def update_token
+    if current_user && params[:token]
+      current_user.fbook_access_token = params[:token]
+      current_user.save
+    end
+    render :nothing => true
+  end
 end

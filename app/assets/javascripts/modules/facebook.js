@@ -11,6 +11,11 @@ var Facebook = window.Facebook = {};
     if (initialized) return;
 
     window.fbAsyncInit = function () {
+      FB.init({
+        appId:'382124145174672',
+        xfbml:true
+      });
+
       FB.getLoginStatus(authorizedOnFacebook);
     };
 
@@ -43,6 +48,10 @@ var Facebook = window.Facebook = {};
       params.to = to;
       callback = InviteFriend.fbToCallback;
     }
+
+    console.log(params);
+    console.log(params.to);
+
     FB.ui(params, callback);
     return true;
 
@@ -63,37 +72,6 @@ var Facebook = window.Facebook = {};
     }
   };
 
-
-  Controller.linkToFB = function (url) {
-    if (!_authToken) {
-      Facebook.login();
-      lastRequestedOperation = function () {
-        Facebook.linkToFB(url);
-      };
-      return false;
-    }
-
-    $.ajax({type:"POST",
-      url:url,
-      dataType:'html',
-      data:{token:_authToken, uid:_userID },
-      success:function (res) {
-        $("#link_to_facebook_block").html(res);
-      }
-    });
-  };
-
-  Controller.unlinkFB = function (url) {
-    $.ajax({type:"POST",
-      url:url,
-      dataType:'html',
-      data:{token:_authToken, uid:_userID },
-      success:function (res) {
-        $("#link_to_facebook_block").html(res);
-      }
-    });
-    $.fancybox.close();
-  };
 
   function _updateAccessToken() {
     $.post('/update_token', {token:_authToken}, function () {

@@ -20,6 +20,10 @@ Gift::Application.routes.draw do
     root to: 'projects#index'
   end
 
+  devise_scope :user do
+      match '/update_token' => 'users#update_token', :as => :update_token, :via=>:post
+    end
+
 
   root to: 'users#show'
 
