@@ -12,6 +12,7 @@ class Ability
       can :show, Project do |project|
         user.projects.for_ids(project.id).exists?
       end
+      can :close, Project,  admin_id: user.id
       can :manage, Project, admin_id: user.id
       can :manage, Comment,  user_id: user.id
       can :manage, User,          id: user.id
