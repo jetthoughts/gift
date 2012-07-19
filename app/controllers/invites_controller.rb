@@ -25,6 +25,15 @@ class InvitesController < ApplicationController
     redirect_to project_path(@project)
   end
 
+  def create_facebook
+    logger.debug '*' * 10
+    logger.debug params
+  end
+
+  def facebook_accept
+    logger.debug '!!!!!!!!!' * 3
+  end
+
   def show
   end
 

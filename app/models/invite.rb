@@ -5,6 +5,7 @@ class Invite
   belongs_to :project
   belongs_to :user
 
+  field :fb_id
   field :email
   field :name
   field :invite_token

@@ -38,11 +38,11 @@ var Facebook = window.Facebook = {};
       return false;
     }
 
-    if(message === undefined) {
+    if (message === undefined) {
       message = "See my project"
     }
 
-    var params = {/*exclude_ids:exclude_ids,*/ method:'apprequests', message: message};
+    var params = {/*exclude_ids:exclude_ids,*/ method:'apprequests', message:message};
     var callback = InviteFriend.fbCallback;
     if (to !== undefined) {
       params.to = to;

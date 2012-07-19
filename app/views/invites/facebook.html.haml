@@ -1,13 +1,15 @@
-%p
-  Hello
-  = @invite.user.name
-  !
+-#%p
+-#  Hello
+-#  = @invite.user.name
+-#  !
+-#
+-#%p
+-#  Someone has invited you to
+-#  = root_url
+-#  , you can accept it through the link below.
 
-%p
-  Someone has invited you to
-  = root_url
-  , you can accept it through the link below.
 
-  = link_to 'Accept invitation',  project_invite_url(@invite.project, @invite)
+= link_to 'Accept invitation',  omniauth_authorize_path(User, :facebook, callback_url: facebook_invite_accepts_url)
+-#link_to 'Accept invitation', new_registration_url(:user, :invite_token => @invite.invite_token)
 
 %p If you don't want to accept the invitation, please ignore this invite.

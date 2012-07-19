@@ -3,6 +3,9 @@ Gift::Application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
 
+  match '/invites/friends.json' => 'invites#create_facebook', :via => :post
+  match '/invites/facebook_accept' => 'invites#facebook_accept', :via => :get, :as => :facebook_invite_accept
+
   resources :projects do
     resources :invites
     resources :comments
