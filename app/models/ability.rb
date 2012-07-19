@@ -9,6 +9,9 @@ class Ability
       cannot :manage, :all
 
       can [:create, :update, :destroy], Invite, user_id: user.id
+      can :show, Project do |project|
+        user.projects.exists? project.id
+      end
       can :manage, Project, admin_id: user.id
       can :manage, Comment,  user_id: user.id
       can :manage, User,          id: user.id
