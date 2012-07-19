@@ -9,8 +9,10 @@ class Fee
 
   field :payment_method
   field :amount, type: Float
+  field :real_amount, type: Float
   field :visible, type: Boolean, default: true
   field :state
+  field :transaction_id
 
   state_machine :state, :initial => :idle do
 
@@ -37,24 +39,28 @@ class Fee
     @credit_card = ActiveMerchant::Billing::CreditCard.new(options)
   end
 
-  def cc_payment ip
-    response = cc.purchase(fee_in_cents, credit_card, :ip => ip)
+  def cc_payment  
+    response = cc.purchase(fee_in_cents, credit_card)
     if response.success?
       #self.card_number = creditcard.display_number
       #self.card_expiration = "%02d-%d" % [@creditcard.expiry_date.month, @creditcard.expiry_date.year]
       #self.billing_id = response.authorization
       self.pay
+      self.real_amount = self.amount
+      self.transaction_id = response.params['transaction_id']
+      save
     else
       errors.add("Credit card Error: #{response.message}")
       false
     end
   end
 
-  def complete_paypal(token, payer_id)
+  def complete_paypal(token, payer_id)    
     if (response = paypal.purchase(fee_in_cents, {:token => token, :payer_id => payer_id, :description => description})).success?
       self.pay
-      # self.real_amount = response.params['gross_amount'].to_f - response.params['fee_amount'].to_f - response.params['tax_amount'].to_f
-      # save
+      self.transaction_id = response.params['transaction_id']
+      self.real_amount = response.params['gross_amount'].to_f - response.params['fee_amount'].to_f - response.params['tax_amount'].to_f
+      save
     else
       errors.add("PayPal Error: #{response.message}")
       false
@@ -79,7 +85,8 @@ class Fee
   end
 
   def cc
-    @cc ||=  ActiveMerchant::Billing::PaypalGateway.new(config_from_file('paypal.yml'))
+    #@cc ||=  ActiveMerchant::Billing::PaypalGateway.new(config_from_file('paypal.yml'))
+    @cc ||= ActiveMerchant::Billing::AuthorizeNetGateway.new(config_from_file('gateway.yml'))
   end
 
   def config_from_file(file)

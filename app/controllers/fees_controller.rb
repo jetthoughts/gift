@@ -7,8 +7,6 @@ class FeesController < ApplicationController
 
   def create
     @fee = current_user.fees.create(model_params(:project => @project))
-    p model_params
-    p @fee
     if @fee.errors.empty?
 
       if @fee.cc?
@@ -31,7 +29,7 @@ class FeesController < ApplicationController
 
     if @fee.valid?
       if @fee.cc?
-        success = @fee.cc_payment(request.remote_ip)
+        success = @fee.cc_payment
         redirect_to (success ? url_for(@project) : new_project_fee_url(@project))
       end
     else

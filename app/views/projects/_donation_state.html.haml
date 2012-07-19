@@ -12,5 +12,5 @@ We have
     - @project.fees.paid.each do |fee|
       %tr
         %td= fee.user.name
-        %td= number_to_currency(fee.amount) if fee.visible?
+        %td= number_to_currency(fee.real_amount) if fee.visible?
 %br
