@@ -10,7 +10,7 @@ class Ability
 
       can [:create, :update, :destroy], Invite, user_id: user.id
       can :show, Project do |project|
-        user.projects.exists? project.id
+        user.projects.for_ids(project.id).exists?
       end
       can :manage, Project, admin_id: user.id
       can :manage, Comment,  user_id: user.id
