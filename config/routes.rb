@@ -21,8 +21,10 @@ Gift::Application.routes.draw do
   end
 
   devise_scope :user do
-      match '/update_token' => 'users#update_token', :as => :update_token, :via=>:post
-    end
+    match '/update_token' => 'users#update_token', :as => :update_token, :via => :post
+  end
+
+  match '/facebook' => 'users#facebook_invite'
 
 
   root to: 'users#show'
