@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   respond_to :html
 
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:facebook_invite]
 
   def show
     @user = current_user
@@ -14,5 +14,9 @@ class UsersController < ApplicationController
       current_user.save
     end
     render :nothing => true
+  end
+
+  def facebook_invite
+    render 'invites/facebook', layout: false
   end
 end
