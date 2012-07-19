@@ -5,6 +5,10 @@ Gift::Application.configure do
   # test suite. You never need to work with it otherwise. Remember that
   # your test database is "scratch space" for the test suite and is wiped
   # and recreated between test runs. Don't rely on the data there!
+
+  FBOOK_APPLICATION_ID = '403210583070412'
+  FBOOK_SECRET_KEY = '6bd2a7be803b3fc5112adbbe3640acf5'
+
   config.cache_classes = true
 
   # Configure static asset server for tests with Cache-Control for performance
@@ -15,14 +19,14 @@ Gift::Application.configure do
   config.whiny_nils = true
 
   # Show full error reports and disable caching
-  config.consider_all_requests_local       = true
+  config.consider_all_requests_local = true
   config.action_controller.perform_caching = false
 
   # Raise exceptions instead of rendering exception templates
   config.action_dispatch.show_exceptions = false
 
   # Disable request forgery protection in test environment
-  config.action_controller.allow_forgery_protection    = false
+  config.action_controller.allow_forgery_protection = false
 
   # Tell Action Mailer not to deliver emails to the real world.
   # The :test delivery method accumulates sent emails in the
