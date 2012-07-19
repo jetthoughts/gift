@@ -39,7 +39,7 @@ gem 'voteable_mongo'
 gem 'state_machine'
 gem 'activeadmin'
 gem 'activeadmin-mongoid'
-gem "activemerchant"
+
 group :development do
   gem "unicorn-rails"
   gem "heroku", require: false
@@ -81,3 +81,12 @@ group :development, :test do
   gem 'jasminerice'
   gem 'jasmine'
 end
+
+gem 'activemerchant'
+gem 'activemerchant'
+gem 'valid_email'
+gem 'money'
+
+gem 'nimbleshop_core', '0.0.5', :path => 'vendor/gems/nimbleshop_core-0.0.5'
+gem 'nimbleshop_paypalwp', '0.0.5', :path => 'vendor/gems/nimbleshop_paypalwp-0.0.5'
+gem 'nimbleshop_authorizedotnet', '0.0.5', :path => 'vendor/gems/nimbleshop_authorizedotnet-0.0.5'

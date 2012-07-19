@@ -1,3 +1,18 @@
+PATH
+  remote: vendor/gems/nimbleshop_authorizedotnet-0.0.5
+  specs:
+    nimbleshop_authorizedotnet (0.0.5)
+
+PATH
+  remote: vendor/gems/nimbleshop_core-0.0.5
+  specs:
+    nimbleshop_core (0.0.5)
+
+PATH
+  remote: vendor/gems/nimbleshop_paypalwp-0.0.5
+  specs:
+    nimbleshop_paypalwp (0.0.5)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -346,6 +361,9 @@ GEM
     unicorn-rails (0.0.1)
       rack
       unicorn
+    valid_email (0.0.4)
+      activemodel
+      mail
     validate_url (0.2.0)
       activemodel (>= 3.0.0)
     voteable_mongo (0.9.3)
@@ -395,8 +413,12 @@ DEPENDENCIES
   kaminari
   koala
   libnotify
+  money
   mongoid (~> 2.4)
   mongoid-rspec (>= 1.4.4)
+  nimbleshop_authorizedotnet (= 0.0.5)!
+  nimbleshop_core (= 0.0.5)!
+  nimbleshop_paypalwp (= 0.0.5)!
   omniauth-facebook
   pry-rails
   rails (~> 3.2)
@@ -414,5 +436,6 @@ DEPENDENCIES
   uglifier (>= 1.0.3)
   unicorn
   unicorn-rails
+  valid_email
   validate_url
   voteable_mongo

@@ -1,0 +1,25 @@
+<div id='cvvhelp' class="modal hide fade" >
+  <div class='modal-header'>
+    <%= link_to 'x', '#', class: 'close', 'data-dismiss' => 'modal' %>
+    <h3>What is CVV ?</h3>
+  </div>
+  <div class="modal-body">
+    <p>
+      The <strong>CVV Number</strong>
+      stands for "<strong>C</strong>ard <strong>V</strong>erification <strong>V</strong>alue" .
+      It is a 3 digit number for VISA, MasterCard and Discover cards.
+      It is a 4 digit number for American Express credit cards.
+    </p>
+
+    <div class="modal_images">
+      <div class="modal_cvv_image">
+        <h4>For Visa, MasterCard and Discover credit cards</h4>
+            <%= image_tag 'https://www.paypalobjects.com/en_US/i/demo/cv_card.gif' %>
+      </div>
+      <div class="modal_cvv_image">
+        <h4>For American Express credit cards</h4>
+        <%= image_tag 'https://www.paypalobjects.com/en_US/i/demo/cv_amex_card.gif' %>
+      </div>
+    </div>
+  </div>
+</div>

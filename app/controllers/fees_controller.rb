@@ -26,7 +26,7 @@ class FeesController < ApplicationController
   end
 
   def update
-    @fee = current_user.fees.idle.find(params[:id])
+    @fee = current_user.fees.find(params[:id])
     @fee.update_attributes(model_params)
 
     if @fee.valid?
@@ -40,7 +40,8 @@ class FeesController < ApplicationController
   end
 
   def edit
-    @fee = current_user.fees.idle.find(params[:id])
+    @fee = current_user.fees.find(params[:id])
+    @creditcard = Creditcard.new
   end
 
   def paypal
