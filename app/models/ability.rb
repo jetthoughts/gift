@@ -16,13 +16,13 @@ class Ability
       can :manage, Project, admin_id: user.id
       can :manage, Comment,  user_id: user.id
       can :create, Comment do |comment|
-        comment.project.users.for_ids(user.id).exists?
+        comment.project.participant? user
       end
       can :manage, User,          id: user.id
 
       can [:update, :create], Card do |card|
         card.project.participants_add_own_suggestions? &&
-          card.project.users.for_ids(user.id).exists?
+          card.project.participant?(user)
       end
       can [:destroy], Card, user_id: user.id
     end

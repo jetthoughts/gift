@@ -48,6 +48,10 @@ class Project
     end_type == 'open_end'
   end
 
+  def participant? user
+    users.for_ids(user.id).exists?
+  end
+
   private
 
   def prepare_end_type
