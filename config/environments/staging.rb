@@ -5,7 +5,7 @@ Gift::Application.configure do
   config.cache_classes = true
 
   # Full error reports are disabled and caching is turned on
-  config.consider_all_requests_local       = false
+  config.consider_all_requests_local = false
   config.action_controller.perform_caching = true
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
@@ -19,6 +19,9 @@ Gift::Application.configure do
 
   # Generate digests for assets URLs
   config.assets.digest = true
+
+  FBOOK_APPLICATION_ID = ENV['FACEBOOK_APP_ID']
+  FBOOK_SECRET_KEY = ENV['FACEBOOK_APP_SECRET']
 
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH
@@ -61,14 +64,14 @@ Gift::Application.configure do
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
 
-  config.action_mailer.default_url_options = { host: 'gift-staging.herokuapp.com'}
+  config.action_mailer.default_url_options = {host: 'gift-staging.herokuapp.com'}
 
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :user_name => "giftstaging",
-    :password => "a447925824c59c1c",
-    :address => "mailtrap.io",
-    :port => 2525,
-    :authentication => :plain,
+      :user_name => "giftstaging",
+      :password => "a447925824c59c1c",
+      :address => "mailtrap.io",
+      :port => 2525,
+      :authentication => :plain,
   }
 end

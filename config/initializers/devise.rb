@@ -38,12 +38,12 @@ Devise.setup do |config|
   # Configure which authentication keys should be case-insensitive.
   # These keys will be downcased upon creating or modifying a user and when used
   # to authenticate or find a user. Default is :email.
-  config.case_insensitive_keys = [ :email ]
+  config.case_insensitive_keys = [:email]
 
   # Configure which authentication keys should have whitespace stripped.
   # These keys will have whitespace before and after removed upon creating or
   # modifying a user and when used to authenticate or find a user. Default is :email.
-  config.strip_whitespace_keys = [ :email ]
+  config.strip_whitespace_keys = [:email]
 
   # Tell if authentication through request.params is enabled. True by default.
   # It can be set to an array that will enable params authentication only for the
@@ -92,19 +92,19 @@ Devise.setup do |config|
   # this period, the invited resource won't be able to accept the invitation.
   # When invite_for is 0 (the default), the invitation won't expire.
   # config.invite_for = 2.weeks
-  
+
   # Number of invites users can send.
   # If invitation_limit is nil, users can send unlimited invites.
   # If invitation_limit is 0, users can't send invites.
   # If invitation_limit n > 0, users can send n invites.
   # Default: nil
   # config.invitation_limit = 5
-  
+
   # The key to be used to check existing users when sending an invitation
   # and the regexp used to test it when validate_on_invite is not set.
   # config.invite_key = {:email => /A[^@]+@[^@]+z/}
   # config.invite_key = {:email => /A[^@]+@[^@]+z/, :username => nil}
-  
+
   # Flag that force a record to be valid before being actually invited 
   # Default: false
   # config.validate_on_invite = true
@@ -232,11 +232,7 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  if Rails.env.production? or Rails.env.staging?
-    config.omniauth :facebook, ENV['FACEBOOK_APP_ID'], ENV['FACEBOOK_APP_SECRET']
-  else
-    config.omniauth :facebook, "382124145174672", "b72c02ca9423d45c78d01914b20381c7"
-  end
+  config.omniauth :facebook, FBOOK_APPLICATION_ID, FBOOK_SECRET_KEY
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
