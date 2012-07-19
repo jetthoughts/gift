@@ -21,7 +21,7 @@ class InvitesController < ApplicationController
       render :new
       return
     end
-    flash[:notice] =  'Success sended'
+    flash[:notice] =  'Success sent'
     redirect_to project_path(@project)
   end
 

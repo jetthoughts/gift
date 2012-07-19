@@ -1,1 +1,13 @@
-Hi people!!!!!!!!!!!
+%p
+  Hello
+  = @invite.user.name
+  !
+
+%p
+  Someone has invited you to
+  = root_url
+  , you can accept it through the link below.
+
+  = link_to 'Accept invitation',  project_invite_url(@invite.project, @invite)
+
+%p If you don't want to accept the invitation, please ignore this invite.
