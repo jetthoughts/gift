@@ -1,0 +1,36 @@
+<div class='well nimbleshop-payment-method-form-well' id='nimbleshop-paypalwp-form-well',  style='display:none;'>
+
+  <%= form_for NimbleshopPaypalwp::Paypalwp.first,  url: '/nimbleshop_paypalwp/paypalwp',
+                                                      remote: true,
+                                                      html: { method: 'put',
+                                                              id: 'nimbleshop-paypalwp-form',
+                                                              class: 'nimbleshop-payment-method-form form-horizontal'} do |f| %>
+
+
+    <fieldset>
+
+      <div class="control-group">
+        <%= f.label :merchant_email, nil, class: 'control-label' %>
+        <div class="controls">
+          <%= f.text_field :merchant_email, class: 'span6' %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <div class="controls">
+          <label class='checkbox'>
+            <%= f.check_box :mode, {}, 'test', 'production' %> Enable sandbox mode
+          </label>
+        </div>
+      </div>
+
+    </fieldset>
+
+    <div class="form-actions">
+      <%= f.submit('Submit', class: 'btn btn-primary') %>
+      &nbsp;
+      <%= link_to t(:cancel), nimbleshop_paypalwp.paypalwp_path, class: 'cancel btn' %>
+    </div>
+  <% end %>
+
+</div>

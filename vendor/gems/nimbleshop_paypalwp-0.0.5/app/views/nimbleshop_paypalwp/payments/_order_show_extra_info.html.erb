@@ -1,0 +1,5 @@
+<tr>
+  <td> <%= transaction.created_at.to_s(:long) %> </td>
+  <td> <%= transaction.operation.titleize %> <%= number_to_currency((transaction.amount || 0) / 100) %> </td>
+</tr>
+

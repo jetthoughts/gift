@@ -1,0 +1,104 @@
+.ns-page-title {
+  float:left;
+}
+
+.new-action {
+  float: right;
+}
+
+.clear {
+  clear: both;
+}
+
+.payment-method-engine-well {
+  border: 1px solid #999;
+  background-color: #eee;
+  padding: 10px;
+}
+
+.payment-method-engine-well h2 {
+  float:left;
+}
+.payment-method-engine-well img {
+  float:right;
+  width: 200px;
+}
+
+.payment-method-engine-well .edit_link {
+  float: left;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.payment-method-engine-well .edit_link .nimbleshop-payment-method-edit {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.nimbleshop-payment-method-edit {
+  float:left; 
+  margin-left:10px;
+  margin-right:10px;
+}
+
+.nimbleshop-payment-method-delete {
+  float:left; 
+  margin-left:6px;
+  margin-right:10px;
+}
+
+.navbar .nav > li > a.go-to-shop {
+  color: #fff;
+  font-weight: bold;
+}
+
+.navbar .nav > li > a.go-to-shop:hover {
+  text-decoration:underline;
+}
+
+
+#product-group-edit-form .condition {
+  margin: 9px 0;
+}
+
+.link_group_name,
+.link_group_edit{
+  float: left;
+}
+
+.link_group_edit{
+  margin-left: 10px;
+  margin-top: 6px;
+}
+
+.control-group a {
+  line-height: 26px;
+  float: left;
+  text-decoration: none;
+  color: #000;
+  padding: 0 1px;
+}
+
+.control-group a:before{
+  content: '\0000a0';
+}
+
+footer .content {
+  color: gray;
+  float: right;
+}
+footer .content a {
+  color: gray;
+}
+
+.remove_nested_fields {
+  margin-right: 5px;
+}
+
+.handle-pictures-umbrella {
+  margin-left: 155px;
+}
+
+.handle-pictures-umbrella .pictures-list {
+  margin-left: -155px;
+}

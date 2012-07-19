@@ -1,6 +1,6 @@
 = render "shared/error_messages", :target => @fee
 
-= form_for [@project, @fee] do |f|
+-# form_for [@project, @fee] do |f|
   = f.fields_for :credit_card, @fee.credit_card do |card|
     %p
       = card.select :brand, ActiveMerchant::Billing::PaypalGateway.supported_cardtypes
@@ -21,3 +21,6 @@
       = card.text_field :verification_value, :size => 4, :maxlength => 4, :class => :small
   %br
   = f.submit 'Send money'
+  %br
+= render  'nimbleshop_authorizedotnet/authorizedotnets/edit'
+

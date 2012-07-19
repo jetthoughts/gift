@@ -1,0 +1,32 @@
+<div class='payment-method-engine-well'>
+
+   <div>
+    <h2>Paypal websites payment standard</h2>
+    <div class="edit_link">
+      <%= link_to 'Edit', '#', class: 'nimbleshop-payment-method-edit', id: 'nimbleshop-paypalwp-payment-method-edit' %>
+
+      <%= link_to nimbleshop_paypalwp.paypalwp_path, class: 'nimbleshop-payment-method-delete',
+                                                      confirm: 'Do you really want to delete Paypal payment method', method: :delete, remote: true do %>
+          <i class='icon-remove icon-white'></i>
+      <% end %>
+    </div>
+
+    <%= nimbleshop_paypalwp_big_image %>
+
+    <div class='clear'></div>
+   </div>
+
+  <%= render partial: '/nimbleshop_paypalwp/paypalwps/form' %>
+</div>
+
+<script>
+  $(function(){
+
+    $('#nimbleshop-paypalwp-payment-method-edit').toggle(function(){
+      $('#nimbleshop-paypalwp-form-well').show(); 
+    }, function(){
+      $('#nimbleshop-paypalwp-form-well').hide(); 
+    });
+
+  })
+</script>

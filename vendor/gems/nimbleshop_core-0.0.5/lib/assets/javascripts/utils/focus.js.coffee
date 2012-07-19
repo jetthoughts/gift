@@ -1,0 +1,3 @@
+$ ->
+  $("input.focus:first").focus()
+

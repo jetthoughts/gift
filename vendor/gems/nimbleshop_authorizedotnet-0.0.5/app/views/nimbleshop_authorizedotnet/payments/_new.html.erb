@@ -1,0 +1,91 @@
+<br />
+
+<p>
+  <label class='radio'>
+    <%= radio_button_tag 'payment_choice', 'authorize-net', true %>
+    <label for='payment_choice'>
+      <%= image_tag('engines/nimbleshop_authorizedotnet/visa.png') %>
+      <%= image_tag('engines/nimbleshop_authorizedotnet/mastercard.png') %>
+      <%= image_tag('engines/nimbleshop_authorizedotnet/american_express.png') %>
+      <%= image_tag('engines/nimbleshop_authorizedotnet/discover.png') %>
+    </label>
+  </label>
+</p>
+
+<%= form_for @creditcard, url: nimbleshop_authorizedotnet.payment_path, remote: true, html: { id: 'authorizedotnet-payment-form', class: 'form-horizontal' } do |f| %>
+  <div class='nimbleshop_authorizedotnet_umbrella'>
+    <% if @creditcard.errors.any? %>
+      <div class="alert alert-error">
+        <ul>
+          <% @creditcard.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <fieldset>
+      <div class='control-group'>
+        <div class='controls'>
+          <%= f.text_field :number, class: 'input-xlarge focus', placeholder: 'Credit card number', autocomplete: 'off' %>
+          <% unless (NimbleshopAuthorizedotnet::Authorizedotnet.first.mode == 'production') %>
+            &nbsp;
+            <%= link_to 'Valid number', '#authorizenetsandboxhelp', 'data-toggle' => "modal" %>
+          <% end %>
+        </div>
+      </div>
+
+      <div class='control-group'>
+        <div class='controls'>
+          <%= f.text_field :cvv, placeholder: 'CVV', autocomplete: 'off' %>
+          &nbsp;
+          <%= link_to 'What is this?', '#cvvhelp', 'data-toggle' => "modal" %>
+        </div>
+      </div>
+
+      <div class='control-group'>
+        <p style='padding-left:160px;'>
+        Expiration date
+        </p>
+        <div class='controls'>
+          <%= f.date_select :expires_on,  discard_day: true, 
+            start_year: Date.today.year, 
+            end_year: (Date.today.year + 10), 
+            add_month_numbers: true, 
+            order: [:day, :month, :year] %>
+        </div>
+      </div>
+    </fieldset>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit 'Submit', class: 'btn btn-primary' %>
+  </div>
+
+  <%= render '/nimbleshop_authorizedotnet/payments/authorize_net_instructions' %>
+  <%= render '/nimbleshop_authorizedotnet/payments/what_is_cvv' %>
+<% end %>
+
+<style>
+  #creditcard_expires_on_2i{
+    width: 130px;
+  }
+  #creditcard_expires_on_1i {
+    width: 100px;
+  }
+</style>
+
+<script>
+$(document).ready(function(){
+
+  $('#authorizedotnet-payment-form')
+    .bind("ajax:beforeSend", function(evt, xhr, settings){
+      var $btn = $('#authorizedotnet-payment-form').find('.btn-primary');
+      $btn.attr('value', 'processing ...').attr('disabled', 'disabled');
+    })
+    .bind("ajax:complete", function(evt, data, status, xhr){
+      var $btn = $('#authorizedotnet-payment-form').find('.btn-primary');
+      $btn.attr('value', 'Submit').removeAttr('disabled');
+    })
+});
+</script>

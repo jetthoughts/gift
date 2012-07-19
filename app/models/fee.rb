@@ -7,23 +7,40 @@ class Fee
 
   validates :project, :user, presence: true
 
-  field :payment_method
+  #field :payment_method
   field :amount, type: Float
   field :visible, type: Boolean, default: true
   field :state
 
-  state_machine :state, :initial => :idle do
 
-    event :pay do
-      transition :idle => :paid
+  field :payment_status, default: 'abandoned'
+
+  has_many    :payment_transactions, dependent:  :destroy
+  belongs_to  :payment_method
+
+
+
+  state_machine :payment_status, initial: :abandoned do
+
+    event(:authorize) { transition abandoned:   :authorized }
+    event(:pending)   { transition abandoned:   :pending    }
+    event(:kapture )  { transition authorized:  :purchased  }
+    event(:refund)    { transition purchased:   :refunded   }
+
+    event(:purchase)  { transition [:abandoned,  :pending] =>  :purchased  }
+    event(:void)      { transition [:authorized, :pending] =>  :voided     }
+
+    state all - [ :abandoned ] do
+      validates :payment_method, presence: true
     end
-
   end
-  validates :payment_method, :inclusion => {:in => %w(cc paypal)}
+
+
+
+  #validates :payment_method, :inclusion => {:in => %w(cc paypal)}
 
   attr_accessible :credit_card, :payment_method, :project, :amount, :visible
 
-  validate :validate_card, if: -> { self.cc? }, on: :update
   validates :amount, presence: true, numericality: {greater_than: 1}
 
   scope :paid, where(:state => 'paid')
@@ -71,7 +88,8 @@ class Fee
   end
 
   def cc?
-    payment_method == 'cc'
+    true
+    #payment_method == 'cc'
   end
 
   def paypal
@@ -90,22 +108,24 @@ class Fee
     "Your fee $#{amount} in donation"
   end
 
-  private
+  def final_billing_address
+    {
+        :first_name     => "John",
+        :last_name     => "Smith",
+        :address1 => '123 First St.',
+        :address2 => '',
+        :state    => 'CA',
 
-  def fee_in_cents
-    amount.to_i*100
+        :zipcode      => '90068'
+    }
   end
 
-  def validate_card
-    unless credit_card && credit_card.valid?
-      errors.add(:credit_card, ' not valid')
-        if credit_card
-          credit_card.errors.each do |key, val|
-          errors.add(key, val.join(', '))
-        end
-      end
-    end
+  def number
+    self.id
+  end
 
+  def total_amount_in_cents
+    amount.to_i*100
   end
 
 end
