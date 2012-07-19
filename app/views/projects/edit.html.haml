@@ -2,6 +2,6 @@
 
 = render 'form'
 
-= link_to 'Show', @project
+= link_to 'Show', @project if can? :show, @project
 \|
 = link_to 'Back', projects_path
