@@ -11,10 +11,10 @@ var Facebook = window.Facebook = {};
     if (initialized) return;
 
     window.fbAsyncInit = function () {
-      FB.init({
-        appId:'382124145174672',
-        xfbml:true
-      });
+//      FB.init({
+//        appId:'382124145174672',
+//        xfbml:true
+//      });
 
       FB.getLoginStatus(authorizedOnFacebook);
     };
