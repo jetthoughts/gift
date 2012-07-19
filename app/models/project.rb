@@ -52,11 +52,6 @@ class Project
     participants_add_own_suggestions? || admin == user
   end
 
-  def can_manage?(user)
-    admin == user
-  end
-
-
   private
 
   def prepare_end_type
