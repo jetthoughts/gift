@@ -33,9 +33,10 @@ var InviteFriend = {
   },
 
   _createInvites:function (data) {
+    var projectId = location.pathname.split('/')[2];
     $.ajax({
       url:"/invites/friends.json",
-      data:{friend_attributes:data},
+      data:{friend_attributes:data, project_id: projectId},
       type:'POST',
       context:this,
       dataType:"json",
