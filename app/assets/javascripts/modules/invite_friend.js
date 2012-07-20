@@ -28,14 +28,15 @@ var InviteFriend = {
       }
       data.push({friend_uid:fuid, friend_name:Facebook.getFriendName(fuid)})
     }
-//    InviteFriend._createInvites(data);
+    InviteFriend._createInvites(data);
     return true;
   },
 
   _createInvites:function (data) {
+    var projectId = location.pathname.split('/')[2];
     $.ajax({
-      url:"/plan/user_friends.json",
-      data:{user_friend_attributes:data},
+      url:"/invites/friends.json",
+      data:{friend_attributes:data, project_id: projectId},
       type:'POST',
       context:this,
       dataType:"json",

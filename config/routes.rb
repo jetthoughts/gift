@@ -3,6 +3,9 @@ Gift::Application.routes.draw do
 
   devise_for :admin_users, ActiveAdmin::Devise.config
 
+  match '/invites/friends.json' => 'invites#create_facebook', :via => :post
+  match '/invites/facebook_accept' => 'invites#facebook_accept', :via => :get, :as => :facebook_invite_accept
+
   resources :projects do
     resources :invites
     resources :fees do
@@ -26,8 +29,10 @@ Gift::Application.routes.draw do
   end
 
   devise_scope :user do
-      match '/update_token' => 'users#update_token', :as => :update_token, :via=>:post
-    end
+    match '/update_token' => 'users#update_token', :as => :update_token, :via => :post
+  end
+
+  match '/facebook' => 'users#facebook_invite'
 
 
   root to: 'users#show'

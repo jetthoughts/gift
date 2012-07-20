@@ -8,8 +8,10 @@ Gift::Application.configure do
     end
   end
 
-  FBOOK_APPLICATION_ID = '382124145174672'
-  FBOOK_SECRET_KEY = 'b72c02ca9423d45c78d01914b20381c7'
+  #FBOOK_APPLICATION_ID = '382124145174672'
+  #FBOOK_SECRET_KEY = 'b72c02ca9423d45c78d01914b20381c7'
+  FBOOK_APPLICATION_ID = '403210583070412'
+  FBOOK_SECRET_KEY = '6bd2a7be803b3fc5112adbbe3640acf5'
 
   # Settings specified here will take precedence over those in config/application.rb
 
