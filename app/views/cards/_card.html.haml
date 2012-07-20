@@ -1,7 +1,8 @@
 .gift
   .image
     = link_to (image_tag card.image_url), card.web_link
+  %div= card.name
   %div= card.description
   %div= card.price
   %div= card.votes_count
-  .vote= render 'votes/form', {card: card}
+  .vote= render 'votes/form', { card: card }
