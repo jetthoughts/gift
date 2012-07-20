@@ -9,9 +9,9 @@
       .btn.pull-right
         = link_to 'Profile', @project.admin
       .btn.pull-right
-        = link_to 'Edit project', edit_project_path(@project)
+        = link_to 'Edit project', edit_project_path(@project) if can? :edit, @project
       .btn.pull-right
-        = link_to 'Close project'
+        = link_to 'Close project' if can? :close, @project
 
   %hr
   .row
@@ -24,12 +24,13 @@
     .span2
       .btn.pull-right.clear-right
         = link_to 'Donate'
-      - if @project.can_suggest?(current_user)
-        .btn.pull-right.clear-right
-          = link_to 'Add gift suggestion', new_project_card_path(@project)
+      .btn.pull-right.clear-right
+        = link_to 'Add gift suggestion', new_project_card_path(@project) if can? :create, @project => Card
   .clearfix
 
-  %hr
-    = render 'comments/form'
-    #comments
-      = render @project.comments.ordered_by_date
+  - if can? :show, @project => Comment
+    %hr
+      - if can? :create, @project => Comment
+        = render 'comments/form'
+      #comments
+        = render @project.comments.ordered_by_date
