@@ -58,11 +58,11 @@ class Project
   end
 
   def donated_amount
-    self.fees.paid.sum(:amount)
+    self.fees.purchased.sum(:amount)
   end
 
   def donated_amount_from(user)
-    self.fees.paid.where(:user_id => user.id).sum(:amount)
+    self.fees.purchased.where(:user_id => user.id).sum(:amount)
   end
 
   private

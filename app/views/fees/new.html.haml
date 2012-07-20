@@ -8,10 +8,7 @@
   %h4
     How do you want to pay?
   %p
-    = f.radio_button :payment_method, 'cc', :checked => true
-    = f.label :payment_method, 'Credit Card'
-    = f.radio_button :payment_method, 'paypal'
-    = f.label :payment_method, 'PayPal'
+    = render :partial => 'payment_method_title', :collection => PaymentMethod.all, :as => :payment_method, :locals => {f:f}
   %h4
     Visability
   %p

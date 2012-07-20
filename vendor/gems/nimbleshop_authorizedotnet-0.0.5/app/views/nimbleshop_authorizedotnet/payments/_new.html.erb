@@ -2,13 +2,10 @@
 
 <p>
   <label class='radio'>
-    <%= radio_button_tag 'payment_choice', 'authorize-net', true %>
-    <label for='payment_choice'>
       <%= image_tag('engines/nimbleshop_authorizedotnet/visa.png') %>
       <%= image_tag('engines/nimbleshop_authorizedotnet/mastercard.png') %>
       <%= image_tag('engines/nimbleshop_authorizedotnet/american_express.png') %>
       <%= image_tag('engines/nimbleshop_authorizedotnet/discover.png') %>
-    </label>
   </label>
 </p>
 
@@ -27,8 +24,13 @@
     <fieldset>
       <div class='control-group'>
         <div class='controls'>
+          <%= f.text_field :name, class: 'input-xlarge focus', placeholder: 'Name', autocomplete: 'off' %>
+        </div>
+      </div>
+      <div class='control-group'>
+        <div class='controls'>
           <%= f.text_field :number, class: 'input-xlarge focus', placeholder: 'Credit card number', autocomplete: 'off' %>
-          <% unless (NimbleshopAuthorizedotnet::Authorizedotnet.first.mode == 'production') %>
+          <% unless (NimbleshopAuthorizedotnet::Authorizedotnet.instance.mode == 'production') %>
             &nbsp;
             <%= link_to 'Valid number', '#authorizenetsandboxhelp', 'data-toggle' => "modal" %>
           <% end %>

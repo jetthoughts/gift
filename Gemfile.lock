@@ -8,11 +8,6 @@ PATH
   specs:
     nimbleshop_core (0.0.5)
 
-PATH
-  remote: vendor/gems/nimbleshop_paypalwp-0.0.5
-  specs:
-    nimbleshop_paypalwp (0.0.5)
-
 GEM
   remote: http://rubygems.org/
   specs:
@@ -418,7 +413,6 @@ DEPENDENCIES
   mongoid-rspec (>= 1.4.4)
   nimbleshop_authorizedotnet (= 0.0.5)!
   nimbleshop_core (= 0.0.5)!
-  nimbleshop_paypalwp (= 0.0.5)!
   omniauth-facebook
   pry-rails
   rails (~> 3.2)

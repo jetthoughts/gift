@@ -83,10 +83,9 @@ group :development, :test do
 end
 
 gem 'activemerchant'
-gem 'activemerchant'
+
 gem 'valid_email'
 gem 'money'
 
 gem 'nimbleshop_core', '0.0.5', :path => 'vendor/gems/nimbleshop_core-0.0.5'
-gem 'nimbleshop_paypalwp', '0.0.5', :path => 'vendor/gems/nimbleshop_paypalwp-0.0.5'
 gem 'nimbleshop_authorizedotnet', '0.0.5', :path => 'vendor/gems/nimbleshop_authorizedotnet-0.0.5'

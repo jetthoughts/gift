@@ -5,7 +5,7 @@
   }
 </style>
 
-<% if !Rails.env.production? && NimbleshopAuthorizedotnet::Authorizedotnet.first  %>
+<% if !Rails.env.production? && NimbleshopAuthorizedotnet::Authorizedotnet.instance  %>
   <div id='authorizenetsandboxhelp' class='modal hide fade'>
 
     <div class='modal-header'>

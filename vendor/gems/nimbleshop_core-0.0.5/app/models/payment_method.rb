@@ -2,11 +2,12 @@ class PaymentMethod
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  field   :data
+  field   :data, type: Hash
   field   :name
   field   :description
   field   :type
-  #field   :permalink
+  field   :mode, default: 'test'
+  field   :permalink
 
   #include Permalink::Builder
 

@@ -39,7 +39,7 @@ module NimbleshopAuthorizedotnet
     end
 
     def load_payment_method
-      @payment_method = NimbleshopAuthorizedotnet::Authorizedotnet.first
+      @payment_method = NimbleshopAuthorizedotnet::Authorizedotnet.instance
     end
 
   end
