@@ -67,7 +67,7 @@ feature "Project create and show" do
     click_button 'Create Project'
 
     ##redirect to invites only in success
-    page.should have_content 'Send invitation'
+    page.should have_content 'Invite your Friends'
   end
 
   scenario "with valid open end" do
@@ -84,7 +84,7 @@ feature "Project create and show" do
     click_button 'Create Project'
 
     ##redirect to invites only in success
-    page.should have_content 'Send invitation'
+    page.should have_content 'Invite your Friends'
   end
 
   scenario "with invalid params" do

@@ -8,36 +8,39 @@ class User
          :omniauthable, omniauth_providers: [:facebook]
 
   ## Database authenticatable
-  field :email,                   type: String, null: false, default: ""
-  field :encrypted_password,      type: String, null: false, default: ""
+  field :email, type: String, null: false, default: ""
+  field :encrypted_password, type: String, null: false, default: ""
 
   ## Recoverable
-  field :reset_password_token,    type: String
-  field :reset_password_sent_at,  type: Time
+  field :reset_password_token, type: String
+  field :reset_password_sent_at, type: Time
 
   ## Rememberable
-  field :remember_created_at,     type: Time
+  field :remember_created_at, type: Time
 
   ## Trackable
-  field :sign_in_count,           type: Integer, default: 0
-  field :current_sign_in_at,      type: Time
-  field :last_sign_in_at,         type: Time
-  field :current_sign_in_ip,      type: String
-  field :last_sign_in_ip,         type: String
+  field :sign_in_count, type: Integer, default: 0
+  field :current_sign_in_at, type: Time
+  field :last_sign_in_at, type: Time
+  field :current_sign_in_ip, type: String
+  field :last_sign_in_ip, type: String
 
   ## Encryptable
   # field :password_salt,         type: String
 
   ## Confirmable
-  field :confirmation_token,      type: String
-  field :confirmed_at,            type: Time
-  field :confirmation_sent_at,    type: Time
-  field :unconfirmed_email,       type: String # Only if using reconfirmable
+  field :confirmation_token, type: String
+  field :confirmed_at, type: Time
+  field :confirmation_sent_at, type: Time
+  field :unconfirmed_email, type: String # Only if using reconfirmable
 
   ## Omniauth
-  field :provider,                type: String
-  field :uid,                     type: String
-  field :password_changed,        type: Boolean, default: false
+  field :provider, type: String
+  field :uid, type: String
+  field :password_changed, type: Boolean, default: false
+
+  ##facebook invited info uncompleted
+  field :info_uncompleted, type: Boolean, default: false
 
   ## Lockable
   # field :failed_attempts,       type: Integer, default: 0 # Only if lock strategy is :failed_attempts
@@ -46,13 +49,13 @@ class User
 
   ## Token authenticatable
   # field :authentication_token,  type: String
-  
-  field :name,                    type: String
+
+  field :name, type: String
 
   mount_uploader :avatar, ImageUploader
 
   ## Validators
-  validates :email, uniqueness: { case_sensitive: false }, if: :email_changed?
+  validates :email, uniqueness: {case_sensitive: false}, if: :email_changed?
 
   ## Relations
   has_and_belongs_to_many :projects
@@ -71,21 +74,31 @@ class User
   ## Methods
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.where(provider: auth.provider, uid: auth.uid).first
-    unless user
-      user = User.create(name:auth.extra.raw_info.name,
-                         provider:auth.provider,
-                         uid:auth.uid,
-                         email:auth.info.email,
-                         password:Devise.friendly_token[0,20],
-                         confirmed_at:DateTime.now
-                        )
+    if user && user.info_uncompleted?
+        user.update_attributes(name: auth.extra.raw_info.name,
+                               email: auth.info.email,
+                               password: Devise.friendly_token[0, 20],
+                               confirmed_at: DateTime.now,
+                               info_uncompleted: false
+        )
+    elsif user.nil?
+      user = User.create(name: auth.extra.raw_info.name,
+                         provider: auth.provider,
+                         uid: auth.uid,
+                         email: auth.info.email,
+                         password: Devise.friendly_token[0, 20],
+                         confirmed_at: DateTime.now
+      )
     end
     user
   end
 
   def check_invite_token
+    logger.debug '*************check invite************************'
     return unless invite_token
     invite = Invite.where(:invite_token => invite_token).first
+
+    logger.debug "*************#{invite}************************"
     if invite
       invite.user = self
       invite.save

@@ -11,11 +11,6 @@ var Facebook = window.Facebook = {};
     if (initialized) return;
 
     window.fbAsyncInit = function () {
-//      FB.init({
-//        appId:'382124145174672',
-//        xfbml:true
-//      });
-
       FB.getLoginStatus(authorizedOnFacebook);
     };
 
@@ -34,7 +29,7 @@ var Facebook = window.Facebook = {};
     });
   };
 
-  Controller.fbInvite = function (exclude_ids, to) {
+  Controller.fbInvite = function (exclude_ids, to, message) {
     if (!_authToken) {
       Facebook.login();
       lastRequestedOperation = function () {
@@ -42,7 +37,12 @@ var Facebook = window.Facebook = {};
       };
       return false;
     }
-    var params = {exclude_ids:exclude_ids, method:'apprequests', message:'See project.'};
+
+    if (message === undefined) {
+      message = "See my project"
+    }
+
+    var params = {/*exclude_ids:exclude_ids,*/ method:'apprequests', message:message};
     var callback = InviteFriend.fbCallback;
     if (to !== undefined) {
       params.to = to;
@@ -53,6 +53,7 @@ var Facebook = window.Facebook = {};
     console.log(params.to);
 
     FB.ui(params, callback);
+
     return true;
 
   };
