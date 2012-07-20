@@ -13,6 +13,9 @@
       .btn.pull-right
         = link_to 'Close project'
 
+  - if @project.users
+    = render @project.users
+
   %hr
   .row
     .span10

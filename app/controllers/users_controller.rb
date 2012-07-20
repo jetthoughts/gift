@@ -17,9 +17,7 @@ class UsersController < ApplicationController
   end
 
   def facebook_invite
-    #Koala::Facebook::GraphAPI.new
-    oauth = Koala::Facebook::OAuth.new(FBOOK_APPLICATION_ID, FBOOK_SECRET_KEY)
-    #@oauth_url = oauth.url_for_oauth_code
+    #error_reason
     render 'invites/facebook', layout: false
   end
 end

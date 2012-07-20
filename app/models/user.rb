@@ -39,6 +39,9 @@ class User
   field :uid,                     type: String
   field :password_changed,        type: Boolean, default: false
 
+  ##facebook invited info uncompleted
+  field :info_uncompleted,         type: Boolean, default: false
+
   ## Lockable
   # field :failed_attempts,       type: Integer, default: 0 # Only if lock strategy is :failed_attempts
   # field :unlock_token,          type: String # Only if unlock strategy is :email or :both
