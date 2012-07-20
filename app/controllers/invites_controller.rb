@@ -21,17 +21,17 @@ class InvitesController < ApplicationController
       render :new
       return
     end
-    flash[:notice] =  'Success sent'
+    flash[:notice] = 'Success sent'
     redirect_to project_path(@project)
   end
 
   def create_facebook
-    logger.debug '*' * 10
-    logger.debug params
-  end
+    friends = params[:friend_attributes]
+    friends.each do |index, user_params|
+      @project.invites.create(fb_id: user_params[:friend_name], name: user_params[:friend_uid])
+    end
 
-  def facebook_accept
-    logger.debug '!!!!!!!!!' * 3
+    render nothing: true
   end
 
   def show
@@ -50,7 +50,7 @@ class InvitesController < ApplicationController
   private
 
   def find_project
-    @project  = Project.find(params[:project_id])
+    @project = Project.find(params[:project_id])
   end
 
   def find_invite

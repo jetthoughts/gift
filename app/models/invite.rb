@@ -10,17 +10,19 @@ class Invite
   field :name
   field :invite_token
 
+  validate :present_email_or_id
   validates :project, :name, presence: true
   validates :email,
-            :presence => true,
             :uniqueness => true,
-            :format => { :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i }
+            :format => {:with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i},
+            :allow_blank => true
+
+  validates :fb_id, :uniqueness => true, :allow_blank => true
 
   before_create :set_token
   before_validation :set_user, :on => :create
 
   after_create :send_notification
-
 
   def self.generate_uid
     SecureRandom.hex(8)
@@ -35,9 +37,19 @@ class Invite
 
   private
 
+  def blank_email_and_id?
+    email.blank? and fb_id.blank?
+  end
+
+  def present_email_or_id
+    if blank_email_and_id?
+      errors.add_to_base("Invite must contains email or facebook user id")
+    end
+  end
+
   def set_user
-    return if user
-    self.user = User.where(:email => email).first
+    return if user || blank_email_and_id?
+    self.user = email.blank? ? User.where(:uid => fb_id).first : User.where(:email => email).first
   end
 
   def set_token
@@ -45,7 +57,7 @@ class Invite
   end
 
   def send_notification
+    return if email.blank?
     self.user.present? ? InvitesMailer.exist_user_notify(self).deliver : InvitesMailer.new_user_notify(self).deliver
   end
-
 end

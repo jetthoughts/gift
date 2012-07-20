@@ -19,7 +19,7 @@ var Facebook = window.Facebook = {};
   };
 
   Controller.login = function () {
-    FB.login(authorizedOnFacebook, {scope:'email, create_event'});
+    FB.login(authorizedOnFacebook, {scope:'email'});
   };
 
   Controller.logout = function () {
