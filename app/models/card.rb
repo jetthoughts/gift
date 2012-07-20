@@ -17,6 +17,6 @@ class Card
 
   validates :web_link, url: { allow_blank: true }
 
-  validates :project, :image, presence: true
+  validates :project, :name, :image, presence: true
 
 end

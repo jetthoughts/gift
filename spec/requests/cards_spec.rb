@@ -13,15 +13,20 @@ feature "Cards" do
     click_button 'Add gift'
 
     page.should have_content "Image can't be blank"
+    page.should have_content "Name can't be blank"
   end
 
   scenario "should be created successfully with correct params" do
     click_link 'Add gift suggestion'
 
+    fill_in 'Name', with: 'name'
     fill_in 'Description', with: 'description'
     page.attach_file('card_image', Rails.root.join('spec', 'assets', 'test-image.jpg'))
     click_button 'Add gift'
 
-    within('.gift') { page.should have_content 'description' }
+    within('.gift') do
+      page.should have_content 'description'
+      page.should have_content 'name'
+    end
   end
 end
