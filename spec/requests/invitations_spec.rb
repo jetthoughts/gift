@@ -12,7 +12,7 @@ feature "Invitations" do
     page.should have_content 'Invite your Friends'
     click_button 'Ready'
 
-    page.should have_content "Email can't be blank"
+    current_path.should eql project_path(@project)
   end
 
   scenario "should sent" do
