@@ -2,7 +2,9 @@
   .form-errors
     = render "shared/error_messages", :target => @card
   .form-inputs
+    %span= f.input :name
     .description
+
       %span= f.input :description#, :placeholder => t('placeholders.defaults.description')
       %span= f.button :button, 'Amazon search'
     .clearfix
