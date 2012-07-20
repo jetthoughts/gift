@@ -19,10 +19,11 @@ class Ability
       can :create, Comment do |comment|
         comment.project.participant? user
       end
+      can :manage, Fee
       can :manage, User, id: user.id
-
+      can :new, Card
       can :create, Card do |card|
-        card.project.participants_add_own_suggestions &&
+        card.project && card.project.participants_add_own_suggestions &&
           card.project.participant?(user)
       end
       can :update, Card do |card|
