@@ -8,6 +8,7 @@ class PaymentMethod
   field   :type
   field   :mode, default: 'test'
   field   :permalink
+  field   :tax, :type => Float, default: 0.0
 
   #include Permalink::Builder
 

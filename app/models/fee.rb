@@ -9,7 +9,6 @@ class Fee
 
   field :amount, type: Float
   field :visible, type: Boolean, default: true
-  field :state
 
   attr_accessible :credit_card, :payment_method_id, :project, :amount, :visible, :prefered_payment_method
 
@@ -56,7 +55,7 @@ class Fee
   end
 
   def total_amount_in_cents
-    amount.to_i*100
+    (amount.to_i + payment_method.tax) * 100
   end
 
 end
