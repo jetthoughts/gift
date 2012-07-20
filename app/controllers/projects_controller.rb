@@ -1,7 +1,6 @@
 class ProjectsController < ApplicationController
   has_scope :page, default: 1
   before_filter :find_project, only: [:show, :edit, :update, :destroy]
-  before_filter :check_rights, only: [:edit, :update, :destroy]
   # GET /projects
   def index
     respond_with @projects = scoped_chain.all
@@ -73,9 +72,4 @@ class ProjectsController < ApplicationController
   def find_project
     @project = chain.find(params[:id])
   end
-
-  def check_rights
-    access_denied unless @project.can_manage?(current_user)
-  end
-
 end

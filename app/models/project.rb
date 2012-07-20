@@ -48,14 +48,9 @@ class Project
     end_type == 'open_end'
   end
 
-  def can_suggest?(user)
-    participants_add_own_suggestions? || admin == user
+  def participant? user
+    users.for_ids(user.id).exists?
   end
-
-  def can_manage?(user)
-    admin == user
-  end
-
 
   private
 
