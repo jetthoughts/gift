@@ -29,9 +29,14 @@ class Invite
   end
 
   def accept!
+    logger.debug '***********************************************'
     if user and !project.users.include? user
       project.users << user
       project.save
+
+      user.projects << project
+      user.save
+      logger.debug '**************save accept!*********************'
     end
   end
 
@@ -43,7 +48,7 @@ class Invite
 
   def present_email_or_id
     if blank_email_and_id?
-      errors.add_to_base("Invite must contains email or facebook user id")
+      errors[:base] << "Invite must contains email or facebook user id"
     end
   end
 

@@ -9,6 +9,8 @@ class InvitesController < ApplicationController
 
   def create
     invite_params = params[:invites]
+    return if need_redirect? invite_params
+
     @invites = []
     invite_params.each do |param|
       name = param[:name]
@@ -28,7 +30,9 @@ class InvitesController < ApplicationController
   def create_facebook
     friends = params[:friend_attributes]
     friends.each do |index, user_params|
-      @project.invites.create(fb_id: user_params[:friend_name], name: user_params[:friend_uid])
+      user = find_user user_params
+      assign_user_to_project user
+      @project.invites.create(fb_id: user_params[:friend_uid], name: user_params[:friend_name])
     end
 
     render nothing: true
@@ -49,6 +53,35 @@ class InvitesController < ApplicationController
 
   private
 
+  def find_user user_params
+    user = User.where(uid: user_params[:friend_uid]).first
+
+    if user.nil?
+      user = User.new(name: user_params[:friend_name],
+                      provider: 'facebook',
+                      uid: user_params[:friend_uid],
+                      info_uncompleted: true)
+    end
+    user
+  end
+
+  def assign_user_to_project user
+    user.projects << @project
+    user.save
+    @project.users << user
+    @project.save
+  end
+
+  def need_redirect? invite_params
+    if invite_params.size == 1
+      if invite_params[0]['email'].blank? and invite_params[0][:name].blank?
+        redirect_to project_path(@project)
+        return true
+      end
+    end
+    false
+  end
+
   def find_project
     @project = Project.find(params[:project_id])
   end
@@ -56,5 +89,4 @@ class InvitesController < ApplicationController
   def find_invite
     @invite = current_user.invites.find(params[:id])
   end
-
 end
