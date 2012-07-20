@@ -1,0 +1,65 @@
+<div class='well nimbleshop-payment-method-form-well' id='nimbleshop-authorizedotnet-form-well' style='display:none;'>
+
+  <%= form_for NimbleshopAuthorizedotnet::Authorizedotnet.instance,  url: '/nimbleshop_authorizedotnet/authorizedotnet',
+                                                      remote: true,
+                                                      html: { method: 'put',
+                                                              id: 'nimbleshop-authorizedotnet-form',
+                                                              class: 'nimbleshop-payment-method-form form-horizontal'} do |f| %>
+
+    <fieldset>
+      <div class='control-group'>
+        <%= f.label :login_id, nil, class: 'control-label' %>
+        <div class='controls'>
+          <%= f.text_field :login_id, class: 'span6' %>
+        </div>
+      </div>
+      <div class='control-group'>
+        <%= f.label :transaction_key, nil, class: 'control-label' %>
+        <div class='controls'>
+          <%= f.text_field :transaction_key, class: 'span6' %>
+        </div>
+      </div>
+
+      <div class='control-group'>
+        <%= f.label :company_name_on_creditcard_statement, nil, class: 'control-label' %>
+        <div class='controls'>
+          <%= f.text_field :company_name_on_creditcard_statement, class: 'span6' %>
+        </div>
+      </div>
+
+      <div class='control-group'>
+        <div class='controls'>
+          <label class='checkbox'>
+            <%= f.check_box :mode, {}, 'test', 'production' %> Enable test mode
+            <%= link_to '?', '#', class: 'help', 'data-content' => 'In the test mode real credit card numbers are not accepted.',
+                              'data-original-title' => 'Test mode' %>
+          </label>
+        </div>
+      </div>
+
+      <div class='control-group'>
+        <div class='controls'>
+          <label class='checkbox'>
+            <%= f.check_box :ssl, {}, 'enabled', 'disabled' %> Enable SSL requirement
+            <%= link_to '?', '#', class: 'help', 'data-content' => 'Enabling SSL requirement will force the payment page to be on SSL.',
+                              'data-original-title' => 'SSL requirement' %>
+          </label>
+        </div>
+      </div>
+
+    </fieldset>
+
+    <div class='form-actions'>
+      <%= f.submit('Submit', class: 'btn btn-primary') %>
+      &nbsp;
+      <%= link_to t(:cancel), nimbleshop_authorizedotnet.authorizedotnet_path, class: 'cancel btn' %>
+    </div>
+  <% end %>
+
+</div>
+
+<style>
+  .control-group a.help {
+    float: none;
+  }
+</style>

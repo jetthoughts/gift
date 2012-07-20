@@ -1,0 +1,21 @@
+= render "shared/error_messages", :target => @fee
+
+= form_for [@project, @fee] do |f|
+  %h4
+    How do you want to contribute?
+  %p
+    = f.text_field :amount
+  %h4
+    How do you want to pay?
+  %p
+    = render :partial => 'payment_method_title', :collection => PaymentMethod.all, :as => :payment_method, :locals => {f:f}
+  %h4
+    Visability
+  %p
+    = f.radio_button :visible, true, :checked => true
+    = f.label :visible, 'Everyone should be allowed to see the amount I contibuted'
+  %p
+    = f.radio_button :visible, false
+    = f.label :visible, 'No one is allowed to see the amount'
+  %br
+  = f.submit 'Next'

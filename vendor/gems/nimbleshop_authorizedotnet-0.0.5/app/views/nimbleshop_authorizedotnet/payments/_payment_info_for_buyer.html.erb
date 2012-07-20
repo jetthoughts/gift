@@ -1,0 +1,6 @@
+<li>
+  Your credit card was charged <strong><%= number_to_currency(order.total_amount) %> </strong> .
+</li>
+<li>
+  In the credit card statement name of the company would appear as <strong><%= order.payment_method.company_name_on_creditcard_statement %></strong> .
+</li>

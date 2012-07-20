@@ -23,11 +23,11 @@
 
     .span2
       .btn.pull-right.clear-right
-        = link_to 'Donate'
+        = link_to 'Engage', new_project_fee_url(@project)
       .btn.pull-right.clear-right
         = link_to 'Add gift suggestion', new_project_card_path(@project) if can? :create, @project => Card
   .clearfix
-
+  = render 'donation_state'
   - if can? :show, @project => Comment
     %hr
       - if can? :create, @project => Comment

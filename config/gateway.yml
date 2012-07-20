@@ -1,0 +1,12 @@
+development:
+  login: 9KSyy53Mh
+  password: 6H87q9m7jm4urVRX
+production:
+  login: 9KSyy53Mh
+  password: 6H87q9m7jm4urVRX
+test:
+  login: 9KSyy53Mh
+  password: 6H87q9m7jm4urVRX
+staging:
+  login: 9KSyy53Mh
+  password: 6H87q9m7jm4urVRX

@@ -25,7 +25,7 @@ class ProjectsController < ApplicationController
 
   # POST /projects
   def create
-    @project = current_user.projects.create(project_params(admin: current_user))
+    @project = current_user.projects.create(model_params(admin: current_user))
 
     if @project.errors.empty?
       redirect_to [:new, @project, :invite]
@@ -36,7 +36,7 @@ class ProjectsController < ApplicationController
 
   # PUT /projects/1
   def update
-    @project.update_attributes project_params
+    @project.update_attributes model_params
 
     respond_with @project
   end
@@ -48,10 +48,6 @@ class ProjectsController < ApplicationController
   end
 
   private
-
-  def project_params new_params = {}
-    params[:project].merge new_params
-  end
 
   def owner
     @owner ||= current_user
