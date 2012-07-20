@@ -16,12 +16,12 @@ module NimbleshopAuthorizedotnet
     end
 
     def nimbleshop_authorizedotnet_order_show_extra_info(order)
-      return unless NimbleshopAuthorizedotnet::Authorizedotnet.first
+      return unless NimbleshopAuthorizedotnet::Authorizedotnet.instance
       render partial: '/nimbleshop_authorizedotnet/payments/order_show_extra_info', locals: { transaction: order.payment_transactions.last }
     end
 
     def nimbleshop_authorizedotnet_available_payment_options_icons
-      return unless NimbleshopAuthorizedotnet::Authorizedotnet.first
+      return unless NimbleshopAuthorizedotnet::Authorizedotnet.instance
       %w(visa mastercard discover american_express).map { |i| image_tag("engines/nimbleshop_authorizedotnet/#{i}.png") }
     end
 
@@ -37,12 +37,12 @@ module NimbleshopAuthorizedotnet
     end
 
     def nimbleshop_authorizedotnet_payment_form(order)
-      return unless NimbleshopAuthorizedotnet::Authorizedotnet.first
+      return unless NimbleshopAuthorizedotnet::Authorizedotnet.instance
       render partial: '/nimbleshop_authorizedotnet/payments/new', locals: {order: order}
     end
 
     def nimbleshop_authorizedotnet_crud_form
-      return unless NimbleshopAuthorizedotnet::Authorizedotnet.first
+      return unless NimbleshopAuthorizedotnet::Authorizedotnet.instance
       render partial: '/nimbleshop_authorizedotnet/authorizedotnets/edit'
     end
 

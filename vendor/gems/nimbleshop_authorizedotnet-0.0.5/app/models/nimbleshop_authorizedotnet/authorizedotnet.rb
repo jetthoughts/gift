@@ -5,10 +5,9 @@ module NimbleshopAuthorizedotnet
     field :login_id
     field :transaction_key
     field :company_name_on_creditcard_statement
-    field :mode
     field  :ssl
 
-    before_save :set_mode, :set_ssl
+    before_save :set_ssl
 
     validates_presence_of :login_id, :transaction_key, :company_name_on_creditcard_statement
 
@@ -26,11 +25,15 @@ module NimbleshopAuthorizedotnet
       order.kapture!
     end
 
-    private
-
-    def set_mode
-      self.mode ||= 'test'
+    def self.instance
+      self.first
     end
+
+    def title
+      'CreditCard'
+    end
+
+    private
 
     def set_ssl
       self.ssl ||= 'disabled'

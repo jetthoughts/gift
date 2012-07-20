@@ -7,10 +7,7 @@ class FeesController < ApplicationController
 
   def create
     @fee = current_user.fees.create(model_params(:project => @project))
-    p model_params
-    p @fee
     if @fee.errors.empty?
-
       if @fee.cc?
         redirect_to [:edit, @project, @fee]
       else
@@ -25,22 +22,9 @@ class FeesController < ApplicationController
     end
   end
 
-  def update
-    @fee = current_user.fees.find(params[:id])
-    @fee.update_attributes(model_params)
-
-    if @fee.valid?
-      if @fee.cc?
-        success = @fee.cc_payment(request.remote_ip)
-        redirect_to (success ? url_for(@project) : new_project_fee_url(@project))
-      end
-    else
-      render :edit
-    end
-  end
-
   def edit
     @fee = current_user.fees.find(params[:id])
+    session[:fee_id] = @fee.id
     @creditcard = Creditcard.new
   end
 

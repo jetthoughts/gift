@@ -1,4 +1,4 @@
-puts '+'*100
+require 'mongoid'
 require 'nimbleshop/engine'
 #require 'generators/nimbleshop/app/install_generator'
 

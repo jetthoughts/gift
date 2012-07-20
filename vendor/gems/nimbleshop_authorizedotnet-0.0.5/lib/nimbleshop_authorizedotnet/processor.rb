@@ -10,7 +10,7 @@ module NimbleshopAuthorizedotnet
     def initialize(order)
       @errors = []
       @order = order
-      @payment_method = NimbleshopAuthorizedotnet::Authorizedotnet.first
+      @payment_method = NimbleshopAuthorizedotnet::Authorizedotnet.instance
     end
 
     private
@@ -33,15 +33,10 @@ module NimbleshopAuthorizedotnet
 
       response = gateway.authorize(order.total_amount_in_cents, creditcard, order_id: order.number )
 
-      puts '1'*100
       record_transaction(response, 'authorized', card_number: creditcard.display_number, cardtype: creditcard.cardtype)
-      puts '2'*100
-      p                 response.success?
       if response.success?
-        puts 'succescscececececec'
         order.update_attributes(payment_method: payment_method)
         order.authorize
-        p order
       else
         @errors << 'Credit card was declined. Please try again!'
         return false
@@ -56,6 +51,7 @@ module NimbleshopAuthorizedotnet
 
       unless valid_card?(creditcard)
         @errors.push(*creditcard.errors.full_messages)
+        p @errors
         return false
       end
 

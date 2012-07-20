@@ -1,6 +1,6 @@
 <div class='well nimbleshop-payment-method-form-well' id='nimbleshop-authorizedotnet-form-well' style='display:none;'>
 
-  <%= form_for NimbleshopAuthorizedotnet::Authorizedotnet.first,  url: '/nimbleshop_authorizedotnet/authorizedotnet',
+  <%= form_for NimbleshopAuthorizedotnet::Authorizedotnet.instance,  url: '/nimbleshop_authorizedotnet/authorizedotnet',
                                                       remote: true,
                                                       html: { method: 'put',
                                                               id: 'nimbleshop-authorizedotnet-form',

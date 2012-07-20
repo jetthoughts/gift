@@ -5,7 +5,7 @@ class Creditcard
   extend  ActiveModel::Callbacks
   include ActiveModel::Validations::Callbacks
 
-  attr_accessor :cvv, :expires_on, :number, :first_name, :last_name, :address1, :address2,
+  attr_accessor :cvv, :expires_on, :number, :name, :address1, :address2,
                 :cardtype, :month, :year, :state, :zipcode
 
   alias :verification_value :cvv # ActiveMerchant needs this
@@ -14,12 +14,12 @@ class Creditcard
 
   before_validation :strip_non_numeric_values, if: :number
 
-  validates_presence_of :last_name, :first_name
 
   validates_presence_of :number,     message: "^Please enter credit card number"
   validates_numericality_of :number, message: "^Please check the credit card number you entered"
   validates_presence_of :cvv,        message: "^Please enter CVV"
 
+  validate  :validation_of_name,        if: lambda { |r| r.errors.empty? }
   validate  :validation_of_cardtype,        if: lambda { |r| r.errors.empty? }
   validate  :validation_by_active_merchant, if: lambda { |r| r.errors.empty? }
 
@@ -39,7 +39,17 @@ class Creditcard
     false
   end
 
+  def first_name
+    String(name).split(' ')[0] || ''
+
+  end
+
+  def last_name
+    String(name).split(' ')[1] || ''
+  end
+
   private
+
 
   def add_user_data(options = {})
     options[:first_name]  = first_name
@@ -56,6 +66,12 @@ class Creditcard
 
   def strip_non_numeric_values
     self.number = number.to_s.gsub('-', '').strip
+  end
+
+  def validation_of_name
+    unless name && name=~/\w+\s\w+/
+      errors.add(:base, 'Please fill name')
+    end
   end
 
   def validation_of_cardtype

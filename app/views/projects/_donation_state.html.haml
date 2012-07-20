@@ -9,7 +9,7 @@ We have
       %th Amount
 
   %tbody
-    - @project.fees.paid.each do |fee|
+    - @project.fees.purchased.each do |fee|
       %tr
         %td= fee.user.name
         %td= number_to_currency(fee.amount) if fee.visible?
