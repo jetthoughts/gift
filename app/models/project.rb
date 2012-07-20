@@ -9,7 +9,7 @@ class Project
   field :article_link,                      type: String
   field :participants_add_own_suggestions,  type: Boolean
   field :fixed_amount,                      type: Float
-  field :open_end,                          type: DateTime
+  field :deadline,                          type: DateTime
   field :paid_type,                         type: String
   field :end_type,                          type: String
 
@@ -21,7 +21,7 @@ class Project
   validates :end_type,  inclusion: Project::END_TYPES.map(&:to_s)
   validates :name, presence: true
   validates :fixed_amount, numericality: { if: :fixed_amount? }
-  validates :open_end, date: { after: Time.now, if: :open_end? }
+  validates :deadline, date: { after: Time.now }
   validates :article_link, :url => {:allow_blank => true}
 
   ## Relations
@@ -30,6 +30,7 @@ class Project
   has_many :comments
   has_many :cards
   has_many :invites
+  has_many :fees
   ## Filters
   before_validation :prepare_end_type
 
@@ -50,6 +51,14 @@ class Project
 
   def participant? user
     users.for_ids(user.id).exists?
+  end
+
+  def donated_amount
+    self.fees.purchased.sum(:amount)
+  end
+
+  def donated_amount_from(user)
+    self.fees.purchased.where(:user_id => user.id).sum(:amount)
   end
 
   private

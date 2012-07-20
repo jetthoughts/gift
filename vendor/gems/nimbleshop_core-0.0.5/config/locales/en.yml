@@ -1,0 +1,61 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  error_bang: 'Error!'
+  cancel: 'Cancel'
+  edit: 'Edit'
+  delete: 'Delete'
+  welcome_admin: 'Welcome admin'
+  paypal_image_alt: 'Make payments with PayPal'
+  credit_card_declined_message: 'Credit card was declined. Please try again.'
+
+  successfully_added: 'Successfully added'
+  successfully_created: 'Successfully created'
+  successfully_updated: 'Successfully updated'
+  successfully_deleted: 'Successfully deleted'
+  could_not_delete:     'Could not delete'
+
+  delete_confirmation_for_shipping_method: 'Do you really want to delete the shipping method ?'
+
+  orders: 'Orders'
+
+  products: 'Products'
+  edit_product: 'Edit product'
+  add_new_product: 'Add new product'
+  delete_confirmation_for_product: 'Do you really want to delete the product ?'
+
+  edit_custom_field: 'Edit custom field'
+  custom_fields: 'Custom fields'
+  add_new_custom_field: 'Add new custom field'
+  delete_confirmation_for_custom_field: 'Do you really want to delete the custom field ?'
+
+  shipping_zones: 'Shipping zones'
+  add_new_shipping_zone: 'Add new shipping zone'
+  edit_shipping_zone: 'Edit shipping zone'
+  delete_confirmation_for_shipping_zone: 'Do you really want to delete the shipping zone ? Deleting a shipping zone will also delete all the associated shipping methods'
+
+  link_groups: 'Link groups'
+  add_new_link_group: 'Add new link group'
+  delete_confirmation_for_link_group: 'Do you really want to delete the link group ?'
+  delete_confirmation_for_link: 'Do you really want to delete the link ?'
+
+  edit_product_group: 'Edit product group'
+  product_groups: 'Product groups'
+  delete_confirmation_for_product_group: 'Do you really want to delete the product group ?'
+
+  eq: '%{field} is equal to %{value}'
+  gt: '%{field} is greater than %{value}'
+  lt: '%{field} is less than %{value}'
+  lteq: '%{field} less than equal to %{value}'
+  gteq: '%{field} is greater than equal to %{value}'
+  ends: "%{field} ends with '%{value}'"
+  starts: "%{field} starts with '%{value}'"
+  contains: "%{field} contains '%{value}'"
+
+  helpers:
+    label:
+      product:
+        name: name
+        description: description
+

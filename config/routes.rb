@@ -5,6 +5,11 @@ Gift::Application.routes.draw do
 
   resources :projects do
     resources :invites
+    resources :fees do
+      member do
+        get :paypal
+      end
+    end
     resources :comments
     resources :cards do
       resource :votes

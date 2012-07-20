@@ -1,0 +1,26 @@
+= render "shared/error_messages", :target => @fee
+
+-# form_for [@project, @fee] do |f|
+  = f.fields_for :credit_card, @fee.credit_card do |card|
+    %p
+      = card.select :brand, ActiveMerchant::Billing::PaypalGateway.supported_cardtypes
+    %p
+      = card.label :first_name
+      = card.text_field :first_name
+    %p
+      = card.label :last_name
+      = card.text_field :last_name
+    %p
+      = card.label :number
+      = card.text_field :number
+    %p
+      = card.select :month, (1..12) , {}, :class => :small
+      \/
+      = card.select :year, (Time.now.year..Time.now.year + 7), {}, :class => :small
+    %p
+      = card.text_field :verification_value, :size => 4, :maxlength => 4, :class => :small
+  %br
+  = f.submit 'Send money'
+  %br
+= render  'nimbleshop_authorizedotnet/payments/new'
+
