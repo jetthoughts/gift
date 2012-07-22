@@ -2,6 +2,7 @@
   .form-errors
     = f.error_notification
   .form-inputs
+    = f.hidden_field :project_id, :value => @project.id
     = f.input :text, :placeholder => t('simple_form.placeholders.defaults.comment'), :as => :text, :input_html => { :rows => 2 }
 
   .form-actions
