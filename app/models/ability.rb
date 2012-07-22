@@ -17,7 +17,7 @@ class Ability
       can :manage, Project, admin_id: user.id
       can :manage, Comment,  user_id: user.id
       can :create, Comment do |comment|
-        comment.project.participant? user
+        comment.project && comment.project.participant?(user)
       end
       can :manage, Fee
       can :manage, User, id: user.id
@@ -26,7 +26,7 @@ class Ability
         card.project && card.project.participants_add_own_suggestions &&
           card.project.participant?(user)
       end
-      can :update, Card do |card|
+      can [:show, :update], Card do |card|
         card.project.participant?(user)
       end
       can :destroy, Card, user_id: user.id
