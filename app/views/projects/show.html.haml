@@ -16,10 +16,6 @@
         .btn.pull-right
           = link_to 'Close project'
 
-  - if @project.users
-    Users:<br/ >
-    = render @project.users
-
   %hr
   .row
     .span10
@@ -35,7 +31,6 @@
         .btn.pull-right.clear-right
           = link_to 'Add gift suggestion', new_project_card_path(@project)
   .clearfix
-  = render 'donation_state'
   - if can? :show, @project.comments.build
     %hr
       - if can? :create, @project.comments.build
