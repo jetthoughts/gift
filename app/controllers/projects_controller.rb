@@ -28,7 +28,7 @@ class ProjectsController < ApplicationController
     @project = current_user.projects.create(model_params(admin: current_user))
 
     if @project.errors.empty?
-      redirect_to [:new, @project, :invite]
+      redirect_to @project
     else
       render 'new'
     end
