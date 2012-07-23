@@ -48,15 +48,21 @@ class Fee
   end
 
   def description
-    "Your fee $#{amount} in donation"
+    "Your fee $#{amount_with_fees} in donation"
   end
 
   def number
     self.id
   end
 
-  def total_amount_in_cents
-    amount.to_i*100
+  def total_amount_in_cents    
+     (BigDecimal(amount_with_fees.to_s) * 100).round(0).to_i  
   end
+  
+  def amount_with_fees
+    payment_method.total_amount_in_cents(amount)
+  end
+
+
 
 end
