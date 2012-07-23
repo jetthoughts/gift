@@ -24,4 +24,21 @@ class PaymentMethod
   def self.partialize
     name.gsub("PaymentMethod::","").underscore
   end
+
+  def self.instance
+    where(:mode => mode).first
+  end
+
+  def self.mode
+    Rails.env == 'production' ? 'production' : 'test'
+  end
+
+  def total_amount_in_cents amount
+    amount + fee(amount)
+  end
+
+  def fee(amount)
+    0
+  end
+
 end

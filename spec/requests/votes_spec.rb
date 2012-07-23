@@ -32,6 +32,7 @@ feature "Votes" do
   def add_gift_with_description description
     click_link 'Add gift suggestion'
 
+    fill_in 'Name', with: 'Gift Name'
     fill_in 'Description', with: description
     page.attach_file('card_image', Rails.root.join('spec', 'assets', 'test-image.jpg'))
     click_button 'Add gift'

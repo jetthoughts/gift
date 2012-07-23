@@ -2,7 +2,7 @@ Fabricator(:project) do
   name "MyString"
   description "MyString"
   article_link "http://google.com"
-  participants_add_own_suggestions false
+  participants_add_own_suggestions true
   paid_type :pay_pal
   deadline DateTime.now.advance(:days => 10)
 end

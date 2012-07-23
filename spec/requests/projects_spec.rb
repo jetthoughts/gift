@@ -63,23 +63,7 @@ feature "Project create and show" do
     choose('Earn up to fixed amount')
     find('#project_fixed_amount').should be_visible
     fill_in 'Fixed amount', with: '10'
-    choose('Pay pal')
-    click_button 'Create Project'
-
-    ##redirect to invites only in success
-    page.should have_content 'Invite your Friends'
-  end
-
-  scenario "with valid open end" do
-    go_to_new_project
-
-    fill_in 'Name', with: 'Test Project'
-    fill_in 'Description', with: 'Project Description'
-    fill_in 'Article link', with: 'http://google.com'
-    choose('Gather with OpenEnd')
-
-    find('#project_open_end').should be_visible
-    fill_in 'Open end', with: (Time.now + 1.months).strftime('%d/%m/%Y %H:%M')
+    fill_in 'Deadline', with: (Time.now + 1.months).strftime('%d/%m/%Y %H:%M')
     choose('Pay pal')
     click_button 'Create Project'
 
