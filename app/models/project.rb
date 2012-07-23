@@ -15,6 +15,7 @@ class Project
   field :paid_type,                         type: String
   field :end_type,                          type: String
   field :currency,                          type: String, default: 'EUR'
+  field :closed,                            type: Boolean, default: false
 
   mount_uploader :image, ImageUploader
 

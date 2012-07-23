@@ -12,7 +12,7 @@
       - if can? :edit, @project
         .btn.pull-right
           = link_to 'Edit project', edit_project_path(@project)
-      - if can? :close, @project
+      - if can? :close, @project and !@project.closed
         .btn.pull-right
           = link_to 'Close project', nil, id: 'close_project'
       - if true
