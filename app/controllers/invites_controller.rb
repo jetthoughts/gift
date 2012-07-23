@@ -3,6 +3,8 @@ class InvitesController < ApplicationController
   before_filter :find_project, :except => [:destroy]
   before_filter :find_invite, :only => [:show, :update, :destroy]
 
+  skip_authorize_resource :only => :create_facebook
+
   def new
     @invites = [@project.invites.build]
   end
