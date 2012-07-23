@@ -19,7 +19,7 @@ class Ability
       can [:show, :create], Comment do |comment|
         comment.project && comment.project.participant?(user)
       end
-
+      can :manage,  Withdraw
       can :manage, Fee
       can :manage, User, id: user.id
       can :create, Card do |card|
