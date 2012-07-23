@@ -93,16 +93,18 @@ class User
     user
   end
 
+  def confirmation_required?
+    !info_uncompleted
+  end
+
   def pending_invites
     invites.not_in(:project_id => projects.map(&:id))
   end
 
   def check_invite_token
-    logger.debug '*************check invite************************'
     return unless invite_token
     invite = Invite.where(:invite_token => invite_token).first
 
-    logger.debug "*************#{invite}************************"
     if invite
       invite.user = self
       invite.save

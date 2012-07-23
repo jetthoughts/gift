@@ -9,7 +9,7 @@ class Ability
       cannot :manage, :all
 
       can :create, Invite
-      can [:show, :update, :destroy], Invite, user_id: user.id
+      can [:show, :update, :destroy, :create_facebook], Invite, user_id: user.id
       can :show, Project do |project|
         user.projects.for_ids(project.id).exists?
       end
@@ -21,6 +21,7 @@ class Ability
       end
       can :manage, Fee
       can :manage, User, id: user.id
+      can :create_facebook, User, id: user.id
       can :new, Card
       can :create, Card do |card|
         card.project && card.project.participants_add_own_suggestions &&
