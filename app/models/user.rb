@@ -93,6 +93,10 @@ class User
     user
   end
 
+  def pending_invites
+    invites.not_in(:project_id => projects.map(&:id))
+  end
+
   def check_invite_token
     logger.debug '*************check invite************************'
     return unless invite_token
@@ -105,8 +109,12 @@ class User
       invite.reload
       invite.accept!
     end
+    merge_another_invites
   end
 
+  def merge_another_invites
+    Invite.where(:user_id => nil, :email => email).update_all(:user_id => id)
+  end 
 
   def self.new_with_session(params, session)
     super.tap do |user|

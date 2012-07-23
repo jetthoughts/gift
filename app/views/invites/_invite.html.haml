@@ -1,0 +1,5 @@
+%p
+  You was invited to project
+  %b= invite.project.name
+  = link_to 'Accept invite', [invite.project, invite], data: { method: :put }
+  = link_to 'Ignore invite', [invite.project, invite], data: { confirm: 'Are you sure?', method: :delete }

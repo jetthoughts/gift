@@ -1,6 +1,8 @@
 class ProjectsController < ApplicationController
   has_scope :page, default: 1
   before_filter :find_project, only: [:show, :edit, :update, :destroy]
+  before_filter :find_pending_invites, only: :index
+
   # GET /projects
   def index
     respond_with @projects = scoped_chain.all
@@ -67,5 +69,9 @@ class ProjectsController < ApplicationController
 
   def find_project
     @project = chain.find(params[:id])
+  end
+
+  def find_pending_invites
+    @pending_invites = current_user.pending_invites
   end
 end
