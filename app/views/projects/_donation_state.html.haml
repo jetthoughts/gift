@@ -1,6 +1,5 @@
-%h3 Donators
-We have
-=number_to_currency(@project.donated_amount)
+%h3 Active users
+= format_total_amount @project.donated_amount
 
 %table.table-bordered
   %thead
@@ -9,8 +8,8 @@ We have
       %th Amount
 
   %tbody
-    - @project.fees.purchased.each do |fee|
+    - @project.users.each do |user|
       %tr
-        %td= fee.user.name
-        %td= number_to_currency(fee.amount) if fee.visible?
+        %td= user.name
+        %td= format_fee_amount @project.visible_fee_amount_from(user)
 %br

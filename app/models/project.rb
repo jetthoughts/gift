@@ -61,6 +61,10 @@ class Project
     self.fees.purchased.where(:user_id => user.id).sum(:amount)
   end
 
+  def visible_fee_amount_from(user)
+    self.fees.purchased.where(user_id: user.id, visible: true).sum(:amount)
+  end
+
   private
 
   def prepare_end_type

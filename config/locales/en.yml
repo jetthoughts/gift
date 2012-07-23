@@ -6,3 +6,6 @@ en:
   general:
     dislike: "Dislike"
     like: "Like"
+    fee_blank_amount: "Private or nothing"
+    total_amount: "We have %{amount} donations"
+    no_world: no
