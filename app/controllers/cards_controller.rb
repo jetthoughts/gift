@@ -6,7 +6,7 @@ class CardsController < ApplicationController
   end
 
   def new
-    @card = Card.new
+    respond_with project, @card = chain.build
   end
 
   def show
@@ -37,19 +37,15 @@ class CardsController < ApplicationController
   end
 
   def card_params
-    params[:card].merge user: current_user
+    params[:card]
   end
 
   def chain
     project.cards
   end
 
-  def author
-    @author ||= params[:user_id] ? User.find(params[:user_id]) : nil
-  end
-
   def projects_chain
-    @projects_chain ||= (author and author.projects) or Project
+    @projects_chain ||= current_user.projects or Project
   end
 
   def project

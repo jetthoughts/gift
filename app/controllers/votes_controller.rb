@@ -1,5 +1,7 @@
 class VotesController < ApplicationController
   before_filter :require_card
+  skip_load_and_authorize_resource
+  load_and_authorize_resource :card
 
   def create
     current_user.vote @card, :up
