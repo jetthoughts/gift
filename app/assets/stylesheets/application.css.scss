@@ -42,3 +42,13 @@ body {
   display: none;
 }
 
+table.with_spaces {
+  th, td {
+    width: 150px;
+    text-align: center;
+    border-bottom: 1px solid #DDD;
+  }
+}
+
+
+
