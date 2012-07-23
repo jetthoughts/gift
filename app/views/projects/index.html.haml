@@ -22,12 +22,15 @@
         %td= project.article_link
         %td= project.participants_add_own_suggestions
         %td= project.fixed_amount
-        %td= project.open_end
+        %td= project.deadline
         %td= project.paid_type
         %td= link_to 'Show', project
         %td= link_to 'Edit', edit_project_path(project) if can? :edit, project
         %td= link_to 'Destroy', project, data: { confirm: 'Are you sure?', method: :delete } if can? :destroy, project
 
+%br
+
+= render :partial => 'invites/invite', :collection => @pending_invites, :as => :invite
 %br
 
 = link_to 'New Project', new_project_path if can? :create, Project

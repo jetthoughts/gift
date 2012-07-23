@@ -1,6 +1,2 @@
 %h2 New invitation
-
-%p
-  You was invited to project
-= link_to 'Accept invite', [@project, @invite], data: { method: :put }
-= link_to 'Ignore invite', [@project, @invite], data: { confirm: 'Are you sure?', method: :delete }
+= render 'invite', {:invite => @invite}

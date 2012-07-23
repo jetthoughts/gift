@@ -9,7 +9,7 @@ class Ability
       cannot :manage, :all
 
       can :create, Invite
-      can [:update, :destroy], Invite, user_id: user.id
+      can [:show, :update, :destroy], Invite, user_id: user.id
       can :show, Project do |project|
         user.projects.for_ids(project.id).exists?
       end

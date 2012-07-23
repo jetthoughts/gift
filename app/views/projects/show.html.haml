@@ -7,11 +7,13 @@
       %span= @project.description
     .span8
       .btn.pull-right
-        = link_to 'Profile', @project.admin
-      .btn.pull-right
-        = link_to 'Edit project', edit_project_path(@project) if can? :edit, @project
-      .btn.pull-right
-        = link_to 'Close project' if can? :close, @project
+        = link_to 'Invites', [:new, @project, :invite]
+      - if can? :edit, @project
+        .btn.pull-right
+          = link_to 'Edit project', edit_project_path(@project)
+      - if can? :close, @project
+        .btn.pull-right
+          = link_to 'Close project'
 
   - if @project.users
     Users:<br/ >
