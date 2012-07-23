@@ -7,10 +7,8 @@ var InviteFriend = {
   },
 
   _parseFriendsIds:function () {
-//  InviteFriend.fb_friends_ids
     invite_ids_text = $('.invite_ids').text();
     InviteFriend.fb_friends_ids = jQuery.parseJSON(invite_ids_text);
-    console.log(InviteFriend.fb_friends_ids);
   },
 
   fbCallback:function (res) {
@@ -54,7 +52,6 @@ var InviteFriend = {
   },
 
   _addEventHandlers:function () {
-
     $('#fb-invite-link').click(function () {
       Facebook.fbInvite(InviteFriend.fb_friends_ids);
     });

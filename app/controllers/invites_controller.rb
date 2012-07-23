@@ -53,17 +53,6 @@ class InvitesController < ApplicationController
 
   private
 
-  def generate_random_email
-    random_string = ''
-    email = ''
-    begin
-      random_string = SecureRandom.hex(10)
-      email = random_string + '@test.com'
-      logger.debug email
-    end until User.where(email: email).first.nil?
-    random_string
-  end
-
   def find_user user_params
     user = User.where(uid: user_params[:friend_uid]).first
 
@@ -71,11 +60,11 @@ class InvitesController < ApplicationController
       user = User.new(name: user_params[:friend_name],
                       provider: 'facebook',
                       uid: user_params[:friend_uid],
-                      email: generate_random_email,
                       password: 'password',
                       confirmed_at: Time.now,
                       info_uncompleted: true
       )
+      user.email = "email_#{user.id}@test.com"
     end
     user
   end
@@ -83,6 +72,10 @@ class InvitesController < ApplicationController
   def assign_user_to_project user
     user.projects << @project
     user.save!
+
+    logger.debug user.errors.inspect
+    logger.debug @project.errors.inspect
+
     @project.users << user
     @project.save!
   end
