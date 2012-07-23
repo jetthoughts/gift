@@ -2,7 +2,7 @@
 = form_for [@project, @with_draw] do |f|
   %h4
     You can withdraw
-    = number_to_currency(@project.available_amount)
+    = currency(@project.available_amount)
   %p
     = f.text_field :paypal_email
   %h4
