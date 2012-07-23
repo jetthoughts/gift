@@ -1,6 +1,8 @@
 module NimbleshopAuthorizedotnet
   class Authorizedotnet < PaymentMethod
 
+    field :transaction_fee, :type => Float, :default => 0.1
+
     field :data, :type => Hash
     field :login_id
     field :transaction_key
@@ -25,12 +27,12 @@ module NimbleshopAuthorizedotnet
       order.kapture!
     end
 
-    def self.instance
-      self.first
-    end
-
     def title
       'CreditCard'
+    end
+
+    def fee(amount)
+      transaction_fee
     end
 
     private
