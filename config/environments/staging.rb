@@ -20,8 +20,8 @@ Gift::Application.configure do
   # Generate digests for assets URLs
   config.assets.digest = true
 
-  FBOOK_APPLICATION_ID = ENV['FACEBOOK_APP_ID']
-  FBOOK_SECRET_KEY = ENV['FACEBOOK_APP_SECRET']
+  FBOOK_APPLICATION_ID = '499933070022133'
+  FBOOK_SECRET_KEY = '4c947868aaa6d06904c3887b845dc645'
 
   # Defaults to Rails.root.join("public/assets")
   # config.assets.manifest = YOUR_PATH
