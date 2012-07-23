@@ -8,4 +8,8 @@ module ProjectsHelper
       submit_tag t('general.like'), disabled: true
     end
   end
+
+  def currency(amount)
+    number_to_currency(amount, unit: '&euro;')
+  end
 end

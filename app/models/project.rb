@@ -12,6 +12,7 @@ class Project
   field :deadline,                          type: DateTime
   field :paid_type,                         type: String
   field :end_type,                          type: String
+  field :currency,                          type: String, default: 'EUR'
 
   mount_uploader :image, ImageUploader
 
@@ -69,11 +70,6 @@ class Project
 
   def donated_amount_from(user)
     self.fees.purchased.where(:user_id => user.id).sum(:amount).to_f
-  end
-
-  def currency
-    #'USD'
-    'EUR'
   end
 
   private
