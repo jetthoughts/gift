@@ -13,6 +13,18 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super
   end
 
+  def update
+    new_attrs = params[resource_name].reject {|k,v| v.blank? }
+    if resource.update_attributes(new_attrs)
+      set_flash_message :notice, :updated
+      sign_in resource_name, resource, :bypass => true
+      redirect_to after_update_path_for(resource)
+    else
+      clean_up_passwords(resource)
+      render :edit
+    end
+end
+
   private
 
   def build_resource(*args)
