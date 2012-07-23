@@ -13,6 +13,13 @@ $ ->
     buttons   :
       "Close"   : ->
         $(this).dialog 'close'
+        csrf_token = $('meta[name=csrf-token]').attr('content')
+        csrf_param = $('meta[name=csrf-param]').attr('content')
+        $("<form action='#{window.location.pathname}/close' method='post'>
+        <input name='#{csrf_param}' value='#{csrf_token}' type='hidden'/>
+        </form>").submit()
+
+
       "Cancel"  : ->
         $(this).dialog 'close'
 
