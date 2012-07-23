@@ -16,16 +16,17 @@ class Ability
       can :close, Project,  admin_id: user.id
       can :manage, Project, admin_id: user.id
       can :manage, Comment,  user_id: user.id
-      can :create, Comment do |comment|
+      can [:show, :create], Comment do |comment|
         comment.project && comment.project.participant?(user)
       end
+
       can :manage, Fee
       can :manage, User, id: user.id
-      can :new, Card
       can :create, Card do |card|
         card.project && card.project.participants_add_own_suggestions &&
           card.project.participant?(user)
       end
+      can :new, Card
       can [:show, :update], Card do |card|
         card.project.participant?(user)
       end
