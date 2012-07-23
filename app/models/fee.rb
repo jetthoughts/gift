@@ -16,10 +16,12 @@ class Fee
   validates :amount, presence: true, numericality: {greater_than: 1}
 
   def complete_paypal(token, payer_id)
-    if (response = paypal.purchase(total_amount_in_cents, {:token => token, :payer_id => payer_id, :description => description})).success?
-      self.purchase
-      self.amount = response.params['gross_amount'].to_f - response.params['fee_amount'].to_f - response.params['tax_amount'].to_f
-      save
+    if (response = paypal.purchase(total_amount_in_cents, {:token => token, :payer_id => payer_id, :description => description, :currency => self.currency })).success?
+      if response.params['payment_status'] == 'Completed'
+        self.purchase
+        self.amount = response.params['gross_amount'].to_f - response.params['fee_amount'].to_f - response.params['tax_amount'].to_f
+        save
+      end
     else
       errors.add("PayPal Error: #{response.message}")
       false
@@ -27,7 +29,7 @@ class Fee
   end
 
   def start_paypal(return_url, cancel_return_url)
-    if (@response = paypal.setup_purchase(total_amount_in_cents,{:return_url => return_url, :cancel_return_url => cancel_return_url, :description => description})).success?
+    if (@response = paypal.setup_purchase(total_amount_in_cents,{:return_url => return_url, :cancel_return_url => cancel_return_url, :description => description, :currency => self.currency  })).success?
       paypal.redirect_url_for(@response.params['token'])
     else
       errors.add("PayPal Error: #{@response.message}")
@@ -48,7 +50,7 @@ class Fee
   end
 
   def description
-    "Your fee $#{amount_with_fees} in donation"
+    "Your fee #{amount_with_fees} in #{currency} for donation with fee"
   end
 
   def number
@@ -61,6 +63,11 @@ class Fee
   
   def amount_with_fees
     payment_method.total_amount_in_cents(amount)
+  end
+
+  def currency
+    'USD'
+    #'EUR'
   end
 
 
