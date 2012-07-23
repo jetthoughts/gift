@@ -5,6 +5,7 @@ class Ability
     if user.nil?
       cannot :manage, :all
       can :create, User
+      can :facebook_invite, User
     else
       cannot :manage, :all
 

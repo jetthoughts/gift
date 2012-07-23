@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   respond_to :html
 
-  before_filter :authenticate_user!, :except => [:facebook_invite]
+  before_filter :authenticate_user!, except: [:facebook_invite]
 
   def show
     @user = current_user

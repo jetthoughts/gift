@@ -2,8 +2,9 @@
   .row
     .span4
       %span= image_tag @project.image if @project.image?
+      %br
       %span= @project.name
-      <br/>
+      %br
       %span= @project.description
     .span8
       .btn.pull-right
