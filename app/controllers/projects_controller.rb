@@ -46,7 +46,7 @@ class ProjectsController < ApplicationController
   # POST /projects/1/close
   def close
     @project = chain.find params[:project_id]
-    # @project.update_attributes closed: true
+    @project.update_attributes closed: true
     flash[:notice] = 'Project closed'
     redirect_to project_path(@project)
   end
