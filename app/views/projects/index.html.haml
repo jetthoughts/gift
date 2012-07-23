@@ -30,4 +30,7 @@
 
 %br
 
+= render :partial => 'invites/invite', :collection => @pending_invites, :as => :invite
+%br
+
 = link_to 'New Project', new_project_path if can? :create, Project
