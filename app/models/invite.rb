@@ -13,12 +13,11 @@ class Invite
   validate :present_email_or_id
   validates :project, :name, presence: true
   validates :email,
-            :uniqueness => true,
             :format => {:with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i},
             :allow_blank => true
 
   validates :fb_id, :uniqueness => true, :allow_blank => true
-
+  validates :email, :uniqueness => {:scope => :project_id}
   before_create :set_token
   before_validation :set_user, :on => :create
 
