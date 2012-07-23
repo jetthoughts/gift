@@ -14,11 +14,10 @@
           = link_to 'Edit project', edit_project_path(@project)
       - if can? :close, @project
         .btn.pull-right
-          = link_to 'Close project'
+          = link_to 'Close project', nil, id: 'close_project'
       - if true
         .btn.pull-right
           = link_to 'Withdraw', project_withdraws_path(@project)
-
   %hr
   .row
     .span10
@@ -40,3 +39,7 @@
         = render 'comments/form'
       #comments
         = render @project.comments.ordered_by_date
+
+#close_project_dialog{ title: 'You are closing the project' }
+  %p
+    Are you sure you want to withdraw #{number_to_currency @project.donated_amount}?
