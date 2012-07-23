@@ -7,7 +7,7 @@ class Fee
 
   validates :project, :user, presence: true
 
-  field :amount, type: Float
+  field :amount, type: Float, default: 0
   field :visible, type: Boolean, default: true
   field :state
 
@@ -66,10 +66,7 @@ class Fee
   end
 
   def currency
-    'USD'
-    #'EUR'
+    project.currency
   end
-
-
 
 end

@@ -1,0 +1,13 @@
+= render "shared/error_messages", :target => @with_draw
+= form_for [@project, @with_draw] do |f|
+  %h4
+    You can withdraw
+    = number_to_currency(@project.available_amount)
+  %p
+    = f.text_field :paypal_email
+  %h4
+    Select type of withdraw
+  %p
+    = render :partial => 'fees/payment_method_title', :collection => PaymentMethod.all, :as => :payment_method, :locals => {f:f}
+  %br
+  = f.submit 'Submit'

@@ -31,6 +31,8 @@ class Project
   has_many :cards
   has_many :invites
   has_many :fees
+  has_many :withdraws
+
   ## Filters
   before_validation :prepare_end_type
 
@@ -53,12 +55,25 @@ class Project
     users.for_ids(user.id).exists?
   end
 
+  def available_amount
+    donated_amount - already_withdrawed
+  end
+
+  def already_withdrawed
+    self.withdraws.sum(:amount).to_f
+  end
+
   def donated_amount
-    self.fees.purchased.sum(:amount)
+    self.fees.purchased.sum(:amount).to_f
   end
 
   def donated_amount_from(user)
-    self.fees.purchased.where(:user_id => user.id).sum(:amount)
+    self.fees.purchased.where(:user_id => user.id).sum(:amount).to_f
+  end
+
+  def currency
+    #'USD'
+    'EUR'
   end
 
   private
