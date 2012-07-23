@@ -7,10 +7,12 @@
   %div{class: 'btn', id: 'fb-invite-link'}
     Facebook invitation
   #invite-other
+    .hidden.invite_ids
+      = invite_ids(@project)
 
   - content_for :javascript_code
   :javascript
-    InviteFriend.initialize('#invite-other', []);
+    InviteFriend.initialize('#invite-other');
   = render 'shared/fb_js_sdk'
 
   %h4

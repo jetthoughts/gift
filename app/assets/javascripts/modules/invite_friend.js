@@ -1,19 +1,16 @@
 var InviteFriend = {
-  initialize:function (dialog, fb_friends_ids) {
+  initialize:function (dialog) {
     Facebook.initialize();
     InviteFriend._addEventHandlers();
     InviteFriend.dialog = $(dialog);
-    InviteFriend.fb_friends_ids = fb_friends_ids;
+    InviteFriend._parseFriendsIds();
   },
 
-  _updateFbFriendStatus:function (fuid) {
-    $("a.invite_fb_friend[rel=" + fuid + "]").replaceWith('Invite Sent');
-  },
-
-  fbToCallback:function (res) {
-    if (InviteFriend.fbCallback(res)) {
-      InviteFriend._updateFbFriendStatus(res.to[0]);
-    }
+  _parseFriendsIds:function () {
+//  InviteFriend.fb_friends_ids
+    invite_ids_text = $('.invite_ids').text();
+    InviteFriend.fb_friends_ids = jQuery.parseJSON(invite_ids_text);
+    console.log(InviteFriend.fb_friends_ids);
   },
 
   fbCallback:function (res) {
@@ -122,22 +119,5 @@ var InviteFriend = {
         }});
       return false;
     });
-
-    $('#share_email_link a').click(function () {
-      Popups.showFromLink(this);
-      InviteFriend.dialog.find('a:first').click();
-      return false;
-    });
-
-    $('#email-composer-form').live('ajax:complete',
-        function (event, xhr) {
-          $('#email-composer-form .info-messages').html(xhr.responseText);
-        }).live('ajax:success', function () {
-          setTimeout(InviteFriend._afterSendMail, 2000);
-        });
-  },
-
-  _afterSendMail:function () {
-    $("#email-composer-form #emails").val('');
   }
 };

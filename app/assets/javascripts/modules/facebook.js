@@ -42,7 +42,7 @@ var Facebook = window.Facebook = {};
       message = "See my project"
     }
 
-    var params = {/*exclude_ids:exclude_ids,*/ method:'apprequests', message:message};
+    var params = {exclude_ids:exclude_ids, method:'apprequests', message:message};
     var callback = InviteFriend.fbCallback;
     if (to !== undefined) {
       params.to = to;
@@ -55,7 +55,6 @@ var Facebook = window.Facebook = {};
     FB.ui(params, callback);
 
     return true;
-
   };
 
   Controller.getFriendName = function (id) {
