@@ -3,8 +3,6 @@ class InvitesController < ApplicationController
   before_filter :find_project, :except => [:destroy]
   before_filter :find_invite, :only => [:show, :update, :destroy]
 
-  skip_authorize_resource :only => :create_facebook
-
   def new
     @invites = [@project.invites.build]
   end
@@ -55,6 +53,17 @@ class InvitesController < ApplicationController
 
   private
 
+  def generate_random_email
+    random_string = ''
+    email = ''
+    begin
+      random_string = SecureRandom.hex(10)
+      email = random_string + '@test.com'
+      logger.debug email
+    end until User.where(email: email).first.nil?
+    random_string
+  end
+
   def find_user user_params
     user = User.where(uid: user_params[:friend_uid]).first
 
@@ -62,16 +71,20 @@ class InvitesController < ApplicationController
       user = User.new(name: user_params[:friend_name],
                       provider: 'facebook',
                       uid: user_params[:friend_uid],
-                      info_uncompleted: true)
+                      email: generate_random_email,
+                      password: 'password',
+                      confirmed_at: Time.now,
+                      info_uncompleted: true
+      )
     end
     user
   end
 
   def assign_user_to_project user
     user.projects << @project
-    user.save
+    user.save!
     @project.users << user
-    @project.save
+    @project.save!
   end
 
   def need_redirect? invite_params
