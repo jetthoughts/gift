@@ -11,7 +11,7 @@ class Fee
   field :visible, type: Boolean, default: true
   field :state
 
-  attr_accessible :credit_card, :payment_method_id, :project, :amount, :visible, :prefered_payment_method
+  attr_accessible :credit_card, :payment_method_id, :project, :amount, :visible
 
   validates :amount, presence: true, numericality: {greater_than: 1}
 

@@ -1,8 +1,6 @@
 Gift::Application.configure do
   # Settings specified here will take precedence over those in config/application.rb
 
-  FBOOK_APPLICATION_ID = '382124145174672'
-  FBOOK_SECRET_KEY = 'b72c02ca9423d45c78d01914b20381c7'
   # The test environment is used exclusively to run your application's
   # test suite. You never need to work with it otherwise. Remember that
   # your test database is "scratch space" for the test suite and is wiped
