@@ -41,7 +41,7 @@ gem 'activeadmin'
 gem 'activeadmin-mongoid'
 gem 'delayed_job_mongoid'
 
-gem 'ruby-aaws'
+gem 'asin'
 
 group :development do
   gem "unicorn-rails"
