@@ -8,6 +8,6 @@
   %h4
     Select type of withdraw
   %p
-    = render :partial => 'fees/payment_method_title', :collection => PaymentMethod.all, :as => :payment_method, :locals => {f:f}
+    = render :partial => 'fees/payment_method_title', :collection => [Paypal::Paypalwp.instance], :as => :payment_method, :locals => {f:f}
   %br
   = f.submit 'Submit'

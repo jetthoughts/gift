@@ -7,17 +7,11 @@ class WithdrawsController < ApplicationController
 
   def create
     @with_draw = @project.withdraws.build(model_params)
-
-    if @with_draw.errors.empty? and @with_draw.refund
+    if @with_draw.valid? and @with_draw.refund
     	redirect_to @project
     else
       render :index
     end
-  end
-
-
-  def paypal
-  	puts '3'*100
   end
 
   private
