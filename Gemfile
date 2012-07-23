@@ -41,6 +41,8 @@ gem 'activeadmin'
 gem 'activeadmin-mongoid'
 gem 'delayed_job_mongoid'
 
+gem 'ruby-aaws'
+
 group :development do
   gem "unicorn-rails"
   gem "heroku", require: false
