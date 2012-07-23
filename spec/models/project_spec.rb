@@ -23,7 +23,7 @@ describe Project do
       end
 
       it "should be nil if end_type eql to open_end" do
-        project = Fabricate.build(:project, end_type: 'open_end', fixed_amount: 10, open_end: DateTime.now + 1.years)
+        project = Fabricate.build(:project, end_type: 'open_end', fixed_amount: 10, deadline: DateTime.now.advance(:days => 10))
         project.save
         project.fixed_amount.should be_nil
       end
@@ -31,19 +31,19 @@ describe Project do
 
     context "#open_end" do
       it "should be valid if end_type eql to open_end" do
-        Fabricate.build(:project, end_type: 'open_end', open_end: DateTime.now + 1.years).should be_valid
+        Fabricate.build(:project, end_type: 'open_end', deadline: DateTime.now.advance(:days => 10)).should be_valid
       end
 
       it "should be invalid if not date" do
-        expect { Fabricate.build(:project, end_type: 'open_end', open_end: 'test') }.should raise_error(Mongoid::Errors::InvalidTime)
+        expect { Fabricate.build(:project, end_type: 'open_end',  deadline: 'test') }.should raise_error(Mongoid::Errors::InvalidTime)
       end
 
       it "should be invalid if earlier that now" do
-        Fabricate.build(:project, end_type: 'open_end', open_end: DateTime.now - 1.years).should have(1).errors_on(:open_end)
+        Fabricate.build(:project, end_type: 'open_end', deadline: DateTime.now - 1.years).should have(1).errors_on(:deadline)
       end
 
       it "should be nil if end_type eql to fixed_amount" do
-        project = Fabricate.build(:project, end_type: 'fixed_amount', fixed_amount: 10, open_end: DateTime.now + 1.years)
+        project = Fabricate.build(:project, end_type: 'fixed_amount', fixed_amount: 10, deadline: DateTime.now.advance(:days => 10))
         project.save
         project.open_end.should be_nil
       end

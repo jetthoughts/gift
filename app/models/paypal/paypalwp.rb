@@ -1,7 +1,8 @@
 module Paypal
   class Paypalwp < PaymentMethod
+    
     def self.instance
-      self.first || self.create
+      self.first
     end
 
     def title

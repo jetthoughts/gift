@@ -4,6 +4,7 @@ Fabricator(:project) do
   article_link "http://google.com"
   participants_add_own_suggestions false
   paid_type :pay_pal
+  deadline DateTime.now.advance(:days => 10)
 end
 
 Fabricator(:project_with_amount, from: :project) do
