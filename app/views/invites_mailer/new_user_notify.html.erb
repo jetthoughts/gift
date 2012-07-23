@@ -2,6 +2,8 @@
 
 <p>Someone has invited you to <%= root_url %>, you can accept it through the link below.</p>
 
+<%= render 'project_info', project: @invite.project %>
+
 <p><%= link_to 'Accept invitation', new_registration_url(:user, :invite_token => @invite.invite_token) %></p>
 
 <p>If you don't want to accept the invitation, please ignore this email.<br />
