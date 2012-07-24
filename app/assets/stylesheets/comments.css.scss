@@ -3,9 +3,23 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .comment {
-  width: 50%;
+  width: 650px;
 
-  & > span:last-child {
-    float: right;
+  span {
+
+	  &.text {
+	    width: 450px;
+	  }
+
+	  &.user {
+	    font-weight: bold;
+	    width: 150px;
+	  }
+
+	  &.date{
+	    width: 50px;
+	    font-style: italic;
+	  }
+
   }
 }

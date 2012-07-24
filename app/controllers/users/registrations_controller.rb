@@ -13,19 +13,27 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super
   end
 
-  def update
-    new_attrs = params[resource_name].reject { |k, v| v.blank? }
+  def profile
+    resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
+    new_attrs = params[resource_name]
+    prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
     if resource.update_attributes(new_attrs)
-      set_flash_message :notice, :updated
-      sign_in resource_name, resource, :bypass => true
+      flash_key = update_needs_confirmation?(resource, prev_unconfirmed_email) ?
+          :update_needs_confirmation : :updated
+      set_flash_message :notice, flash_key
       redirect_to after_update_path_for(resource)
     else
-      clean_up_passwords(resource)
       render :edit
     end
   end
 
   private
+  
+  def update_needs_confirmation?(resource, previous)
+    resource.respond_to?(:pending_reconfirmation?) &&
+      resource.pending_reconfirmation? &&
+      previous != resource.unconfirmed_email
+  end
 
   def build_resource(*args)
     super

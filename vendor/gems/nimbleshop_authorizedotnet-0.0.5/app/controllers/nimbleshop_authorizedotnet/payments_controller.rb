@@ -12,7 +12,6 @@ module NimbleshopAuthorizedotnet
       if processor.purchase(creditcard: creditcard)
         @output = "window.location='/projects/#{order.project.id}/'"
       else
-        puts 'errorrororroro'
         error = processor.errors.first
         Rails.logger.info "Error: #{error}"
         @output = "alert('#{error}')"
