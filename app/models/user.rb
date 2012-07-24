@@ -56,7 +56,7 @@ class User
 
   ## Validators
   validates :email, uniqueness: {case_sensitive: false}, if: :email_changed?
-
+   validates :name, presence: true
   ## Relations
   has_and_belongs_to_many :projects
   has_many :invites

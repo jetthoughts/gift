@@ -13,14 +13,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
     super
   end
 
-  def update
-    new_attrs = params[resource_name].reject { |k, v| v.blank? }
+  def profile
+    self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
+    new_attrs = params[resource_name]
     if resource.update_attributes(new_attrs)
       set_flash_message :notice, :updated
-      sign_in resource_name, resource, :bypass => true
       redirect_to after_update_path_for(resource)
     else
-      clean_up_passwords(resource)
       render :edit
     end
   end

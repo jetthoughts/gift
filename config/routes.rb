@@ -34,6 +34,7 @@ Gift::Application.routes.draw do
 
   devise_scope :user do
     match '/update_token' => 'users#update_token', :as => :update_token, :via => :post
+    match 'users/profile' => 'users/registrations#profile', :as => :profile, :via => :put
   end
 
   match '/facebook' => 'users#facebook_invite'

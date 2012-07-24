@@ -17,13 +17,13 @@ class Withdraw
   validates :paypal_email, presence: true, if: :paypal?
 
   def check_available_amount
-    errors.add(:amount, 'Poll is not available') unless amount <= project.available_amount
+    errors.add(:amount, 'Pool is not available') unless amount <= project.available_amount
   end
 
   def refund
     self.amount = project.available_amount
     if self.amount < 1
-      errors.add(:amount, 'Poll is not available')
+      errors.add(:amount, 'Pool is not available')
       return false
     end
 
