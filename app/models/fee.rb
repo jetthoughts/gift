@@ -12,16 +12,21 @@ class Fee
 
   attr_accessible :credit_card, :payment_method_id, :project, :amount, :visible
 
-  validates :amount, presence: true, numericality: {greater_than: 1}
+  validates :amount, presence: true, numericality: {greater_than_or_equal_to: 10}
 
   def complete_paypal(token, payer_id)
     if (response = paypal.purchase(total_amount_in_cents, {:token => token, :payer_id => payer_id, :description => description, :currency => self.currency })).success?
+      
+        puts '*'*100
+      p response.params
       if response.params['payment_status'] == 'Completed'
         self.purchase
         self.amount = response.params['gross_amount'].to_f - response.params['fee_amount'].to_f - response.params['tax_amount'].to_f
         save
       end
     else
+      puts '*'*100
+      p response.message
       errors.add(:payment_method, "PayPal Error: #{response.message}")
       false
     end

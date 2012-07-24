@@ -1,9 +1,10 @@
 module Paypal
   class Paypalwp < PaymentMethod
 
-     field :paypal_percent, :type => Float, :default => 0.029
+     field :paypal_percent, :type => Float, :default => 0.019  #set default for Germany
      field :transaction_fee, :type => Float, :default => 0.35
-     field :refund_fee, :type => Float, :default => 1.0
+
+     field :refund_fee, :type => Float, :default => 0.9
      
     def title
       'Paypal'
