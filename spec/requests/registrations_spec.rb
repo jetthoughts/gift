@@ -13,14 +13,13 @@ feature "User edit profile action" do
       click_link 'Profile'
     end
     current_path.should eql edit_user_registration_path
-    page.should have_content 'Edit User'
+    page.should have_content 'Profile'
   end
 
   scenario "Update profile" do
     sign_in
     visit edit_user_registration_path
     fill_in 'Name', with: 'New Name'
-    fill_in 'Current password', with: 'qweqwe'
     click_button 'Update'
 
     page.should have_content I18n.t('devise.registrations.updated')
@@ -30,11 +29,9 @@ feature "User edit profile action" do
     sign_in
     visit edit_user_registration_path
     fill_in 'Email', with: 'test@mailer.com'
-    fill_in 'Current password', with: 'qweqwe'
     click_button 'Update'
 
-    page.should have_content I18n.t('devise.registrations.updated')
-    #page.should have_content I18n.t('devise.registrations.update_needs_confirmation')
+    page.should have_content I18n.t('devise.registrations.update_needs_confirmation')
   end
 
   scenario "Set new password without current_password" do
@@ -42,7 +39,7 @@ feature "User edit profile action" do
     visit edit_user_registration_path
     fill_in 'Password', with: 'new_password'
     fill_in 'Password confirmation', with: 'new_password'
-    click_button 'Update'
+    click_button 'Change password'
 
     page.should have_content I18n.t('simple_form.error_notification.default_message')
     within 'div.password.error' do
