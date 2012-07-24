@@ -76,5 +76,6 @@ Gift::Application.configure do
   }
   config.after_initialize do
     ActiveMerchant::Billing::Base.gateway_mode = :test
+    ActiveMerchant::Billing::PaypalExpressGateway.default_currency = 'EUR'
   end
 end

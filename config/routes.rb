@@ -7,6 +7,10 @@ Gift::Application.routes.draw do
   match '/invites/facebook_accept' => 'invites#facebook_accept', :via => :get, :as => :facebook_invite_accept
 
   resources :projects do
+    resources :withdraws do
+      get 'paypal'  => 'withdraw#paypal', :on => :collection
+      get 'paypal'  => 'withdraw#paypal', :on => :collection      
+    end
     resources :invites
     resources :fees do
       member do

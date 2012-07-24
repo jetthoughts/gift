@@ -7,9 +7,8 @@ class Fee
 
   validates :project, :user, presence: true
 
-  field :amount, type: Float
+  field :amount, type: Float, default: 0
   field :visible, type: Boolean, default: true
-  field :state
 
   attr_accessible :credit_card, :payment_method_id, :project, :amount, :visible
 
@@ -23,7 +22,7 @@ class Fee
         save
       end
     else
-      errors.add("PayPal Error: #{response.message}")
+      errors.add(:payment_method, "PayPal Error: #{response.message}")
       false
     end
   end
@@ -32,7 +31,7 @@ class Fee
     if (@response = paypal.setup_purchase(total_amount_in_cents,{:return_url => return_url, :cancel_return_url => cancel_return_url, :description => description, :currency => self.currency  })).success?
       paypal.redirect_url_for(@response.params['token'])
     else
-      errors.add("PayPal Error: #{@response.message}")
+      errors.add(:payment_method, "PayPal Error: #{@response.message}")
       false
     end
   end
@@ -66,10 +65,7 @@ class Fee
   end
 
   def currency
-    'USD'
-    #'EUR'
+    project.currency
   end
-
-
 
 end

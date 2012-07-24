@@ -21,4 +21,12 @@ module ProjectsHelper
     amount =  @project.donated_amount.blank? ? t('general.no_world') : number_to_currency(amount)
     t('general.total_amount', amount: amount)
   end
+
+  def currency(amount)
+    number_to_currency(amount, unit: currency_unit('EUR'))
+  end
+
+  def currency_unit(abbr)
+    {'EUR' => '&euro;'}[abbr]
+  end
 end

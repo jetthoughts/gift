@@ -1,7 +1,7 @@
 development:
-  login: 's3_1342514477_biz_api1.mailinator.com'
-  password: '1342514516'
-  signature: 'A5FHW4PF0qmLAT2Q0PVN.Jm-CXeWAwnkxh2QzVjBC5KJrPGzfJMUXhRx'
+  login: 'sg_1343046003_biz_api1.mailinator.com'
+  password: '1343046029'
+  signature: 'AVSknFZDGwvFztYaEZb1k4E6OSLSAapUsosFoX3a4KBPV6DQDJ8NfXVx'
 test:
   login: 's3_1342514477_biz_api1.mailinator.com'
   password: '1342514516'
