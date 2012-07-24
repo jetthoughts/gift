@@ -12,4 +12,5 @@ Fabricator(:project_with_amount, from: :project) do
   end_type :fixed_amount
   fixed_amount 10
   paid_type :pay_pal
+  deadline DateTime.now.advance(:days => 10)
 end
