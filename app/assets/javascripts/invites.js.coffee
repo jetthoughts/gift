@@ -7,10 +7,10 @@ $ ->
     elem = $('#new_invite .email_participant:first')
     new_elem = elem.clone()
     new_elem.find('input').val('').end().appendTo $('#by_email')
-    new_elem.find('#remove_email_participant').removeClass('hidden')
+    new_elem.find('.remove_email_participant').removeClass('hidden')
     return false
 
-  $('#remove_email_participant').live 'click', ->
+  $('.remove_email_participant').live 'click', ->
     $(this).parent().remove()
     return false
 

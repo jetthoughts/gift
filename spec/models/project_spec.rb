@@ -2,8 +2,6 @@ require 'spec_helper'
 
 describe Project do
 
-
-
   context "#end_type" do
     it "should be valid if eql to fixed_amount" do
       Fabricate.build(:project, end_type: 'fixed_amount').should_not have(1).errors_on(:end_type)

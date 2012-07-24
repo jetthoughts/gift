@@ -26,6 +26,7 @@ Spork.prefork do
   Capybara.server_boot_timeout = 50
 
   require 'cancan/matchers'
+  require "email_spec"
 
   Dir[File.join(File.dirname(__FILE__), 'support', '**', '*.rb')].each { |f| require f }
 
