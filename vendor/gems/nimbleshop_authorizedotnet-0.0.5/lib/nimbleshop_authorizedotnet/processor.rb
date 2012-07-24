@@ -10,6 +10,7 @@ module NimbleshopAuthorizedotnet
     def initialize(order)
       @errors = []
       @order = order
+      ActiveMerchant::Billing::AuthorizeNetGateway.default_currency = @order.currency
       @payment_method = NimbleshopAuthorizedotnet::Authorizedotnet.instance
     end
 
@@ -30,9 +31,7 @@ module NimbleshopAuthorizedotnet
         @errors.push(*creditcard.errors.full_messages)
         return false
       end
-
-      response = gateway.authorize(order.total_amount_in_cents, creditcard, order_id: order.number )
-
+      response = gateway.authorize(order.total_amount_in_cents, creditcard, {order_id: order.number, currency: @order.currency } )
       record_transaction(response, 'authorized', card_number: creditcard.display_number, cardtype: creditcard.cardtype)
       if response.success?
         order.update_attributes(payment_method: payment_method)
@@ -51,11 +50,9 @@ module NimbleshopAuthorizedotnet
 
       unless valid_card?(creditcard)
         @errors.push(*creditcard.errors.full_messages)
-        p @errors
         return false
       end
-
-      response = gateway.purchase(order.total_amount_in_cents, creditcard)
+      response = gateway.purchase(order.total_amount_in_cents, creditcard, {:currency => @order.currency })
       record_transaction(response, 'purchased', card_number: creditcard.display_number, cardtype: creditcard.cardtype)
 
       if response.success?
@@ -71,8 +68,7 @@ module NimbleshopAuthorizedotnet
       options.symbolize_keys!
       options.assert_valid_keys(:transaction_gid)
       tsx_id = options[:transaction_gid]
-
-      response = gateway.capture(order.total_amount_in_cents, tsx_id, {})
+      response = gateway.capture(order.total_amount_in_cents, tsx_id,{:currency => @order.currency })
       record_transaction(response, 'captured')
 
       if response.success?

@@ -1,6 +1,8 @@
 class Project
   PAID_TYPES = [:pay_pal, :money_transfer, :amazon_voucher]
   END_TYPES = [:fixed_amount, :open_end]
+  MIN_WITHDRAW = 10
+
   include Mongoid::Document
   include Mongoid::Timestamps
 
@@ -12,6 +14,7 @@ class Project
   field :deadline,                          type: DateTime
   field :paid_type,                         type: String
   field :end_type,                          type: String
+  field :currency,                          type: String, default: 'EUR'
 
   mount_uploader :image, ImageUploader
 
@@ -20,7 +23,7 @@ class Project
   validates :paid_type, inclusion: { in: Project::PAID_TYPES.map(&:to_s), message: '' }
   validates :end_type,  inclusion: Project::END_TYPES.map(&:to_s)
   validates :name, presence: true
-  validates :fixed_amount, numericality: { if: :fixed_amount? }
+  validates :fixed_amount, numericality: { greater_than_or_equal_to: MIN_WITHDRAW, if: :fixed_amount? }
   validates :deadline, date: { after: Time.now }
   validates :article_link, :url => {:allow_blank => true}
 
@@ -31,6 +34,8 @@ class Project
   has_many :cards
   has_many :invites
   has_many :fees
+  has_many :withdraws
+
   ## Filters
   before_validation :prepare_end_type
 
@@ -53,12 +58,26 @@ class Project
     users.for_ids(user.id).exists?
   end
 
+  # available for withdraw
+  def available_amount
+    donated_amount - already_withdrawed
+  end
+
+  def already_withdrawed
+    self.withdraws.sum(:amount).to_f
+  end
+
+  # how much was donated
   def donated_amount
-    self.fees.purchased.sum(:amount)
+    self.fees.purchased.sum(:amount).to_f
   end
 
   def donated_amount_from(user)
-    self.fees.purchased.where(:user_id => user.id).sum(:amount)
+    self.fees.purchased.where(:user_id => user.id).sum(:amount).to_f
+  end
+
+  def can_withdraw?
+    self.available_amount >= MIN_WITHDRAW
   end
 
   def visible_fee_amount_from(user)
