@@ -3,8 +3,17 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $ ->
-  $('#search_modal button').click (e) ->
+  $('#search_modal form button').click (e) ->
     e.preventDefault()
-    console.log 'test'
     $('#search_modal .modal-body p').load window.location.pathname.replace(/\/new/, '/amazon_search'),
       q: $('#search_modal form input').val()
+
+  $('#search_modal').modal
+    backdrop : true
+    keyboard : true
+    show     : false
+  .css
+    'width'       : '80%'
+    'margin-left' : ->
+      -($(@).width() / 2)
+

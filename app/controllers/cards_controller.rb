@@ -28,8 +28,12 @@ class CardsController < ApplicationController
 
   def amazon_search
     @client = ASIN::Client.instance
-    @items = @client.search :Keywords => params[:q], :SearchIndex => :All, :ResponseGroup => :Medium
-    logger.debug @items.map { |i| i.raw.ItemAttributes.ListPrice.inspect }
+    @current_page = params[:page] || 1
+    @items = @client.search Keywords: params[:q], SearchIndex: :All, ResponseGroup: :Medium, ItemPage: @current_page
+    amazon_response = @client.last_response
+
+    @total_results = amazon_response['ItemSearchResponse']['Items']['TotalResults']
+    @total_pages   = amazon_response['ItemSearchResponse']['Items']['TotalPages']
     render layout: false
   end
 
