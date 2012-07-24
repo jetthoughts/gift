@@ -19,6 +19,11 @@ class Fee
     state all - [ :abandoned ] do
 
     end
+
+    after_transition any => :purchased do |fee|
+      fee.purchase_notify if fee.respond_to?(:purchase_notify)
+    end
+
   end
 
   scope :purchased, where(:payment_status => 'purchased')

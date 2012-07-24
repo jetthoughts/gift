@@ -39,6 +39,7 @@ gem 'voteable_mongo'
 gem 'state_machine'
 gem 'activeadmin'
 gem 'activeadmin-mongoid'
+gem 'delayed_job_mongoid'
 
 group :development do
   gem "unicorn-rails"

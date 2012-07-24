@@ -14,6 +14,8 @@ class Fee
 
   validates :amount, presence: true, numericality: {greater_than: 1}
 
+
+  #paypal  methods should be moved from here
   def complete_paypal(token, payer_id)
     if (response = paypal.purchase(total_amount_in_cents, {:token => token, :payer_id => payer_id, :description => description, :currency => self.currency })).success?
       if response.params['payment_status'] == 'Completed'
@@ -66,6 +68,18 @@ class Fee
 
   def currency
     project.currency
+  end
+  # paypal payment method block end
+
+  def purchase_notify
+    return unless project
+    recipients.each do |u|
+      CommentsMailer.new_donation(self, u).deliver
+    end
+  end
+
+  def recipients
+    project.users.where(:_id.ne => user.id, :notification_donated => true)
   end
 
 end
