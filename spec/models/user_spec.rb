@@ -19,7 +19,7 @@ describe User do
 
     context "when is a" do
       let(:user)    { Fabricate(:user) }
-      let(:project) { Fabricate(:project_with_amount) }
+      let(:project) { Fabricate(:project_with_amount, admin: user) }
 
       context "valid user" do
         let(:comment) { Fabricate(:comment, user: user) }
