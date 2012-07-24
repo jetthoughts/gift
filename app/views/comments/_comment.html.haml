@@ -1,3 +1,8 @@
 .comment
-  %span= comment.text
-  %span= comment.created_at
+  %span.user
+    = comment.user.name
+    =':'
+  %span.text
+    = comment.text
+    ='.'
+  %span.date= comment.created_at

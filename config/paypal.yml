@@ -1,16 +1,16 @@
 development:
-  login: 's3_1342514477_biz_api1.mailinator.com'
-  password: '1342514516'
-  signature: 'A5FHW4PF0qmLAT2Q0PVN.Jm-CXeWAwnkxh2QzVjBC5KJrPGzfJMUXhRx'
+  login: 'gs_1343131071_biz_api1.mailinator.com'
+  password: '1343131095'
+  signature: 'AYUoXZhCw9z3nmVAUw1vXKz7VtkgArpML7KvjK5HgM2bf69kAOCm403y'
 test:
-  login: 's3_1342514477_biz_api1.mailinator.com'
-  password: '1342514516'
-  signature: 'A5FHW4PF0qmLAT2Q0PVN.Jm-CXeWAwnkxh2QzVjBC5KJrPGzfJMUXhRx'
+  login: 'gs_1343131071_biz_api1.mailinator.com'
+  password: '1343131095'
+  signature: 'AYUoXZhCw9z3nmVAUw1vXKz7VtkgArpML7KvjK5HgM2bf69kAOCm403y'
 production:
-  login: 's3_1342514477_biz_api1.mailinator.com'
-  password: '1342514516'
-  signature: 'A5FHW4PF0qmLAT2Q0PVN.Jm-CXeWAwnkxh2QzVjBC5KJrPGzfJMUXhRx'
+  login: 'gs_1343131071_biz_api1.mailinator.com'
+  password: '1343131095'
+  signature: 'AYUoXZhCw9z3nmVAUw1vXKz7VtkgArpML7KvjK5HgM2bf69kAOCm403y'
 staging:
-  login: 's3_1342514477_biz_api1.mailinator.com'
-  password: '1342514516'
-  signature: 'A5FHW4PF0qmLAT2Q0PVN.Jm-CXeWAwnkxh2QzVjBC5KJrPGzfJMUXhRx'
+  login: 'gs_1343131071_biz_api1.mailinator.com'
+  password: '1343131095'
+  signature: 'AYUoXZhCw9z3nmVAUw1vXKz7VtkgArpML7KvjK5HgM2bf69kAOCm403y'

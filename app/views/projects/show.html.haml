@@ -15,6 +15,9 @@
       - if can? :close, @project
         .btn.pull-right
           = link_to 'Close project'
+      - if true
+        .btn.pull-right
+          = link_to 'Withdrow', project_withdraws_path(@project)
 
   %hr
   .row

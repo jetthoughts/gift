@@ -7,6 +7,10 @@ Gift::Application.routes.draw do
   match '/invites/facebook_accept' => 'invites#facebook_accept', :via => :get, :as => :facebook_invite_accept
 
   resources :projects do
+    resources :withdraws do
+      get 'paypal'  => 'withdraw#paypal', :on => :collection
+      get 'paypal'  => 'withdraw#paypal', :on => :collection      
+    end
     resources :invites
     resources :fees do
       member do
@@ -30,6 +34,7 @@ Gift::Application.routes.draw do
 
   devise_scope :user do
     match '/update_token' => 'users#update_token', :as => :update_token, :via => :post
+    match 'users/profile' => 'users/registrations#profile', :as => :profile, :via => :put
   end
 
   match '/facebook' => 'users#facebook_invite'
