@@ -4,8 +4,7 @@
 = form_for [@project, Invite.new], :html => {:method => :post} do |f|
   %h4
     Via Facebook:
-  %div{class: 'btn', id: 'fb-invite-link'}
-    Facebook invitation
+  %div{id: 'fb-invite-link'}
   #invite-other
     .hidden.invite_ids
       = invite_ids(@project)
@@ -15,6 +14,7 @@
     InviteFriend.initialize('#invite-other');
   = render 'shared/fb_js_sdk'
 
+  %br
   %h4
     By email
   #by_email
