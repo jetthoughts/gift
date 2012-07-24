@@ -1,0 +1,10 @@
+%p
+  Too little collected for withdraw.
+%p
+  Need at least
+  = currency(Project::MIN_WITHDRAW)
+%p
+  Available only
+  = currency(@project.available_amount)
+%p
+  = link_to "Back to project", @project

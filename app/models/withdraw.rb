@@ -14,14 +14,10 @@ class Withdraw
   validates :project, presence: true
   
   validates :amount, presence: true, numericality: true
-#  validate :check_available_amount
+  validates :paypal_email, presence: true, if: :paypal?
 
   def check_available_amount
     errors.add(:amount, 'Poll is not available') unless amount <= project.available_amount
-  end
-
-  def set_amount
-    
   end
 
   def refund
@@ -34,19 +30,17 @@ class Withdraw
     if (response = paypal.transfer(total_amount_in_cents, paypal_email, { currency: project.currency })).success?       
        save  
     else
-      puts '*'*100
-      p response.message
       errors.add(:payment_method, "PayPal Error: #{response.message}")
       false
     end
   end
 
-  def cc?
-    payment_method.class.name != 'Paypal::Paypalwp'
+  def paypal?
+    payment_method.class.name == 'Paypal::Paypalwp'
   end
 
   def paypal
-    @paypal ||=  ActiveMerchant::Billing::Base.gateway(:paypal_express).new(config_from_file('paypal.yml'))
+    @paypal ||=  ActiveMerchant::Billing::Base.gateway(:paypal_express).new(config_from_file('paypal.yml'))    
   end
 
   def config_from_file(file)
@@ -54,7 +48,10 @@ class Withdraw
   end
 
   def total_amount_in_cents    
-    (BigDecimal(amount.to_s) * 100).round(0).to_i  
+    (BigDecimal(amount_with_fees.to_s) * 100).round(0).to_i  
   end
 
+  def amount_with_fees
+    amount - payment_method.refund_fee
+  end
 end

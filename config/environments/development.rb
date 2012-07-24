@@ -46,5 +46,6 @@ Gift::Application.configure do
   config.action_mailer.default_url_options = {:host => 'localhost:3000'}
   config.after_initialize do
     ActiveMerchant::Billing::Base.gateway_mode = :test
+    ActiveMerchant::Billing::PaypalExpressGateway.default_currency = 'EUR'
   end
 end

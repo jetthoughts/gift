@@ -2,6 +2,10 @@ class WithdrawsController < ApplicationController
   before_filter :find_project
 
   def index
+    unless @project.can_withdraw?
+      render 'too_little_collected'
+      return
+    end
    @with_draw = @project.withdraws.build
   end
 

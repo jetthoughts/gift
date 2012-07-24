@@ -10,6 +10,10 @@ module ProjectsHelper
   end
 
   def currency(amount)
-    number_to_currency(amount, unit: '&euro;')
+    number_to_currency(amount, unit: currency_unit('EUR'))
+  end
+
+  def currency_unit(abbr)
+    {'EUR' => '&euro;'}[abbr]
   end
 end
