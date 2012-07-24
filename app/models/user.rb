@@ -52,11 +52,14 @@ class User
 
   field :name, type: String
 
+  field :notification_donated, type: Boolean, default: true
+  field :notification_new_comment, type: Boolean, default: true
+
   mount_uploader :avatar, ImageUploader
 
   ## Validators
   validates :email, uniqueness: {case_sensitive: false}, if: :email_changed?
-   validates :name, presence: true
+  validates :name, presence: true
   ## Relations
   has_and_belongs_to_many :projects
   has_many :invites
