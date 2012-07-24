@@ -6,7 +6,14 @@
   text-align: center;
   width: 50%;
 }
-//
-/*#fb-invite-link {
-  background: image-url("/assets/images/icons/facebook.png") no-repeat;
-}*/
+
+#fb-invite-link {
+  background: url("/assets/icons/facebook.jpg") no-repeat;
+  width: 80px;
+  height: 30px;
+}
+
+#remove_email_participant {
+  position: relative;
+  top: -3px;
+}
