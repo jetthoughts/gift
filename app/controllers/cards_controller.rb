@@ -26,6 +26,13 @@ class CardsController < ApplicationController
     respond_with project, @card = chain.destroy(params[:id]) #, :layout => false
   end
 
+  def amazon_search
+    @client = ASIN::Client.instance
+    @items = @client.search :Keywords => params[:q], :SearchIndex => :All, :ResponseGroup => :Medium
+    logger.debug @items.map { |i| i.raw.ItemAttributes.ListPrice.inspect }
+    render layout: false
+  end
+
   private
 
   def card

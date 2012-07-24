@@ -79,3 +79,9 @@ Gift::Application.configure do
     ActiveMerchant::Billing::PaypalExpressGateway.default_currency = 'EUR'
   end
 end
+
+ASIN::Configuration.configure do |config|
+  config.secret        = 'czH6/sKbqJ0BNBFcFZM7CmQ5pq/PNKKn5fBxWXIY'
+  config.key           = 'KIAJL2NGDZ4IICQK5AQ'
+  config.associate_tag = 'frien098-20'
+end

@@ -28,3 +28,4 @@
 //= require projects
 //= require comments
 //= require invites
+//= require card

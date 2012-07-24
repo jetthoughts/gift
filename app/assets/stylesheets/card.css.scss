@@ -47,3 +47,20 @@ form .image {
   text-align: right;
   width: 40%;
 }
+
+#search_modal {
+  .items {
+    li {
+      clear: both;
+      p {
+        display: inline-block; 
+        width: 50%;
+      }
+      img {
+        float: left; 
+        margin-right: 10px;
+        height: 160px;
+      }
+    }
+  }
+}
