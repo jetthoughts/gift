@@ -17,7 +17,7 @@ feature "User sign in and sign up actions" do
   scenario "Signing up" do
     click_link 'Sign up'
     page.should have_content 'Sign up'
-
+    fill_in 'Name', with: 'Max'
     fill_in 'Email', with: 'test@test.com'
     fill_in 'Password', with: @user.password
     fill_in 'Password confirmation', with: @user.password
