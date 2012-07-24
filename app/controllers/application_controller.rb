@@ -23,6 +23,7 @@ class ApplicationController < ActionController::Base
     return if params[:user].blank?
 
     user = User.where(email: params[:user][:email]).first
+    return if user.nil?
 
     if user.info_uncompleted
       redirect_to root_url, alert: 'Access Denied'
