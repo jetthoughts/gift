@@ -4,6 +4,7 @@
   %h4
     How do you want to contribute?
   %p
+    = currency_unit(@project.currency).html_safe
     = f.text_field :amount
   %h4
     How do you want to pay?
