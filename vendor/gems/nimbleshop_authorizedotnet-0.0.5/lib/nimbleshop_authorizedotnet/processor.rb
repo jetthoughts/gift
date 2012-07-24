@@ -34,7 +34,6 @@ module NimbleshopAuthorizedotnet
       response = gateway.authorize(order.total_amount_in_cents, creditcard, {order_id: order.number, currency: @order.currency } )
       record_transaction(response, 'authorized', card_number: creditcard.display_number, cardtype: creditcard.cardtype)
       if response.success?
-        order.update_attributes(payment_method: payment_method)
         order.authorize
       else
         @errors << 'Credit card was declined. Please try again!'
@@ -56,7 +55,6 @@ module NimbleshopAuthorizedotnet
       record_transaction(response, 'purchased', card_number: creditcard.display_number, cardtype: creditcard.cardtype)
 
       if response.success?
-        order.update_attributes(payment_method: payment_method)
         order.purchase
       else
         @errors << 'Credit card was declined. Please try again!'

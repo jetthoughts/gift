@@ -1,0 +1,14 @@
+<p>
+  <%= @user.name %>,
+</p>
+
+<p>
+  <%= currency(@fee.amount) %> was donated to <%= @fee.project.name %>
+  <%- if @fee.visible? %>
+    from <% @fee.user.name %>
+  <% end %>
+  <br /><br />
+
+  <%= link_to "View project", project_url(@fee.project),
+    :style => "color:#36a14b; font-weight:bold;" %>
+</p>

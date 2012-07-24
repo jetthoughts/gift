@@ -1,0 +1,12 @@
+<p>
+  <%= @user.name %>,
+</p>
+
+<p>
+  <%= @comment.user.name %> commented on <%= @comment.project.name %> dashboard
+
+  <br /><br />
+  &quot;<%= "#{@comment.text}." %>&quot;<br /><br />
+  <%= link_to "View #{@comment.user.name}'s comment", project_url(@comment.project),
+    :style => "color:#36a14b; font-weight:bold;" %>
+</p>
