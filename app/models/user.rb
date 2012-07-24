@@ -73,6 +73,7 @@ class User
 
   ## Methods
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
+    puts auth
     user = User.where(provider: auth.provider, uid: auth.uid).first
     if user && user.info_uncompleted?
         user.update_attributes(name: auth.extra.raw_info.name,

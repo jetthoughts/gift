@@ -32,5 +32,14 @@ feature "Invitations" do
     click_link 'Other participants'
 
     page.has_selector?('.email_participant', :count => 3)
+    page.has_selector?('.remove_email_participant', :count => 2)
+  end
+
+  scenario 'can remove participient' do
+    click_link 'Other participants'
+    page.has_selector?('.email_participant', :count => 2)
+
+    click_link 'remove'
+    page.has_selector?('.email_participant', :count => 1)
   end
 end
