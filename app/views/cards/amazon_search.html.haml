@@ -5,3 +5,7 @@
       %h4= link_to item.title, item.raw.DetailPageUrl, target: '_blank'
       %span.badge.badge-inverse= amazon_price(item)
       %span.badge.badge-info= item.raw.ItemAttributes.ProductGroup
+
+- if @items
+  .well
+    = paginate_without_scope current_page: @current_page, total_pages: @total_pages, limit_value: 10

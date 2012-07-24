@@ -49,13 +49,11 @@ form .image {
 }
 
 #search_modal {
+  width: 50%;
   .items {
     li {
-      clear: both;
-      p {
-        display: inline-block; 
-        width: 50%;
-      }
+      overflow:hidden;
+      margin-bottom: 5px;
       img {
         float: left; 
         margin-right: 10px;
