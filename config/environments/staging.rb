@@ -79,3 +79,9 @@ Gift::Application.configure do
     ActiveMerchant::Billing::PaypalExpressGateway.default_currency = 'EUR'
   end
 end
+
+ASIN::Configuration.configure do |config|
+  config.secret        = ENV['AWS_SECRET']
+  config.key           = ENV['AWS_KEY']
+  config.associate_tag = ENV['AWS_ASSOCIATE_TAG']
+end

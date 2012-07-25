@@ -25,6 +25,7 @@ gem "koala", ">= 1.2"
 
 gem "cancan"
 gem "kaminari"
+gem "bootstrap-kaminari-views"
 gem "has_scope"
 gem "show_for"
 gem "simple_form", ">= 2.0.0"
@@ -40,6 +41,11 @@ gem 'state_machine'
 gem 'activeadmin'
 gem 'activeadmin-mongoid'
 gem 'delayed_job_mongoid'
+
+gem 'asin', git: 'git://github.com/XsErG/asin.git', branch: 'develop'
+gem 'confiture', git: 'git://github.com/phoet/confiture.git'
+
+gem 'airbrake'
 
 group :development do
   gem "unicorn-rails"
@@ -71,7 +77,7 @@ group :test do
   gem "fabrication"
   gem "ffaker"
 
-  gem "mongoid-rspec", ">= 1.4.4"
+  gem "mongoid-rspec"
   gem "email_spec", ">= 1.2.1"
 end
 
