@@ -21,7 +21,7 @@ class Fee
     end
 
     after_transition any => :purchased do |fee|
-      fee.purchase_notify if fee.respond_to?(:purchase_notify)
+      fee.run_purchase_notify if fee.respond_to?(:run_purchase_notify)
     end
 
   end
