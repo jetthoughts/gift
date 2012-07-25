@@ -13,7 +13,6 @@ end
 
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
-gem "emberjs-rails"
 
 gem "haml"
 gem 'bson_ext'
