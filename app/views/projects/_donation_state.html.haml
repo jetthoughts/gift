@@ -1,16 +1,15 @@
-%br
-%h4 Active users
-= format_total_amount @project.donated_amount
+.donation_state
+  %h4 Active users
+  = format_total_amount @project.donated_amount
 
-%table.table-bordered.with_spaces
-  %thead
-    %tr
-      %th Name
-      %th Amount
-
-  %tbody
-    - @project.users.each do |user|
+  %table.table-bordered.with_spaces
+    %thead
       %tr
-        %td= user.name
-        %td= format_fee_amount @project.visible_fee_amount_from(user)
-%br
+        %th Name
+        %th Amount
+
+    %tbody
+      - @project.users.each do |user|
+        %tr
+          %td= user.name
+          %td= format_fee_amount @project.visible_fee_amount_from(user)
