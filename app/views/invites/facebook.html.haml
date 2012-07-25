@@ -6,8 +6,7 @@
   %br
 
   - if @invites.present?
-    You have been invited to next projects in the web site
-    = link_to root_url
+    You have been invited to next projects
     %br
     - @invites.each do |invite|
       %p
@@ -23,3 +22,9 @@
         = link_to 'Accept', project_invite_facebook_update_url(invite.project, invite)
         = link_to 'Ignore', project_invite_facebook_destroy_url(invite.project, invite)
       %hr
+  - else
+    You have no new invites
+    %br
+    %br
+    Web site:
+    = link_to root_url, root_url

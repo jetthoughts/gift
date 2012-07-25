@@ -37,7 +37,7 @@ class Invite
       user.save
       logger.debug '**************save accept!*********************'
     end
-    self.destroy!
+    self.destroy
   end
 
   private

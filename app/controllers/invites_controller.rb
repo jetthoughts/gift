@@ -1,7 +1,6 @@
 class InvitesController < ApplicationController
-  before_filter :authenticate_user!, :except => [:facebook_update, :facebook_destroy]
   before_filter :find_project, :except => [:destroy]
-  before_filter :find_invite, :only => [:show, :update, :destroy]
+  before_filter :find_invite, :only => [:show, :update, :destroy, :facebook_update, :facebook_destroy]
 
   def new
     @invites = [@project.invites.build]
@@ -42,15 +41,13 @@ class InvitesController < ApplicationController
   end
 
   def facebook_update
-    invite = Invite.where(params[:id]).first
-    invite.accept!
-    redirect :back
+    @invite.accept!
+    redirect_to :back
   end
 
   def facebook_destroy
-    invite = Invite.where(params[:id]).first
-    invite.destroy
-    redirect :back
+    @invite.destroy
+    redirect_to :back
   end
 
   def update

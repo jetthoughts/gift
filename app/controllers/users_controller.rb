@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   respond_to :html
+  before_filter :authenticate_user!, :except => [:facebook_invite]
 
   def show
     @user = current_user
@@ -15,21 +16,14 @@ class UsersController < ApplicationController
   end
 
   def facebook_invite
-    @oauth = Koala::Facebook::OAuth.new(FBOOK_APPLICATION_ID, FBOOK_SECRET_KEY, facebook_url)
-    fb_params = @oauth.parse_signed_request(params[:signed_request]) if params
-    oauth_token = fb_params['oauth_token']
-
-    if oauth_token.nil?
-      redirect_to omniauth_authorize_url(:facebook)
-      #redirect_to @oauth.url_for_oauth_code(:permissions => "email")
+    if current_user.nil?
+      session[:back] = facebook_url
+      redirect_to omniauth_authorize_path(User, :facebook)
     else
-      user_id = fb_params['user_id']
+      user_id = current_user.uid
+      @name = current_user.name
       @invites = Invite.where(fb_id: user_id).entries
-      graph = Koala::Facebook::API.new(fb_params['oauth_token'])
-      result = graph.get_object('me')
-      @name = result['name']
-      render 'invites/facebook_exist_user', layout: false
+      render 'invites/facebook', layout: false
     end
   end
-  #error_reason
 end

@@ -94,8 +94,8 @@ class User
                          confirmed_at: DateTime.now
       )
     end
-    @user.fbook_access_token = (credentials = auth["credentials"]) ? credentials["token"] : nil
-    @user.save!
+    user.fbook_access_token = (credentials = auth["credentials"]) ? credentials["token"] : nil
+    user.save!
     user
   end
 
