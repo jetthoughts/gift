@@ -5,13 +5,17 @@
   .form-inputs
     %span= f.input :name
     .description
-      %span= f.input :description#, :placeholder => t('placeholders.defaults.description')
-      %span= f.button :button, 'Amazon search'
+      %span= f.input :description
+      %span 
+        = link_to 'Amazon search', '#search_modal', data: { toggle: 'modal'}, class: 'btn'
     .clearfix
     = f.input :web_link
     .image
       = f.input :image
+      = f.input :remote_image_url
     = f.input :price
 
   .form-actions
     = f.button :submit, t('simple_form.add_gift')
+
+= render 'search_modal'
