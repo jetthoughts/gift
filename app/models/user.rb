@@ -79,12 +79,12 @@ class User
     puts auth
     user = User.where(provider: auth.provider, uid: auth.uid).first
     if user && user.info_uncompleted?
-        user.update_attributes(name: auth.extra.raw_info.name,
-                               email: auth.info.email,
-                               password: Devise.friendly_token[0, 20],
-                               confirmed_at: DateTime.now,
-                               info_uncompleted: false
-        )
+      user.update_attributes(name: auth.extra.raw_info.name,
+                             email: auth.info.email,
+                             password: Devise.friendly_token[0, 20],
+                             confirmed_at: DateTime.now,
+                             info_uncompleted: false
+      )
     elsif user.nil?
       user = User.create(name: auth.extra.raw_info.name,
                          provider: auth.provider,
@@ -94,6 +94,8 @@ class User
                          confirmed_at: DateTime.now
       )
     end
+    @user.fbook_access_token = (credentials = auth["credentials"]) ? credentials["token"] : nil
+    @user.save!
     user
   end
 
@@ -121,7 +123,7 @@ class User
 
   def merge_another_invites
     Invite.where(:user_id => nil, :email => email).update_all(:user_id => id)
-  end 
+  end
 
   def self.new_with_session(params, session)
     super.tap do |user|

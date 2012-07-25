@@ -4,7 +4,8 @@ Gift::Application.routes.draw do
   devise_for :admin_users, ActiveAdmin::Devise.config
 
   match '/invites/friends.json' => 'invites#create_facebook', :via => :post
-  match '/invites/facebook_accept' => 'invites#facebook_accept', :via => :get, :as => :facebook_invite_accept
+  match '/projects/:project_id/invites/facebook/accept/:id' => 'invites#facebook_update', :via => :get, :as => :project_invite_facebook_update
+  match '/projects/:project_id/invites/facebook/ignore/:id' => 'invites#facebook_destroy', :via => :get, :as => :project_invite_facebook_destroy
 
   resources :projects do
     resources :withdraws do

@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+
   has_scope :page, default: 1
   before_filter :find_project, only: [:show, :edit, :update, :destroy]
   before_filter :find_pending_invites, only: :index

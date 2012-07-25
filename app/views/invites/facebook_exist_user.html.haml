@@ -20,8 +20,6 @@
         %b Created by:
         = invite.project.admin.name
         %br
-        = link_to 'Accept', project_invite_url(invite.project, invite), data: { method: :put}
-        = link_to 'Ignore', project_invite_url(invite.project, invite), data: { confirm: 'Are you sure?', method: :delete }
+        = link_to 'Accept', project_invite_facebook_update_url(invite.project, invite)
+        = link_to 'Ignore', project_invite_facebook_destroy_url(invite.project, invite)
       %hr
-
--#= link_to 'Accept invitation',  user_omniauth_authorize_url(:facebook), target: '_top'

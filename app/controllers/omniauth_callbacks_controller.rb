@@ -4,9 +4,6 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
     @user = User.find_for_facebook_oauth(auth, current_user)
 
     if @user.persisted?
-      @user.fbook_access_token = (credentials = auth["credentials"]) ? credentials["token"] : nil
-      @user.save!
-
       flash[:notice] = I18n.t "devise.omniauth_callbacks.success", :kind => "Facebook"
       sign_in_and_redirect @user, :event => :authentication
     else
