@@ -15,15 +15,27 @@ module CardsHelper
     item.image_url
   end
 
+  def amazon_formatted_price item
+    price = amazon_price item
+    return price.FormattedPrice if price
+    'Not setted'
+  end
+
+  def amazon_amount item
+    price = amazon_price item
+    return price.Amount if price
+    'Not setted'
+  end
+
   def amazon_price item
     if item.raw.ItemAttributes.ListPrice
-      return item.raw.ItemAttributes.ListPrice.FormattedPrice
+      return item.raw.ItemAttributes.ListPrice
     end
 
     if item.raw.OfferSummary!.LowestNewPrice
-      return item.raw.OfferSummary.LowestNewPrice.FormattedPrice
+      return item.raw.OfferSummary.LowestNewPrice
     end
 
-    'Not setted'
+    nil
   end
 end
