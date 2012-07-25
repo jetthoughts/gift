@@ -22,7 +22,13 @@ $ ->
 
   $('#search_modal .add-gift').live 'click', (e) ->
     e.preventDefault()
-    add_amazon_gift $(@)
+    self = $(@)
+    add_amazon_gift self
+    disabled_link = $('#search_modal .add-gift.disabled')
+    disabled_link.removeClass('disabled btn-danger').addClass('btn-success')
+    disabled_link.find('i').removeClass('icon-minus').addClass('icon-plus')
+    self.find('i').removeClass('icon-plus').addClass('icon-minus')
+    self.removeClass('btn-success').addClass('btn-danger disabled')
 
 
 load_search_result = (query, page = 1)->
