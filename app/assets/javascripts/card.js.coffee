@@ -20,8 +20,30 @@ $ ->
     url = $.url(@)
     load_search_result url.param('q'), url.param('page')
 
+  $('#search_modal .add-gift').live 'click', (e) ->
+    e.preventDefault()
+    add_amazon_gift $(@)
+
 
 load_search_result = (query, page = 1)->
   $('#search_modal .modal-body p').load window.location.pathname.replace(/\/new/, '/amazon_search'),
     q: query
     page: page
+
+add_amazon_gift = (link)->
+  parent      = link.parent()
+  amount      = parent.find('.price').data('amount')
+  image_url   = parent.find('img').attr('src')
+  details_url = parent.find('h4 a').attr('href')
+  name        = parent.find('h4 a').text()
+  description = parent.find('.product-group').text()
+
+  $('#card_name').val name
+  $('#card_description').val description
+  $('#card_price').val amount_to_price(amount)
+  $('#card_remote_image_url').val image_url
+  $('#card_web_link').val details_url
+
+amount_to_price = (amount) ->
+  amount = amount + ''
+  [amount.slice(0, -2), '.', amount.slice(-2)].join ''
