@@ -1,5 +1,5 @@
 class InvitesController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => [:facebook_update, :facebook_destroy]
   before_filter :find_project, :except => [:destroy]
   before_filter :find_invite, :only => [:show, :update, :destroy]
 
