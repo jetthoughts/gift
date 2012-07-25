@@ -7,7 +7,6 @@
   float: left;
   margin-left: 10px;
   margin-bottom: 10px;
-  height: 210px;
   @include border;
 
   .image {
@@ -17,9 +16,14 @@
     width: 120px;
     height: 120px;
 
-    img {
+    a {
+      display: block;
       width: 120px;
       height: 120px;
+      img {
+        max-width: 100%;
+        max-height: 100%;
+      }
     }
   }
 
@@ -30,6 +34,9 @@
   .vote {
     text-align: right;
     margin-right: 10px;
+    a {
+      color: white;
+    }
   }
 }
 
@@ -46,4 +53,28 @@
 form .image {
   text-align: right;
   width: 40%;
+}
+
+#search_modal {
+  width: 80%;
+  margin-top: -45%;
+  .add-gift {
+    color: white;
+  }
+  .modal-footer {
+    a {
+      color: white;
+    }
+  }
+  .items {
+    li {
+      overflow:hidden;
+      margin-bottom: 5px;
+      img {
+        float: left; 
+        margin-right: 10px;
+        height: 160px;
+      }
+    }
+  }
 }

@@ -1,0 +1,11 @@
+#search_modal.modal.hide
+  .modal-header
+    %button.close{ 'data-dismiss' => 'modal' } ×
+    %h3 Amazon Search
+    %form.form-search.well
+      %input.search-query{type: :text, name: 'q'}
+      %button.btn Search
+  .modal-body
+    %p
+  .modal-footer
+    %a.btn.btn-primary{ href:'#', 'data-dismiss' => 'modal' } Close
