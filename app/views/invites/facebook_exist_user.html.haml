@@ -1,0 +1,27 @@
+%p
+  Hello,
+  %b
+    = @name
+  !
+  %br
+
+  - if @invites.present?
+    You have been invited to next projects in the web site
+    = link_to root_url
+    %br
+    - @invites.each do |invite|
+      %p
+        %b Project:
+        = invite.project.name
+        %br
+        %b Description:
+        = invite.project.description
+        %br
+        %b Created by:
+        = invite.project.admin.name
+        %br
+        = link_to 'Accept', project_invite_url(invite.project, invite), data: { method: :put}
+        = link_to 'Ignore', project_invite_url(invite.project, invite), data: { confirm: 'Are you sure?', method: :delete }
+      %hr
+
+-#= link_to 'Accept invitation',  user_omniauth_authorize_url(:facebook), target: '_top'

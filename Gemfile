@@ -21,7 +21,7 @@ gem 'bson_ext'
 gem "mongoid", "~> 2.4"
 gem "devise", ">= 1.3.3"
 gem "omniauth-facebook"
-gem "koala"
+gem "koala", ">= 1.2"
 
 gem "cancan"
 gem "kaminari"
