@@ -5,6 +5,7 @@
 $ ->
   $('#search_modal form button').click (e) ->
     e.preventDefault()
+    mask_list()
     load_search_result $('#search_modal form input').val()
 
   $('#search_modal').modal
@@ -17,6 +18,7 @@ $ ->
 
   $('#search_modal .pagination a').live 'click', (e) ->
     e.preventDefault()
+    mask_list()
     url = $.url(@)
     load_search_result url.param('q'), url.param('page')
 
@@ -35,6 +37,8 @@ load_search_result = (query, page = 1)->
   $('#search_modal .modal-body p').load window.location.pathname.replace(/\/new/, '/amazon_search'),
     q: query
     page: page
+  , ->
+    unmask_list()
 
 add_amazon_gift = (link)->
   parent      = link.parent()
@@ -53,3 +57,11 @@ add_amazon_gift = (link)->
 amount_to_price = (amount) ->
   amount = amount + ''
   [amount.slice(0, -2), '.', amount.slice(-2)].join ''
+
+mask_list = ->
+  $('#search_modal .modal-body').mask('Loading...')
+  $('#search_modal form button').attr('disabled', true)
+
+unmask_list = ->
+  $('#search_modal .modal-body').unmask()
+  $('#search_modal form button').attr('disabled', false)

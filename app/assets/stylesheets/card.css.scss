@@ -66,6 +66,9 @@ form .image {
       color: white;
     }
   }
+  .modal-body {
+    min-height: 100px; 
+  }
   .items {
     li {
       overflow:hidden;
