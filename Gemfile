@@ -44,6 +44,8 @@ gem 'delayed_job_mongoid'
 
 gem 'asin', git: 'git://github.com/XsErG/asin.git', branch: 'develop'
 
+gem 'airbrake'
+
 group :development do
   gem "unicorn-rails"
   gem "heroku", require: false
