@@ -13,7 +13,5 @@ $ ->
     keyboard : true
     show     : false
   .css
-    'width'       : '80%'
     'margin-left' : ->
       -($(@).width() / 2)
-
