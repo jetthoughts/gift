@@ -15,16 +15,7 @@
 //= require jquery.ui.all
 //= require jquery-ui-timepicker-addon
 //= require jquery.url
-//= require ember
 //= require bootstrap
-
-//= require app
-//= require_tree ./models
-//= require_tree ./controllers
-//= require_tree ./views
-//= require_tree ./helpers
-//= require_tree ./templates
-//= require_tree ./modules
 
 //= require projects
 //= require comments
