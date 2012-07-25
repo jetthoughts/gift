@@ -1,0 +1,15 @@
+%ul.items.unstyled
+  - @items.each do |item|
+    %li{id: item.asin}
+      = image_tag amazon_image_url(item)
+      %h4.inline= link_to item.title, item.raw.DetailPageURL, target: '_blank'
+      %br/
+      %span.badge.badge-inverse.price{ data: { amount: amazon_amount(item) } }= amazon_formatted_price(item)
+      %span.badge.badge-info.product-group= item.raw.ItemAttributes.ProductGroup
+      %a.btn.btn-success.pull-right.add-gift{ href: '#'}
+        %i.icon-white.icon-plus
+        Add
+
+- if @items.present?
+  .well
+    = paginate_without_scope current_page: @current_page, total_pages: @total_pages, limit_value: 10, theme: 'twitter-bootstrap'
