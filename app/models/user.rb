@@ -39,9 +39,6 @@ class User
   field :uid, type: String
   field :password_changed, type: Boolean, default: false
 
-  ##facebook invited info uncompleted
-  field :info_uncompleted, type: Boolean, default: false
-
   ## Lockable
   # field :failed_attempts,       type: Integer, default: 0 # Only if lock strategy is :failed_attempts
   # field :unlock_token,          type: String # Only if unlock strategy is :email or :both
@@ -76,16 +73,8 @@ class User
 
   ## Methods
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
-    puts auth
     user = User.where(provider: auth.provider, uid: auth.uid).first
-    if user && user.info_uncompleted?
-      user.update_attributes(name: auth.extra.raw_info.name,
-                             email: auth.info.email,
-                             password: Devise.friendly_token[0, 20],
-                             confirmed_at: DateTime.now,
-                             info_uncompleted: false
-      )
-    elsif user.nil?
+    if user.nil?
       user = User.create(name: auth.extra.raw_info.name,
                          provider: auth.provider,
                          uid: auth.uid,
@@ -98,11 +87,6 @@ class User
     user.save!
     user
   end
-
-  #todo: not working
-  #def confirmation_required?
-  #  !info_uncompleted
-  #end
 
   def pending_invites
     invites.not_in(:project_id => projects.map(&:id))

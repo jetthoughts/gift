@@ -20,6 +20,7 @@ class UsersController < ApplicationController
       session[:back] = facebook_url
       redirect_to omniauth_authorize_path(User, :facebook)
     else
+      session[:back] = nil
       user_id = current_user.uid
       @name = current_user.name
       @invites = Invite.where(fb_id: user_id).entries
