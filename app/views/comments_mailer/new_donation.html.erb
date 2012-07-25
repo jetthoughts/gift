@@ -5,7 +5,7 @@
 <p>
   <%= currency(@fee.amount) %> was donated to <%= @fee.project.name %>
   <%- if @fee.visible? %>
-    from <% @fee.user.name %>
+    from <%= @fee.user.name %>
   <% end %>
   <br /><br />
 
