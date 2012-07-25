@@ -9,6 +9,12 @@ GIT
       hashie (~> 1.1)
       httpi (~> 0.9)
 
+GIT
+  remote: git://github.com/phoet/confiture.git
+  revision: c8abec3a16e9bd23087e6a6b6f7d078a85ec3dce
+  specs:
+    confiture (0.1.2)
+
 PATH
   remote: vendor/gems/nimbleshop_authorizedotnet-0.0.5
   specs:
@@ -119,7 +125,6 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.3.3)
-    confiture (0.1.2)
     crack (0.3.1)
     database_cleaner (0.8.0)
     date_validator (0.6.3)
@@ -413,6 +418,7 @@ DEPENDENCIES
   carrierwave
   carrierwave-mongoid
   coffee-rails (~> 3.2.1)
+  confiture!
   database_cleaner (>= 0.7.1)
   date_validator
   delayed_job_mongoid
