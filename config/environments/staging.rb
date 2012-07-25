@@ -81,7 +81,7 @@ Gift::Application.configure do
 end
 
 ASIN::Configuration.configure do |config|
-  config.secret        = 'czH6/sKbqJ0BNBFcFZM7CmQ5pq/PNKKn5fBxWXIY'
-  config.key           = 'KIAJL2NGDZ4IICQK5AQ'
-  config.associate_tag = 'frien098-20'
+  config.secret        = ENV['AWS_SECRET']
+  config.key           = ENV['AWS_KEY']
+  config.associate_tag = ENV['AWS_ASSOCIATE_TAG']
 end
