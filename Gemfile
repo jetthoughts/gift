@@ -1,7 +1,7 @@
 source :rubygems
 
 gem 'rails', '~> 3.2'
-gem "unicorn"
+gem 'thin'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -48,7 +48,6 @@ gem 'confiture', git: 'git://github.com/phoet/confiture.git'
 gem 'airbrake'
 
 group :development do
-  gem "unicorn-rails"
   gem "heroku", require: false
   gem "haml-rails", require: false
 
