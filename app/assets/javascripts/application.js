@@ -15,6 +15,7 @@
 //= require jquery.ui.all
 //= require jquery-ui-timepicker-addon
 //= require jquery.url
+//= require jquery.loadmask.min
 //= require bootstrap
 
 //= require projects
