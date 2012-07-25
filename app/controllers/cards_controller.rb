@@ -28,7 +28,7 @@ class CardsController < ApplicationController
 
   def amazon_search
     @client = ASIN::Client.instance
-    @current_page = params[:page] || 1
+    @current_page = params[:page].to_i || 1
     @items = @client.search Keywords: params[:q], SearchIndex: :All, ResponseGroup: :Medium, ItemPage: @current_page
     amazon_response = @client.last_response
 
