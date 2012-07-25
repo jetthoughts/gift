@@ -97,9 +97,10 @@ class User
     user
   end
 
-  def confirmation_required?
-    !info_uncompleted
-  end
+  #todo: not working
+  #def confirmation_required?
+  #  !info_uncompleted
+  #end
 
   def pending_invites
     invites.not_in(:project_id => projects.map(&:id))

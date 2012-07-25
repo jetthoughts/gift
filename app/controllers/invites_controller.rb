@@ -41,6 +41,18 @@ class InvitesController < ApplicationController
   def show
   end
 
+  def facebook_update
+    invite = Invite.where(params[:id]).first
+    invite.accept!
+    redirect :back
+  end
+
+  def facebook_destroy
+    invite = Invite.where(params[:id]).first
+    invite.destroy
+    redirect :back
+  end
+
   def update
     @invite.accept!
     redirect_to @project
