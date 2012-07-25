@@ -2,9 +2,13 @@
   - @items.each do |item|
     %li{id: item.asin}
       = image_tag amazon_image_url(item)
-      %h4= link_to item.title, item.raw.DetailPageURL, target: '_blank'
+      %h4.inline= link_to item.title, item.raw.DetailPageURL, target: '_blank'
+      %br/
       %span.badge.badge-inverse= amazon_price(item)
       %span.badge.badge-info= item.raw.ItemAttributes.ProductGroup
+      %a.btn.btn-success.pull-right.add-gift{ href: '#'}
+        %i.icon-white.icon-plus
+        Add
 
 - if @items.present?
   .well
