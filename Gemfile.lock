@@ -1,3 +1,20 @@
+GIT
+  remote: git://github.com/XsErG/asin.git
+  revision: cbab269e53aba509f6bbba5c37f22b43b270d86e
+  branch: develop
+  specs:
+    asin (0.8.0)
+      confiture (~> 0.1)
+      crack (~> 0.3)
+      hashie (~> 1.1)
+      httpi (~> 0.9)
+
+GIT
+  remote: git://github.com/phoet/confiture.git
+  revision: c8abec3a16e9bd23087e6a6b6f7d078a85ec3dce
+  specs:
+    confiture (0.1.2)
+
 PATH
   remote: vendor/gems/nimbleshop_authorizedotnet-0.0.5
   specs:
@@ -65,9 +82,15 @@ GEM
     activesupport (3.2.6)
       i18n (~> 0.6)
       multi_json (~> 1.0)
-    addressable (2.2.8)
+    addressable (2.3.1)
+    airbrake (3.1.2)
+      activesupport
+      builder
     arel (3.0.2)
     bcrypt-ruby (3.0.1)
+    bootstrap-kaminari-views (0.0.2)
+      kaminari (>= 0.13)
+      rails (>= 3.1)
     bootstrap-sass (2.0.4.0)
     bourbon (2.1.1)
       sass (>= 3.1)
@@ -92,8 +115,8 @@ GEM
     carrierwave-mongoid (0.2.1)
       carrierwave (~> 0.6.1)
       mongoid (~> 2.1)
-    childprocess (0.3.3)
-      ffi (~> 1.0.6)
+    childprocess (0.3.4)
+      ffi (~> 1.0, >= 1.0.6)
     coderay (1.0.7)
     coffee-rails (3.2.2)
       coffee-script (>= 2.2.0)
@@ -102,6 +125,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.3.3)
+    crack (0.3.1)
     database_cleaner (0.8.0)
     date_validator (0.6.3)
       activemodel (~> 3.0)
@@ -123,15 +147,15 @@ GEM
       hamlbars (~> 1.0.0)
       rails (~> 3.1)
     erubis (2.7.0)
-    excon (0.14.2)
+    excon (0.15.4)
     execjs (1.4.0)
       multi_json (~> 1.0)
-    fabrication (2.0.3)
+    fabrication (2.2.0)
     faraday (0.8.1)
       multipart-post (~> 1.1)
     fastercsv (1.5.5)
-    ffaker (1.14.0)
-    ffi (1.0.11)
+    ffaker (1.15.0)
+    ffi (1.1.0)
     formtastic (2.1.1)
       actionpack (~> 3.0)
     growl (1.0.3)
@@ -141,14 +165,14 @@ GEM
     guard-bundler (1.0.0)
       bundler (~> 1.0)
       guard (~> 1.1)
-    guard-jasmine (1.5.0)
+    guard-jasmine (1.5.1)
       childprocess
       guard (>= 1.1.0)
       multi_json
       thor
     guard-rails (0.1.0)
       guard (>= 0.2.2)
-    guard-rspec (1.1.0)
+    guard-rspec (1.2.0)
       guard (>= 1.1)
     guard-spork (1.1.0)
       guard (>= 1.1)
@@ -166,16 +190,18 @@ GEM
       tilt
     has_scope (0.5.1)
     hashie (1.2.0)
-    heroku (2.28.7)
-      heroku-api (~> 0.2.6)
+    heroku (2.29.0)
+      heroku-api (~> 0.2.13)
       launchy (>= 0.3.2)
       netrc (~> 0.7.5)
       rest-client (~> 1.6.1)
       rubyzip
-    heroku-api (0.2.6)
-      excon (~> 0.14.0)
+    heroku-api (0.2.13)
+      excon (~> 0.15.4)
     hike (1.2.1)
     httpauth (0.1)
+    httpi (0.9.7)
+      rack
     i18n (0.6.0)
     inherited_resources (1.3.1)
       has_scope (~> 0.5.0)
@@ -197,6 +223,8 @@ GEM
       jquery-rails
       railties (>= 3.1.0)
     json (1.7.3)
+    jwt (0.1.5)
+      multi_json (>= 1.0)
     kaminari (0.13.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
@@ -209,8 +237,10 @@ GEM
       addressable (~> 2.2.6)
     libnotify (0.7.4)
       ffi (~> 1.0.11)
+    launchy (2.0.3)
+    libnotify (0.7.3)
     libv8 (3.3.10.4)
-    libwebsocket (0.1.3)
+    libwebsocket (0.1.4)
       addressable
     listen (0.4.7)
       rb-fchange (~> 0.0.5)
@@ -225,14 +255,14 @@ GEM
       activerecord (~> 3.1)
       activesupport (~> 3.1)
       polyamorous (~> 0.5.0)
-    method_source (0.7.1)
+    method_source (0.8)
     mime-types (1.19)
     money (5.0.0)
       i18n (~> 0.4)
       json
     mongo (1.6.2)
       bson (~> 1.6.2)
-    mongoid (2.4.11)
+    mongoid (2.4.12)
       activemodel (~> 3.1)
       mongo (<= 1.6.2)
       tzinfo (~> 0.3.22)
@@ -244,26 +274,28 @@ GEM
     multipart-post (1.1.5)
     netrc (0.7.5)
     nokogiri (1.5.5)
-    oauth2 (0.6.1)
-      faraday (~> 0.7)
+    oauth2 (0.8.0)
+      faraday (~> 0.8)
       httpauth (~> 0.1)
-      multi_json (~> 1.3)
+      jwt (~> 0.1.4)
+      multi_json (~> 1.0)
+      rack (~> 1.2)
     omniauth (1.1.0)
       hashie (~> 1.2)
       rack
-    omniauth-facebook (1.4.0)
-      omniauth-oauth2 (~> 1.0.2)
-    omniauth-oauth2 (1.0.2)
-      oauth2 (~> 0.6.0)
+    omniauth-facebook (1.4.1)
+      omniauth-oauth2 (~> 1.1.0)
+    omniauth-oauth2 (1.1.0)
+      oauth2 (~> 0.8.0)
       omniauth (~> 1.0)
-    orm_adapter (0.3.0)
+    orm_adapter (0.4.0)
     polyamorous (0.5.0)
       activerecord (~> 3.0)
     polyglot (0.3.3)
-    pry (0.9.9.6)
+    pry (0.9.10)
       coderay (~> 1.0.5)
-      method_source (~> 0.7.1)
-      slop (>= 2.4.4, < 3)
+      method_source (~> 0.8)
+      slop (~> 3.3.1)
     pry-rails (0.1.6)
       pry
     rack (1.4.1)
@@ -297,31 +329,31 @@ GEM
       ffi (>= 0.5.0)
     rdoc (3.12)
       json (~> 1.4)
-    responders (0.9.1)
+    responders (0.9.2)
       railties (~> 3.1)
     rest-client (1.6.7)
       mime-types (>= 1.16)
     rmagick (2.13.1)
-    rspec (2.10.0)
-      rspec-core (~> 2.10.0)
-      rspec-expectations (~> 2.10.0)
-      rspec-mocks (~> 2.10.0)
-    rspec-core (2.10.1)
-    rspec-expectations (2.10.0)
+    rspec (2.11.0)
+      rspec-core (~> 2.11.0)
+      rspec-expectations (~> 2.11.0)
+      rspec-mocks (~> 2.11.0)
+    rspec-core (2.11.1)
+    rspec-expectations (2.11.1)
       diff-lcs (~> 1.1.3)
-    rspec-mocks (2.10.1)
-    rspec-rails (2.10.1)
+    rspec-mocks (2.11.1)
+    rspec-rails (2.11.0)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       railties (>= 3.0)
-      rspec (~> 2.10.0)
+      rspec (~> 2.11.0)
     rubyzip (0.9.9)
     sass (3.1.20)
     sass-rails (3.2.5)
       railties (~> 3.2.0)
       sass (>= 3.1.10)
       tilt (~> 1.3)
-    selenium-webdriver (2.24.0)
+    selenium-webdriver (2.25.0)
       childprocess (>= 0.2.5)
       libwebsocket (~> 0.1.3)
       multi_json (~> 1.0)
@@ -336,7 +368,7 @@ GEM
       multi_json (~> 1.0)
       simplecov-html (~> 0.5.3)
     simplecov-html (0.5.3)
-    slop (2.4.4)
+    slop (3.3.2)
     spork (0.9.2)
     sprockets (2.1.3)
       hike (~> 1.2)
@@ -379,6 +411,9 @@ DEPENDENCIES
   activeadmin
   activeadmin-mongoid
   activemerchant
+  airbrake
+  asin!
+  bootstrap-kaminari-views
   bootstrap-sass (>= 2.0.1)
   bson_ext
   cancan
@@ -387,6 +422,7 @@ DEPENDENCIES
   carrierwave
   carrierwave-mongoid
   coffee-rails (~> 3.2.1)
+  confiture!
   database_cleaner (>= 0.7.1)
   date_validator
   delayed_job_mongoid
@@ -416,7 +452,7 @@ DEPENDENCIES
   libnotify
   money
   mongoid (~> 2.4)
-  mongoid-rspec (>= 1.4.4)
+  mongoid-rspec
   nimbleshop_authorizedotnet (= 0.0.5)!
   nimbleshop_core (= 0.0.5)!
   omniauth-facebook

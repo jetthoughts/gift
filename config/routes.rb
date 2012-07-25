@@ -12,6 +12,7 @@ Gift::Application.routes.draw do
       get 'paypal'  => 'withdraw#paypal', :on => :collection
       get 'paypal'  => 'withdraw#paypal', :on => :collection      
     end
+    post :close
     resources :invites
     resources :fees do
       member do
@@ -21,6 +22,7 @@ Gift::Application.routes.draw do
     resources :comments
     resources :cards do
       resource :votes
+      post :amazon_search, on: :collection
     end
   end
 

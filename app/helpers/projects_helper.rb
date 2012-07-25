@@ -1,11 +1,17 @@
 module ProjectsHelper
-  def like_dislike_button card
+  def like_dislike_link card
     if @voted_card == card
-      submit_tag t('general.dislike')
+      link_to([@project, card, :votes], method: (@voted_card == card ? :delete : :post), class: 'btn btn-danger') do
+        t('general.dislike')
+      end
     elsif @voted_card.nil?
-      submit_tag t('general.like')
+      link_to([@project, card, :votes], method: (@voted_card == card ? :delete : :post), class: 'btn btn-success') do
+        t('general.like')
+      end
     else
-      submit_tag t('general.like'), disabled: true
+      link_to('#', class: 'btn btn-success disabled') do
+        t('general.like')
+      end
     end
   end
 
@@ -13,12 +19,12 @@ module ProjectsHelper
     if amount.blank?
       t('general.fee_blank_amount')
     else
-      number_to_currency amount
+      currency amount
     end
   end
 
   def format_total_amount amount
-    amount =  @project.donated_amount.blank? ? t('general.no_world') : number_to_currency(amount)
+    amount =  @project.donated_amount.blank? ? t('general.no_world') : currency(amount)
     t('general.total_amount', amount: amount)
   end
 
