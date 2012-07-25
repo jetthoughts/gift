@@ -9,7 +9,7 @@ class Comment
   belongs_to :user
   belongs_to :project
 
-  after_create :notify
+  after_create :run_notify
 
   ## Scopes
   scope :ordered_by_date, -> do
@@ -21,6 +21,10 @@ class Comment
   end
 
   private
+
+  def run_notify
+    self.delay.notify
+  end
 
   def notify
     return unless project
