@@ -11,6 +11,7 @@ Gift::Application.routes.draw do
       get 'paypal'  => 'withdraw#paypal', :on => :collection
       get 'paypal'  => 'withdraw#paypal', :on => :collection      
     end
+    post :close
     resources :invites
     resources :fees do
       member do
