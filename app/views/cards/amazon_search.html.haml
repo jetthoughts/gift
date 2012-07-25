@@ -4,8 +4,8 @@
       = image_tag amazon_image_url(item)
       %h4.inline= link_to item.title, item.raw.DetailPageURL, target: '_blank'
       %br/
-      %span.badge.badge-inverse= amazon_price(item)
-      %span.badge.badge-info= item.raw.ItemAttributes.ProductGroup
+      %span.badge.badge-inverse.price{ data: { amount: amazon_amount(item) } }= amazon_formatted_price(item)
+      %span.badge.badge-info.product-group= item.raw.ItemAttributes.ProductGroup
       %a.btn.btn-success.pull-right.add-gift{ href: '#'}
         %i.icon-white.icon-plus
         Add
