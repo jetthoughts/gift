@@ -18,6 +18,7 @@
 //= require jquery.loadmask.min
 //= require bootstrap
 
+//= require_tree ./modules
 //= require projects
 //= require comments
 //= require invites

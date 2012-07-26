@@ -69,8 +69,7 @@ class User
 
   attr_accessor :fbook_access_token
 
-  after_create :check_invite_token
-
+  after_create :check_invite_token, :merge_another_invites
   ## Methods
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.where(provider: auth.provider, uid: auth.uid).first
@@ -81,6 +80,7 @@ class User
                          email: auth.info.email,
                          password: Devise.friendly_token[0, 20],
                          confirmed_at: DateTime.now
+
       )
     end
     user.fbook_access_token = (credentials = auth["credentials"]) ? credentials["token"] : nil
@@ -102,11 +102,10 @@ class User
       invite.reload
       invite.accept!
     end
-    merge_another_invites
   end
 
   def merge_another_invites
-    Invite.where(:user_id => nil, :email => email).update_all(:user_id => id)
+    Invite.where(:user_id => nil).any_of({:email => email}, {:fb_id => uid}).update_all(:user_id => id)
   end
 
   def self.new_with_session(params, session)
