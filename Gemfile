@@ -53,10 +53,10 @@ gem 'nimbleshop_core', '0.0.5', :path => 'vendor/gems/nimbleshop_core-0.0.5'
 gem 'nimbleshop_authorizedotnet', '0.0.5', :path => 'vendor/gems/nimbleshop_authorizedotnet-0.0.5'
 
 gem 'airbrake'
-gem "heroku"
+
 
 group :development do
-
+  gem "heroku"
   gem "haml-rails", require: false
 
   gem "guard", ">= 0.6.2", require: false
