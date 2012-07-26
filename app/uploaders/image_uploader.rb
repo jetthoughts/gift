@@ -34,7 +34,13 @@ class ImageUploader < CarrierWave::Uploader::Base
     %w(jpg jpeg gif png)
   end
 
+  def default_url
+    "/assets/fallback/default.jpg"
+  end
+
   def filename
+    return nil if file.nil?
+
     ext = CarrierWave::SanitizedFile.new(file).extension || :jpeg
     "#{model.id}.#{ext}"
   end
