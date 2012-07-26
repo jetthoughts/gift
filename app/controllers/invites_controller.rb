@@ -1,6 +1,8 @@
 class InvitesController < ApplicationController
   before_filter :find_project, :except => [:destroy]
   before_filter :find_invite, :only => [:show, :update, :destroy, :facebook_update, :facebook_destroy]
+  skip_load_and_authorize_resource
+  load_and_authorize_resource
 
   def new
     @invites = [@project.invites.build]
@@ -75,6 +77,6 @@ class InvitesController < ApplicationController
   end
 
   def find_invite
-    @invite = current_user.invites.find(params[:id])
+    @invite = current_user.invites.for_ids(params[:id]).first
   end
 end

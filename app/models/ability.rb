@@ -10,7 +10,7 @@ class Ability
       cannot :manage, :all
 
       can :create, Invite
-      can [:show, :update, :destroy, :create_facebook, :facebook_update, :facebook_destroy], Invite, user_id: user.id
+      can [:show, :update, :destroy, :create_facebook, :find_invite, :facebook_update, :facebook_destroy], Invite, user_id: user.id
       can :show, Project do |project|
         user.projects.for_ids(project.id).exists?
       end

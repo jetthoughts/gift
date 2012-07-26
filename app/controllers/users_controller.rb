@@ -24,7 +24,14 @@ class UsersController < ApplicationController
       user_id = current_user.uid
       @name = current_user.name
       @invites = Invite.where(fb_id: user_id).entries
-      render 'invites/facebook', layout: false
+
+      if @invites.blank?
+        render :text => '<html><head><script type="text/javascript">window.top.location.href = '+
+            root_url.to_json +
+            ';</script></head></html>'
+      else
+        render 'invites/facebook', layout: false
+      end
     end
   end
 end
