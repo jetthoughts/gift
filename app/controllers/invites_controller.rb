@@ -16,7 +16,7 @@ class InvitesController < ApplicationController
     invite_params.each do |param|
       name = param[:name]
       email = param[:email]
-      invite = @project.invites.create(email: email, name: name)
+      invite = @project.invites.create(email: email, name: name, creator_name: current_user.name)
       @invites.push(invite) if invite.errors.present?
     end
 
@@ -31,7 +31,7 @@ class InvitesController < ApplicationController
   def create_facebook
     friends = params[:friend_attributes]
     friends.each do |index, user_params|
-      @project.invites.create(fb_id: user_params[:friend_uid], name: user_params[:friend_name])
+      @project.invites.create(fb_id: user_params[:friend_uid], name: user_params[:friend_name], creator_name: current_user.name)
     end
 
     render nothing: true

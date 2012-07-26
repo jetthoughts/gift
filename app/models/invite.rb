@@ -8,6 +8,7 @@ class Invite
   field :fb_id
   field :email
   field :name
+  field :creator_name
   field :invite_token
 
   validate :present_email_or_id

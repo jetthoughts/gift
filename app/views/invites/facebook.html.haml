@@ -19,6 +19,9 @@
         %b Created by:
         = invite.project.admin.name
         %br
+        %b Invited by:
+        = invite.creator_name
+        %br
         = link_to 'Accept', project_invite_facebook_update_url(invite.project, invite)
         = link_to 'Ignore', project_invite_facebook_destroy_url(invite.project, invite)
       %hr
