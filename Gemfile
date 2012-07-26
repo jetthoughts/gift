@@ -54,9 +54,8 @@ gem 'nimbleshop_authorizedotnet', '0.0.5', :path => 'vendor/gems/nimbleshop_auth
 
 gem 'airbrake'
 
-
 group :development do
-  gem "heroku"
+
   gem "haml-rails", require: false
 
   gem "guard", ">= 0.6.2", require: false
@@ -98,4 +97,8 @@ end
 
 group :utils do
   gem 'foreman'
+end
+
+group :production do
+  gem "heroku"
 end
