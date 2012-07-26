@@ -1,7 +1,7 @@
 source :rubygems
 
 gem 'rails', '~> 3.2'
-gem 'thin'
+gem 'unicorn'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -44,10 +44,20 @@ gem 'delayed_job_mongoid'
 gem 'asin', git: 'git://github.com/XsErG/asin.git', branch: 'develop'
 gem 'confiture', git: 'git://github.com/phoet/confiture.git'
 
+
+gem 'activemerchant'
+
+gem 'valid_email'
+gem 'money'
+
+gem 'nimbleshop_core', '0.0.5', :path => 'vendor/gems/nimbleshop_core-0.0.5'
+gem 'nimbleshop_authorizedotnet', '0.0.5', :path => 'vendor/gems/nimbleshop_authorizedotnet-0.0.5'
+
 gem 'airbrake'
+gem "heroku"
 
 group :development do
-  gem "heroku", require: false
+
   gem "haml-rails", require: false
 
   gem "guard", ">= 0.6.2", require: false
@@ -87,10 +97,6 @@ group :development, :test do
   gem 'jasmine'
 end
 
-gem 'activemerchant'
-
-gem 'valid_email'
-gem 'money'
-
-gem 'nimbleshop_core', '0.0.5', :path => 'vendor/gems/nimbleshop_core-0.0.5'
-gem 'nimbleshop_authorizedotnet', '0.0.5', :path => 'vendor/gems/nimbleshop_authorizedotnet-0.0.5'
+group :utils do
+  gem 'foreman'
+end
