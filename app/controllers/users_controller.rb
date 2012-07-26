@@ -16,6 +16,7 @@ class UsersController < ApplicationController
   end
 
   def facebook_invite
+    logger.debug '*****************************************************************************'
     if current_user.nil?
       session[:back] = facebook_url
       redirect_to omniauth_authorize_path(User, :facebook)
