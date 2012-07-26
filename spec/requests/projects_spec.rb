@@ -10,12 +10,7 @@ feature "Project edit" do
   end
 
   scenario "with valid attributes" do
-    page.should have_content "Listing projects"
-    page.should have_content "Project Name"
-
-    within '#main tbody tr:nth-child(1)' do
-      click_link 'Edit'
-    end
+    click_link 'Edit'
 
     page.should have_content 'Editing project'
 
@@ -26,25 +21,6 @@ feature "Project edit" do
     page.should have_content 'New name'
   end
 
-end
-
-feature "Project destroy" do
-  include RequestHelper
-  background do
-    sign_in
-    create_project
-
-    visit root_path
-  end
-
-  scenario "destroy" do
-    page.should have_content "Listing projects"
-    page.should have_content "Project Name"
-
-    within '#main tbody tr:nth-child(1)' do
-      click_link 'Destroy'
-    end
-  end
 end
 
 feature "Project create and show" do
