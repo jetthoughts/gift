@@ -33,7 +33,7 @@ class Project
   has_and_belongs_to_many :users
   has_many :comments
   has_many :cards
-  has_many :invites
+  has_many :invites, dependent: :destroy
   has_many :fees
   has_many :withdraws
 
