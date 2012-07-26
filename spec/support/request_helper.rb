@@ -8,7 +8,6 @@ module RequestHelper
     click_button 'Sign in'
 
     page.should have_content I18n.t('devise.sessions.signed_in')
-    page.should have_content 'Listing projects'
   end
 
   def create_project
