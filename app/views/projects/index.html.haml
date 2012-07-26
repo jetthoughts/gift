@@ -1,34 +1,40 @@
-%h1 Listing projects
-
-%table.table-bordered.with_spaces
-  %thead
-    %tr
-      %th Name
-      %th Description
-      %th Article link
-      %th Participants add own suggestions
-      %th Fixed amount
-      %th Deadline
-      %th Paid type
-      %th
-      %th
-      %th
-
-  %tbody
+- if @projects.present?
+  %table.table-bordered.with_spaces
+    %tbody
     - @projects.each do |project|
       %tr
-        %td= project.name
-        %td= project.description
-        %td= project.article_link
-        %td= project.participants_add_own_suggestions
-        %td= project.fixed_amount
-        %td= project.deadline
-        %td= project.paid_type
-        %td= link_to 'Show', project
-        %td= link_to 'Edit', edit_project_path(project) if can? :edit, project
-        %td= link_to 'Destroy', project, data: { confirm: 'Are you sure?', method: :delete } if can? :destroy, project
-
-%br
+        %td
+          = image_tag project.image
+        %td
+          = project.name
+          %br
+          = project.description
+          %br
+          Created by
+          = project.admin.name
+          on
+          = project.created_at
+        %td
+          = link_to 'Show', project
+          = link_to 'Edit', edit_project_path(project) if can? :edit, project
+      %tr
+        %td{colspan: 3 }
+          = format_total_amount project.donated_amount
+          Members:
+          = project.users.count
+          Expires on
+          = project.deadline
+          %br
+          - if project.fixed_amount.present?
+            Goal
+            = currency project.fixed_amount
+            Progress
+            = project.amount_percent
+            = '%'
+      %tr
+        %td{colspan: 3 }
+          %br
+          %br
 
 = render :partial => 'invites/invite', :collection => @pending_invites, :as => :invite
 %br

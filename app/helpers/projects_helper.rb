@@ -24,7 +24,7 @@ module ProjectsHelper
   end
 
   def format_total_amount amount
-    amount =  @project.donated_amount.blank? ? t('general.no_world') : currency(amount)
+    amount =  amount.blank? ? t('general.no_world') : currency(amount)
     t('general.total_amount', amount: amount).html_safe
   end
 
