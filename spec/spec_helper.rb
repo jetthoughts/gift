@@ -21,8 +21,8 @@ Spork.prefork do
   require 'rspec/rails'
   require 'rspec/autorun'
 
-  Capybara.default_host = 'http://localhost'
-  Capybara.app_host = 'http://localhost'
+  #Capybara.default_host = 'http://localhost'
+  #Capybara.app_host = 'http://localhost'
   Capybara.server_boot_timeout = 50
 
   require 'cancan/matchers'
