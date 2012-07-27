@@ -4,7 +4,8 @@
     - @projects.each do |project|
       %tr
         %td
-          = image_tag project.image.thumb if project.image.present?
+          .icon
+            = image_tag project.image.thumb
         %td
           = project.name
           %br
