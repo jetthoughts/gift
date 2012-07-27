@@ -21,6 +21,15 @@ feature "Project edit" do
     page.should have_content 'New name'
   end
 
+  scenario 'should been correct closed', js: true  do
+    click_link 'Show'
+    click_link 'Close project'
+
+    page.should have_content 'You are closing the project'
+    click_button 'Close'
+    page.should have_content 'Project closed'
+  end
+
 end
 
 feature "Project create and show" do
