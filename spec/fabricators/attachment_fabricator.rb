@@ -1,0 +1,2 @@
+Fabricator(:attachment) do
+end

@@ -8,7 +8,7 @@ class Ability
       can :facebook_invite, User
     else
       cannot :manage, :all
-
+      can :manage, Attachment
       can :create, Invite
       can [:show, :update, :destroy, :create_facebook, :find_invite, :facebook_update, :facebook_destroy], Invite, user_id: user.id
       can :show, Project do |project|

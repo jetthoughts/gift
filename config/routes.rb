@@ -7,6 +7,8 @@ Gift::Application.routes.draw do
   match '/projects/:project_id/invites/facebook/accept/:id' => 'invites#facebook_update', :via => :get, :as => :project_invite_facebook_update
   match '/projects/:project_id/invites/facebook/ignore/:id' => 'invites#facebook_destroy', :via => :get, :as => :project_invite_facebook_destroy
 
+  match '/attachments/(:id)' => 'attachments#update', :as => :attachment, :via=>:put
+
   resources :projects do
     resources :withdraws do
       get 'paypal'  => 'withdraw#paypal', :on => :collection

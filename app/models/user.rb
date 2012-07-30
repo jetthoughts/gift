@@ -61,6 +61,7 @@ class User
   has_and_belongs_to_many :projects
   has_many :invites
   has_many :fees
+  belongs_to :attachment
 
   has_many :comments
   has_many :cards
