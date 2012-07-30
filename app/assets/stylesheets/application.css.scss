@@ -24,7 +24,17 @@
 body {
   padding-top: 60px;
 }
+.clear{
+  clear:both
+}
 
+.left{
+  float:left;
+}
+
+.right{
+  float:right;
+}
 .clear-right {
   clear: right;
 }

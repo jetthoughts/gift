@@ -53,7 +53,7 @@ gem 'nimbleshop_core', '0.0.5', :path => 'vendor/gems/nimbleshop_core-0.0.5'
 gem 'nimbleshop_authorizedotnet', '0.0.5', :path => 'vendor/gems/nimbleshop_authorizedotnet-0.0.5'
 
 gem 'airbrake'
-
+gem 'therubyracer'
 group :development do
 
   gem "haml-rails", require: false

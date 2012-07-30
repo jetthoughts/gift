@@ -13,7 +13,7 @@ class AttachmentsController < ApplicationController
 
     if result
       render :json => {:url => @attachment.image.url, :attachment_id => @attachment.id,
-        :normal_url => @attachment.image.url
+        :thumb_url => @attachment.image.thumb.url
       }.to_json
     else
       error = 'An error occurred while loading this picture. Please make sure that the picture format is .png, .jpg, or .gif and that the picture size is less than 5 MB.'

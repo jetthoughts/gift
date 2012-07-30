@@ -18,9 +18,6 @@ class Project
   field :currency, type: String, default: 'EUR'
   field :closed, type: Boolean, default: false
 
-  mount_uploader :image, ImageUploader
-
-
   ## Validators
   validates :paid_type, inclusion: {in: Project::PAID_TYPES.map(&:to_s), message: ''}
   validates :end_type, inclusion: Project::END_TYPES.map(&:to_s)
@@ -37,6 +34,8 @@ class Project
   has_many :invites, dependent: :destroy
   has_many :fees
   has_many :withdraws
+  
+  belongs_to :attachment
 
   ## Filters
   before_validation :prepare_end_type
@@ -88,6 +87,14 @@ class Project
 
   def visible_fee_amount_from(user)
     self.fees.purchased.where(user_id: user.id, visible: true).sum(:amount)
+  end
+
+  def image
+    attachment.image if attachment
+  end
+
+  def image_thumb
+    attachment.image.thumb if attachment
   end
 
   private

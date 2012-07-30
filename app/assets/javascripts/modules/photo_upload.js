@@ -16,10 +16,10 @@ var PhotoUpload = window.PhotoUpload = {
             onSubmit : function() {
                 $('.ajax-loader-indicator').removeClass('hide');
             },
-            onComplete: function(file, response) {
+            onComplete: function(file, response) {               
                 if (response.url) {
-                    $('#avatar_image').attr('src', response.orig_url + "?time=" + new Date().getTime());
-                    $('input[name=attachment_id]').val(response.attachment_id);
+                    $('#avatar_image').attr('src', response.url + "?time=" + new Date().getTime());
+                    $('input[name*=attachment_id]').val(response.attachment_id);
                     if (typeof(onSuccess) == "function"){
                       onSuccess(response.attachment_id);
                     }
