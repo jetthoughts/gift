@@ -13,6 +13,7 @@ class Project
   field :fixed_amount, type: Float
   field :deadline, type: DateTime
   field :paid_type, type: String
+  field :paid_info, type: Hash, default: nil
   field :end_type, type: String
   field :currency, type: String, default: 'EUR'
   field :closed, type: Boolean, default: false

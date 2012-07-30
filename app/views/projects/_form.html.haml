@@ -33,5 +33,18 @@
       - f.collection_radio_buttons :paid_type, Project::PAID_TYPES, :to_s, lambda { |p| p.to_s.humanize } do |b|
         = b.label(class: 'radio inline') { b.radio_button + b.text }
 
+    %span{class: 'project_paid_type_pay_pal'}
+      = text_field_tag 'project[paid_info][paypal_email]', nil, placeholder: "PayPal email", class: 'hidden'
+
+    %span{class: 'project_paid_type_money_transfer'}
+      = text_field_tag 'project[paid_info][name]', nil, placeholder: "Name", class: 'hidden'
+      = text_field_tag 'project[paid_info][creditcard_number]', nil, placeholder: "Credit card number", class: 'hidden'
+      = text_field_tag 'project[paid_info][creditcard_cvv]', nil, placeholder: "CVV", class: 'hidden'
+
+    %span{class: 'project_paid_type_amazon_voucher'}
+      = text_field_tag 'project[paid_info][person_name]', nil, placeholder: "Person's Name", class: 'hidden'
+      = text_field_tag 'project[paid_info][destination_name]', nil, placeholder: "Name of the Destination", class: 'hidden'
+      = text_field_tag 'project[paid_info][destination_address]', nil, placeholder: "Destination Address", class: 'hidden'
+
   .form-actions
     = f.button :submit
