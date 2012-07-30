@@ -14,7 +14,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def profile
-    resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
+    self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
     new_attrs = params[resource_name]
     prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
     if resource.update_attributes(new_attrs)
@@ -27,11 +27,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
   end
 
-  private
+  protected
+
+  def after_update_path_for(resource)
+    edit_user_registration_path
+  end
   
   def update_needs_confirmation?(resource, previous)
     resource.respond_to?(:pending_reconfirmation?) &&
       resource.pending_reconfirmation? &&
+      previous.present? &&
       previous != resource.unconfirmed_email
   end
 
