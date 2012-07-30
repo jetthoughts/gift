@@ -88,7 +88,7 @@ class User
   end
 
   def avatar
-    attachment.image if attachment
+      current_attachment.image
   end
 
   def pending_invites
@@ -107,6 +107,7 @@ class User
     end
   end
 
+
   def merge_another_invites
     Invite.where(:user_id => nil).any_of({:email => email}, {:fb_id => uid}).update_all(:user_id => id)
   end
@@ -118,4 +119,12 @@ class User
       end
     end
   end
+
+  private
+
+  def current_attachment
+    attachment ? attachment : Attachment.new
+  end
+
 end
+

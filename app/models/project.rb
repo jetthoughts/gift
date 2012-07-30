@@ -90,14 +90,18 @@ class Project
   end
 
   def image
-    attachment.image if attachment
+    current_attachment.image
   end
 
   def image_thumb
-    attachment.image.thumb if attachment
+    image.thumb
   end
 
   private
+
+  def current_attachment
+    attachment ? attachment : Attachment.new
+  end
 
   def prepare_end_type
     write_attribute(:open_end, nil) if fixed_amount?
