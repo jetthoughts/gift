@@ -1,13 +1,16 @@
 = simple_form_for(@project) do |f|
   = f.error_notification
 
-  .form-inputs
+  .form-inputs.left
     = f.input :name
     = f.input :description
-    = f.input :article_link
-    = f.input :image
+    = f.input :article_link    
     = f.input :participants_add_own_suggestions, as: :boolean
-
+    = f.input :attachment_id, :as => :hidden
+  .right
+    = image_tag @project.image, :width => 300, :id => :avatar_image
+    = link_to 'Upload photo', '#', :id => 'upload_button'
+  .clear
   #end-type.accordeon
     .accordion-group.form-inputs
       %div{ class: 'accordion-heading' }
@@ -48,3 +51,5 @@
 
   .form-actions
     = f.button :submit
+= content_for :javascript_code do
+  ="PhotoUpload.initialize('#{attachment_url(current_user.attachment ||  Attachment.new)}');"

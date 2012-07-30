@@ -52,8 +52,6 @@ class User
   field :notification_donated, type: Boolean, default: true
   field :notification_new_comment, type: Boolean, default: true
 
-  mount_uploader :avatar, ImageUploader
-
   ## Validators
   validates :email, uniqueness: {case_sensitive: false}, if: :email_changed?
   validates :name, presence: true
@@ -87,6 +85,10 @@ class User
     user.fbook_access_token = (credentials = auth["credentials"]) ? credentials["token"] : nil
     user.save!
     user
+  end
+
+  def avatar
+    attachment.image if attachment
   end
 
   def pending_invites

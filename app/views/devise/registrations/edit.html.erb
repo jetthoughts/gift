@@ -1,14 +1,11 @@
 <h3>Profile</h3>
 
-<%= simple_form_for(resource, :as => resource_name, :url => profile_path, :html => { :method => :put, :class => 'form-horizontal', :style => 'float:left' }) do |f| %>
+<%= simple_form_for(resource, :as => resource_name, :url => profile_path, :html => { :method => :put, :class => 'form-horizontal left', }) do |f| %>
   <%= f.error_notification %>
   <%= f.input :email, :required => true %>
   <div class="inputs">
     <%= f.input :name, :autofocus => true %>
     <%= f.input :attachment_id, :as => :hidden %>
-
-    <%= link_to('Change photo', '#', :id => 'upload_button' ) %>
-
   </div>
   <div class="inputs">
     <%= f.input :notification_donated, :as => :boolean %>
@@ -18,10 +15,12 @@
     <%= f.button :submit, "Update" %>
   </div>
 <% end %>
+<div class='right'>
+  <%= image_tag resource.avatar, :width => 300, :id => :avatar_image %>
+  <%= link_to('Change photo', '#', :id => 'upload_button' ) %>
+</div>
 
-<%= image_tag resource.avatar, :width => 300, :style=>"float:right" %>
-
-<div style='clear:both'>
+<div class='clear'>
 </div>
 
 <h3>Change password</h3>
@@ -42,8 +41,6 @@
 <%
    attachment = current_user.attachment ||  Attachment.new
 %>
-<script>
-  $(function(){
+<%= content_for :javascript_code do %>
     PhotoUpload.initialize('<%= attachment_url(attachment) %>');
-  })
-</script>
+<% end %>
