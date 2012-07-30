@@ -26,3 +26,21 @@ $ ->
   $('#close_project').click (e)->
     e.preventDefault()
     $('#close_project_dialog').dialog 'open'
+
+  oldId = null
+  toggleInputs = (elemClass, isShow = true) ->
+    return if elemClass is null
+    $(".#{elemClass}").children().each ->
+          if isShow
+            $(this).removeClass 'hidden'
+          else
+            $(this).addClass 'hidden'
+
+  $('.edit_project input[type=radio]').click ->
+    id = $(this).attr('id');
+    toggleInputs(oldId, false)
+    toggleInputs(id, true)
+    oldId = id
+
+
+
