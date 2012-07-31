@@ -34,6 +34,7 @@ class Project
   has_many :invites, dependent: :destroy
   has_many :fees
   has_many :withdraws
+  embeds_one :bank_info
 
   belongs_to :attachment
 
