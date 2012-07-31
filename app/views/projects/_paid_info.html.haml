@@ -1,0 +1,12 @@
+%span{class: 'project_paid_type_pay_pal'}
+  = text_field_tag 'project[paid_info][pay_pal][paypal_email]', @project.paid_info["pay_pal"]['paypal_email'], placeholder: "PayPal email", class: 'hidden'
+
+%span{class: 'project_paid_type_money_transfer'}
+  = text_field_tag 'project[paid_info][money_transfer][name]', @project.paid_info['money_transfer']['name'], placeholder: "Name", class: 'hidden'
+  = text_field_tag 'project[paid_info][money_transfer][creditcard_number]', @project.paid_info['money_transfer']['creditcard_number'], placeholder: "Credit card number", class: 'hidden'
+  = text_field_tag 'project[paid_info][money_transfer][creditcard_cvv]', @project.paid_info['money_transfer']['creditcard_cvv'], placeholder: "CVV", class: 'hidden'
+
+%span{class: 'project_paid_type_amazon_voucher'}
+  = text_field_tag 'project[paid_info][amazon_voucher][person_name]', @project.paid_info['amazon_voucher']['person_name'], placeholder: "Person's Name", class: 'hidden'
+  = text_field_tag 'project[paid_info][amazon_voucher][destination_name]', @project.paid_info['amazon_voucher']['destination_name'], placeholder: "Name of the Destination", class: 'hidden'
+  = text_field_tag 'project[paid_info][amazon_voucher][destination_address]', @project.paid_info['amazon_voucher']['destination_address'], placeholder: "Destination Address", class: 'hidden'
