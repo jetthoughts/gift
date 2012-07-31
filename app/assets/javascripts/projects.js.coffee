@@ -31,10 +31,15 @@ $ ->
   toggleSpan = (elemClass, isShow = true) ->
     return if elemClass is null
     span = $(".#{elemClass}")
+    inputs = span.find('input')
     if isShow
       span.removeClass 'hidden'
+      inputs.each -> $(this).prop('disabled', false)
     else
       span.addClass 'hidden'
+      inputs.each ->
+        console.log this
+        $(this).prop('disabled', true)
 
   checkedElem = $('input:radio[name="project[paid_type]"]:checked')[0]
   if checkedElem

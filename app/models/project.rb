@@ -36,7 +36,7 @@ class Project
   has_many :withdraws
   embeds_one :paid_info
 
-  accepts_nested_attributes_for :paid_info, allow_destroy: true
+  accepts_nested_attributes_for :paid_info, allow_destroy: true, reject_if: proc { |attributes| !['BankInfo', 'AmazonInfo', 'PayPal'].include?(attributes[:_type]) }
 
   belongs_to :attachment
 
