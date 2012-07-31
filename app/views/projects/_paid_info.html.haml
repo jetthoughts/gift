@@ -1,12 +1,8 @@
 %span{class: 'project_paid_type_pay_pal hidden'}
-  = text_field_tag 'project[paid_info][pay_pal][paypal_email]', (@project.paid_info["pay_pal"]['paypal_email'] if @project.paid_info.present?), placeholder: "PayPal email"
+  = render 'paypal_info', f: f
 
 %span{class: 'project_paid_type_money_transfer hidden'}
-  = text_field_tag 'project[paid_info][money_transfer][name]', nil, placeholder: "Name"
-  = text_field_tag 'project[paid_info][money_transfer][creditcard_number]', nil, placeholder: "Credit card number"
-  = text_field_tag 'project[paid_info][money_transfer][creditcard_cvv]', nil, placeholder: "CVV"
+  = render 'bank_info', f: f
 
 %span{class: 'project_paid_type_amazon_voucher hidden'}
-  = text_field_tag 'project[paid_info][amazon_voucher][person_name]', (@project.paid_info['amazon_voucher']['person_name'] if @project.paid_info.present?), placeholder: "Person's Name"
-  = text_field_tag 'project[paid_info][amazon_voucher][destination_name]', (@project.paid_info['amazon_voucher']['destination_name'] if @project.paid_info.present?), placeholder: "Name of the Destination"
-  = text_field_tag 'project[paid_info][amazon_voucher][destination_address]', (@project.paid_info['amazon_voucher']['destination_address'] if @project.paid_info.present?), placeholder: "Destination Address"
+  = render 'amazon_info', f: f

@@ -18,7 +18,8 @@ class ProjectsController < ApplicationController
 
   # GET /projects/new
   def new
-    respond_with @project = chain.build(end_type: :fixed_amount)
+    @project = chain.build(end_type: :fixed_amount)
+    respond_with @project
   end
 
   # GET /projects/1/edit

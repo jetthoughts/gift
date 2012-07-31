@@ -1,0 +1,5 @@
+= f.simple_fields_for :paid_info, (f.object.paid_info.kind_of?(AmazonInfo) ? f.object : AmazonInfo.new) do |info|
+  = info.input :_type, as: :hidden
+  = info.input :name, label: false, placeholder: 'Name'
+  = info.input :destination_name, label: false, placeholder: 'Destination Name'
+  = info.input :destination_address, label: false, placeholder: 'Destination Address'
