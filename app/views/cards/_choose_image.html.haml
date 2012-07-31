@@ -6,12 +6,13 @@
     %img#image
   .modal-footer
     .buttons
-      = link_to '<', '#', :id => :prev_image
+      Choose a thumbnail
       %span.counters
         %span.current
           0
         of
         %span.count
           0
-      = link_to '>', '#', :id => :next_image
+      = link_to 'Prev', '#', :id => :prev_image
+      = link_to 'Next', '#', :id => :next_image
     %a.btn.btn-primary{ href:'#', 'data-dismiss' => 'modal' } Close
