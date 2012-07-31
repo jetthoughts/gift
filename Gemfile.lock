@@ -15,6 +15,12 @@ GIT
   specs:
     confiture (0.1.2)
 
+GIT
+  remote: git://github.com/spy-a/images_fetcher.git
+  revision: 8676c60a557482c875285468ada0e1ecc8ba3ffa
+  specs:
+    images_fetcher (0.0.1)
+
 PATH
   remote: vendor/gems/nimbleshop_authorizedotnet-0.0.5
   specs:
@@ -432,6 +438,7 @@ DEPENDENCIES
   haml-rails
   has_scope
   heroku
+  images_fetcher (= 0.0.1)!
   jasmine
   jasminerice
   jquery-rails

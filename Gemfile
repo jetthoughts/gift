@@ -51,7 +51,7 @@ gem 'money'
 
 gem 'nimbleshop_core', '0.0.5', :path => 'vendor/gems/nimbleshop_core-0.0.5'
 gem 'nimbleshop_authorizedotnet', '0.0.5', :path => 'vendor/gems/nimbleshop_authorizedotnet-0.0.5'
-
+gem 'images_fetcher', '0.0.1', :git => 'git://github.com/spy-a/images_fetcher.git'
 gem 'airbrake'
 gem 'therubyracer'
 group :development do
