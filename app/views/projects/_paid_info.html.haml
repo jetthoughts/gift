@@ -1,0 +1,8 @@
+%span{class: 'project_paid_type_pay_pal hidden'}
+  = render 'paypal_info', f: f
+
+%span{class: 'project_paid_type_money_transfer hidden'}
+  = render 'bank_info', f: f
+
+%span{class: 'project_paid_type_amazon_voucher hidden'}
+  = render 'amazon_info', f: f

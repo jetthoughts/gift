@@ -1,0 +1,3 @@
+= f.simple_fields_for :paid_info, (f.object.paid_info.kind_of?(PayPalInfo) ? f.object.paid_info : PayPalInfo.new) do |info|
+  = info.input :_type, as: :hidden, :input_html => { :disabled => true }
+  = info.input :email, label: false, placeholder: 'Email', :input_html => { :disabled => true }
