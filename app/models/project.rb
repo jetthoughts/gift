@@ -34,7 +34,7 @@ class Project
   has_many :invites, dependent: :destroy
   has_many :fees
   has_many :withdraws
-  
+
   belongs_to :attachment
 
   ## Filters
@@ -43,6 +43,10 @@ class Project
   ## Scopes
   scope :ordered_by_date, -> do
     order_by [[:created_at, :desc]]
+  end
+
+  def paid_info_by_type
+    paid_info[paid_type]
   end
 
   def amount_percent
