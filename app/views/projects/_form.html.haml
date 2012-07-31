@@ -36,7 +36,7 @@
       - f.collection_radio_buttons :paid_type, Project::PAID_TYPES, :to_s, lambda { |p| p.to_s.humanize } do |b|
         = b.label(class: 'radio inline') { b.radio_button + b.text }
 
-    = render 'paid_info'
+    = render 'paid_info', f: f
 
   .form-actions
     = f.button :submit

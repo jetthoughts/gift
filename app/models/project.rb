@@ -13,7 +13,6 @@ class Project
   field :fixed_amount, type: Float
   field :deadline, type: DateTime
   field :paid_type, type: String
-  field :paid_info, type: Hash, default: nil
   field :end_type, type: String
   field :currency, type: String, default: 'EUR'
   field :closed, type: Boolean, default: false
@@ -25,6 +24,7 @@ class Project
   validates :fixed_amount, numericality: {greater_than_or_equal_to: MIN_WITHDRAW, if: :fixed_amount?}
   validates :deadline, date: {after: Time.now}
   validates :article_link, :url => {:allow_blank => true}
+  validates_presence_of :paypal_email, if: :paid_type_paypal?
 
   ## Relations
   belongs_to :admin, :class_name => 'User', :inverse_of => :own_project, :foreign_key => "admin_id"
@@ -34,7 +34,9 @@ class Project
   has_many :invites, dependent: :destroy
   has_many :fees
   has_many :withdraws
-  embeds_one :bank_info
+  embeds_one :paid_info
+
+  accepts_nested_attributes_for :paid_info, allow_destroy: true
 
   belongs_to :attachment
 
@@ -46,14 +48,22 @@ class Project
     order_by [[:created_at, :desc]]
   end
 
-  def paid_info_by_type
-    paid_info[paid_type]
-  end
-
   def amount_percent
     if fixed_amount.present? and fixed_amount > 0
       donated_amount / fixed_amount
     end
+  end
+
+  def paid_type_money_transfer?
+    paid_type == 'money_transfer'
+  end
+
+  def paid_type_amazon?
+    paid_type == 'amazon_voucher]'
+  end
+
+  def paid_type_paypal?
+    paid_type == 'pay_pal'
   end
 
   def fixed_amount?
