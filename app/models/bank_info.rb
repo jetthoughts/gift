@@ -4,4 +4,5 @@ class BankInfo < PaidInfo
   field :bank_number, type: String
 
   validates_presence_of :name, :account_number, :bank_number
+  validates_numericality_of :account_number, :bank_number
 end

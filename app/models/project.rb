@@ -24,7 +24,6 @@ class Project
   validates :fixed_amount, numericality: {greater_than_or_equal_to: MIN_WITHDRAW, if: :fixed_amount?}
   validates :deadline, date: {after: Time.now}
   validates :article_link, :url => {:allow_blank => true}
-  validates_presence_of :paypal_email, if: :paid_type_paypal?
 
   ## Relations
   belongs_to :admin, :class_name => 'User', :inverse_of => :own_project, :foreign_key => "admin_id"
@@ -36,7 +35,7 @@ class Project
   has_many :withdraws
   embeds_one :paid_info
 
-  accepts_nested_attributes_for :paid_info, allow_destroy: true, reject_if: proc { |attributes| !['BankInfo', 'AmazonInfo', 'PayPal'].include?(attributes[:_type]) }
+  accepts_nested_attributes_for :paid_info, allow_destroy: true, reject_if: proc { |attributes| !['BankInfo', 'AmazonInfo', 'PayPalInfo'].include?(attributes[:_type]) }
 
   belongs_to :attachment
 
@@ -52,18 +51,6 @@ class Project
     if fixed_amount.present? and fixed_amount > 0
       donated_amount / fixed_amount
     end
-  end
-
-  def paid_type_money_transfer?
-    paid_type == 'money_transfer'
-  end
-
-  def paid_type_amazon?
-    paid_type == 'amazon_voucher]'
-  end
-
-  def paid_type_paypal?
-    paid_type == 'pay_pal'
   end
 
   def fixed_amount?

@@ -1,4 +1,4 @@
-= f.simple_fields_for :paid_info, (f.object.paid_info.kind_of?(BankInfo) ? f.object : BankInfo.new) do |info|
+= f.simple_fields_for :paid_info, (f.object.paid_info.kind_of?(BankInfo) ? f.object.paid_info : BankInfo.new) do |info|
   = info.input :_type, as: :hidden, :input_html => { :disabled => true }
   = info.input :name, label: false, placeholder: 'Name', :input_html => { :disabled => true }
   = info.input :account_number, label: false, placeholder: 'Account Number', :input_html => { :disabled => true }
