@@ -1,0 +1,5 @@
+= f.simple_fields_for :paid_info, (f.object.paid_info.kind_of?(AmazonInfo) ? f.object.paid_info : AmazonInfo.new) do |info|
+  = info.input :_type, as: :hidden, :input_html => { :disabled => true }
+  = info.input :name, label: false, placeholder: 'Name', :input_html => { :disabled => true }
+  = info.input :destination_name, label: false, placeholder: 'Destination Name', :input_html => { :disabled => true }
+  = info.input :destination_address, label: false, placeholder: 'Destination Address', :input_html => { :disabled => true }

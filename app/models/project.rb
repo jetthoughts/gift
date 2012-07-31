@@ -13,7 +13,6 @@ class Project
   field :fixed_amount, type: Float
   field :deadline, type: DateTime
   field :paid_type, type: String
-  field :paid_info, type: Hash, default: nil
   field :end_type, type: String
   field :currency, type: String, default: 'EUR'
   field :closed, type: Boolean, default: false
@@ -34,7 +33,10 @@ class Project
   has_many :invites, dependent: :destroy
   has_many :fees
   has_many :withdraws
-  
+  embeds_one :paid_info
+
+  accepts_nested_attributes_for :paid_info, allow_destroy: true, reject_if: proc { |attributes| !['BankInfo', 'AmazonInfo', 'PayPalInfo'].include?(attributes[:_type]) }
+
   belongs_to :attachment
 
   ## Filters

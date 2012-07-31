@@ -28,18 +28,28 @@ $ ->
     $('#close_project_dialog').dialog 'open'
 
   oldId = null
-  toggleInputs = (elemClass, isShow = true) ->
+  toggleSpan = (elemClass, isShow = true) ->
     return if elemClass is null
-    $(".#{elemClass}").children().each ->
-          if isShow
-            $(this).removeClass 'hidden'
-          else
-            $(this).addClass 'hidden'
+    span = $(".#{elemClass}")
+    inputs = span.find('input')
+    if isShow
+      span.removeClass 'hidden'
+      inputs.each -> $(this).prop('disabled', false)
+    else
+      span.addClass 'hidden'
+      inputs.each ->
+        console.log this
+        $(this).prop('disabled', true)
 
-  $('.edit_project input[type=radio]').click ->
-    id = $(this).attr('id');
-    toggleInputs(oldId, false)
-    toggleInputs(id, true)
+  checkedElem = $('input:radio[name="project[paid_type]"]:checked')[0]
+  if checkedElem
+    oldId = $(checkedElem).attr('id')
+    toggleSpan(oldId)
+
+  $('input:radio[name="project[paid_type]"]').click ->
+    id = $(this).attr('id')
+    toggleSpan(oldId, false)
+    toggleSpan(id, true)
     oldId = id
 
 
