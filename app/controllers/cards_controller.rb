@@ -1,6 +1,8 @@
 class CardsController < ApplicationController
   before_filter :init_project, only: [:new, :create, :update]
 
+  caches_action :fetch
+
   def index
     respond_with project, @cards = chain.all #, :layout => false
   end

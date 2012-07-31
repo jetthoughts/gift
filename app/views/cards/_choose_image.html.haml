@@ -1,0 +1,17 @@
+#choose_image.modal.hide
+  .modal-header
+    %button.close{ 'data-dismiss' => 'modal' } ×
+    %h3 Choose image
+  .modal-body
+    %img#image
+  .modal-footer
+    .buttons
+      = link_to '<', '#', :id => :prev_image
+      %span.counters
+        %span.current
+          0
+        of
+        %span.count
+          0
+      = link_to '>', '#', :id => :next_image
+    %a.btn.btn-primary{ href:'#', 'data-dismiss' => 'modal' } Close

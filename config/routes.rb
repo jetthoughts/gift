@@ -28,6 +28,8 @@ Gift::Application.routes.draw do
     end
   end
 
+  mount ImagesFetcher::Engine, at: '/im'
+
   devise_for :users,
              controllers: {omniauth_callbacks: "omniauth_callbacks", registrations: "users/registrations"}
 
