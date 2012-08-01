@@ -1,6 +1,7 @@
 %p
   .row
     .span4
+      = format_total_amount(@project.donated_amount)
       %span= image_tag @project.image
       %br
       %span= @project.name
@@ -21,17 +22,16 @@
       %br
       %br
       %br
-      = render 'donation_state'
 
   %hr
   .row
-    .span10
+    .span8
       - unless @project.cards.blank?
         = render @project.cards
       - else
         No any gifts
 
-    .span2
+    .span4
       .btn.pull-right.clear-right
         = link_to 'Engage', new_project_fee_url(@project)
       - if can? :create, @project.cards.build
