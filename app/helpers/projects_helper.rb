@@ -28,8 +28,6 @@ module ProjectsHelper
       notification.event_params['amount'] = currency notification.event_params['amount']
     end
 
-    p notification.event_type
-    p notification.event_params
     t("general.events.#{notification.event_type}", notification.event_params.symbolize_keys).html_safe
   end
 

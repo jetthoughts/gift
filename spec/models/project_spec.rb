@@ -2,6 +2,11 @@ require 'spec_helper'
 
 describe Project do
 
+  before :all do
+    @user = Fabricate.build(:user)
+  end
+
+
   context "#end_type" do
     it "should be valid if eql to fixed_amount" do
       Fabricate.build(:project, end_type: 'fixed_amount').should_not have(1).errors_on(:end_type)
@@ -24,7 +29,7 @@ describe Project do
       end
 
       it "should be nil if end_type eql to open_end" do
-        project = Fabricate.build(:project, end_type: 'open_end', fixed_amount: 10, deadline: DateTime.now.advance(:days => 10))
+        project = Fabricate.build(:project, admin: @user, end_type: 'open_end', fixed_amount: 10, deadline: DateTime.now.advance(:days => 10))
         project.save
         project.fixed_amount.should be_nil
       end
@@ -44,7 +49,7 @@ describe Project do
       end
 
       it "should be nil if end_type eql to fixed_amount" do
-        project = Fabricate.build(:project, end_type: 'fixed_amount', fixed_amount: 10, deadline: DateTime.now.advance(:days => 10))
+        project = Fabricate.build(:project, end_type: 'fixed_amount', admin: @user, fixed_amount: 10, deadline: DateTime.now.advance(:days => 10))
         project.save
         project.open_end.should be_nil
       end

@@ -42,7 +42,7 @@ describe User do
       end
 
       context "participant of project" do
-        let(:project) { Fabricate(:project_with_amount, participants_add_own_suggestions: false) }
+        let(:project) { Fabricate(:project_with_amount, admin: user, participants_add_own_suggestions: false) }
 
         before { project.users << user; project.save }
 
@@ -53,7 +53,7 @@ describe User do
       end
 
       context "partisipant of project with ability to add own suggestios" do
-        let(:project) { Fabricate(:project_with_amount, participants_add_own_suggestions: true) }
+        let(:project) { Fabricate(:project_with_amount, admin: user, participants_add_own_suggestions: true) }
 
         before { project.users << user; project.save }
 
