@@ -103,7 +103,6 @@ class Project
   private
 
   def send_updated_event
-    return until self.changed?
     UpdateNotification.project_updated_event self
   end
 

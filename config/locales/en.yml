@@ -13,3 +13,4 @@ en:
     events:
       new_card_created: "%{user} added new gift to %{project} in %{time}"
       project_updated: "%{user} updated %{columns} for project %{project} on %{time}"
+      new_fee_donated: "%{user} paid %{amount} for project %{project} on %{time}"

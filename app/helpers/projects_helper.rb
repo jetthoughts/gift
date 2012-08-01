@@ -23,6 +23,16 @@ module ProjectsHelper
     end
   end
 
+  def format_notification_message notification
+    if notification.event_type == 'new_fee_donated'
+      notification.event_params['amount'] = currency notification.event_params['amount']
+    end
+
+    p notification.event_type
+    p notification.event_params
+    t("general.events.#{notification.event_type}", notification.event_params.symbolize_keys).html_safe
+  end
+
   def format_total_amount amount
     amount =  amount.blank? ? t('general.no_world') : currency(amount)
     t('general.total_amount', amount: amount).html_safe
