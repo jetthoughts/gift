@@ -23,6 +23,7 @@ class UpdateNotification
       changed_columns << column.to_s if project.send("#{column.to_s}_changed?")
     end
 
+    return if changed_columns.blank?
     UpdateNotification.create({event_type: 'project_updated', event_params: {user: project.admin.name,
                                                                              columns: changed_columns.to_sentence, project: project.name, time: Time.now.to_s}})
   end
