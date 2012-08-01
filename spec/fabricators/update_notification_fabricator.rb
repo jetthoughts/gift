@@ -1,2 +1,3 @@
-Fabricator(:update_notifications) do
+Fabricator(:update_notification) do
+
 end
