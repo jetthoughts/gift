@@ -24,6 +24,6 @@ class Card
   private
 
   def created_event
-    UpdateNotifications.new_card_created_event self
+    UpdateNotification.new_card_created_event self
   end
 end

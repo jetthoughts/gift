@@ -9,3 +9,7 @@ en:
     fee_blank_amount: "Private or nothing"
     total_amount: "We have %{amount} donations"
     no_world: no
+
+    events:
+      new_card_created: "%{user} added new gift to %{project} in %{time}"
+      project_updated: "%{user} updated %{project} in %{time}"

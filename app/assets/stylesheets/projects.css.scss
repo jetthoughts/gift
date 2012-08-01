@@ -118,3 +118,14 @@
   margin-top: 10px;
   float: right;
 }
+
+.update_notifications {
+  padding: 10px;
+  border: 1px solid black;
+
+  .notification {
+    padding: 5px;
+    border: 1px solid gray;
+    margin-bottom: 10px;
+  }
+}
