@@ -11,6 +11,8 @@ class Card
   field :web_link,    type: String
   field :name,        type: String
 
+  after_create :created_event
+
   voteable self, up: +1, down: -1
   belongs_to :project
   belongs_to :user
@@ -19,4 +21,9 @@ class Card
 
   validates :project, :name, :image, presence: true
 
+  private
+
+  def created_event
+    UpdateNotifications.new_card_created_event self
+  end
 end

@@ -37,6 +37,9 @@
       - if can? :create, @project.cards.build
         .btn.pull-right.clear-right
           = link_to 'Add gift suggestion', new_project_card_path(@project)
+
+      = render 'update_notifications'
+
   .clearfix
   - if can? :show, @project.comments.build
     %hr
