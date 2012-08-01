@@ -12,4 +12,4 @@ en:
 
     events:
       new_card_created: "%{user} added new gift to %{project} in %{time}"
-      project_updated: "%{user} updated %{project} in %{time}"
+      project_updated: "%{user} updated %{columns} for project %{project} on %{time}"
