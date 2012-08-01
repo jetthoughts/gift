@@ -41,7 +41,7 @@ class Project
 
   ## Filters
   before_validation :prepare_end_type
-  after_update :send_updated_event
+  before_save :send_updated_event
 
   ## Scopes
   scope :ordered_by_date, -> do
@@ -103,7 +103,8 @@ class Project
   private
 
   def send_updated_event
-    UpdateNotifications.project_updated_event self
+    return until self.changed?
+    UpdateNotification.project_updated_event self
   end
 
   def current_attachment

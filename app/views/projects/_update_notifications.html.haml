@@ -1,2 +1,4 @@
 .update_notifications.clear-right
-   svwvwwv
+  - UpdateNotification.ordered_by_date.entries.each do |notification|
+    .notification
+      = notification.message
