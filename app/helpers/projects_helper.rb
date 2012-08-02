@@ -23,6 +23,11 @@ module ProjectsHelper
     end
   end
 
+  def format_close_dialog_message project
+    paid_type = project.paid_type
+    t("general.close_project.#{paid_type}", amount: currency(@project.donated_amount), account: project.paid_info.account_identifier).html_safe
+  end
+
   def format_notification_message notification
     if notification.event_params['amount'].present?
       notification.event_params['amount'] = currency notification.event_params['amount']
