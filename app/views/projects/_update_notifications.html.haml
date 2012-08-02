@@ -1,4 +1,4 @@
 .update_notifications.clear-right
-  - UpdateNotification.ordered_by_date.entries.each do |notification|
+  - @project.update_notifications.ordered_by_date.entries.each do |notification|
     .notification
       = format_notification_message notification

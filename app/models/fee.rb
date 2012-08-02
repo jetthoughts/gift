@@ -11,7 +11,6 @@ class Fee
   field :visible, type: Boolean, default: true
 
   attr_accessible :credit_card, :payment_method_id, :project, :amount, :visible
-  after_save :new_fee_event
 
   validates :amount, presence: true, numericality: {greater_than: 1}
 
@@ -78,6 +77,7 @@ class Fee
 
   def purchase_notify
     return unless project
+    UpdateNotification.new_fee_donated self
     recipients.each do |u|
       CommentsMailer.new_donation(self, u).deliver
     end
@@ -85,11 +85,5 @@ class Fee
 
   def recipients
     project.users.where(:_id.ne => user.id, :notification_donated => true)
-  end
-
-  private
-
-  def new_fee_event
-    UpdateNotification.new_fee_donated(self) if self.purchased?
   end
 end
