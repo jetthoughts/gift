@@ -42,7 +42,7 @@ class Project
 
   ## Filters
   before_validation :prepare_end_type
-  before_save :send_updated_event
+  before_update :send_updated_event
 
   ## Scopes
   scope :ordered_by_date, -> do
