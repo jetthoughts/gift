@@ -101,6 +101,16 @@ class Project
     image.thumb
   end
 
+  def run_notify_users_about_close
+    delay.notify_users_about_close
+  end
+
+  def notify_users_about_close
+    users.each do |user|
+      CloseProjectMailer.notify_user(self, user).deliver
+    end
+  end
+
   private
 
   def send_updated_event
