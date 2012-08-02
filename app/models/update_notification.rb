@@ -20,22 +20,35 @@ class UpdateNotification
   def self.project_updated_event project
     return unless project.changed?
 
+    project_updated_columns_event project
+    project_end_type_event project
+    project_participant_event project
+  end
+
+  def self.project_updated_columns_event project
     changed_columns = []
     PROJECT_TRACK_COLUMNS.each do |column|
       changed_columns << column.to_s if project.send("#{column.to_s}_changed?")
     end
 
+    changed_columns.delete('fixed_amount') if project.fixed_amount_change.present? and project.fixed_amount_change.include? nil
+
     if changed_columns.present?
-      UpdateNotification.create({project: project, event_type: 'project_updated', event_params: {user: project.admin.name,
-                                                                                                 columns: changed_columns.to_sentence}})
+      event_type = 'project_updated'
+      event_params = {user: project.admin.name, columns: changed_columns.to_sentence}
+      UpdateNotification.create({project: project, event_type: event_type, event_params: event_params})
     end
+  end
 
+  def self.project_end_type_event project
     if project.end_type_changed?
-      UpdateNotification.create({project: project, event_type: 'project_change_end_type', event_params: {user: project.admin.name,
-                                                                                                         type: project.end_type,
-                                                                                                         amount: project.fixed_amount}})
+      event_type = 'project_change_end_type'
+      event_params = {user: project.admin.name, type: project.end_type, amount: (project.fixed_amount.present? ? project.fixed_amount : '')}
+      UpdateNotification.create({project: project, event_type: event_type, event_params: event_params})
     end
+  end
 
+  def self.project_participant_event project
     if project.participants_add_own_suggestions_changed?
       event_type = project.participants_add_own_suggestions ? 'project_allow_gift_suggestion' : 'project_prohibite_gift_suggestion'
       UpdateNotification.create({project: project, event_type: event_type, event_params: {user: project.admin.name}})
