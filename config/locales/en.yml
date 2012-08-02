@@ -23,3 +23,11 @@ en:
 
       new_fee_donated_visible: "%{user} donated %{amount} to the project on %{time}"
       new_fee_donated_hidden: "%{user} contributed to the project on %{time}"
+
+    close_project:
+      amazon_voucher:
+        "An amazon voucher with the amount of %{amount} will be sent to %{account}"
+      pay_pal:
+        "The amount of %{amount} will be transferred the paypal account %{account}"
+      money_transfer:
+        "The amount of %{amount} will be transferred to the account %{account}"

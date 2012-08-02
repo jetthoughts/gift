@@ -3,4 +3,4 @@
   = f.label :payment_method_id, payment_method.title
   == (#{currency(Paypal::Paypalwp.instance.refund_fee)} fee will be taken for transfer)
 %p
-  = f.text_field :paypal_email
+  = f.text_field :paypal_email, placeholder: 'PayPal email'
