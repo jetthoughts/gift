@@ -2,17 +2,19 @@ class UpdateNotification
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  PROJECT_TRACK_COLUMNS = [:name, :description, :fixed_amount, :deadline, :end_type]
+  PROJECT_TRACK_COLUMNS = [:name, :description, :deadline, :fixed_amount]
 
   field :event_type, type: String
   field :event_params, type: Hash
+
+  belongs_to :project
 
   scope :ordered_by_date, -> do
     order_by [[:created_at, :desc]]
   end
 
   def self.new_card_created_event card
-    UpdateNotification.create({event_type: 'new_card_created', event_params: {user: card.user.name, project: card.project.name, time: Time.now.to_s}})
+    UpdateNotification.create({project: card.project, event_type: 'new_card_created', event_params: {user: card.user.name}})
   end
 
   def self.project_updated_event project
@@ -23,14 +25,26 @@ class UpdateNotification
       changed_columns << column.to_s if project.send("#{column.to_s}_changed?")
     end
 
-    return if changed_columns.blank?
-    UpdateNotification.create({event_type: 'project_updated', event_params: {user: project.admin.name,
-                                                                             columns: changed_columns.to_sentence, project: project.name, time: Time.now.to_s}})
+    if changed_columns.present?
+      UpdateNotification.create({project: project, event_type: 'project_updated', event_params: {user: project.admin.name,
+                                                                                                 columns: changed_columns.to_sentence}})
+    end
+
+    if project.end_type_changed?
+      UpdateNotification.create({project: project, event_type: 'project_change_end_type', event_params: {user: project.admin.name,
+                                                                                                         type: project.end_type,
+                                                                                                         amount: project.fixed_amount}})
+    end
+
+    if project.participants_add_own_suggestions_changed?
+      event_type = project.participants_add_own_suggestions ? 'project_allow_gift_suggestion' : 'project_prohibite_gift_suggestion'
+      UpdateNotification.create({project: project, event_type: event_type, event_params: {user: project.admin.name}})
+    end
   end
 
   def self.new_fee_donated fee
-    return unless fee.visible
-    UpdateNotification.create({event_type: 'new_fee_donated', event_params: {user: fee.user.name,
-                                                                             project: fee.project.name, amount: fee.amount, time: Time.now.to_s}})
+    event_type = fee.visible ? 'new_fee_donated_visible' : 'new_fee_donated_hidden'
+    UpdateNotification.create({project: fee.project.name, event_type: event_type, event_params: {user: fee.user.name,
+                                                                                                 amount: fee.amount}})
   end
 end

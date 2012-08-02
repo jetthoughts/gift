@@ -33,6 +33,7 @@ class Project
   has_many :invites, dependent: :destroy
   has_many :fees
   has_many :withdraws
+  has_many :update_notifications
   embeds_one :paid_info
 
   accepts_nested_attributes_for :paid_info, allow_destroy: true, reject_if: proc { |attributes| !['BankInfo', 'AmazonInfo', 'PayPalInfo'].include?(attributes[:_type]) }
