@@ -7,9 +7,9 @@ class Card
   mount_uploader :image, ImageUploader
 
   field :description, type: String
-  field :price,       type: Float
-  field :web_link,    type: String
-  field :name,        type: String
+  field :price, type: Float
+  field :web_link, type: String
+  field :name, type: String
 
   after_create :created_event
 
@@ -17,9 +17,13 @@ class Card
   belongs_to :project
   belongs_to :user
 
-  validates :web_link, url: { allow_blank: true }
+  validates :web_link, url: {allow_blank: true}
 
   validates :project, :name, :image, presence: true
+
+  scope :ordered_by_date, -> do
+    order_by [[:created_at, :desc]]
+  end
 
   private
 

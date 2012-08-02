@@ -27,7 +27,7 @@
   .row
     .span8
       - unless @project.cards.blank?
-        = render @project.cards
+        = render @project.cards.ordered_by_date
       - else
         No any gifts
 
