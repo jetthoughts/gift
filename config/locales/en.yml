@@ -11,6 +11,12 @@ en:
     no_world: no
 
     events:
-      new_card_created: "%{user} added new gift to %{project} in %{time}"
-      project_updated: "%{user} updated %{columns} for project %{project} on %{time}"
-      new_fee_donated: "%{user} paid %{amount} for project %{project} on %{time}"
+      new_card_created: "%{user} added new gift suggestion on %{time}"
+      project_updated: "%{user} updated project %{columns} on %{time}"
+      project_change_end_type: "%{user} changed the target to %{type} %{amount} on %{time}"
+
+      project_allow_gift_suggestion: "%{user} allowed to add new gift suggestions on %{time}"
+      project_prohibite_gift_suggestion: "%{user} prohibited to add new gift suggestions on %{time}"
+
+      new_fee_donated_visible: "%{user} donated %{amount} to the project on %{time}"
+      new_fee_donated_hidden: "%{user} contributed to the project on %{time}"
