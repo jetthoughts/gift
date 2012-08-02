@@ -56,8 +56,13 @@ class UpdateNotification
   end
 
   def self.new_fee_donated fee
-    event_type = fee.visible ? 'new_fee_donated_visible' : 'new_fee_donated_hidden'
-    UpdateNotification.create({project: fee.project.name, event_type: event_type, event_params: {user: fee.user.name,
-                                                                                                 amount: fee.amount}})
+    event_params = {user: fee.user.name}
+    if fee.visible
+      event_type = 'new_fee_donated_visible'
+      event_params = event_params.merge({amount: fee.amount})
+    else
+      event_type = 'new_fee_donated_hidden'
+    end
+    UpdateNotification.create({project: fee.project, event_type: event_type, event_params: event_params})
   end
 end
