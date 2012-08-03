@@ -1,7 +1,11 @@
 %p
   .row
     .span4
-      = format_total_amount(@project.donated_amount)
+      - if @project.closed
+        .closed
+          Project closed
+      - else
+        = format_total_amount(@project.donated_amount)
       %span= image_tag @project.image
       %br
       %span= @project.name
