@@ -19,7 +19,7 @@ feature "Fees page" do
   end
 
   scenario 'test credit card dialog', js: true do
-    execute_rake('authorizedotnet:load_record')
+    add_payment_method
 
     click_link 'Engage'
     page.should have_content 'CreditCard'
@@ -30,7 +30,6 @@ feature "Fees page" do
     click_button 'Next'
     page.should have_button 'Submit'
 
-
     fill_in 'creditcard_name', with: 'Test Test'
     fill_in 'creditcard_number', with: '4007000000027'
     fill_in 'creditcard_cvv', with: '123'
@@ -40,14 +39,4 @@ feature "Fees page" do
     current_path.should eql project_path(@project)
     page.should have_content '20.00 donations'
   end
-
-  def execute_rake(task)
-    require 'rake'
-    rake = Rake::Application.new
-    Rake.application = rake
-    Rake::Task.define_task(:environment)
-    load "gems/nimbleshop_authorizedotnet-0.0.5/lib/tasks/authorize.rake"
-    rake[task].invoke
-  end
-
 end

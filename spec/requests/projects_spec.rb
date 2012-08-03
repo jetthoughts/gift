@@ -21,11 +21,43 @@ feature "Project edit" do
     page.should have_content 'New name'
   end
 
-  scenario 'should been correct closed', js: true  do
+  scenario 'close dialog contains little withdraw text', js: true do
     click_link 'Show'
     click_link 'Close project'
 
-    page.should have_content 'You are closing the project'
+    page.should have_content 'Too little collected for withdraw.'
+    page.should have_button 'OK'
+
+    click_button 'OK'
+    current_path.should eql project_path(@project)
+  end
+
+  scenario 'close dialog with fee but without paid info should be redirect to edit page', js: true do
+    add_payment_method
+    Fabricate(:fee, user: @user, project: @project, payment_method: PaymentMethod.first)
+
+    click_link 'Show'
+    page.should have_content '20.00 donations'
+    click_link 'Close project'
+
+    page.should have_content 'You must input your paid type info in the edit project page and try later'
+
+    click_button 'OK'
+    page.should have_content 'Editing project'
+  end
+
+  scenario 'close dialog with fee and paid info should be close project', js: true do
+    add_payment_method
+    Fabricate(:fee, user: @user, project: @project, payment_method: PaymentMethod.first)
+    @project.paid_info = Fabricate.build(:pay_pal_info)
+    @project.save
+
+    click_link 'Show'
+    page.should have_content '20.00 donations'
+    click_link 'Close project'
+
+    page.should have_content '20.00 will be transferred to the paypal account'
+
     click_button 'Close'
     page.should have_content 'Project closed'
   end

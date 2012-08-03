@@ -52,7 +52,7 @@
 #close_project_dialog{ title: 'You are closing the project' }
   %p
     - if @project.can_withdraw?
-      = format_close_dialog_message @project
+      = format_close_dialog_message(@project).html_safe
     - else
       .error
         = render 'withdraws/too_little_collected'
