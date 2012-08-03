@@ -1,6 +1,6 @@
 class Project
   PAID_TYPES = [:pay_pal, :money_transfer, :amazon_voucher]
-  PAID_TYPES_CLASSES = %w(BankInfo AmazonInfo PayPalInfo)
+  PAID_TYPES_CLASSES = %w(PayPalInfo BankInfo AmazonInfo)
   END_TYPES = [:fixed_amount, :open_end]
   MIN_WITHDRAW = 10
 
@@ -37,13 +37,14 @@ class Project
   has_many :update_notifications
   embeds_one :paid_info
 
-  accepts_nested_attributes_for :paid_info, allow_destroy: true, reject_if: proc { |attributes| !PAID_TYPES_CLASSES.include?(attributes[:_type]) or attributes.all? {|k,v| k == '_type' ? true : v.blank?}}
+  accepts_nested_attributes_for :paid_info, allow_destroy: true, reject_if: proc { |attributes| !PAID_TYPES_CLASSES.include?(attributes[:_type]) or attributes.all? { |k, v| k == '_type' ? true : v.blank? } }
 
   belongs_to :attachment
 
   ## Filters
   before_validation :prepare_end_type
   before_update :send_updated_event
+  after_update :check_valid_paid_info
 
   ## Scopes
   scope :ordered_by_date, -> do
@@ -113,6 +114,15 @@ class Project
   end
 
   private
+
+  def check_valid_paid_info
+    return if paid_info.nil?
+
+    paid_info_index = PAID_TYPES.index paid_type.to_sym
+    paid_info_class = PAID_TYPES_CLASSES[paid_info_index]
+
+    paid_info.remove if paid_info._type != paid_info_class
+  end
 
   def send_updated_event
     UpdateNotification.project_updated_event self
