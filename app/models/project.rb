@@ -1,5 +1,6 @@
 class Project
   PAID_TYPES = [:pay_pal, :money_transfer, :amazon_voucher]
+  PAID_TYPES_CLASSES = %w(BankInfo AmazonInfo PayPalInfo)
   END_TYPES = [:fixed_amount, :open_end]
   MIN_WITHDRAW = 10
 
@@ -36,7 +37,7 @@ class Project
   has_many :update_notifications
   embeds_one :paid_info
 
-  accepts_nested_attributes_for :paid_info, allow_destroy: true, reject_if: proc { |attributes| !['BankInfo', 'AmazonInfo', 'PayPalInfo'].include?(attributes[:_type]) }
+  accepts_nested_attributes_for :paid_info, allow_destroy: true, reject_if: proc { |attributes| !PAID_TYPES_CLASSES.include?(attributes[:_type]) or attributes.all? {|k,v| k == '_type' ? true : v.blank?}}
 
   belongs_to :attachment
 
