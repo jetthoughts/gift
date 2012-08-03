@@ -107,7 +107,7 @@ class Project
 
   def notify_users_about_close
     users.each do |user|
-      CloseProjectMailer.notify_user(self, user).deliver
+      CloseProjectMailer.notify_user(self, user).deliver if user != admin
     end
   end
 
