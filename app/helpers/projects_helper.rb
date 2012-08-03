@@ -38,7 +38,8 @@ module ProjectsHelper
       notification.event_params['amount'] = currency notification.event_params['amount']
     end
 
-    event_params = notification.event_params.symbolize_keys.merge({time: notification.created_at})
+    time = l(notification.created_at, format: :time_date)
+    event_params = notification.event_params.symbolize_keys.merge({time: time})
     t("general.events.#{notification.event_type}", event_params).html_safe
   end
 
