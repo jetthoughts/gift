@@ -5,6 +5,7 @@ en:
   time:
     formats:
       time_date:
+        "%H:%M %m/%d/%Y"
 
   general:
     dislike: "Dislike"

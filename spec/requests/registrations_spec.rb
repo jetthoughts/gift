@@ -31,7 +31,7 @@ feature "User edit profile action" do
     fill_in 'Email', with: 'test@mailer.com'
     click_button 'Update'
 
-    page.should have_content I18n.t('devise.registrations.update_needs_confirmation')
+    page.should have_content I18n.t('devise.registrations.updated')
   end
 
   scenario "Set new password without current_password" do
