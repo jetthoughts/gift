@@ -11,11 +11,15 @@ $ ->
     modal     : true
     resizable : false
 
-    if $('.not_paid_info').length
+    if $('.no_paid_info').length
       buttons:
         "OK" : ->
           $(this).dialog 'close'
           window.location = window.location.href + '/edit'
+    else if $('.error').length
+      buttons:
+        "OK" : ->
+          $(this).dialog 'close'
     else
       buttons   :
         "Close"   : ->

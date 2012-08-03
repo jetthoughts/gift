@@ -33,3 +33,7 @@ en:
         "The amount of %{amount} will be transferred the paypal account %{account}"
       money_transfer:
         "The amount of %{amount} will be transferred to the account %{account}"
+    withdraw:
+      too_litle: "Too little collected for withdraw."
+      min_amount: "Need at least %{amount}"
+      current_amount: "Available only %{amount}"

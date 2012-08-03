@@ -25,8 +25,9 @@ module ProjectsHelper
 
   def format_close_dialog_message project
     paid_type = project.paid_type
+
     if project.paid_info.nil?
-      t('general.close_project.empty_paid_info')
+      "<div class='no_paid_info'>#{t('general.close_project.empty_paid_info')}</div>"
     else
       t("general.close_project.#{paid_type}", amount: currency(@project.donated_amount), account: project.paid_info.account_identifier).html_safe
     end
