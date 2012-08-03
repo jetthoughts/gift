@@ -17,7 +17,6 @@ namespace :authorizedotnet do
               permalink: 'authorizedotnet',
               description: %Q[<p> Authorize.Net is a payment gateway service provider allowing merchants to accept credit card and electronic checks paymentsn. Authorize.Net claims a user base of over 305,000 merchants, which would make them the Internet's largest payment gateway service provider.  </p> <p> It also provides an instant test account which you can use while your application is being processed.  </p>]
           })
-      puts "Authorize.net record was successfuly created"
     end
   end
 end
