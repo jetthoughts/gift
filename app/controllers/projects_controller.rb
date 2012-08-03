@@ -50,8 +50,6 @@ class ProjectsController < ApplicationController
     @project = chain.find params[:project_id]
     @project.update_attributes closed: true
     @project.run_notify_users_about_close
-
-    flash[:notice] = 'Project closed'
     redirect_to project_path(@project)
   end
 
