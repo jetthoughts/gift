@@ -10,18 +10,24 @@ $ ->
     autoOpen  : false
     modal     : true
     resizable : false
-    buttons   :
-      "Close"   : ->
-        $(this).dialog 'close'
-        csrf_token = $('meta[name=csrf-token]').attr('content')
-        csrf_param = $('meta[name=csrf-param]').attr('content')
-        $("<form action='#{window.location.pathname}/close' method='post'>
-        <input name='#{csrf_param}' value='#{csrf_token}' type='hidden'/>
-        </form>").submit()
 
+    if $('.not_paid_info').length
+      buttons:
+        "OK" : ->
+          $(this).dialog 'close'
+          window.location = window.location.href + '/edit'
+    else
+      buttons   :
+        "Close"   : ->
+          $(this).dialog 'close'
+          csrf_token = $('meta[name=csrf-token]').attr('content')
+          csrf_param = $('meta[name=csrf-param]').attr('content')
+          $("<form action='#{window.location.pathname}/close' method='post'>
+          <input name='#{csrf_param}' value='#{csrf_token}' type='hidden'/>
+          </form>").submit()
 
-      "Cancel"  : ->
-        $(this).dialog 'close'
+        "Cancel"  : ->
+          $(this).dialog 'close'
 
   $('#close_project').click (e)->
     e.preventDefault()

@@ -25,6 +25,8 @@ en:
       new_fee_donated_hidden: "%{user} contributed to the project on %{time}"
 
     close_project:
+      empty_paid_info:
+        You must input your paid type info in the edit project page and try later
       amazon_voucher:
         "An amazon voucher with the amount of %{amount} will be sent to %{account}"
       pay_pal:
