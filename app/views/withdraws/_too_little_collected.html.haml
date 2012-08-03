@@ -1,0 +1,7 @@
+%p
+  = t('general.withdraw.too_litle')
+%p
+  = t('general.withdraw.min_amount', amount: currency(Project::MIN_WITHDRAW)).html_safe
+
+%p
+  = t('general.withdraw.current_amount', amount: currency(@project.available_amount)).html_safe
