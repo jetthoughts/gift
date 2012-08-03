@@ -17,4 +17,14 @@ module RequestHelper
     @user.projects << @project
     @user.save
   end
+
+  def add_payment_method
+    task = 'authorizedotnet:load_record'
+    require 'rake'
+    rake = Rake::Application.new
+    Rake.application = rake
+    Rake::Task.define_task(:environment)
+    load "gems/nimbleshop_authorizedotnet-0.0.5/lib/tasks/authorize.rake"
+    rake[task].invoke
+  end
 end

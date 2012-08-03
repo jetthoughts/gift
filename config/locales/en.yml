@@ -30,7 +30,7 @@ en:
       amazon_voucher:
         "An amazon voucher with the amount of %{amount} will be sent to %{account}"
       pay_pal:
-        "The amount of %{amount} will be transferred the paypal account %{account}"
+        "The amount of %{amount} will be transferred to the paypal account %{account}"
       money_transfer:
         "The amount of %{amount} will be transferred to the account %{account}"
     withdraw:
