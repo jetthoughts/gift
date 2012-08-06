@@ -3,7 +3,6 @@ module 'Amazon'
 Amazon.SearchByRequest = class extends Amazon.Search
 
   constructor : (modal_selector) ->
-    console.log 11
     @modal = $(modal_selector)
     @bind()
     @completion()
@@ -72,7 +71,7 @@ Amazon.SearchByRequest = class extends Amazon.Search
       description : parent.find('.product-group').text()
 
   load_results : (query, page = 1)->
-    $('.modal-body p', @modal).load @search_location(),
+    $('.modal-body p', @modal).load @location(),
       q: query
       page: page
     , =>
@@ -91,8 +90,8 @@ Amazon.SearchByRequest = class extends Amazon.Search
       .removeClass('icon-plus')
       .addClass('icon-minus')
 
-  search_location : ->
-    window.location.pathname.replace /\/new/, '/amazon_search'
+  location : ->
+    super '/amazon_search'
 
   mask_list : ->
     $('.modal-body', @modal).mask('Loading...')
