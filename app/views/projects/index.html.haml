@@ -17,7 +17,7 @@
           = project.created_at
         %td
           = link_to 'Show', project
-          = link_to 'Edit', edit_project_path(project) if can? :edit, project
+          = link_to 'Edit', edit_project_path(project) if can? :edit, project and !project.closed
       %tr
         %td{colspan: 3 }
           = format_total_amount project.donated_amount
