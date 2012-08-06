@@ -47,9 +47,8 @@ class ProjectsController < ApplicationController
   # POST /projects/1/close
   def close
     @project = chain.find params[:project_id]
-    @project.update_attributes closed: true
-    @project.run_notify_users_about_close
-    withdraw
+    #withdraw
+    @project.close
     redirect_to @project
   end
 
@@ -64,6 +63,7 @@ class ProjectsController < ApplicationController
   def withdraw
     @with_draw = Withdraw.build_with_project @project
     @with_draw.refund if !@with_draw.nil? and @with_draw.valid?
+    flash[:notice] = @with_draw.errors if @with_draw.errors.present?
   end
 
   def owner
