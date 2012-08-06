@@ -51,6 +51,11 @@ class Project
     order_by [[:created_at, :desc]]
   end
 
+  def close
+    update_attributes closed: true
+    run_notify_users_about_close
+  end
+
   def amount_percent
     if fixed_amount.present? and fixed_amount > 0
       donated_amount / fixed_amount

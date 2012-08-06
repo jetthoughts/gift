@@ -24,7 +24,7 @@ class Withdraw
     paid_info = project.paid_info
     if project.paid_type == 'pay_pal'
       payment_method = PaymentMethod.where(_type: 'Paypal::Paypalwp').first
-      Withdraw.build project: project, payment_method: payment_method, paypal_email: paid_info.email
+      self.new project: project, payment_method: payment_method, paypal_email: paid_info.email, amount: project.donated_amount
     else
       nil
     end
