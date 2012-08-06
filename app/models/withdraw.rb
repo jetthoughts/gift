@@ -20,6 +20,16 @@ class Withdraw
     errors.add(:amount, 'Pool is not available') unless amount <= project.available_amount
   end
 
+  def self.build_with_project project
+    paid_info = project.paid_info
+    if project.paid_type == 'pay_pal'
+      payment_method = PaymentMethod.where(_type: 'Paypal::Paypalwp').first
+      Withdraw.build project: project, payment_method: payment_method, paypal_email: paid_info.email
+    else
+      nil
+    end
+  end
+
   def refund
     self.amount = project.available_amount
     if self.amount < 1
