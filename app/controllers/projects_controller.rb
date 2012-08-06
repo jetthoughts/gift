@@ -41,7 +41,6 @@ class ProjectsController < ApplicationController
   # PUT /projects/1
   def update
     @project.update_attributes model_params
-
     respond_with @project
   end
 
@@ -50,7 +49,8 @@ class ProjectsController < ApplicationController
     @project = chain.find params[:project_id]
     @project.update_attributes closed: true
     @project.run_notify_users_about_close
-    redirect_to project_path(@project)
+    withdraw
+    redirect_to @project
   end
 
   # DELETE /projects/1
@@ -60,6 +60,11 @@ class ProjectsController < ApplicationController
   end
 
   private
+
+  def withdraw
+    @with_draw = Withdraw.build_with_project @project
+    @with_draw.refund if !@with_draw.nil? and @with_draw.valid?
+  end
 
   def owner
     @owner ||= current_user
