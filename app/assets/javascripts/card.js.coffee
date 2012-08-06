@@ -32,9 +32,31 @@ $ ->
     self.find('i').removeClass('icon-plus').addClass('icon-minus')
     self.removeClass('btn-success').addClass('btn-danger disabled')
 
+  $("#search_modal input").autocomplete
+    source : (request, response) ->
+      $.ajax
+        url      : "http://completion.amazon.com/search/complete",
+        type     : "GET"
+        cache    : false
+        dataType : "jsonp"
+        success  : (data) ->
+          response(data[1])
+        data     :
+          method   : 'completion'
+          client   : 'amazon-search-ui'
+          q        : request.term
+          'search-alias': 'aps'
+          mkt      : 1
+          fb       : 0
+          xcat     : 0
+          sc       : 1
+
+
+new_location = (action) ->
+  window.location.pathname.replace(/\/new/, action)
 
 load_search_result = (query, page = 1)->
-  $('#search_modal .modal-body p').load window.location.pathname.replace(/\/new/, '/amazon_search'),
+  $('#search_modal .modal-body p').load new_location('/amazon_search'),
     q: query
     page: page
   , ->
