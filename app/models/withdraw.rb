@@ -8,7 +8,7 @@ class Withdraw
   field :amount, type: Float, default: 0
   belongs_to  :payment_method
   
-  attr_accessible :payment_method_id, :project, :paypal_email
+  attr_accessible :payment_method, :project, :paypal_email
 
   validates :payment_method, presence: true
   validates :project, presence: true
@@ -24,7 +24,7 @@ class Withdraw
     paid_info = project.paid_info
     if project.paid_type == 'pay_pal'
       payment_method = PaymentMethod.where(_type: 'Paypal::Paypalwp').first
-      self.new project: project, payment_method: payment_method, paypal_email: paid_info.email, amount: project.donated_amount
+      self.new project: project, payment_method: payment_method, paypal_email: paid_info.email
     else
       nil
     end
@@ -34,13 +34,16 @@ class Withdraw
     self.amount = project.available_amount
     if self.amount < 1
       errors.add(:amount, 'Pool is not available')
+      logger.debug 'Pool is not available'
       return false
     end
 
-    if (response = paypal.transfer(total_amount_in_cents, paypal_email, { currency: project.currency })).success?       
-       save  
+    if (response = paypal.transfer(total_amount_in_cents, paypal_email, { currency: project.currency })).success?
+      logger.debug 'Success'
+      save
     else
       errors.add(:payment_method, "PayPal Error: #{response.message}")
+      logger.debug "PayPal Error: #{response.message}"
       false
     end
   end
