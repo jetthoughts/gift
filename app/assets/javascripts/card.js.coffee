@@ -3,6 +3,8 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $ ->
+
+  image_selector    = new Amazon.ImageSelector('#choose_image')
   search_by_request = new Amazon.SearchByRequest('#search_modal')
   search_by_url     = new Amazon.SearchByURL('#card_web_link')
 
@@ -15,4 +17,7 @@ $ ->
       detailsUrl  : '#card_web_link'
 
   search_by_request.setup_form '#new_card', form_options
-  search_by_url.setup_form '#new_card', form_options
+  search_by_url.setup_form     '#new_card', form_options
+
+  search_by_request.setup_image_selector image_selector
+  search_by_url.setup_image_selector     image_selector

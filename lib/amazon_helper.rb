@@ -1,4 +1,11 @@
 module AmazonHelper
+  def amazon_images_list item
+    sets = item.raw.ImageSets.ImageSet
+    sets.map do |set|
+      set.MediumImage.URL
+    end
+  end
+
   def amazon_details_url item
     item.raw.DetailPageURL
   end

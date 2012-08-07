@@ -11,9 +11,9 @@ Amazon.Search = class
         description  : '#description'
         detailsUrl : '#details_url'
 
+  setup_image_selector : (@image_selector) ->
+
   fill_form : ->
-    console.log 2
-    console.log @data
     $(@form_options.selectors.name).val @data.name
     $(@form_options.selectors.description).val @data.description
     $(@form_options.selectors.price).val @amount_to_price(@data.amount)
