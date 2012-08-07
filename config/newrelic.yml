@@ -23,7 +23,7 @@ common: &default_settings
   # it from running with Rake or the console.  Set to false to
   # completely turn the agent off regardless of the other settings.
   # Valid values are true, false and auto.
-  # agent_enabled: auto
+  agent_enabled: true
   
   # Application Name
   # Set this to be the name of your application as you'd like it show
@@ -192,7 +192,7 @@ development:
   # 'enabled').
   # NOTE: for initial evaluation purposes, you may want to temporarily 
   # turn agent communication on in development mode.
-  monitor_mode: true
+  monitor_mode: false
 
   # Rails Only - when running in Developer Mode, the New Relic Agent will 
   # present performance information on the last 100 transactions you have
