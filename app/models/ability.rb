@@ -23,7 +23,7 @@ class Ability
       can [:show, :create, :new, :index], Project, admin_id: user.id
 
       can :manage, Comment do |comment|
-        !comment.project.closed
+        !comment.project.closed if comment.project
       end
       can [:show], Comment do |comment|
         comment.project && comment.project.participant?(user)
