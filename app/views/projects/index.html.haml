@@ -11,26 +11,29 @@
           %br
           = project.description
           %br
-          Created by
-          = project.admin.name
-          on
-          = project.created_at
+          = t('general.project_created', name: project.admin.name, date: project.created_at)
         %td
           = link_to 'Show', project
           = link_to 'Edit', edit_project_path(project) if can? :edit, project and !project.closed
       %tr
         %td{colspan: 3 }
-          = format_total_amount project.donated_amount
-          Members:
-          = project.users.count
-          Expires on
-          = project.deadline
-          %br
-          - if project.fixed_amount.present?
-            Goal
-            = currency project.fixed_amount
-            Progress
-            = number_to_percentage project.amount_percent, :precision => 2
+          - if project.closed
+            = t('general.collected_amount', amount: currency(project.donated_amount)).html_safe
+            %br
+            = t('general.project_closed', name: project.admin.name, date: project.closed_at)
+            %br
+            = t('general.members_contributes', count: project.donated_users)
+          - else
+            = format_total_amount project.donated_amount
+            = t('general.members', count: project.users.count)
+            %br
+            = t('general.expires_on', date: project.deadline)
+            %br
+            - if project.fixed_amount.present?
+              Goal
+              = currency project.fixed_amount
+              Progress
+              = number_to_percentage project.amount_percent, :precision => 2
       %tr
         %td{colspan: 3 }
           %br

@@ -17,6 +17,7 @@ class Project
   field :end_type, type: String
   field :currency, type: String, default: 'EUR'
   field :closed, type: Boolean, default: false
+  field :closed_at, type: DateTime
 
   ## Validators
   validates :paid_type, inclusion: {in: Project::PAID_TYPES.map(&:to_s), message: ''}
@@ -52,7 +53,7 @@ class Project
   end
 
   def close
-    update_attributes closed: true
+    update_attributes closed: true, closed_at: Time.now
     run_notify_users_about_close
   end
 
@@ -98,6 +99,10 @@ class Project
 
   def visible_fee_amount_from(user)
     self.fees.purchased.where(user_id: user.id, visible: true).sum(:amount)
+  end
+
+  def donated_users
+    self.fees.purchased.distinct("user_id").count
   end
 
   def image
