@@ -13,6 +13,12 @@ en:
     fee_blank_amount: "Private or nothing"
     total_amount: "We have %{amount} donations"
     no_world: no
+    collected_amount: We collected %{amount}
+    project_created: Created by %{name} on %{date}
+    project_closed: This project was closed by %{name} on %{date}
+    members_contributes: "%{count} members contributed."
+    expires_on: Expires on %{date}
+    members: "Members: %{count}"
 
     events:
       new_card_created: "%{user} added new gift suggestion on %{time}"
