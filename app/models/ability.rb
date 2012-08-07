@@ -17,7 +17,9 @@ class Ability
         user.projects.for_ids(project.id).exists?
       end
       can :close, Project, admin_id: user.id
-      can [:edit, :update], Project, closed: false
+      can [:edit, :update], Project do |project|
+        !project.closed and project.admin == user
+      end
       can [:show, :create, :new, :index], Project, admin_id: user.id
 
       can :manage, Comment do |comment|
