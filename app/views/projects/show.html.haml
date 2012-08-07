@@ -12,8 +12,9 @@
       %br
       %span= @project.description
     .span8
-      .btn.pull-right
-        = link_to 'Invites', [:new, @project, :invite]
+      - if can? :create, @project.invites.build
+        .btn.pull-right
+          = link_to 'Invites', [:new, @project, :invite]
       - if can? :edit, @project
         .btn.pull-right
           = link_to 'Edit project', edit_project_path(@project)
@@ -33,8 +34,9 @@
         No any gifts
 
     .span4
-      .btn.pull-right.clear-right
-        = link_to 'Engage', new_project_fee_url(@project)
+      - if !@project.closed
+        .btn.pull-right.clear-right
+          = link_to 'Engage', new_project_fee_url(@project)
       - if can? :create, @project.cards.build
         .btn.pull-right.clear-right
           = link_to 'Add gift suggestion', new_project_card_path(@project)

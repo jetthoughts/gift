@@ -14,7 +14,7 @@
           = t('general.project_created', name: project.admin.name, date: project.created_at)
         %td
           = link_to 'Show', project
-          = link_to 'Edit', edit_project_path(project) if can? :edit, project and !project.closed
+          = link_to 'Edit', edit_project_path(project) if can? :edit, project
       %tr
         %td{colspan: 3 }
           - if project.closed

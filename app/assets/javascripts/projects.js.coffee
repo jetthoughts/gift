@@ -33,12 +33,6 @@ $ ->
     e.preventDefault()
     $('#close_project_dialog').dialog 'open'
 
-  if $('.closed').length > 0
-    $('.btn').each ->
-      _this = $(this)
-      _this.addClass 'disabled'
-      $(_this.find('a')[0]).attr("href", "#")
-
   oldId = null
   toggleSpan = (elemClass, isShow = true) ->
     return if elemClass is null
