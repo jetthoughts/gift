@@ -19,6 +19,7 @@ Amazon.SearchByURL = class extends Amazon.Search
       dataType : 'json'
       success : (data) =>
         @data =  data
+        @image_selector.add_image_links @data.images
         callback.call(@)
       data :
         q : @asin()

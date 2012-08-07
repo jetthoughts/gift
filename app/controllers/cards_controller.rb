@@ -44,7 +44,7 @@ class CardsController < ApplicationController
     search = client.lookup params[:q]
     @item = search.first
     
-    render json: { amount: amazon_amount(@item), image_url: amazon_image_url(@item), details_url: amazon_details_url(@item), name: @item.title, description: amazon_product_group(@item) }
+    render json: { amount: amazon_amount(@item), image_url: amazon_image_url(@item), details_url: amazon_details_url(@item), name: @item.title, description: amazon_product_group(@item), images: amazon_images_list(@item)}
   end
 
   private

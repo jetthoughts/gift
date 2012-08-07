@@ -1,3 +1,3 @@
 module CardsHelper
-  extend AmazonHelper
+  include AmazonHelper
 end
