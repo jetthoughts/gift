@@ -21,6 +21,7 @@ Amazon.SearchByURL = class extends Amazon.Search
         @data =  data
         @image_selector.add_image_links @data.images
         @image_selector.open()
+        @show_other_image_button()
         callback.call(@)
       data :
         q : @asin()

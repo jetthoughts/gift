@@ -1,6 +1,11 @@
 module 'Amazon'
 
 Amazon.Search = class
+
+  bind_form : ->
+    $(@form_options.otherImage, @modal).click =>
+      @image_selector.open()
+    
   setup_form : (form_selector, options) ->
     @form = $(form_selector)
     @form_options = $.extend
@@ -9,9 +14,18 @@ Amazon.Search = class
       imageUrl     : '#image_url'
       description  : '#description'
       detailsUrl   : '#details_url'
+      otherImage   : '#select_other_image'
     , options
+    @bind_form()
 
   setup_image_selector : (@image_selector) ->
+
+
+  show_other_image_button : ->
+    $(@form_options.otherImage).removeClass 'hidden'
+
+  hide_other_image_button : ->
+    $(@form_options.otherImage).addClass 'hidden'
 
   fill_form : ->
     $(@form_options.name, @form).val @data.name
