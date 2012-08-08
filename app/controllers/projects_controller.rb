@@ -37,6 +37,7 @@ class ProjectsController < ApplicationController
       render 'new'
     end
   end
+  
 
   # PUT /projects/1
   def update
