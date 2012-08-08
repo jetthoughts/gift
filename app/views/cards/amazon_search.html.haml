@@ -1,6 +1,6 @@
 %ul.items.unstyled
   - @items.each do |item|
-    %li{id: item.asin}
+    %li{id: item.asin, data: { image_links: amazon_images_list(item).to_json }}
       = image_tag amazon_image_url(item)
       %h4.inline= link_to item.title, amazon_details_url(item), target: '_blank'
       %br/
