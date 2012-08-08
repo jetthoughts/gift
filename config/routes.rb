@@ -25,6 +25,7 @@ Gift::Application.routes.draw do
     resources :cards do
       resource :votes
       post :amazon_search, on: :collection
+      post :amazon_lookup, on: :collection
     end
   end
 

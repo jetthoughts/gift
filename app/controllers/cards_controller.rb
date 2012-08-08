@@ -1,5 +1,7 @@
 class CardsController < ApplicationController
+  include AmazonHelper
   before_filter :init_project, only: [:new, :create, :update]
+  helper :cards
 
   def index
     respond_with project, @cards = chain.all #, :layout => false
@@ -35,6 +37,14 @@ class CardsController < ApplicationController
     @total_results = amazon_response['ItemSearchResponse']['Items']['TotalResults']
     @total_pages   = amazon_response['ItemSearchResponse']['Items']['TotalPages']
     render layout: false
+  end
+
+  def amazon_lookup
+    client = ASIN::Client.instance
+    search = client.lookup params[:q]
+    @item = search.first
+    
+    render json: { amount: amazon_amount(@item), image_url: amazon_image_url(@item), details_url: amazon_details_url(@item), name: @item.title, description: amazon_product_group(@item), images: amazon_images_list(@item)}
   end
 
   private
