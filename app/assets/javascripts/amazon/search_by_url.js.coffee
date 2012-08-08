@@ -20,6 +20,7 @@ Amazon.SearchByURL = class extends Amazon.Search
       success : (data) =>
         @data =  data
         @image_selector.add_image_links @data.images
+        @image_selector.open()
         callback.call(@)
       data :
         q : @asin()

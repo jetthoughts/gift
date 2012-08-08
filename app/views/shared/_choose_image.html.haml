@@ -9,11 +9,11 @@
     .buttons
       Choose a thumbnail
       %span.counters
-        %span.current
+        %span.current_count
           0
         of
         %span.count
           0
-      = link_to 'Prev', '#', id: :prev_image
-      = link_to 'Next', '#', id: :next_image
+      = link_to 'Prev', '#', id: :prev_image, class: 'btn'
+      = link_to 'Next', '#', id: :next_image, class: 'btn'
     %a.btn.btn-primary{ href:'#', 'data-dismiss' => 'modal' } Close
