@@ -2,7 +2,7 @@ module AmazonHelper
   def amazon_images_list item
     sets = item.raw.ImageSets.ImageSet
     sets.map do |set|
-      set.MediumImage.URL
+      set.LargeImage.URL
     end
   end
 
@@ -15,16 +15,16 @@ module AmazonHelper
   end
 
   def amazon_image_url item
-    if item.raw.MediumImage
-      return item.raw.MediumImage.URL
+    if item.raw.LargeImage
+      return item.raw.LargeImage.URL
     end
 
     if item.raw.ImageSets.ImageSet.is_a? Hashie::Mash
-      return item.raw.ImageSets.ImageSet.MediumImage.URL
+      return item.raw.ImageSets.ImageSet.LargeImage.URL
     end
 
     if item.raw.ImageSets.ImageSet.is_a? Array
-      return item.raw.ImageSets.ImageSet.first.MediumImage.URL
+      return item.raw.ImageSets.ImageSet.first.LargeImage.URL
     end
 
     item.image_url
