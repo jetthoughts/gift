@@ -1,9 +1,10 @@
 #fb-root
-%h2 Invite your Friends
+%h2
+  = t('general.invites.invite_friends')
 
 = form_for [@project, Invite.new], :html => {:method => :post} do |f|
   %h4
-    Via Facebook:
+    = t('general.invites.via_facebook')
   %div{id: 'fb-invite-link'}
   #invite-other
     .hidden.invite_ids
@@ -16,9 +17,9 @@
 
   %br
   %h4
-    By email
+    = t('general.invites.by_email')
   #by_email
     = render :partial => 'invite_fields', :collection => @invites, :as => :invite
   .center
-    = link_to 'Other participants', '#',  id: 'add_email_participant', class: 'btn'
-  %p= f.submit 'Ready'
+    = link_to t('general.invites.others'), '#',  id: 'add_email_participant', class: 'btn'
+  %p= f.submit t('general.invites.ready')

@@ -1,11 +1,6 @@
 %p
-  Congratulations!
+  = t('general.mailers.congratulations')
   %br
-  The project
-  = @project.name
-  has been closed.
+  = t('general.mailers.project_closed', name: @project.name)
   %br
-  You collected an amount of
-  = @project.donated_amount
-  for your friend
-  = @project.admin.name
+  = t('general.mailers.amount_total', amount: @project.donated_amount, name: @project.admin.name)

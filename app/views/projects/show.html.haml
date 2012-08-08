@@ -3,7 +3,7 @@
     .span4
       - if @project.closed
         .closed
-          Project closed
+          = t('general.project.closed')
       - else
         = format_total_amount(@project.available_amount)
       %span= image_tag @project.image
@@ -14,13 +14,13 @@
     .span8
       - if can? :create, @project.invites.build
         .btn.pull-right
-          = link_to 'Invites', [:new, @project, :invite]
+          = link_to t('general.project.invites_button'), [:new, @project, :invite]
       - if can? :edit, @project
         .btn.pull-right
-          = link_to 'Edit project', edit_project_path(@project)
+          = link_to t('general.project.edit_project_button'), edit_project_path(@project)
       - if can? :close, @project and !@project.closed
         .btn.pull-right
-          = link_to 'Close project', nil, id: 'close_project'
+          = link_to t('general.project.close_project_button'), nil, id: 'close_project'
       %br
       %br
       %br
@@ -31,15 +31,15 @@
       - unless @project.cards.blank?
         = render @project.cards.ordered_by_date
       - else
-        No any gifts
+        = t('general.project.no_gifts')
 
     .span4
       - if !@project.closed
         .btn.pull-right.clear-right
-          = link_to 'Engage', new_project_fee_url(@project)
+          = link_to t('general.project.engage'), new_project_fee_url(@project)
       - if can? :create, @project.cards.build
         .btn.pull-right.clear-right
-          = link_to 'Add gift suggestion', new_project_card_path(@project)
+          = link_to t('general.project.add_gift_button'), new_project_card_path(@project)
 
       = render 'update_notifications'
 
@@ -51,7 +51,7 @@
       #comments
         = render @project.comments.ordered_by_date
 
-#close_project_dialog{ title: 'You are closing the project' }
+#close_project_dialog{ title: t('general.project.closing_title') }
   %p
     - if @project.can_withdraw?
       = format_close_dialog_message(@project).html_safe

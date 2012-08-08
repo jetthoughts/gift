@@ -1,4 +1,4 @@
-<h3>Profile</h3>
+<h3><%= t('general.profile') %></h3>
 
 <%= simple_form_for(resource, :as => resource_name, :url => profile_path, :html => { :method => :put, :class => 'form-horizontal left', }) do |f| %>
   <%= f.error_notification %>
@@ -12,18 +12,18 @@
     <%= f.input :notification_new_comment, :as => :boolean %>
   </div>
   <div class="actions">
-    <%= f.button :submit, "Update" %>
+    <%= f.button :submit, t('general.update') %>
   </div>
 <% end %>
 <div class='right'>
   <%= image_tag resource.avatar, :width => 300, :id => :avatar_image %>
-  <%= link_to('Change photo', '#', :id => 'upload_button' ) %>
+  <%= link_to t('general.change_photo'), '#', :id => 'upload_button'  %>
 </div>
 
 <div class='clear'>
 </div>
 
-<h3>Change password</h3>
+<h3><%= t('general.change_password') %></h3>
 
 <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put, :class => 'form-horizontal' }) do |f| %>
   <div class="inputs">
@@ -32,11 +32,11 @@
     <%= f.input :current_password, :hint => "we need your current password to confirm your changes", :required => false %>
   </div>
   <div class="actions">
-    <%= f.button :submit, "Change password" %>
+    <%= f.button :submit, t('general.change_password') %>
   </div>
 <% end %>
 
-<%= link_to "Back", :back %>
+<%= link_to t('general.back'), :back %>
 
 <%
    attachment = current_user.attachment ||  Attachment.new

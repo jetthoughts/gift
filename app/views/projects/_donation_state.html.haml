@@ -1,12 +1,15 @@
 .donation_state
-  %h4 Active users
+  %h4
+    = t('general.active_users')
   = format_total_amount(@project.donated_amount)
 
   %table.table-bordered.with_spaces
     %thead
       %tr
-        %th Name
-        %th Amount
+        %th
+          = t('general.invites.name')
+        %th
+          = t('general.amount')
 
     %tbody
       - @project.users.each do |user|

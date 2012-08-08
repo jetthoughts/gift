@@ -13,8 +13,8 @@
           %br
           = t('general.project_created', name: project.admin.name, date: project.created_at)
         %td
-          = link_to 'Show', project
-          = link_to 'Edit', edit_project_path(project) if can? :edit, project
+          = link_to t('general.project.show'), project
+          = link_to t('general.project.edit'), edit_project_path(project) if can? :edit, project
       %tr
         %td{colspan: 3 }
           - if project.closed
@@ -30,9 +30,9 @@
             = t('general.expires_on', date: project.deadline)
             %br
             - if project.fixed_amount.present?
-              Goal
+              = t('general.project.goal')
               = currency project.fixed_amount
-              Progress
+              = t('general.project.progress')
               = number_to_percentage project.amount_percent, :precision => 2
       %tr
         %td{colspan: 3 }

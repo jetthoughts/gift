@@ -1,12 +1,13 @@
+
 <p>
   <%= @user.name %>,
 </p>
 
 <p>
-  <%= @comment.user.name %> commented on <%= @comment.project.name %> dashboard
+  <%= t('general.mailers.commented', user: @comment.user.name, project: @comment.project.name) %>
 
   <br /><br />
   &quot;<%= "#{@comment.text}." %>&quot;<br /><br />
-  <%= link_to "View #{@comment.user.name}'s comment", project_url(@comment.project),
+  <%= link_to t('general.mailers.view_comment', user: @comment.user.name), project_url(@comment.project),
     :style => "color:#36a14b; font-weight:bold;" %>
 </p>

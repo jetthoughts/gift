@@ -9,14 +9,14 @@
     = f.input :attachment_id, :as => :hidden
   .right
     = image_tag @project.image, :width => 300, :id => :avatar_image
-    = link_to 'Upload photo', '#', :id => 'upload_button'
+    = link_to t('general.upload_photo'), '#', :id => 'upload_button'
   .clear
   #end-type.accordeon
     .accordion-group.form-inputs
       %div{ class: 'accordion-heading' }
         = label_tag(nil, class: 'accordion-toggle', data: { target: '#fixed-amount-collapse', toggle: 'collapse', parent: '#end-type' }) do
           = f.radio_button :end_type, :fixed_amount
-          Earn up to fixed amount
+          = t('general.project.fixed_amount')
       #fixed-amount-collapse.collapse.accordion-body{ class: f.object.fixed_amount? && 'in' }
         = f.input :fixed_amount
 
@@ -24,10 +24,10 @@
       %div{ class: 'accordion-heading' }
         =label_tag(nil, class: 'accordion-toggle', data: { target: '#open-end-collapse', toggle: 'collapse', parent: '#end-type' }) do
           = f.radio_button :end_type, :open_end
-          Gather with OpenEnd
+          = t('general.project.open_end')
       #open-end-collapse.collapse.accordion-body{ class: f.object.open_end? && 'in' }
         %p
-          No fixed amount to achieve.
+          = t('general.project.no_fixed_amount')
 
   .form-inputs
     = f.input :deadline, input_html: { class: 'datetimepicker' }
