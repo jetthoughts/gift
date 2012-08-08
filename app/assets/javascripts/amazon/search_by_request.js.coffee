@@ -59,7 +59,6 @@ Amazon.SearchByRequest = class extends Amazon.Search
     @fill_form()
 
     @image_selector.add_image_links link.parent().data('image-links')
-    @close()
     @image_selector.open()
 
     @disable_add_links()
