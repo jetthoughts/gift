@@ -9,15 +9,17 @@ $ ->
   search_by_url     = new Amazon.SearchByURL('#card_web_link')
 
   form_options = 
-    selectors :
-      name        : '#card_name'
-      price       : '#card_price'
-      imageUrl    : '#card_remote_image_url'
-      description : '#card_description'
-      detailsUrl  : '#card_web_link'
+    name        : '#card_name'
+    price       : '#card_price'
+    imageUrl    : '#card_remote_image_url'
+    description : '#card_description'
+    detailsUrl  : '#card_web_link'
 
+
+  console.log form_options
   search_by_request.setup_form '#new_card', form_options
   search_by_url.setup_form     '#new_card', form_options
+  image_selector.setup_form    '#new_card', form_options
 
   search_by_request.setup_image_selector image_selector
   search_by_url.setup_image_selector     image_selector

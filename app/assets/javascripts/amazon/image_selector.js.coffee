@@ -10,6 +10,8 @@ Amazon.ImageSelector = class
       @prev_image()
     $('#next_image', @modal).click (e) =>
       @next_image()
+    @modal.on 'hide', =>
+      @update_form()
       
   next_image : ->
     next = @current_image().next()
@@ -27,6 +29,7 @@ Amazon.ImageSelector = class
     @modal.modal 'show'
 
   add_image_links : (links) ->
+    $('.modal-body ul').html ''
     $.each links, (index, link) =>
       $('.modal-body ul', @modal).append "<li><img src='#{link}'/></li>"
     @set_current_image $('.modal-body ul li').first()
@@ -50,7 +53,19 @@ Amazon.ImageSelector = class
   inc_current_counter : ->
     counter = $('.current_count', @modal)
     counter.text parseInt(counter.text()) + 1
+
   dec_current_counter : ->
     counter = $('.current_count', @modal)
     counter.text parseInt(counter.text()) - 1
 
+  update_form : ->
+    link = @current_image().find('img').attr('src')
+    $(@form_options.imageUrl, @form).val link
+    $(@form_options.remoteImagePreview, @form).attr('src', link)
+
+  setup_form : (form_selector, options) ->
+    @form = $(form_selector)
+    @form_options = $.extend
+      imageUrl : '#image_url'
+      remoteImagePreview : '#remote_image_preview'
+    , options
