@@ -14,6 +14,7 @@
       = f.input :image
       = f.input :remote_image_url
       %img#remote_image_preview
+      = link_to 'Select other image', '#', id: 'select_other_image', class: 'hidden btn'
     = f.input :price
 
   .form-actions

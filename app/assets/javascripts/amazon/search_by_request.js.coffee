@@ -60,6 +60,7 @@ Amazon.SearchByRequest = class extends Amazon.Search
 
     @image_selector.add_image_links link.parent().data('image-links')
     @image_selector.open()
+    @show_other_image_button()
 
     @disable_add_links()
     @enable_add_link link
