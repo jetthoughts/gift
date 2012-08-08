@@ -42,6 +42,8 @@ gem 'delayed_job_mongoid'
 
 gem 'asin', git: 'git://github.com/XsErG/asin.git', branch: 'develop'
 gem 'confiture', git: 'git://github.com/phoet/confiture.git'
+gem 'vcr'
+gem 'webmock'
 
 
 gem 'activemerchant'
