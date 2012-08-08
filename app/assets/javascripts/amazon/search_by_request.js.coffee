@@ -58,8 +58,15 @@ Amazon.SearchByRequest = class extends Amazon.Search
     @get_data link
     @fill_form()
 
+    @image_selector.add_image_links link.parent().data('image-links')
+    @close()
+    @image_selector.open()
+
     @disable_add_links()
     @enable_add_link link
+
+  close : ->
+    @modal.modal 'hide'
 
   get_data : (item) ->
     parent = item.parent()
