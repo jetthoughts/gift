@@ -1,8 +1,12 @@
 module AmazonHelper
   def amazon_images_list item
     sets = item.raw.ImageSets.ImageSet
-    sets.map do |set|
-      set.LargeImage.URL
+    if sets.is_a? Array
+      sets.map do |set|
+        set.LargeImage.URL
+      end
+    else
+      [sets.LargeImage.URL]
     end
   end
 
