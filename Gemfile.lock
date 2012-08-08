@@ -395,6 +395,7 @@ GEM
       mail
     validate_url (0.2.0)
       activemodel (>= 3.0.0)
+    vcr (2.2.4)
     voteable_mongo (0.9.3)
     warden (1.2.1)
       rack (>= 1.0)
@@ -472,4 +473,5 @@ DEPENDENCIES
   unicorn-rails
   valid_email
   validate_url
+  vcr
   voteable_mongo
