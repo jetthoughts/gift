@@ -27,6 +27,7 @@ Spork.prefork do
 
   require 'cancan/matchers'
   require "email_spec"
+  require 'vcr'
 
   Dir[File.join(File.dirname(__FILE__), 'support', '**', '*.rb')].each { |f| require f }
 
@@ -47,7 +48,21 @@ Spork.prefork do
       DatabaseCleaner.clean
     end
 
+    config.around(:each) do |example|
+      options = example.metadata[:vcr] || nil
+      if options
+        name = example.metadata[:full_description].downcase.gsub(/\\\\W+/, "_").split("_", 2).join("/")
+        VCR.use_cassette(name, {}, &example)
+      end
+    end
+
     config.infer_base_class_for_anonymous_controllers = false
+  end
+
+  VCR.configure do |config|
+    config.ignore_hosts '127.0.0.1', 'localhost'
+    config.cassette_library_dir = 'spec/cassettes'
+    config.hook_into :webmock
   end
 end
 
