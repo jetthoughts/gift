@@ -18,7 +18,9 @@
 //= require jquery.loadmask.min
 //= require bootstrap
 
+//= require module
 //= require_tree ./modules
+//= require_tree ./amazon
 //= require projects
 //= require comments
 //= require invites
