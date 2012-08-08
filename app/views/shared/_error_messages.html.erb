@@ -1,7 +1,7 @@
 <% if !target.blank? and target.errors.any? %>
 
 <div class="alert alert-error">
-  Some errors were found, please take a look:
+  <%= t('general.errors') %>
   <ul>
   <% target.errors.full_messages.each do |msg| %>
     <li><%= msg %></li>

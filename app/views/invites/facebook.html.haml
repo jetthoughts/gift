@@ -1,33 +1,26 @@
 %p
-  Hello,
-  %b
-    = @name
-  !
+  = t('general.invites.hello', name: @name)
   %br
 
   - if @invites.present?
-    You have been invited to next projects
+    = t('general.invites.you_invited')
     %br
     - @invites.each do |invite|
       %p
-        %b Project:
-        = invite.project.name
+        = t('general.project.project', name: invite.project.name)
         %br
-        %b Description:
-        = invite.project.description
+        = t('general.project.description', text: invite.project.description)
         %br
-        %b Created by:
-        = invite.project.admin.name
+        = t('general.project.created_by', user: invite.project.admin.name)
         %br
-        %b Invited by:
-        = invite.creator_name
+        = t('general.project.invited_by', user: invite.creator_name)
         %br
         = link_to 'Accept', project_invite_facebook_update_url(invite.project, invite)
         = link_to 'Ignore', project_invite_facebook_destroy_url(invite.project, invite)
       %hr
   - else
-    You have no new invites
+    = t('general.invites.no_invites')
     %br
     %br
-    Please, go to the our web site:
+    = t('general.invites.go_to_our_site')
     = link_to root_url, root_url

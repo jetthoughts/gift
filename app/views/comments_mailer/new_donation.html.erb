@@ -3,12 +3,12 @@
 </p>
 
 <p>
-  <%= currency(@fee.amount) %> was donated to <%= @fee.project.name %>
+  <%= t('general.mailers.donated', amount: currency(@fee.amount), project:  @fee.project.name) %>
   <%- if @fee.visible? %>
-    from <%= @fee.user.name %>
+    <%= t('general.mailers.from', name: @fee.user.name ) %>
   <% end %>
   <br /><br />
 
-  <%= link_to "View project", project_url(@fee.project),
+  <%= link_to t('general.mailers.view_project'), project_url(@fee.project),
     :style => "color:#36a14b; font-weight:bold;" %>
 </p>

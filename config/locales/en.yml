@@ -8,17 +8,96 @@ en:
         "%H:%M %m/%d/%Y"
 
   general:
+    errors: 'Some errors were found, please take a look:'
     dislike: "Dislike"
     like: "Like"
     fee_blank_amount: "Private or nothing"
     total_amount: "We have %{amount} donations"
     no_world: no
+    close: Close
     collected_amount: We collected %{amount}
     project_created: Created by %{name} on %{date}
     project_closed: This project was closed by %{name} on %{date}
     members_contributes: "%{count} members contributed."
     expires_on: Expires on %{date}
     members: "Members: %{count}"
+    choose_image: Choose image
+    choose_thumbnail: Choose a thumbnail
+    amazon_search: Amazon Search
+    search: Search
+    profile: Profile
+    update: Update
+    change_photo: Change photo
+    upload_photo: Upload photo
+    change_password: Change password
+    back: Back
+    next: Next
+    active_users: Active users
+    amount: Amount
+    sign_up: Sign up
+    sign_in: Sign in
+    sign_with_provider: Sign in with %{provider}
+    sign_attention: If you signed-up via an authentication service a random password has been set for the local password.<br/>
+                      You can request a new password using the "Forgot your Password?" link on the sign-in page.
+
+    fees:
+      contribute_answer: How do you want to contribute?
+      pay_answer: How do you want to pay?
+      visibility: Visibility
+      visibility_text: Everyone should be allowed to see the amount I contributed
+      hidden_text: No one is allowed to see the amount
+
+    invites:
+      text: You was invited to project %{name}
+      accept: Accept invite
+      ignore: Ignore invite
+      participant: 'Participant:'
+      others: Other participants
+      name: Name
+      email: Email
+      remove: Remove
+      new: New invitation
+      invite_friends: Invite your Friends
+      via_facebook: 'Via Facebook:'
+      by_email: By email
+      ready: Ready
+      hello: Hello, %{name}!
+      you_invited: You have been invited to next projects
+      no_invites: You have no new invites
+      go_to_our_site: 'Please, go to the our web site:'
+
+    project:
+      closed: Project closed
+      created_by: Created by %{user}
+      invited_by: Invited by %{user}
+      project: "Project: %{name}"
+      description: "Description: %{text}"
+      invites_button: Invites
+      edit_project_button: Edit project
+      edit_project: Editing project
+      new_project: New project
+      close_project_button: Close project
+      no_gifts: No any gifts
+      engage: Engage
+      add_gift_button: Add gift suggestion
+      closing_title: You are closing the project
+      show: Show
+      edit: Edit
+      goal: Goal
+      progress: Progress
+      fixed_amount: Earn up to fixed amount
+      no_fixed_amount: No fixed amount to achieve.
+      open_end: Gather with OpenEnd
+
+    mailers:
+      congratulations: Congratulations!
+      project_closed: The project %{name} has been closed.
+      amount_total: You collected an amount of %{amount} for your friend %{name}
+      commented: "%{user} commented on %{project} dashboard"
+      view_comment: "View %{user}'s comment"
+      donated: "%{amount) was donated to %{project}"
+      from: from %{name}
+      view_project: View project
 
     events:
       new_card_created: "%{user} added new gift suggestion on %{time}"

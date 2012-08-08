@@ -2,21 +2,21 @@
 
 = form_for [@project, @fee] do |f|
   %h4
-    How do you want to contribute?
+    = t('general.fees.contribute_answer')
   %p
     = currency_unit(@project.currency).html_safe
     = f.text_field :amount, :value => ""
   %h4
-    How do you want to pay?
+    = t('general.fees.pay_answer')
   %p
     = render :partial => 'payment_method_title', :collection => PaymentMethod.all, :as => :payment_method, :locals => {f:f}
   %h4
-    Visability
+    = t('general.fees.visibility')
   %p
     = f.radio_button :visible, true, :checked => true
-    = f.label :visible, 'Everyone should be allowed to see the amount I contibuted'
+    = f.label :visible, t('general.fees.visibility_text')
   %p
     = f.radio_button :visible, false
-    = f.label :visible, 'No one is allowed to see the amount'
+    = f.label :visible, t('general.fees.hidden_text')
   %br
-  = f.submit 'Next'
+  = f.submit t('general.next')
