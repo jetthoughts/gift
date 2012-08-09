@@ -39,4 +39,4 @@ Amazon.Search = class
     [amount.slice(0, -2), '.', amount.slice(-2)].join ''
 
   location : (action) ->
-    window.location.pathname.replace /\/new/, action 
+    window.location.pathname.replace /(\/cards\/new|\/cards)$/, "/cards#{action}"
