@@ -64,7 +64,6 @@ group :development do
   gem "guard-rails", ">= 0.0.3", require: false
   gem "guard-spork", require: false
   gem "guard-rspec", ">= 0.4.3", require: false
-  gem "guard-jasmine", require: false
 
   gem 'rb-fsevent', require: false
 
@@ -93,9 +92,6 @@ end
 group :development, :test do
   gem "pry-rails"
   gem "rspec-rails", ">= 2.8.1"
-
-  gem 'jasminerice'
-  gem 'jasmine'
 end
 
 group :utils do
