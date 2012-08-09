@@ -42,9 +42,6 @@ gem 'delayed_job_mongoid'
 
 gem 'asin', git: 'git://github.com/XsErG/asin.git', branch: 'develop'
 gem 'confiture', git: 'git://github.com/phoet/confiture.git'
-gem 'vcr'
-gem 'webmock'
-
 
 gem 'activemerchant'
 
@@ -89,6 +86,8 @@ group :test do
 
   gem "mongoid-rspec"
   gem "email_spec", ">= 1.2.1"
+  gem 'vcr'
+  gem 'webmock'
 end
 
 group :development, :test do
