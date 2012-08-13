@@ -47,9 +47,10 @@ class ProjectsController < ApplicationController
   # POST /projects/1/close
   def close
     @project = chain.find params[:project_id]
-    withdraw
-    @project.close
-    redirect_to @project
+    if withdraw
+      @project.close
+      flash[:notice] = 'Project successfully closed'
+    end
   end
 
   # DELETE /projects/1
@@ -61,10 +62,12 @@ class ProjectsController < ApplicationController
   private
 
   def withdraw
-    @with_draw = Withdraw.build_with_project @project
-    logger.debug @with_draw.inspect
-    @with_draw.refund if !@with_draw.nil? and @with_draw.valid?
-    flash[:notice] = @with_draw.errors if @with_draw.errors.present?
+    with_draw = Withdraw.build_with_project @project
+    if !with_draw.nil? and with_draw.valid?
+      with_draw.refund
+      flash[:notice] = with_draw.errors.messages.values.first
+      !with_draw.new?
+    end
   end
 
   def owner
