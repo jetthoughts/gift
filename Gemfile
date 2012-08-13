@@ -70,6 +70,7 @@ group :development do
   gem 'growl', require: false
   gem 'libnotify', require: false
   gem 'rb-inotify', require: false
+  gem 'quiet_assets'
 end
 
 group :test do

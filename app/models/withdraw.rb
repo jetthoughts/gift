@@ -8,7 +8,7 @@ class Withdraw
   field :amount, type: Float, default: 0
   belongs_to  :payment_method
   
-  attr_accessible :payment_method, :project, :paypal_email
+  attr_accessible :payment_method, :project, :paypal_email, :payment_method_id
 
   validates :payment_method, presence: true
   validates :project, presence: true
@@ -23,7 +23,7 @@ class Withdraw
   def self.build_with_project project
     paid_info = project.paid_info
     if project.paid_type == 'pay_pal'
-      payment_method = PaymentMethod.where(_type: 'Paypal::Paypalwp').first
+      payment_method = Paypal::Paypalwp.instance
       self.new project: project, payment_method: payment_method, paypal_email: paid_info.email
     else
       nil
@@ -38,7 +38,7 @@ class Withdraw
       return false
     end
 
-    if (response = paypal.transfer(total_amount_in_cents, paypal_email, { currency: project.currency })).success?
+    if (response = payment_method.refund(total_amount_in_cents, paypal_email, { currency: project.currency })).success?
       logger.debug 'Success'
       save
     else
@@ -50,14 +50,6 @@ class Withdraw
 
   def paypal?
     payment_method.class.name == 'Paypal::Paypalwp'
-  end
-
-  def paypal
-    @paypal ||=  ActiveMerchant::Billing::Base.gateway(:paypal_express).new(config_from_file('paypal.yml'))    
-  end
-
-  def config_from_file(file)
-    YAML.load_file(File.join(Rails.root, 'config', file))[Rails.env].symbolize_keys
   end
 
   def total_amount_in_cents    
