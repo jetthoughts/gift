@@ -15,6 +15,15 @@ ActiveAdmin.register Project do
     default_actions
   end
 
+  action_item :only => :show do
+    link_to 'Logs', logs_admin_project_path(resource)
+  end
+
+  member_action :logs do
+    @project = Project.find(params[:id])
+    render 'projects/_update_notifications'
+  end
+
   form do |f|
     f.inputs "Project" do
       f.input :name
