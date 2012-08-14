@@ -41,7 +41,7 @@
         .btn.pull-right.clear-right
           = link_to t('general.project.add_gift_button'), new_project_card_path(@project)
 
-      = render 'update_notifications'
+      = render 'update_notifications', {update_notifications: @project.update_notifications}
 
   .clearfix
   - if can? :show, @project.comments.build
