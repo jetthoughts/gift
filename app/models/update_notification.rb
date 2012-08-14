@@ -65,4 +65,11 @@ class UpdateNotification
     end
     UpdateNotification.create({project: fee.project, event_type: event_type, event_params: event_params})
   end
+
+  def self.new_withdraw withdraw
+    event_params = {amount: withdraw.amount, amount_with_fees: withdraw.amount_with_fees, success: withdraw.success?, error: withdraw.errors.messages.values.join(', ')}
+    event_type =  withdraw.success? ? 'withdraw_success' : 'withdraw_failure'
+    UpdateNotification.create({project: withdraw.project, event_type: event_type, event_params: event_params})
+  end
+
 end
