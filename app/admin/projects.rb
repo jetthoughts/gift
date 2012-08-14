@@ -15,13 +15,24 @@ ActiveAdmin.register Project do
     default_actions
   end
 
-  action_item :only => :show do
-    link_to 'Logs', logs_admin_project_path(resource)
+  action_item :only => [:show, :all_logs] do
+    link_to 'Payment Logs', payment_logs_admin_project_path(resource)
   end
 
-  member_action :logs do
-    @project = Project.find(params[:id])
-    render 'projects/_update_notifications'
+  action_item :only => :payment_logs do
+    link_to 'All Logs', all_logs_admin_project_path(resource)
+  end
+
+  member_action :payment_logs do
+    project = Project.find(params[:id])
+    update_notifications = project.update_notifications.admin_events
+    render :file => 'projects/_update_notifications', :locals => {update_notifications: update_notifications}
+  end
+
+  member_action :all_logs do
+    project = Project.find(params[:id])
+    update_notifications = project.update_notifications
+    render :file => 'projects/_update_notifications', :locals => {update_notifications: update_notifications}
   end
 
   form do |f|

@@ -4,6 +4,8 @@ class UpdateNotification
 
   PROJECT_TRACK_COLUMNS = [:name, :description, :deadline, :fixed_amount]
 
+  ADMIN_EVENTS = %w(withdraw_success withdraw_failure project_change_end_type new_fee_donated_visible new_fee_donated_hidden)
+
   field :event_type, type: String
   field :event_params, type: Hash
 
@@ -12,6 +14,8 @@ class UpdateNotification
   scope :ordered_by_date, -> do
     order_by [[:created_at, :desc]]
   end
+
+  scope :admin_events, where(:event_type.in => ADMIN_EVENTS)
 
   def self.new_card_created_event card
     UpdateNotification.create({project: card.project, event_type: 'new_card_created', event_params: {user: card.user.name}})
