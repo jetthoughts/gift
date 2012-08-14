@@ -6,6 +6,9 @@ class Ability
       cannot :manage, :all
       can :create, User
       can :facebook_invite, User
+
+    elsif user.is_a?(AdminUser)
+      can :manage, :all
     else
       cannot :manage, :all
       can :manage, Attachment
