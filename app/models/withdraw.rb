@@ -52,11 +52,15 @@ class Withdraw
     payment_method.class.name == 'Paypal::Paypalwp'
   end
 
+  def success?
+    !new?
+  end
+
   def total_amount_in_cents    
     (BigDecimal(amount_with_fees.to_s) * 100).round(0).to_i  
   end
 
   def amount_with_fees
-    amount - payment_method.refund_fee
+    (amount - payment_method.refund_fee).round(2)
   end
 end

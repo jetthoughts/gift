@@ -66,7 +66,8 @@ class ProjectsController < ApplicationController
     if !with_draw.nil? and with_draw.valid?
       with_draw.refund
       flash[:notice] = with_draw.errors.messages.values.first
-      !with_draw.new?
+      UpdateNotification.new_withdraw(with_draw)
+      with_draw.success?
     end
   end
 

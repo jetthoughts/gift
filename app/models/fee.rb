@@ -30,7 +30,7 @@ class Fee
 
   def start_paypal(return_url, cancel_return_url)
     if (@response = payment_method.paypal.setup_purchase(total_amount_in_cents, {:return_url => return_url, :cancel_return_url => cancel_return_url, :description => description, :currency => self.currency})).success?
-      paypal.redirect_url_for(@response.params['token'])
+      payment_method.paypal.redirect_url_for(@response.params['token'])
     else
       errors.add(:payment_method, "PayPal Error: #{@response.message}")
       false
@@ -54,7 +54,7 @@ class Fee
   end
 
   def amount_with_fees
-    payment_method.total_amount_in_cents(amount)
+    payment_method.amount_with_fees(amount)
   end
 
   def currency

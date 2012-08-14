@@ -33,7 +33,7 @@ class PaymentMethod
     Rails.env == 'production' ? 'production' : 'test'
   end
 
-  def total_amount_in_cents amount
+  def amount_with_fees amount
     amount + fee(amount)
   end
 

@@ -109,6 +109,8 @@ en:
 
       new_fee_donated_visible: "%{user} donated %{amount} to the project on %{time}"
       new_fee_donated_hidden: "%{user} contributed to the project on %{time}"
+      withdraw_success: "Admin withdraw %{amount}(%{amount_with_fees}) with success"
+      withdraw_failure: "Admin tried withdraw %{amount}(%{amount_with_fees}) with error: %{error}"
 
     close_project:
       empty_paid_info:
