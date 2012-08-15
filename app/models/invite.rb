@@ -7,6 +7,8 @@ class Invite
 
   field :fb_id
   field :email
+  field :phone
+
   field :name
   field :creator_name
   field :invite_token
@@ -15,6 +17,10 @@ class Invite
   validates :project, :name, presence: true
   validates :email,
             :format => {:with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i},
+            :allow_blank => true
+
+  validates :phone,
+            :format => {:with => /^\+\d{12}$/i},
             :allow_blank => true
 
   validates :fb_id, :uniqueness => true, :allow_blank => true
@@ -44,7 +50,7 @@ class Invite
   private
 
   def blank_email_and_id?
-    email.blank? and fb_id.blank?
+    email.blank? and fb_id.blank? and phone.blank?
   end
 
   def present_email_or_id
@@ -66,4 +72,10 @@ class Invite
     return if email.blank?
     self.user.present? ? InvitesMailer.exist_user_notify(self).deliver : InvitesMailer.new_user_notify(self).deliver
   end
+
+  def send_phone_notification
+    return if phone.blank?
+    self.user.present? ? SMSNotifier.exist_user_notify(self) : SMSNotifier.new_user_notify(self)
+  end
+
 end

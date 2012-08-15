@@ -3,7 +3,7 @@
   %b
   = invite.project.description
   %br
-  = t('general.project.created_by', user: invite.admin.name)
+  = t('general.project.created_by', user: invite.creator_name)
   %br
   = link_to t('general.invites.accept'), [invite.project, invite], data: { method: :put }
   = link_to t('general.invites.ignore'), [invite.project, invite], data: { confirm: 'Are you sure?', method: :delete }

@@ -86,3 +86,6 @@ ASIN::Configuration.configure do |config|
   config.associate_tag = ENV['AWS_ASSOCIATE_TAG']
   config.logger        = nil
 end
+
+SMS_CONFIG = %w(3387553 alexey.kisel bbAAMEZMdOHVYH)
+Clickatell::API.debug_mode = false

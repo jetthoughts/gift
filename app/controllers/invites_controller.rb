@@ -9,22 +9,23 @@ class InvitesController < ApplicationController
   end
 
   def create
-    invite_params = params[:invites]
-    return if need_redirect? invite_params
+    invite_params = params[:invites].reject {|invite| invite[:email].blank? and invite[:phone].blank? and invite[:name].blank? }
+    if invite_params.any?
+      @invites = []
+      invite_params.each do |param|
+        name = param[:name]
+        email = param[:email]
+        phone = param[:phone]
+        invite = @project.invites.create(phone: phone, email: email, name: name, creator_name: current_user.name)
+        @invites.push(invite) if invite.errors.present?
+      end
 
-    @invites = []
-    invite_params.each do |param|
-      name = param[:name]
-      email = param[:email]
-      invite = @project.invites.create(email: email, name: name, creator_name: current_user.name)
-      @invites.push(invite) if invite.errors.present?
+      if @invites.any?
+        render :new
+        return
+      end
+      flash[:notice] = 'Success sent'
     end
-
-    if @invites.any?
-      render :new
-      return
-    end
-    flash[:notice] = 'Success sent'
     redirect_to project_path(@project)
   end
 
@@ -51,6 +52,7 @@ class InvitesController < ApplicationController
   end
 
   def update
+    @invite.user ||= current_user
     @invite.accept!
     redirect_to @project
   end
@@ -62,21 +64,12 @@ class InvitesController < ApplicationController
 
   private
 
-  def need_redirect? invite_params
-    if invite_params.size == 1
-      if invite_params[0]['email'].blank? and invite_params[0][:name].blank?
-        redirect_to project_path(@project)
-        return true
-      end
-    end
-    false
-  end
-
   def find_project
     @project = Project.find(params[:project_id])
   end
 
   def find_invite
-    @invite = current_user.invites.for_ids(params[:id]).first
+    #@invite = current_user.invites.for_ids(params[:id]).first
+    @invite = Invite.find(params[:id])
   end
 end
