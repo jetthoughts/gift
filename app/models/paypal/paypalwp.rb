@@ -10,7 +10,7 @@ module Paypal
     end
 
     def fee(amount)
-      ((amount * paypal_percent / (1 - paypal_percent))*100).ceil.to_f/100 + transaction_fee
+      ((amount + transaction_fee) / (1 - paypal_percent).round(4)).round(2) - amount
     end
 
     def refund total_amount_in_cents, paypal_email, options

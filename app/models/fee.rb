@@ -16,7 +16,15 @@ class Fee
 
   #paypal  methods should be moved from here
   def complete_paypal(token, payer_id)
-    if (response = payment_method.paypal.purchase(total_amount_in_cents, {:token => token, :payer_id => payer_id, :description => description, :currency => self.currency})).success?
+    response = payment_method.paypal.purchase(total_amount_in_cents, {:token => token, :payer_id => payer_id, :description => description, :currency => self.currency})
+    transaction_gid = response.params['transaction_id']
+    options = { operation:          'purchase',
+                params:             response.params,
+                success:            response.success?,
+                data:           {},
+                transaction_gid:    transaction_gid }
+    self.payment_transactions.create(options)
+    if response.success?
       if response.params['payment_status'] == 'Completed'
         self.purchase
         self.amount = response.params['gross_amount'].to_f - response.params['fee_amount'].to_f - response.params['tax_amount'].to_f

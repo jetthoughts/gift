@@ -25,4 +25,16 @@ describe Fee do
 
   end
 
+  describe 'Paypal Calculator' do
+    it 'should return correct fees' do
+      vals = {13=>1361, 14=>1463, 33=>3400, 50=>5133, 10=>1055, 100=>10229}
+
+      vals.each do |k,v|
+        fee = @user.fees.build(project: @project, amount: k, payment_method_id: Paypal::Paypalwp.instance.id)
+        fee.total_amount_in_cents.should eql(v)
+      end
+    end
+
+  end
+
 end
