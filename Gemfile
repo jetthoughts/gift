@@ -54,6 +54,7 @@ gem 'images_fetcher', '0.0.1', :git => 'git://github.com/spy-a/images_fetcher.gi
 gem 'airbrake'
 gem 'therubyracer'
 gem 'newrelic_rpm'
+gem 'clickatell'
 
 group :development do
 

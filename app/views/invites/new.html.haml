@@ -22,4 +22,8 @@
     = render :partial => 'invite_fields', :collection => @invites, :as => :invite
   .center
     = link_to t('general.invites.others'), '#',  id: 'add_email_participant', class: 'btn'
+  %h4
+    = t('general.invites.by_phone')
+  #by_email
+    = render :partial => 'phone_invite_fields', :collection => @invites, :as => :invite
   %p= f.submit t('general.invites.ready')

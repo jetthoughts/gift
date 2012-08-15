@@ -55,11 +55,13 @@ en:
       others: Other participants
       name: Name
       email: Email
+      phone: Phone
       remove: Remove
       new: New invitation
       invite_friends: Invite your Friends
       via_facebook: 'Via Facebook:'
       by_email: By email
+      by_phone: By phone
       ready: Ready
       hello: Hello, %{name}!
       you_invited: You have been invited to next projects
