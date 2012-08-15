@@ -16,6 +16,9 @@ class UpdateNotification
   end
 
   scope :admin_events, where(:event_type.in => ADMIN_EVENTS)
+  scope :new_events, lambda {|u| where(:created_at.gte => u.last_sign_in_at) }
+
+  default_scope ordered_by_date
 
   def self.new_card_created_event card
     UpdateNotification.create({project: card.project, event_type: 'new_card_created', event_params: {user: card.user.name}})
@@ -74,6 +77,12 @@ class UpdateNotification
     event_params = {amount: withdraw.amount, amount_with_fees: withdraw.amount_with_fees, success: withdraw.success?, error: withdraw.errors.messages.values.join(', ')}
     event_type =  withdraw.success? ? 'withdraw_success' : 'withdraw_failure'
     UpdateNotification.create({project: withdraw.project, event_type: event_type, event_params: event_params})
+  end
+
+  def self.new_project project
+    event_params = {}
+    event_type =  'new_project'
+    UpdateNotification.create({project: project, event_type: event_type, event_params: event_params})
   end
 
 end
