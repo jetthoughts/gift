@@ -1,0 +1,5 @@
+%h2
+  = project.name
+= render 'projects/update_notifications', {update_notifications: events}
+%hr
+= link_to 'All logs for this project', all_logs_admin_project_path(project)

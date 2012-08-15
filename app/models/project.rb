@@ -47,6 +47,8 @@ class Project
   before_update :send_updated_event
   after_update :check_valid_paid_info
 
+  after_create :create_notification
+
   ## Scopes
   scope :ordered_by_date, -> do
     order_by [[:created_at, :desc]]
@@ -146,4 +148,9 @@ class Project
     write_attribute(:open_end, nil) if fixed_amount?
     write_attribute(:fixed_amount, nil) if open_end?
   end
+
+  def create_notification
+    UpdateNotification.new_project(self)
+  end
+
 end
