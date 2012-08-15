@@ -6,21 +6,20 @@ class InvitesController < ApplicationController
 
   def new
     @invites = [@project.invites.build]
+    @phone_invites = [@project.invites.build]
   end
 
   def create
     invite_params = params[:invites].reject {|invite| invite[:email].blank? and invite[:phone].blank? and invite[:name].blank? }
     if invite_params.any?
-      @invites = []
+      @invites, @phone_invites = [], []
       invite_params.each do |param|
-        name = param[:name]
-        email = param[:email]
-        phone = param[:phone]
+        name, email, phone = param[:name], param[:email], param[:phone]
         invite = @project.invites.create(phone: phone, email: email, name: name, creator_name: current_user.name)
-        @invites.push(invite) if invite.errors.present?
+        (param.has_key?(:phone) ? @phone_invites : @invites).push(invite) if invite.errors.present?
       end
 
-      if @invites.any?
+      if @invites.any? || @phone_invites.any?
         render :new
         return
       end
@@ -53,6 +52,7 @@ class InvitesController < ApplicationController
 
   def update
     @invite.user ||= current_user
+
     @invite.accept!
     redirect_to @project
   end

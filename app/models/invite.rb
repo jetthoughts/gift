@@ -1,7 +1,7 @@
+require 'smsnotifier'
 class Invite
   include Mongoid::Document
   include Mongoid::Timestamps
-
   belongs_to :project
   belongs_to :user
 
@@ -24,11 +24,11 @@ class Invite
             :allow_blank => true
 
   validates :fb_id, :uniqueness => true, :allow_blank => true
-  validates :email, :uniqueness => {:scope => :project_id}
+  validates :email, :uniqueness => {:scope => :project_id},  :allow_blank => true
   before_create :set_token
   before_validation :set_user, :on => :create
 
-  after_create :send_notification
+  after_create :send_notification, :send_sms_notification
 
   def self.generate_uid
     SecureRandom.hex(8)
@@ -49,12 +49,16 @@ class Invite
 
   private
 
-  def blank_email_and_id?
+  def blank_email_and_id_and_phone?
     email.blank? and fb_id.blank? and phone.blank?
   end
 
+  def blank_email_and_id?
+    email.blank? and fb_id.blank?
+  end
+
   def present_email_or_id
-    if blank_email_and_id?
+    if blank_email_and_id_and_phone?
       errors[:base] << "Invite must contains email or facebook user id"
     end
   end
@@ -73,9 +77,9 @@ class Invite
     self.user.present? ? InvitesMailer.exist_user_notify(self).deliver : InvitesMailer.new_user_notify(self).deliver
   end
 
-  def send_phone_notification
+  def send_sms_notification
     return if phone.blank?
-    self.user.present? ? SMSNotifier.exist_user_notify(self) : SMSNotifier.new_user_notify(self)
+    SMSNotifier.instance.exist_user_notify(self)
   end
 
 end
