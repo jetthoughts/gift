@@ -48,6 +48,7 @@ Spork.prefork do
       DatabaseCleaner.clean
     end
 
+=begin
     config.around(:each) do |example|
       options = example.metadata[:vcr] || nil
       if options
@@ -55,6 +56,7 @@ Spork.prefork do
         VCR.use_cassette(name, {}, &example)
       end
     end
+=end
 
     config.infer_base_class_for_anonymous_controllers = false
   end
