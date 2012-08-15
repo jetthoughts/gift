@@ -25,5 +25,5 @@
   %h4
     = t('general.invites.by_phone')
   #by_email
-    = render :partial => 'phone_invite_fields', :collection => @invites, :as => :invite
+    = render :partial => 'phone_invite_fields', :collection => @phone_invites, :as => :invite
   %p= f.submit t('general.invites.ready')
