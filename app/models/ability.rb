@@ -37,8 +37,7 @@ class Ability
       can :create_facebook, User, id: user.id
       can [:new, :amazon_lookup, :amazon_search, :fetch], Card
       can :create, Card do |card|
-        card.project && card.project.participants_add_own_suggestions &&
-            card.project.participant?(user) && !card.project.closed
+        card.project && (card.project.participants_add_own_suggestions || card.project.admin == user) && card.project.participant?(user) && !card.project.closed
       end
       can [:show, :update], Card do |card|
         card.project.participant?(user) && !card.project.closed
