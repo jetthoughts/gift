@@ -23,7 +23,8 @@ class Fee
                 success:            response.success?,
                 data:           {},
                 transaction_gid:    transaction_gid }
-    self.payment_transactions.create(options)
+    self.payment_transactions.create!(options)
+
     if response.success?
       if response.params['payment_status'] == 'Completed'
         self.purchase

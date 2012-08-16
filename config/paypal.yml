@@ -11,6 +11,6 @@ production:
   password: '1343131095'
   signature: 'AYUoXZhCw9z3nmVAUw1vXKz7VtkgArpML7KvjK5HgM2bf69kAOCm403y'
 staging:
-  login: 'gs_1343131071_biz_api1.mailinator.com'
-  password: '1343131095'
-  signature: 'AYUoXZhCw9z3nmVAUw1vXKz7VtkgArpML7KvjK5HgM2bf69kAOCm403y'
+  login: 'n.rohany_api1.gmail.com'
+  password: '45JC5CYKFVNHWBYN'
+  signature: 'AFcWxV21C7fd0v3bYYYRCpSSRl31A43BqEyWmBXYucDQMH-t.57L54Z3'
