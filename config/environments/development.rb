@@ -57,4 +57,4 @@ ASIN::Configuration.configure do |config|
 end
 
 SMS_CONFIG = %w(3387553 alexey.kisel bbAAMEZMdOHVYH)
-Clickatell::API.debug_mode = false
+Clickatell::API.debug_mode = true

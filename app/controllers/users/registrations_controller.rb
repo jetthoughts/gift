@@ -2,7 +2,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def new
     atrs = {}
+    puts '*'*100
     if params[:invite_token] and invite = Invite.where(:invite_token => params[:invite_token]).first
+      puts '*'*100
+      p invite
       atrs = {:email => invite.email, :name => invite.name}
     end
     resource = build_resource(atrs)

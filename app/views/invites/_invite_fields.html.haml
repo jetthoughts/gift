@@ -1,6 +1,6 @@
 = render "shared/error_messages", :target => invite
-.email_participant
+.participant
   = t('general.invites.participant')
   = text_field_tag 'invites[][name]', invite.name, :placeholder => t('general.invites.name')
   = text_field_tag 'invites[][email]', invite.email, :placeholder => t('general.invites.email')
-  = link_to t('general.invites.remove'), '#',  class: 'btn remove_email_participant hidden'
+  = link_to t('general.invites.remove'), '#',  class: 'btn remove_participant hidden'
