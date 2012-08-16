@@ -109,6 +109,11 @@ class User
 
 
   def merge_another_invites
+    vals = []
+    [:email, :uid].each do |field|
+
+    end
+
     Invite.where(:user_id => nil).any_of({:email => email}, {:fb_id => uid}).update_all(:user_id => id)
   end
 

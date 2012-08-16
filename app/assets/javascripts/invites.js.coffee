@@ -3,14 +3,15 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $ ->
-  $('#add_email_participant').click ->
-    elem = $('#new_invite .email_participant:first')
+  $('.add_participant').click ->
+    href = $(this).data('href')
+    elem = $(href).find('.participant:first')
     new_elem = elem.clone()
-    new_elem.find('input').val('').end().appendTo $('#by_email')
-    new_elem.find('.remove_email_participant').removeClass('hidden')
+    new_elem.find('input').val('').end().appendTo $(href)
+    new_elem.find('.remove_participant').removeClass('hidden')
     return false
 
-  $('.remove_email_participant').live 'click', ->
+  $('.remove_participant').live 'click', ->
     $(this).parent().remove()
     return false
 

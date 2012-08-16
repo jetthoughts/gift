@@ -21,9 +21,11 @@
   #by_email
     = render :partial => 'invite_fields', :collection => @invites, :as => :invite
   .center
-    = link_to t('general.invites.others'), '#',  id: 'add_email_participant', class: 'btn'
+    = link_to t('general.invites.others'), '#',  class: 'add_participant btn', data: {href:'#by_email'}
   %h4
     = t('general.invites.by_phone')
-  #by_email
+  #by_phone
     = render :partial => 'phone_invite_fields', :collection => @phone_invites, :as => :invite
+  .center
+    = link_to t('general.invites.others'), '#',  class: 'add_participant btn', data: {href:'#by_phone'}
   %p= f.submit t('general.invites.ready')

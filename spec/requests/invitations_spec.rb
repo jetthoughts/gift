@@ -16,7 +16,7 @@ feature "Invitations" do
   end
 
   scenario "should sent" do
-    within '#by_email .email_participant:first' do
+    within '#by_email .participant:first' do
       fill_in 'invites__name', with: 'Name'
       fill_in 'invites__email', with: 'some@email.com'
     end
@@ -31,15 +31,15 @@ feature "Invitations" do
     click_link 'Other participants'
     click_link 'Other participants'
 
-    page.has_selector?('.email_participant', :count => 3)
-    page.has_selector?('.remove_email_participant', :count => 2)
+    page.has_selector?('.participant', :count => 3)
+    page.has_selector?('.remove_participant', :count => 2)
   end
 
   scenario 'can remove participient' do
     click_link 'Other participants'
-    page.has_selector?('.email_participant', :count => 2)
+    page.has_selector?('.participant', :count => 2)
 
     click_link 'remove'
-    page.has_selector?('.email_participant', :count => 1)
+    page.has_selector?('.participant', :count => 1)
   end
 end
