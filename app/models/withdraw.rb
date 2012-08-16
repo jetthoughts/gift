@@ -37,7 +37,6 @@ class Withdraw
       logger.debug 'Pool is not available'
       return false
     end
-
     if (response = payment_method.refund(total_amount_in_cents, paypal_email, { currency: project.currency })).success?
       logger.debug 'Success'
       save
