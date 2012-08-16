@@ -7,7 +7,7 @@ class SMSNotifier
     puts '***'+'Send in SMS'+'***'
     p build_message(invite)
     puts '*'*100
-    #send_message(invite.phone, build_message(invite))
+    send_message(invite.phone, build_message(invite))
   end
 
   def self.instance
