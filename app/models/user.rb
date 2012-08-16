@@ -111,10 +111,13 @@ class User
   def merge_another_invites
     vals = []
     [:email, :uid].each do |field|
-
+      val = self.send(field)
+      if val.present?
+        vals << {field => val}
+      end
     end
+    Invite.where(:user_id => nil).any_of(*vals).update_all(:user_id => id) if vals.any?
 
-    Invite.where(:user_id => nil).any_of({:email => email}, {:fb_id => uid}).update_all(:user_id => id)
   end
 
   def self.new_with_session(params, session)
