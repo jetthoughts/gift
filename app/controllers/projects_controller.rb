@@ -63,6 +63,7 @@ class ProjectsController < ApplicationController
 
   def withdraw
     with_draw = Withdraw.build_with_project @project
+
     if !with_draw.nil? and with_draw.valid?
       with_draw.refund
       flash[:notice] = with_draw.errors.messages.values.first
