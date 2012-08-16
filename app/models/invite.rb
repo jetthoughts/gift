@@ -28,6 +28,8 @@ class Invite
   before_create :set_token
   before_validation :set_user, :on => :create
 
+
+
   after_create :send_notification, :send_sms_notification
 
   def self.generate_uid
@@ -45,6 +47,16 @@ class Invite
       logger.debug '**************save accept!*********************'
     end
     self.destroy
+  end
+
+  def send_notification
+    return if email.blank?
+    self.user.present? ? InvitesMailer.exist_user_notify(self).deliver : InvitesMailer.new_user_notify(self).deliver
+  end
+
+  def send_sms_notification
+    return if phone.blank?
+    SMSNotifier.instance.exist_user_notify(self)
   end
 
   private
@@ -72,14 +84,6 @@ class Invite
     self.invite_token = self.class.generate_uid
   end
 
-  def send_notification
-    return if email.blank?
-    self.user.present? ? InvitesMailer.exist_user_notify(self).deliver : InvitesMailer.new_user_notify(self).deliver
-  end
-
-  def send_sms_notification
-    return if phone.blank?
-    SMSNotifier.instance.exist_user_notify(self)
-  end
-
+  handle_asynchronously :send_notification
+  handle_asynchronously :send_sms_notification
 end
