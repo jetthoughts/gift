@@ -85,4 +85,10 @@ class UpdateNotification
     UpdateNotification.create({project: project, event_type: event_type, event_params: event_params})
   end
 
+  def self.new_transaction transaction
+    event_params = {created_at: transaction.created_at }
+    event_type =  'new_transaction'
+    UpdateNotification.create({project: project, event_type: event_type, event_params: event_params})
+  end
+
 end
