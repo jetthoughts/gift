@@ -39,7 +39,7 @@ feature "Invitations" do
     click_link 'Other participants'
     page.has_selector?('.participant', :count => 2)
 
-    click_link 'remove'
+    click_link 'Remove'
     page.has_selector?('.participant', :count => 1)
   end
 end

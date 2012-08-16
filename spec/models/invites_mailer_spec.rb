@@ -24,7 +24,7 @@ describe InvitesMailer do
 
     it 'should have correct name and email' do
       should deliver_to('test@test.com')
-      should have_body_text(/Hello foo bar!/)
+      should have_body_text(/Hello, foo bar!/)
     end
   end
 
@@ -47,7 +47,7 @@ describe InvitesMailer do
 
     it 'should have correct name and email' do
       should deliver_to('test@test.com')
-      should have_body_text(/Hello foo bar!/)
+      should have_body_text(/Hello, foo bar!/)
     end
   end
 
