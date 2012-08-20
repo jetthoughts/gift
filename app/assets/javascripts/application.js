@@ -25,4 +25,3 @@
 //= require comments
 //= require invites
 //= require card
-//= require images_fetcher

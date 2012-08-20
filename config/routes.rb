@@ -29,7 +29,8 @@ Gift::Application.routes.draw do
     end
   end
 
-  mount ImagesFetcher::Engine, at: '/im'
+  match '/fetch' => 'requests#fetch'
+  match '/parse' => 'requests#parse'
 
   devise_for :users,
              controllers: {omniauth_callbacks: "omniauth_callbacks", registrations: "users/registrations"}
