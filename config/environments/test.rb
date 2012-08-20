@@ -44,6 +44,7 @@ ASIN::Configuration.configure do |config|
   config.secret        = 'OPphxSFx8O9sVJhQyJDQkRVfr1pwLFwzkYV63JRe'
   config.key           = 'AKIAIXDN3UGIC77M6ASQ'
   config.associate_tag = 'birthdonat-20'
+  config.logger        = nil
 end
 
 SMS_CONFIG = %w(3387553 alexey.kisel bbAAMEZMdOHVYH)

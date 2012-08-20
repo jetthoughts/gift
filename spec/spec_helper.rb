@@ -4,6 +4,8 @@ require 'spork'
 Spork.prefork do
   ENV["RAILS_ENV"] ||= 'test'
 
+
+  require 'support/confiture'
   require File.expand_path("../../config/environment", __FILE__)
   require 'simplecov'
   require 'rails/application'
@@ -14,20 +16,11 @@ Spork.prefork do
   require 'cancan/matchers'
   require "email_spec"
   require 'vcr'
-
   SimpleCov.start 'rails'
 
   Capybara.javascript_driver = :webkit
-  # Capybara.javascript_driver = :selenium
   Capybara.server_boot_timeout = 50
 
-  Capybara.server do |app, port|
-    Unicorn::Configurator::RACKUP[:port] = port
-    Unicorn::Configurator::RACKUP[:set_listener] = true
-
-    server = Unicorn::HttpServer.new(app)
-    server.start
-  end
 
   Spork.trap_class_method(Rails::Mongoid, :load_models)
   Spork.trap_method(Rails::Application, :reload_routes!)
