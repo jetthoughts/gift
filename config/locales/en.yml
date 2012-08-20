@@ -69,6 +69,7 @@ en:
       go_to_our_site: 'Please, go to the our web site:'
 
     project:
+      first_gift: Sample gift suggestion
       closed: Project closed
       created_by: Created by %{user}
       invited_by: Invited by %{user}
