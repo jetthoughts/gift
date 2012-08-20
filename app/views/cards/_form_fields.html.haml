@@ -1,0 +1,14 @@
+.form-inputs
+  %span= f.input :name
+  .description
+    %span= f.text_area :description, :style => 'height: 50px;'
+    %span
+      = link_to 'Amazon search', '#search_modal', data: { toggle: 'modal'}, class: 'btn'
+  .clearfix
+  = f.input :web_link
+  .image
+    = f.input :image
+    = f. hidden_field :remote_image_url
+    %img#remote_image_preview
+    = link_to 'Select other image', '#', id: 'select_other_image', class: 'hidden btn'
+  = f.input :price

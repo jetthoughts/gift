@@ -29,6 +29,9 @@ Gift::Application.routes.draw do
     end
   end
 
+  match 'cards/amazon_search' => 'cards#amazon_search', :via => :post
+  post 'cards/amazon_lookup'=> 'cards#amazon_lookup', :via => :post
+
   match '/fetch' => 'requests#fetch'
   match '/parse' => 'requests#parse'
 

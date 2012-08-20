@@ -4,13 +4,17 @@
   .form-inputs.left
     = f.input :name
     = f.input :description
-    = f.input :article_link    
     = f.input :participants_add_own_suggestions, as: :boolean
     = f.input :attachment_id, :as => :hidden
   .right
-    = image_tag @project.image, :width => 300, :id => :avatar_image
+    = image_tag @project.image_thumb, :id => :avatar_image
     = link_to t('general.upload_photo'), '#', :id => 'upload_button'
   .clear
+  - if @project.new_record?
+    %h3
+      = t('general.project.first_gift')
+    = f.simple_fields_for :cards, Card.new do |card|
+      = render 'cards/form_fields', f:card
   #end-type.accordeon
     .accordion-group.form-inputs
       %div{ class: 'accordion-heading' }
@@ -42,3 +46,7 @@
     = f.button :submit
 = content_for :javascript_code do
   ="PhotoUpload.initialize('#{attachment_url(current_user.attachment ||  Attachment.new)}');"
+
+- if @project.new_record?
+  = render 'cards/search_modal'
+  = render 'cards/choose_image'
