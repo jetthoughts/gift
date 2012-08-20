@@ -36,7 +36,7 @@
   </div>
 <% end %>
 
-<%= link_to t('general.back'), :back %>
+<%= link_to t('general.back'), projects_path %>
 
 <%
    attachment = current_user.attachment ||  Attachment.new
