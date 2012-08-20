@@ -30,14 +30,9 @@ class ProjectsController < ApplicationController
   # POST /projects
   def create
     @project = current_user.projects.build(model_params(admin: current_user))
-    p "Cards"
-    p @project.cards.first
-    #card = Card.new params["project"]["cards_attributes"]["0"]
-    #card.user = current_user
-    #card.project = @project
 
-    if @project.errors.empty?
-      card.save
+    if @project.save
+      @project.cards.first.update_attributes user_id: current_user.id if @project.cards.first.present?
       redirect_to [:new, @project, :invite]
     else
       render 'new'
