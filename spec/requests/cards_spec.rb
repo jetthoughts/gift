@@ -50,7 +50,6 @@ feature "Gift from Amazon Advertising API" do
   scenario "should add gift from amazon link", vcr: true, js: true do
     click_link 'Add gift suggestion'
     fill_in 'Web link', with: 'http://www.amazon.com/gp/product/B0050SBGRS'
-    sleep 5
     wait_until { find('#choose_image').visible? }
     within('#choose_image') { click_link 'Close'}
 
@@ -73,4 +72,42 @@ feature "Gift from Amazon Advertising API" do
     end
   end
 
+  scenario "should add gift from amazon search", vcr: true, js: true do
+    click_link 'Add gift suggestion'
+    click_link 'Amazon search'
+    find('#search_modal').should be_visible
+
+    within('#search_modal') do
+      fill_in 'q', with: 'rspec book'
+      click_button 'Search'
+      wait_until { find('.modal-body .items').visible? }
+      find('.add-gift').click
+    end
+
+    wait_until { find('#choose_image').visible? }
+    within('#choose_image') { click_link 'Close'}
+    page.should have_css '#search_modal .add-gift.btn-danger'
+    within('#search_modal') { click_link 'Close'}
+
+    within '#new_card' do
+      field_labeled(' Name').value.should eql "The RSpec Book: Behaviour Driven Development with Rspec, Cucumber, and Friends (The Facets of Ruby Series)"
+      field_labeled('Description').value.should eql 'Book'
+      field_labeled('Price').value.should eql '38.95'
+
+      find('#select_other_image').should be_visible
+
+
+      field_labeled('Remote image url').value.should eql 'http://ecx.images-amazon.com/images/I/51tFzC0fFZL.jpg'
+
+      click_button 'Add gift'
+    end
+
+    within '.gift' do
+      page.should have_content 'RSpec Book'
+      page.should have_content 'Book'
+    end
+
+
+
+  end
 end
