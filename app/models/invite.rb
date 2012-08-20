@@ -20,7 +20,7 @@ class Invite
             :allow_blank => true
 
   validates :phone,
-            :format => {:with => /^\+\d{12}$/i},
+            :format => {:with => /^\+\d{10,15}$/i},
             :allow_blank => true
 
   validates :fb_id, :uniqueness => true, :allow_blank => true
