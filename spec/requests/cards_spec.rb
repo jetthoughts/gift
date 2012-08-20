@@ -81,12 +81,20 @@ feature "Gift from Amazon Advertising API" do
       fill_in 'q', with: 'rspec book'
       click_button 'Search'
       wait_until { find('.modal-body .items').visible? }
-      find('.add-gift').click
     end
+    buttons = all('.add-gift')
+    buttons[1].click
+    buttons[1]['class'].include? 'btn-danger'
 
     wait_until { find('#choose_image').visible? }
     within('#choose_image') { click_link 'Close'}
-    page.should have_css '#search_modal .add-gift.btn-danger'
+
+    buttons[0].click
+    buttons[0]['class'].include? 'btn-danger'
+
+    wait_until { find('#choose_image').visible? }
+    within('#choose_image') { click_link 'Close'}
+
     within('#search_modal') { click_link 'Close'}
 
     within '#new_card' do
@@ -106,8 +114,5 @@ feature "Gift from Amazon Advertising API" do
       page.should have_content 'RSpec Book'
       page.should have_content 'Book'
     end
-
-
-
   end
 end
