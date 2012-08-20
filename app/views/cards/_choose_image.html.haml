@@ -5,16 +5,3 @@
       = t('general.choose_image')
   .modal-body
     %img#image
-  .modal-footer
-    .buttons
-      = t('general.choose_thumbnail')
-      %span.counters
-        %span.current
-          0
-        of
-        %span.count
-          0
-      = link_to 'Prev', '#', :id => :prev_image
-      = link_to 'Next', '#', :id => :next_image
-    %a.btn.btn-primary{ href:'#', 'data-dismiss' => 'modal' }
-      = t('general.close')

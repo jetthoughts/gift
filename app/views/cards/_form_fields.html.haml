@@ -6,8 +6,19 @@
       = link_to 'Amazon search', '#search_modal', data: { toggle: 'modal'}, class: 'btn'
   .clearfix
   = f.input :web_link
+  #select_buttons.buttons.hidden
+    = t('general.choose_thumbnail')
+    %span.counters
+      %span.current_count
+        0
+      of
+      %span.count
+        0
+    = link_to 'Prev', '#', :id => :prev_image
+    = link_to 'Next', '#', :id => :next_image
   .image
     = f.input :image
+
     = f.input :remote_image_url, as: :hidden
     %img#remote_image_preview
     = link_to 'Select other image', '#', id: 'select_other_image', class: 'hidden btn'

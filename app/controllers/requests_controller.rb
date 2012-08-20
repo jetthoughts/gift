@@ -12,7 +12,7 @@ class RequestsController < ActionController::Base
   def parse
     doc = Nokogiri::HTML(@html)
     meta_desc = doc.css("meta[name='description']").first
-    description = meta_desc['content']
+    description = meta_desc ? meta_desc['content'] : ''
     images = doc.css('body img').map { |i| i['src'] }.reject { |src| (src=~/^http.*png|jpg$/).nil? }
     res = { :amount => '',
             :details_url => @url,

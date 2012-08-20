@@ -6,23 +6,26 @@ Amazon.ImageSelector = class
     @bind()
 
   bind : ->
-    $('#prev_image', @modal).click (e) =>
+    $('#prev_image').click (e) =>
       @prev_image()
-    $('#next_image', @modal).click (e) =>
+      @update_form()
+      false
+    $('#next_image').click (e) =>
       @next_image()
+      @update_form()
+      false
     @modal.on 'hide', =>
       @update_form()
-      
+
   next_image : ->
+
     next = @current_image().next()
-    console.log next
     if next.length > 0
       @set_current_image next
       @inc_current_counter()
 
   prev_image : ->
     prev = @current_image().prev()
-    console.log prev
     if prev.length > 0
       @set_current_image prev
       @dec_current_counter()
@@ -37,6 +40,10 @@ Amazon.ImageSelector = class
     @set_current_image $('.modal-body ul li', @modal).first()
     @set_all_counter links.length
     @set_current_counter 1 if links.length > 0
+    if (links.length > 1)
+      $('#select_buttons').removeClass('hidden')
+    else
+      $('#select_buttons').addClass('hidden')
 
   set_current_image : (list_item) ->
     $('#image', @modal).attr('src', list_item.find('img').attr('src'))
@@ -47,22 +54,21 @@ Amazon.ImageSelector = class
     $('.modal-body ul li.current', @modal)
 
   set_current_counter : (number) ->
-    $('.current_count', @modal).text(number)
+    $('.current_count').text(number)
 
   set_all_counter : (number) ->
-    $('.count', @modal).text(number)
+    $('.count').text(number)
 
   inc_current_counter : ->
-    counter = $('.current_count', @modal)
-    counter.text parseInt(counter.text()) + 1
+    counter = $('.current_count')
+    counter.text parseInt(counter.first().text()) + 1
 
   dec_current_counter : ->
-    counter = $('.current_count', @modal)
-    counter.text parseInt(counter.text()) - 1
+    counter = $('.current_count')
+    counter.text parseInt(counter.first().text()) - 1
 
   update_form : ->
     link = @current_image().find('img').attr('src')
-    console.log  link
     $(@form_options.imageUrl, @form).val link
     $(@form_options.remoteImagePreview, @form).attr('src', link)
 
