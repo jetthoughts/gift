@@ -60,8 +60,7 @@ feature "Gift from Amazon Advertising API" do
 
       find('#select_other_image').should be_visible
 
-
-      field_labeled('Remote image url').value.should eql 'http://ecx.images-amazon.com/images/I/516fblWcHZL.jpg'
+      find('#card_remote_image_url').value.should eql 'http://ecx.images-amazon.com/images/I/516fblWcHZL.jpg'
 
       click_button 'Add gift'
     end
@@ -104,8 +103,7 @@ feature "Gift from Amazon Advertising API" do
 
       find('#select_other_image').should be_visible
 
-
-      field_labeled('Remote image url').value.should eql 'http://ecx.images-amazon.com/images/I/51tFzC0fFZL.jpg'
+      find('#card_remote_image_url').value.should eql 'http://ecx.images-amazon.com/images/I/51tFzC0fFZL.jpg'
 
       click_button 'Add gift'
     end
