@@ -4,7 +4,10 @@
   .form-inputs.left
     = f.input :name
     = f.input :description
-    = f.input :article_link    
+    = f.input :article_link
+    - if @project.new_record?
+      %span
+        = link_to 'Amazon search', '#search_modal', data: { toggle: 'modal'}, class: 'btn'
     = f.input :participants_add_own_suggestions, as: :boolean
     = f.input :attachment_id, :as => :hidden
   .right
@@ -42,3 +45,6 @@
     = f.button :submit
 = content_for :javascript_code do
   ="PhotoUpload.initialize('#{attachment_url(current_user.attachment ||  Attachment.new)}');"
+
+- if @project.new_record?
+  = render 'cards/search_modal'
