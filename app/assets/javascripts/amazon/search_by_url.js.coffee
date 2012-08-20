@@ -22,7 +22,7 @@ Amazon.SearchByURL = class extends Amazon.Search
       success: (data) =>
         @data = data
         @image_selector.add_image_links @data.images
-        @image_selector.open()
+        @image_selector.update_form()
         @show_other_image_button()
         callback.call(@)
       data:
@@ -48,6 +48,6 @@ Amazon.SearchByURL = class extends Amazon.Search
       success: (data, textStatus, jqXHR) ->
         obj.data = data
         obj.image_selector.add_image_links obj.data.images
-        obj.image_selector.open()
-        obj.show_other_image_button()
+        obj.image_selector.update_form()
+        #obj.show_other_image_button()
         callback.call(obj)
