@@ -2,21 +2,7 @@
   = f.hidden_field :project_id, :value => @project.id
   .form-errors
     = render "shared/error_messages", :target => @card
-  .form-inputs
-    %span= f.input :name
-    .description
-      %span= f.input :description
-      %span 
-        = link_to 'Amazon search', '#search_modal', data: { toggle: 'modal'}, class: 'btn'
-    .clearfix
-    = f.input :web_link
-    .image
-      = f.input :image
-      = f.input :remote_image_url
-      %img#remote_image_preview
-      = link_to 'Select other image', '#', id: 'select_other_image', class: 'hidden btn'
-    = f.input :price
-
+  = render 'cards/form_fields', f:f
   .form-actions
     = f.button :submit, t('simple_form.add_gift')
 
