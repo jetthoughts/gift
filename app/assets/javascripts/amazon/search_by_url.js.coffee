@@ -10,21 +10,16 @@ Amazon.SearchByURL = class extends Amazon.Search
     @link_input.change (e) =>
       @url = @link_input.val()
       if @url.search(/amazon\./i) > -1
-        @get_data @fill_form
+        @get_data
       else
-        @fetch_rest_link(@url, @fill_form, @)
+        @fetch_rest_link(@url)
 
-  get_data: (callback) =>
+  get_data: () =>
     $.ajax
       url: @location()
       type: "POST"
       dataType: 'json'
-      success: (data) =>
-        @data = data
-        @image_selector.add_image_links @data.images
-        @image_selector.update_form()
-        @show_other_image_button()
-        callback.call(@)
+      success: @success_handler
       data:
         q: @asin()
 
@@ -37,17 +32,19 @@ Amazon.SearchByURL = class extends Amazon.Search
   location: ->
     super '/amazon_lookup'
 
-  fetch_rest_link: (link, callback, obj)->
+  fetch_rest_link: (link)->
     url = link
+
     $.ajax '/parse',
       type: 'GET'
       data:
         url: url
       dataType: 'json',
-      error: (jqXHR, textStatus, errorThrown) ->
-      success: (data, textStatus, jqXHR) ->
-        obj.data = data
-        obj.image_selector.add_image_links obj.data.images
-        obj.image_selector.update_form()
-        #obj.show_other_image_button()
-        callback.call(obj)
+      error: (jqXHR, textStatus, errorThrown) =>
+      success: @success_handler
+
+  success_handler: (data) =>
+    @data = data
+    @image_selector.add_image_links @data.images
+    @image_selector.update_form()
+    @fill_form()
