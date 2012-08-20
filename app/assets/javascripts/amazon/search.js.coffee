@@ -30,9 +30,9 @@ Amazon.Search = class
   fill_form : ->
     $(@form_options.name, @form).val @data.name
     $(@form_options.description, @form).val @data.description
-    $(@form_options.price, @form).val @amount_to_price(@data.amount)
     $(@form_options.imageUrl, @form).val @data.image_url
     $(@form_options.detailsUrl, @form).val @data.details_url
+    $(@form_options.price, @form).val @amount_to_price(@data.amount)
 
   amount_to_price : (amount) ->
     amount = amount + ''
