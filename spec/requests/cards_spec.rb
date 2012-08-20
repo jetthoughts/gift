@@ -47,21 +47,24 @@ feature "Gift from Amazon Advertising API" do
     field_labeled('Name').value.should be_blank
   end
 
-  scenario "should add gift from amazon link", vcr:true do
+  scenario "should add gift from amazon link", vcr: true, js: true do
     click_link 'Add gift suggestion'
     fill_in 'Web link', with: 'http://www.amazon.com/gp/product/B0050SBGRS'
-    wait_until { find('#select_other_image').visible? }
-    field_labeled(' Name').value.should be_eql "Citizen Men's AT1180-05E Chronograph Eco Drive Watch"
-    field_labeled('Description').value.should be_eql 'Watch'
-    field_labeled('Price').value.should be_eql '299.00'
+    wait_until { find('#choose_image').visible? }
+    within('#choose_image') { click_link 'Close'}
 
-    find('#choose_image').should be_visible
+    within '#new_card' do
+      field_labeled(' Name').value.should eql "Citizen Men's AT1180-05E Chronograph Eco Drive Watch"
+      field_labeled('Description').value.should eql 'Watch'
+      field_labeled('Price').value.should eql '299.00'
 
-    click_link 'Close'
+      find('#select_other_image').should be_visible
 
-    field_labeled('Remote image url').value.should be_eql 'http://ecx.images-amazon.com/images/I/516fblWcHZL.jpg'
 
-    click_button 'Add gift'
+      field_labeled('Remote image url').value.should eql 'http://ecx.images-amazon.com/images/I/516fblWcHZL.jpg'
+
+      click_button 'Add gift'
+    end
 
     within '.gift' do
       page.should have_content 'Citizen Men'
@@ -69,4 +72,47 @@ feature "Gift from Amazon Advertising API" do
     end
   end
 
+  scenario "should add gift from amazon search", vcr: true, js: true do
+    click_link 'Add gift suggestion'
+    click_link 'Amazon search'
+    find('#search_modal').should be_visible
+
+    within('#search_modal') do
+      fill_in 'q', with: 'rspec book'
+      click_button 'Search'
+      wait_until { find('.modal-body .items').visible? }
+    end
+    buttons = all('.add-gift')
+    buttons[1].click
+    buttons[1]['class'].include? 'btn-danger'
+
+    wait_until { find('#choose_image').visible? }
+    within('#choose_image') { click_link 'Close'}
+
+    buttons[0].click
+    buttons[0]['class'].include? 'btn-danger'
+
+    wait_until { find('#choose_image').visible? }
+    within('#choose_image') { click_link 'Close'}
+
+    within('#search_modal') { click_link 'Close'}
+
+    within '#new_card' do
+      field_labeled(' Name').value.should eql "The RSpec Book: Behaviour Driven Development with Rspec, Cucumber, and Friends (The Facets of Ruby Series)"
+      field_labeled('Description').value.should eql 'Book'
+      field_labeled('Price').value.should eql '38.95'
+
+      find('#select_other_image').should be_visible
+
+
+      field_labeled('Remote image url').value.should eql 'http://ecx.images-amazon.com/images/I/51tFzC0fFZL.jpg'
+
+      click_button 'Add gift'
+    end
+
+    within '.gift' do
+      page.should have_content 'RSpec Book'
+      page.should have_content 'Book'
+    end
+  end
 end
