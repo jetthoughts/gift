@@ -5,7 +5,7 @@
   .form-inputs
     %span= f.input :name
     .description
-      %span= f.text_area :description, :style => 'height: 50px;'
+      %span= f.input :description
       %span 
         = link_to 'Amazon search', '#search_modal', data: { toggle: 'modal'}, class: 'btn'
     .clearfix

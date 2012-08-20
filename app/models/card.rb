@@ -19,7 +19,7 @@ class Card
 
   validates :web_link, url: {allow_blank: true}
 
-  validates :project, :name, :image, presence: true
+  validates :project, :name, presence: true
 
   scope :ordered_by_date, -> do
     order_by [[:created_at, :desc]]

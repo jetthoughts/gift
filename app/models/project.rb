@@ -38,6 +38,7 @@ class Project
   has_many :update_notifications
   embeds_one :paid_info
 
+  accepts_nested_attributes_for :cards, reject_if: :all_blank
   accepts_nested_attributes_for :paid_info, allow_destroy: true, reject_if: proc { |attributes| !PAID_TYPES_CLASSES.include?(attributes[:_type]) or attributes.all? { |k, v| k == '_type' ? true : v.blank? } }
 
   belongs_to :attachment
