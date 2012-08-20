@@ -32,7 +32,8 @@ Gift::Application.routes.draw do
   match 'cards/amazon_search' => 'cards#amazon_search', :via => :post
   post 'cards/amazon_lookup'=> 'cards#amazon_lookup', :via => :post
 
-  mount ImagesFetcher::Engine, at: '/im'
+  match '/fetch' => 'requests#fetch'
+  match '/parse' => 'requests#parse'
 
   devise_for :users,
              controllers: {omniauth_callbacks: "omniauth_callbacks", registrations: "users/registrations"}
