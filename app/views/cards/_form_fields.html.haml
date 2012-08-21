@@ -1,3 +1,4 @@
+- attachment = Attachment.new
 .form-inputs
   %span= f.input :name
   .description
@@ -18,8 +19,8 @@
     = link_to 'Next', '#', :id => :next_image
   .image
     = f.input :remote_image_url, as: :hidden
-    = image_tag @project.image_thumb, :id => :avatar_image
-    = link_to t('general.upload_photo'), '#', :id => 'upload_button'
+    = image_tag attachment.image.thumb, :id => :card_image_preview
+    = link_to t('general.upload_photo'), '#', :id => 'card_upload_button'
   = f.input :price
 = content_for :javascript_code do
-  ="PhotoUpload.initialize('#{attachment_url(Attachment.new, :format => :json)}', function(id, response) { image_selector.push_image(response.url); } )"
+  ="PhotoUpload.initialize('#{attachment_url(attachment, :format => :json)}', function(id, response) { image_selector.push_image(response.url); }, 'card_image_preview', 'card_upload_button' )"

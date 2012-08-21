@@ -50,15 +50,12 @@ feature "Gift from Amazon Advertising API" do
   scenario "should add gift from amazon link", vcr: true, js: true do
     click_link 'Add gift suggestion'
     fill_in 'Web link', with: 'http://www.amazon.com/gp/product/B0050SBGRS'
-    wait_until { find('#choose_image').visible? }
-    within('#choose_image') { click_link 'Close'}
+    wait_until { find('#select_buttons').visible? }
 
     within '#new_card' do
       field_labeled(' Name').value.should eql "Citizen Men's AT1180-05E Chronograph Eco Drive Watch"
       field_labeled('Description').value.should eql 'Watch'
       field_labeled('Price').value.should eql '299.00'
-
-      find('#select_other_image').should be_visible
 
       find('#card_remote_image_url').value.should eql 'http://ecx.images-amazon.com/images/I/516fblWcHZL.jpg'
 
@@ -85,14 +82,11 @@ feature "Gift from Amazon Advertising API" do
     buttons[1].click
     buttons[1]['class'].include? 'btn-danger'
 
-    wait_until { find('#choose_image').visible? }
-    within('#choose_image') { click_link 'Close'}
+    wait_until { find('#card_name').value != '' }
+
 
     buttons[0].click
     buttons[0]['class'].include? 'btn-danger'
-
-    wait_until { find('#choose_image').visible? }
-    within('#choose_image') { click_link 'Close'}
 
     within('#search_modal') { click_link 'Close'}
 
@@ -100,8 +94,6 @@ feature "Gift from Amazon Advertising API" do
       field_labeled(' Name').value.should eql "The RSpec Book: Behaviour Driven Development with Rspec, Cucumber, and Friends (The Facets of Ruby Series)"
       field_labeled('Description').value.should eql 'Book'
       field_labeled('Price').value.should eql '38.95'
-
-      find('#select_other_image').should be_visible
 
       find('#card_remote_image_url').value.should eql 'http://ecx.images-amazon.com/images/I/51tFzC0fFZL.jpg'
 

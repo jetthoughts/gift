@@ -5,8 +5,8 @@
     = f.input :name
     = f.input :description
     = f.input :participants_add_own_suggestions, as: :boolean
-    = f.input :attachment_id, :as => :hidden
   .right
+    = f.input :attachment_id, :as => :hidden
     = image_tag @project.image_thumb, :id => :avatar_image
     = link_to t('general.upload_photo'), '#', :id => 'upload_button'
   .clear

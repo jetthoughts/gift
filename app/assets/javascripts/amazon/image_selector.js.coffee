@@ -82,5 +82,5 @@ Amazon.ImageSelector = class
     @form = $(form_selector)
     @form_options = $.extend
       imageUrl : '#image_url'
-      remoteImagePreview : '#avatar_image'
+      remoteImagePreview : '#card_image_preview'
     , options
