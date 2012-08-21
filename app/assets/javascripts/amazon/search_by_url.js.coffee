@@ -15,7 +15,7 @@ Amazon.SearchByURL = class extends Amazon.Search
       else
         @fetch_rest_link(@url)
     $.ajaxSetup
-      complete: () =>
+      complete: =>
         @link_input.removeAttr "disabled"
 
   get_data: () =>
