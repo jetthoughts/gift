@@ -21,7 +21,7 @@ var PhotoUpload = window.PhotoUpload = {
                     $('#avatar_image').attr('src', response.url + "?time=" + new Date().getTime());
                     $('input[name*=attachment_id]').val(response.attachment_id);
                     if (typeof(onSuccess) == "function"){
-                      onSuccess(response.attachment_id);
+                      onSuccess(response.attachment_id, response);
                     }
                 } else if (response.error) {
                     alert('An error occurred while loading this picture. Please make sure that the picture format is .png, .jpg, or .gif and that the picture size is less than 2 MB.');
