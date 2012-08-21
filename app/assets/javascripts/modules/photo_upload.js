@@ -2,9 +2,12 @@ var PhotoUpload = window.PhotoUpload = {
     update_profile: function(id){
        $.post('/users/profile', {'_method': 'PUT', attachment_id: id});
     },
-
-    initialize : function(url, onSuccess) {
-        new AjaxUpload('upload_button', {
+    default_preview_id : 'avatar_image',
+    default_button_id : 'upload_button',
+    initialize : function(url, onSuccess, preview_id, button_id) {
+        var button_id =  typeof button_id !== 'undefined' ? button_id : PhotoUpload.default_button_id;
+        var preview_id = typeof preview_id !== 'undefined' ? preview_id : PhotoUpload.default_preview_id;
+        new AjaxUpload(button_id || PhotoUpload.default_button_id, {
             responseType: 'json',
             action:url,
             data: {
@@ -16,10 +19,10 @@ var PhotoUpload = window.PhotoUpload = {
             onSubmit : function() {
                 $('.ajax-loader-indicator').removeClass('hide');
             },
-            onComplete: function(file, response) {               
+            onComplete: function(file, response) {
                 if (response.url) {
-                    $('#avatar_image').attr('src', response.url + "?time=" + new Date().getTime());
-                    $('input[name*=attachment_id]').val(response.attachment_id);
+                    $("#"+(preview_id)).attr('src', response.url + "?time=" + new Date().getTime());
+                    $("#"+button_id).parent().find('input[name*=attachment_id]').val(response.attachment_id);
                     if (typeof(onSuccess) == "function"){
                       onSuccess(response.attachment_id, response);
                     }
