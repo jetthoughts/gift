@@ -11,13 +11,15 @@ class RequestsController < ActionController::Base
 
   def parse
     doc = Nokogiri::HTML(@html)
+    meta_title = doc.css("meta[name='og:name']").first
+    title = meta_title ? meta_title['content'] : doc.title
     meta_desc = doc.css("meta[name='description']").first
     description = meta_desc ? meta_desc['content'] : ''
     images = doc.css('body img').map { |i| i['src'] }.reject { |src| (src=~/^http.*png|jpg$/).nil? }
     res = { :amount => '',
             :details_url => @url,
             :image_url => images.first,
-            :name => doc.title,
+            :name => title,
            :description => description,
            :images => images }
     render :json => res
@@ -27,7 +29,11 @@ class RequestsController < ActionController::Base
 
   def get_html
     @url = params['url'] || ''
-    @html = Net::HTTP.get(URI(@url))
+    @html = ''
+    begin
+      @html = Net::HTTP.get(URI(@url))
+    rescue
+    end
   end
 
 end

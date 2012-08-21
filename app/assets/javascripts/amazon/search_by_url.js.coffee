@@ -9,10 +9,14 @@ Amazon.SearchByURL = class extends Amazon.Search
   bind: ->
     @link_input.change (e) =>
       @url = @link_input.val()
+      @link_input.attr "disabled", "disabled"
       if @url.search(/amazon\./i) > -1
         @get_data
       else
         @fetch_rest_link(@url)
+    $.ajaxSetup
+      complete: () =>
+        @link_input.removeAttr "disabled"
 
   get_data: () =>
     $.ajax
