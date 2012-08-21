@@ -29,7 +29,9 @@ Amazon.ImageSelector = class
     @modal.modal 'show'
 
   add_image_links : (links) ->
-    $('.modal-body ul', @modal).html ''
+    @images = []
+    return unless links
+    #$('.modal-body ul', @modal).html ''
     $.each links, (index, link) =>
       #$('.modal-body ul', @modal).append "<li><img src='#{link}'/></li>"
       @push_image(link)

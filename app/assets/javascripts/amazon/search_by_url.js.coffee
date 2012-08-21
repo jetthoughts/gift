@@ -11,7 +11,7 @@ Amazon.SearchByURL = class extends Amazon.Search
       @url = @link_input.val()
       @link_input.attr "disabled", "disabled"
       if @url.search(/amazon\./i) > -1
-        @get_data
+        @get_data()
       else
         @fetch_rest_link(@url)
     $.ajaxSetup
