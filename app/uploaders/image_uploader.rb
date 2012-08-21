@@ -35,6 +35,11 @@ class ImageUploader < CarrierWave::Uploader::Base
     "fallback/" +  [version_name, "default.jpg"].compact.join('_')
   end
 
+  def url
+    _url = super
+    (_url && _url.starts_with?("/")) ? APP_CONFIG["host"] + _url : _url
+  end
+
   def extension_white_list
     %w(jpg jpeg gif png)
   end

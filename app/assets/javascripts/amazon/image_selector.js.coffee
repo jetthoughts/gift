@@ -31,9 +31,7 @@ Amazon.ImageSelector = class
   add_image_links : (links) ->
     @images = []
     return unless links
-    #$('.modal-body ul', @modal).html ''
     $.each links, (index, link) =>
-      #$('.modal-body ul', @modal).append "<li><img src='#{link}'/></li>"
       @push_image(link)
     @set_all_counter links.length
     @set_current_counter(0)
@@ -42,6 +40,7 @@ Amazon.ImageSelector = class
     (@images || []).push src
     @set_all_counter(@images.length)
     @set_current_counter(@images.length - 1)
+    @update_form()
     @images
 
   toggle_select_buttons : () ->
@@ -49,11 +48,6 @@ Amazon.ImageSelector = class
       $('#select_buttons').removeClass('hidden')
     else
       $('#select_buttons').addClass('hidden')
-
-  #set_current_image : (list_item) ->
-  #  $('#image', @modal).attr('src', list_item.find('img').attr('src'))
-  #  $('.modal-body ul li').removeClass 'current'
-  #  list_item.addClass 'current'
 
   current_image : ->
     @images[@current_index]
