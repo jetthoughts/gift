@@ -13,16 +13,15 @@ describe Fee do
   end
 
   describe 'Validation' do
-      it 'should contain payment_method' do
-        fee = @user.fees.build(project: @project)
-        fee.valid?.should be_false
-      end
+    it 'should contain payment_method' do
+      fee = @user.fees.build(project: @project)
+      fee.valid?.should be_false
+    end
 
-      it 'should contain paypal payment_method' do
-        fee = @user.fees.build(project: @project, payment_method_id: Paypal::Paypalwp.instance.id, amount: 10)
-        fee.valid?.should be_true
-      end
-
+    it 'should contain paypal payment_method' do
+      fee = @user.fees.build(project: @project, payment_method_id: Paypal::Paypalwp.instance.id, amount: 10)
+      fee.valid?.should be_true
+    end
   end
 
   describe 'Paypal Calculator' do

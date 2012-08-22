@@ -19,12 +19,15 @@ module RequestHelper
   end
 
   def add_payment_method
-    task = 'authorizedotnet:load_record'
+    task_1 = 'authorizedotnet:load_record'
+    task_2 = 'paypal:load_record'
     require 'rake'
     rake = Rake::Application.new
     Rake.application = rake
     Rake::Task.define_task(:environment)
     load "gems/nimbleshop_authorizedotnet-0.0.5/lib/tasks/authorize.rake"
-    rake[task].invoke
+    load "tasks/paypal_tasks.rake"
+    rake[task_1].invoke
+    rake[task_2].invoke
   end
 end

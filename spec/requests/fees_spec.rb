@@ -40,4 +40,26 @@ feature "Fees page" do
     current_path.should eql project_path(@project)
     page.should have_content '20.00 donations'
   end
+
+  scenario 'test paypal card dialog', js: true, vcr: true do
+    add_payment_method
+
+    click_link 'Engage'
+    page.should have_content 'Paypal'
+
+    fill_in 'fee_amount', with: 10
+    choose('Paypal')
+
+    click_button 'Next'
+
+    page.should have_field 'login_email'
+    fill_in 'login_email', with: 'san+1_1345555514_pre@jetthoughts.com'
+    fill_in 'login_password', with: 'qweqweqwe'
+    click_button 'login.x'
+
+    page.should have_content 'Sergey Andreyev'
+
+    click_button 'continue'
+    
+  end
 end
