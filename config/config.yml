@@ -1,0 +1,8 @@
+development:
+  host: http://localhost:3000
+test:
+  host: http://localhost:3000
+staging:
+  host: http://gift-staging.herokuapp.com
+production:
+  host: http://gift-staging.herokuapp.com
