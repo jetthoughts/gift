@@ -42,6 +42,7 @@ feature "Fees page" do
   end
 
   scenario 'test paypal card dialog', js: true, vcr: true do
+    pending
     add_payment_method
 
     click_link 'Engage'
@@ -52,7 +53,8 @@ feature "Fees page" do
 
     click_button 'Next'
 
-    page.should have_field 'login_email'
+    wait_until { page.has_selector?('input[name=login_email]') }
+
     fill_in 'login_email', with: 'san+1_1345555514_pre@jetthoughts.com'
     fill_in 'login_password', with: 'qweqweqwe'
     click_button 'login.x'
@@ -60,6 +62,5 @@ feature "Fees page" do
     page.should have_content 'Sergey Andreyev'
 
     click_button 'continue'
-    
   end
 end
