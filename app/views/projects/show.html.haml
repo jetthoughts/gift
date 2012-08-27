@@ -1,6 +1,10 @@
 %p
   .row
-    .span4
+    .span2
+      .users
+        - @project.users.each do |user|
+          = render user
+    .span5
       - if @project.closed
         .closed
           = t('general.project.closed')
@@ -11,7 +15,7 @@
       %span= @project.name
       %br
       %span= @project.description
-    .span8
+    .span5
       - if can? :create, @project.invites.build
         .btn.pull-right
           = link_to t('general.project.invites_button'), [:new, @project, :invite]
