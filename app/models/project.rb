@@ -24,7 +24,7 @@ class Project
   validates :end_type, inclusion: Project::END_TYPES.map(&:to_s)
   validates :name, presence: true
   validates :fixed_amount, numericality: {greater_than_or_equal_to: MIN_WITHDRAW, if: :fixed_amount?}
-  validates :deadline, date: {after: Time.now}
+  validates :deadline, date: {after: Time.now, if: :open_end?}
   validates :article_link, :url => {:allow_blank => true}
 
   ## Relations
