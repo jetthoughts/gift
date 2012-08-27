@@ -1,9 +1,9 @@
 class UsersController < ApplicationController
   respond_to :html
   before_filter :authenticate_user!, :except => [:facebook_invite]
+  before_filter :find_user, only: :show
 
   def show
-    @user = current_user
     render 'users/show'
   end
 
@@ -12,7 +12,7 @@ class UsersController < ApplicationController
       current_user.fbook_access_token = params[:token]
       current_user.save
     end
-    render :nothing => true
+    render nothing: true
   end
 
   def facebook_invite
@@ -27,12 +27,18 @@ class UsersController < ApplicationController
       @invites = Invite.where(fb_id: user_id).entries
 
       if @invites.blank?
-        render :text => '<html><head><script type="text/javascript">window.top.location.href = '+
+        render text: '<html><head><script type="text/javascript">window.top.location.href = '+
             root_url.to_json +
             ';</script></head></html>'
       else
         render 'invites/facebook', layout: false
       end
     end
+  end
+
+  private
+
+  def find_user
+    @user = User.find(params[:id])
   end
 end

@@ -34,6 +34,7 @@ class Ability
       can :manage, Withdraw
       can :manage, Fee
       can :manage, User, id: user.id
+      can :show, User
       can :create_facebook, User, id: user.id
       can [:new, :amazon_lookup, :amazon_search, :fetch], Card
       can :create, Card do |card|

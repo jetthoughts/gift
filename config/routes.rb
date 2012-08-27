@@ -38,7 +38,7 @@ Gift::Application.routes.draw do
   devise_for :users,
              controllers: {omniauth_callbacks: "omniauth_callbacks", registrations: "users/registrations"}
 
-  resource :user, only: [:show]
+  resources :users, only: [:show]
 
   authenticate :user do
     root to: 'projects#index'
