@@ -32,10 +32,10 @@
       #open-end-collapse.collapse.accordion-body{ class: f.object.open_end? && 'in' }
         %p
           = t('general.project.no_fixed_amount')
+        = f.input :deadline, input_html: { class: 'datetimepicker' }
+
 
   .form-inputs
-    = f.input :deadline, input_html: { class: 'datetimepicker' }
-
     = f.input :paid_type, as: :radio_buttons do
       - f.collection_radio_buttons :paid_type, Project::PAID_TYPES, :to_s, lambda { |p| p.to_s.humanize } do |b|
         = b.label(class: 'radio inline') { b.radio_button + b.text }
