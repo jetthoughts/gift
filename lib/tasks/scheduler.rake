@@ -6,7 +6,7 @@ task :check_project_deadline => :environment do
     if !project.closed and project.deadline.present?
       remaining_time = project.deadline - now
       project.run_notify_about_deadline remaining_time
-      project.close if remaining_time <= 0
+      project.close if remaining_time <= 0 and project.can_withdraw?
     end
   end
   puts "done."
