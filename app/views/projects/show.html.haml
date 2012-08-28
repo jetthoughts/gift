@@ -16,6 +16,9 @@
       %br
       %span= @project.description
     .span5
+      - if can? :create, @project.withdraws.build
+        .btn.pull-right
+          = link_to 'Withdraw', project_withdraws_path(@project)
       - if can? :create, @project.invites.build
         .btn.pull-right
           = link_to t('general.project.invites_button'), [:new, @project, :invite]

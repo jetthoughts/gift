@@ -31,7 +31,10 @@ class Ability
       can [:show], Comment do |comment|
         comment.project && comment.project.participant?(user)
       end
-      can :manage, Withdraw
+      #can :manage, Withdraw
+      can :manage, Withdraw do |withdraw|
+        withdraw.project and withdraw.project.closed and withdraw.project.admin == user and withdraw.project.can_withdraw?
+      end
       can :manage, Fee
       can :manage, User, id: user.id
       can :show, User
