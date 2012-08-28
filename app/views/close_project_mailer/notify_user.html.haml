@@ -1,6 +1,6 @@
 %p
   = t('general.mailers.congratulations')
   %br
-  = t('general.mailers.project_closed', name: @project.name)
+  = t('general.mailers.project_closed', name: @project.name, time: @project.closed_at)
   %br
   = t('general.mailers.amount_total', amount: @project.donated_amount, name: @project.admin.name)
