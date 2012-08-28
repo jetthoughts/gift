@@ -24,7 +24,7 @@ class Project
   validates :end_type, inclusion: Project::END_TYPES.map(&:to_s)
   validates :name, presence: true
   validates :fixed_amount, numericality: {greater_than_or_equal_to: MIN_WITHDRAW, if: :fixed_amount?}
-  validates :deadline, date: {after: Time.now, if: :open_end?}
+  validates :deadline, date: {after: Time.now, if: :not_closed?}
   validates :article_link, :url => {:allow_blank => true}
 
   ## Relations
@@ -64,6 +64,10 @@ class Project
     if fixed_amount.present? and fixed_amount > 0
       donated_amount / fixed_amount
     end
+  end
+
+  def not_closed?
+    end_type == 'open_end' and !closed
   end
 
   def fixed_amount?
@@ -121,10 +125,16 @@ class Project
   end
 
   def run_notify_about_deadline remaining_time
+    p "Remaining time"
+    p remaining_time
     if remaining_time <= 0
       delay.notify_deadline
+      true
     elsif remaining_time <= 1.day
       delay.notify_deadline_one_day
+      true
+    else
+      false
     end
   end
 
