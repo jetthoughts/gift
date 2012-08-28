@@ -93,8 +93,11 @@ en:
       open_end: Gather with OpenEnd
 
     mailers:
+      deadline_warning: Deadline is comming up in one day for the project %{name}
+      contribute_warning: If you still want to contribute, please do it as soon as possible
+      review_withdraw: Please review your withdraw methods.
       congratulations: Congratulations!
-      project_closed: The project %{name} has been closed.
+      project_closed: The project %{name} has been closed on %{time}.
       amount_total: You collected an amount of %{amount} for your friend %{name}
       commented: "%{user} commented on %{project} dashboard"
       view_comment: "View %{user}'s comment"
