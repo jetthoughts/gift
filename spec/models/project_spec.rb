@@ -6,10 +6,9 @@ describe Project do
     @user = Fabricate.build(:user)
   end
 
-
   context "#end_type" do
     it "should be valid if eql to fixed_amount" do
-      Fabricate.build(:project, end_type: 'fixed_amount').should_not have(1).errors_on(:end_type)
+      Fabricate.build(:project, end_type: 'fixed_amount').should have(1).errors_on(:end_type)
     end
     it "should be valid if eql to open_end" do
       Fabricate.build(:project, end_type: 'open_end').should_not have(1).errors_on(:end_type)
@@ -17,6 +16,12 @@ describe Project do
 
     it "should be invalid if not inclusion in list" do
       Fabricate.build(:project, end_type: 'invalid_end_type').should_not be_valid
+    end
+
+    it "should be run actions if deadline is less 1 days" do
+      project = Fabricate.build(:project, end_type: 'open_end', deadline: 1.days.ago)
+      remaining_time = project.deadline - DateTime.now
+      project.run_notify_about_deadline(remaining_time).should be_true
     end
 
     context "#fixed_amount" do
