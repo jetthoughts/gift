@@ -120,13 +120,32 @@ class Project
     delay.notify_users_about_close
   end
 
+  def run_notify_about_deadline remaining_time
+    if remaining_time <= 0
+      delay.notify_deadline
+    elsif remaining_time <= 1.day
+      delay.notify_deadline_one_day
+    end
+  end
+
+  private
+
+  def notify_deadline_one_day
+    DeadlineMailer.notify_one_day_owner(self, admin).deliver
+    users.each do |user|
+      DeadlineMailer.notify_one_day_members(self, user).deliver if user != admin
+    end
+  end
+
+  def notify_deadline
+    DeadlineMailer.notify_owner(self, admin).deliver
+  end
+
   def notify_users_about_close
     users.each do |user|
       CloseProjectMailer.notify_user(self, user).deliver if user != admin
     end
   end
-
-  private
 
   def check_valid_paid_info
     return if paid_info.nil?
