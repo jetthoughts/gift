@@ -18,6 +18,17 @@ module RequestHelper
     @user.save
   end
 
+  def add_paypal_payment_method
+    task = 'paypal:load_record'
+    require 'rake'
+    rake = Rake::Application.new
+    Rake.application = rake
+    Rake::Task.define_task(:environment)
+    load "tasks/paypal_tasks.rake"
+    rake[task].invoke
+  end
+
+
   def add_payment_method
     task_1 = 'authorizedotnet:load_record'
     task_2 = 'paypal:load_record'

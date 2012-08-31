@@ -37,16 +37,6 @@ describe ProjectsController do
     Paypal::Paypalwp.any_instance.stub(:refund => hello)
   end
 
-  def add_paypal_payment_method
-    task = 'paypal:load_record'
-    require 'rake'
-    rake = Rake::Application.new
-    Rake.application = rake
-    Rake::Task.define_task(:environment)
-    load "tasks/paypal_tasks.rake"
-    rake[task].invoke
-  end
-
   def create_project
     @project = Fabricate(:project_with_amount, admin: @user )
     @project.users << @user
