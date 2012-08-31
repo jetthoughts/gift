@@ -33,7 +33,33 @@ describe FeesController do
         payment_method_id: PaymentMethod.first.id,
         visible: true
       }
-      post :crate, project_id: @project.id, fee: fee_options
+      post :create, project_id: @project.id, fee: fee_options
+      response.should be_redirect
+    end
+
+    it "should render edit if payment_method not paypalwp" do
+      add_authorizedotnet_payment_method
+      fee_options = {
+        amount: 4,
+        payment_method_id: PaymentMethod.last.id,
+        visible: true
+      }
+      post :create, project_id: @project.id, fee: fee_options
+      @fee = assigns(:fee)
+      response.should redirect_to([:edit, @project, @fee])
+    end
+
+    it "should render form with notice about problem with gateway" do
+      Fee.any_instance_stub(:start_paypal).and_return false
+      fee_options = {
+        amount: 4,
+        payment_method_id: PaymentMethod.first.id,
+        visible: true
+      }
+      post :create, project_id: @project.id, fee: fee_options
+      response.should render_template('new')
+      flash.should_not be_nil
+      flash[:notice].should eql "We have problem with gateway"
     end
   end
 
