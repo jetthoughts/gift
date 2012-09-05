@@ -71,7 +71,8 @@ class User
   after_create :check_invite_token, :merge_another_invites
   ## Methods
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
-    user = User.where(provider: auth.provider, uid: auth.uid).first
+    user = find_and_update_with_facebook_id auth.info.email, auth.uid
+    user = User.where(provider: auth.provider, uid: auth.uid).first if user.nil?
     if user.nil?
       user = User.create(name: auth.extra.raw_info.name,
                          provider: auth.provider,
@@ -84,6 +85,12 @@ class User
     end
     user.fbook_access_token = (credentials = auth["credentials"]) ? credentials["token"] : nil
     user.save!
+    user
+  end
+
+  def self.find_and_update_with_facebook_id email, uid
+    user = User.where(email: email).first
+    user.update_attribute :uid, uid if user.present?
     user
   end
 
