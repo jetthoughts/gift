@@ -1,0 +1,5 @@
+= image_tag image_thumb, :id => :avatar_image, :data => {:'default_url' => default_url}
+= link_to t('general.change_photo'), '#', :id => 'upload_button'
+- cls = %w(remove_photo)
+- cls << 'hidden' unless image_thumb.present?
+= link_to t('general.remove_photo'), attachment_url(attachment), :class => cls.join(' ')

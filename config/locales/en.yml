@@ -29,6 +29,7 @@ en:
     update: Update
     change_photo: Change photo
     upload_photo: Upload photo
+    remove_photo: Remove photo
     change_password: Change password
     back: Back
     next: Next

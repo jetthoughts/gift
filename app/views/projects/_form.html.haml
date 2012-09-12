@@ -7,8 +7,7 @@
     = f.input :participants_add_own_suggestions, as: :boolean
   .right
     = f.input :attachment_id, :as => :hidden
-    = image_tag @project.image_thumb, :id => :avatar_image
-    = link_to t('general.upload_photo'), '#', :id => 'upload_button'
+    = render 'shared/ajax_photo', {image_thumb: @project.image_thumb, default_url: asset_path(Attachment.new.image.thumb) ,attachment: @project.current_attachment}
   .clear
   - if @project.new_record?
     %h3

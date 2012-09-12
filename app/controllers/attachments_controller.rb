@@ -12,7 +12,7 @@ class AttachmentsController < ApplicationController
              end
 
     if result
-      render :json => {:url => @attachment.image.url, :attachment_id => @attachment.id,
+      render :json => {:url => @attachment.image.url, :attachment_id => @attachment.id, :attachment_url => attachment_url(@attachment),
                        :thumb_url => @attachment.image.thumb.url
       }.to_json
     else

@@ -8,6 +8,7 @@ Gift::Application.routes.draw do
   match '/projects/:project_id/invites/facebook/ignore/:id' => 'invites#facebook_destroy', :via => :get, :as => :project_invite_facebook_destroy
 
   match '/attachments/(:id)' => 'attachments#update', :as => :attachment, :via=>:put
+  match '/attachments/(:id)' => 'attachments#destroy', :as => :attachment, :via=>:delete
 
   resources :projects do
     resources :withdraws do

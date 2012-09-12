@@ -135,11 +135,11 @@ class User
     end
   end
 
-  private
-
   def current_attachment
     attachment ? attachment : Attachment.new
   end
+
+  private
 
 end
 

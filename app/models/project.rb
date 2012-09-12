@@ -138,6 +138,10 @@ class Project
     end
   end
 
+  def current_attachment
+    attachment ? attachment : Attachment.new
+  end
+
   private
 
   def notify_deadline_one_day
@@ -168,10 +172,6 @@ class Project
 
   def send_updated_event
     UpdateNotification.project_updated_event self
-  end
-
-  def current_attachment
-    attachment ? attachment : Attachment.new
   end
 
   def prepare_end_type
