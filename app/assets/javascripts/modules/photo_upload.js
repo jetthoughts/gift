@@ -12,7 +12,6 @@ var PhotoUpload = window.PhotoUpload = {
             action:url,
             data: {
                 authenticity_token: $('input[name=authenticity_token]').val(),
-                attachment_id: $('input[name=attachment_id]').val(),
                 action : "update",
                 _method : "put"
             },

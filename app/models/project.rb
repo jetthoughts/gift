@@ -13,7 +13,7 @@ class Project
   field :participants_add_own_suggestions, type: Boolean
   field :fixed_amount, type: Float
   field :deadline, type: DateTime
-  field :paid_type, type: String
+  field :paid_type, type: String, default: PAID_TYPES.first
   field :end_type, type: String
   field :currency, type: String, default: 'EUR'
   field :closed, type: Boolean, default: false

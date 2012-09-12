@@ -1,6 +1,9 @@
-- attachment = Attachment.new
+- attachment = f.object.attachment
+- f.object.remote_image_url ||= attachment.image.url unless attachment.new?
+- thumb_url = f.object.remote_image_url.present? ? f.object.remote_image_url : attachment.image.thumb.url
+
 .form-inputs
-  %span= f.input :name
+  %span= f.input :name, :input_html => {:required => true}
   .description
     %span= f.input :description, as: :text, :input_html => { :cols => 50, :rows => 4 }
     %span
@@ -18,8 +21,9 @@
     = link_to 'Prev', '#', :id => :prev_image
     = link_to 'Next', '#', :id => :next_image
   .image
-    = f.input :remote_image_url, as: :hidden
-    = image_tag attachment.image.thumb, :id => :card_image_preview
+    = f.input :attachment_id, :as => :hidden
+    = f.input :remote_image_url, :as => :hidden
+    = image_tag thumb_url, :id => :card_image_preview
     = link_to t('general.upload_photo'), '#', :id => 'card_upload_button'
   = f.input :price
 = content_for :javascript_code do

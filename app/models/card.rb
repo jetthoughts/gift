@@ -4,6 +4,8 @@ class Card
   include Mongo::Voteable
 
   #attr_accessible :image, :image_cache
+  attr_accessor :attachment_id
+
   mount_uploader :image, ImageUploader
 
   field :description, type: String
@@ -23,6 +25,10 @@ class Card
 
   scope :ordered_by_date, -> do
     order_by [[:created_at, :desc]]
+  end
+
+  def attachment
+    attachment_id.blank? ? Attachment.new : Attachment.find(attachment_id)
   end
 
   private

@@ -17,6 +17,7 @@ class CardsController < ApplicationController
 
   def create
     @card = chain.create(card_params.merge({user: current_user}))
+
     respond_with project, @card
   end
 

@@ -2,7 +2,7 @@
   = f.error_notification
 
   .form-inputs.left
-    = f.input :name
+    = f.input :name, :required => true
     = f.input :description
     = f.input :participants_add_own_suggestions, as: :boolean
   .right
@@ -13,7 +13,7 @@
   - if @project.new_record?
     %h3
       = t('general.project.first_gift')
-    = f.simple_fields_for :cards, Card.new do |card|
+    = f.simple_fields_for :cards, @project.cards.first || Card.new do |card|
       = render 'cards/form_fields', f:card
   #end-type.accordeon
     .accordion-group.form-inputs
@@ -22,7 +22,7 @@
           = f.radio_button :end_type, :fixed_amount
           = t('general.project.fixed_amount')
       #fixed-amount-collapse.collapse.accordion-body{ class: f.object.fixed_amount? && 'in' }
-        = f.input :fixed_amount
+        = f.input :fixed_amount, :required => true, :input_html => {:type => "number"}
 
     .accordion-group.form-inputs
       %div{ class: 'accordion-heading' }
@@ -36,7 +36,7 @@
 
 
   .form-inputs
-    = f.input :paid_type, as: :radio_buttons do
+    = f.input :paid_type, :input_html => {:required => true},  as: :radio_buttons do
       - f.collection_radio_buttons :paid_type, Project::PAID_TYPES, :to_s, lambda { |p| p.to_s.humanize } do |b|
         = b.label(class: 'radio inline') { b.radio_button + b.text }
 
